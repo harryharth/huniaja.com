@@ -20,12 +20,12 @@ export const navLinks = [
 export const searchTabs = ["Beli", "Sewa", "Baru"];
 
 export const quickCategories = [
-  { label: "Beli Properti", icon: "Home", color: "bg-blue-600" },
-  { label: "Sewa Properti", icon: "Key", color: "bg-emerald-500" },
-  { label: "Pasang Iklan", icon: "Megaphone", color: "bg-red-500" },
-  { label: "Cuan Dirumah", icon: "Wallet", color: "bg-amber-400" },
-  { label: "Paket Developer", icon: "Package", color: "bg-indigo-500" },
-  { label: "House Keeping", icon: "Sparkles", color: "bg-green-500" },
+  { label: "Beli Properti", icon: "Home", color: "bg-[#0025F5]" },
+  { label: "Sewa Properti", icon: "House", color: "bg-[#22C55E]" },
+  { label: "Pasang Iklan", icon: "Megaphone", color: "bg-[#EF4444]" },
+  { label: "Cuan Dirumah", icon: "UserRound", color: "bg-[#7C3AED]" },
+  { label: "Paket Developer", icon: "HomeCheck", color: "bg-[#0EA5E9]" },
+  { label: "Layanan Rumah", icon: "ThumbsUp", color: "bg-[#16A34A]" },
 ];
 
 export const propertyTypes = [
