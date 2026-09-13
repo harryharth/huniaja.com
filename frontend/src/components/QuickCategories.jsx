@@ -1,8 +1,53 @@
 import React, { useState } from "react";
-import { Home, House, ChevronRight } from "lucide-react";
-import { quickCategories, promoCards, LOGO_WHITE } from "../mock";
+import { ChevronRight } from "lucide-react";
+import { promoCards, LOGO_WHITE } from "../mock";
 
-const iconMap = { Home, House };
+// Huniaja-style squircle icon with smile mark
+function HuniajaIcon({ color = "#0025F5", size = 56 }) {
+  return (
+    <svg
+      width={size}
+      height={size}
+      viewBox="0 0 100 100"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M50 4 C82 4 96 18 96 50 C96 82 82 96 50 96 C18 96 4 82 4 50 C4 18 18 4 50 4 Z"
+        fill={color}
+      />
+      {/* Left eye - inverted U */}
+      <path
+        d="M28 46 c0 -7 5 -12 11 -12 c6 0 11 5 11 12"
+        stroke="white"
+        strokeWidth="7"
+        strokeLinecap="round"
+        fill="none"
+      />
+      {/* Right eye - inverted U */}
+      <path
+        d="M50 46 c0 -7 5 -12 11 -12 c6 0 11 5 11 12"
+        stroke="white"
+        strokeWidth="7"
+        strokeLinecap="round"
+        fill="none"
+      />
+      {/* Big smile */}
+      <path
+        d="M26 54 c4 14 14 20 24 20 c10 0 20 -6 24 -20"
+        stroke="white"
+        strokeWidth="7"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        fill="none"
+      />
+    </svg>
+  );
+}
+
+const cats = [
+  { label: "Beli Properti", color: "#0025F5" },
+  { label: "Kerjasama", color: "#12B815" },
+];
 
 export default function QuickCategories() {
   const [active, setActive] = useState(1);
@@ -12,33 +57,29 @@ export default function QuickCategories() {
       <div className="max-w-6xl mx-auto px-6">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-4 md:gap-5 items-stretch">
           {/* Left: Pill categories */}
-          <div className="md:col-span-3 flex md:flex-col gap-3">
-            {quickCategories.map((c) => {
-              const Icon = iconMap[c.icon];
-              return (
-                <button
-                  key={c.label}
-                  className="group flex-1 flex items-center gap-3 bg-white border border-slate-200 hover:border-[#0025F5]/40 hover:shadow-md rounded-full p-1.5 pr-3 transition-all"
+          <div className="md:col-span-3 flex md:flex-col gap-4">
+            {cats.map((c) => (
+              <button
+                key={c.label}
+                className="group flex-1 flex items-center gap-3 md:gap-4 bg-white border border-slate-200 hover:border-slate-300 hover:shadow-md rounded-[28px] p-2 pr-3 md:pr-4 shadow-sm transition-all"
+              >
+                <span className="shrink-0">
+                  <HuniajaIcon color={c.color} size={56} />
+                </span>
+                <span className="text-[15px] md:text-base font-semibold text-slate-800 whitespace-nowrap flex-1 text-left">
+                  {c.label}
+                </span>
+                <span
+                  className="w-7 h-7 rounded-full flex items-center justify-center shrink-0"
+                  style={{ backgroundColor: c.color }}
                 >
-                  <span
-                    className={`w-11 h-11 flex items-center justify-center rounded-2xl ${c.color} text-white shrink-0 shadow-sm`}
-                  >
-                    <Icon className="w-5 h-5" strokeWidth={2.4} />
-                  </span>
-                  <span className="text-sm font-semibold text-slate-800 whitespace-nowrap flex-1 text-left">
-                    {c.label}
-                  </span>
-                  <span
-                    className={`w-6 h-6 rounded-full ${c.color} flex items-center justify-center shrink-0`}
-                  >
-                    <ChevronRight
-                      className="w-3.5 h-3.5 text-white"
-                      strokeWidth={3}
-                    />
-                  </span>
-                </button>
-              );
-            })}
+                  <ChevronRight
+                    className="w-4 h-4 text-white"
+                    strokeWidth={3}
+                  />
+                </span>
+              </button>
+            ))}
           </div>
 
           {/* Right: Two promo banners */}
@@ -47,7 +88,7 @@ export default function QuickCategories() {
               {promoCards.map((p, idx) => (
                 <div
                   key={idx}
-                  className={`${p.bg} relative overflow-hidden rounded-[36px] md:rounded-[44px] h-40 md:h-44 flex flex-col items-center justify-center text-white shadow-md hover:-translate-y-0.5 transition-transform`}
+                  className={`${p.bg} relative overflow-hidden rounded-[36px] md:rounded-[44px] h-40 md:h-[178px] flex flex-col items-center justify-center text-white shadow-md hover:-translate-y-0.5 transition-transform`}
                 >
                   <img
                     src={LOGO_WHITE}
