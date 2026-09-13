@@ -19,7 +19,6 @@ export const ICON_JAGA_RUMAH = "https://customer-assets-gfyr7b9c.emergentagent.n
 export const navLinks = [
   { label: "Beli", href: "/cari-properti" },
   { label: "KPR", href: "/kpr" },
-  { label: "Kerjasama", href: "/kerjasama" },
 ];
 
 export const searchTabs = ["Beli", "Sewa", "Baru"];
