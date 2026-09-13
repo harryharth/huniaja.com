@@ -21,18 +21,18 @@ export default function QuickCategories() {
               key={c.label}
               to={c.href}
               data-testid={`quickcat-${c.label}`}
-              className="group flex flex-col items-center justify-center bg-white border border-slate-200 hover:border-slate-300 hover:shadow-md rounded-[20px] md:rounded-[24px] p-3 md:p-4 shadow-sm transition-all min-w-0"
+              className="group flex flex-row items-center gap-2 md:gap-2.5 bg-white border border-slate-200 hover:border-slate-300 hover:shadow-md rounded-[20px] md:rounded-[24px] p-2.5 md:p-3 shadow-sm transition-all min-w-0"
             >
               <span
-                className={`shrink-0 w-12 h-12 md:w-14 md:h-14 rounded-2xl ${c.bg} flex items-center justify-center`}
+                className={`shrink-0 w-11 h-11 md:w-11 md:h-11 rounded-2xl ${c.bg} flex items-center justify-center`}
               >
                 <img
                   src={c.img}
                   alt={c.label}
-                  className="w-10 h-10 md:w-12 md:h-12 object-contain"
+                  className="w-9 h-9 md:w-10 md:h-10 object-contain"
                 />
               </span>
-              <span className="text-xs md:text-sm font-semibold text-slate-800 mt-2 text-center leading-tight">
+              <span className="text-xs md:text-[13px] lg:text-sm font-semibold text-slate-800 leading-tight">
                 {c.label}
               </span>
             </Link>
