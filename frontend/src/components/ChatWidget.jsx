@@ -84,12 +84,12 @@ export default function ChatWidget() {
         <button
           onClick={() => setOpen(true)}
           data-testid="chat-fab"
-          className="fixed bottom-5 right-5 z-40 bg-[#0025F5] hover:bg-[#001fd1] text-white rounded-full shadow-2xl flex items-center gap-2 pl-4 pr-5 h-14 transition-transform hover:-translate-y-0.5"
+          className="fixed bottom-5 right-5 z-40 bg-[#00B512] hover:bg-[#009e0f] text-white rounded-full shadow-2xl flex items-center gap-2 pl-4 pr-5 h-14 transition-transform hover:-translate-y-0.5"
           aria-label="Buka chat"
         >
           <span className="relative">
             <MessageCircle className="w-6 h-6" />
-            <span className="absolute -top-1 -right-1 w-3 h-3 rounded-full bg-[#00B512] ring-2 ring-[#0025F5]" />
+            <span className="absolute -top-1 -right-1 w-3 h-3 rounded-full bg-white ring-2 ring-[#00B512]" />
           </span>
           <span className="font-bold text-sm hidden sm:inline">Chat AI</span>
         </button>

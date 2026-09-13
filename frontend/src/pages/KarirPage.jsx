@@ -92,15 +92,6 @@ const jobs = [
     color: "#0EA5E9",
     desc: "Layani pengguna dan bangun komunitas Huniaja yang saling mendukung dan aktif.",
   },
-  {
-    position: "Copywriting",
-    code: "HACP",
-    location: "Bogor - Jawa Barat",
-    type: "Full-time",
-    Icon: PenTool,
-    color: "#7C3AED",
-    desc: "Tulis narasi properti, artikel Berita, dan copy campaign yang mengundang aksi.",
-  },
 ];
 
 const perks = [

@@ -9,6 +9,15 @@ import {
   KeyRound,
   Users,
   HardHat,
+  Quote,
+  TrendingUp,
+  Clock,
+  Eye,
+  Sparkles,
+  MessageCircle,
+  Rocket,
+  ShieldCheck,
+  Zap,
 } from "lucide-react";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
@@ -23,6 +32,60 @@ import { HERO_BANNER } from "../mock";
 import { WA_URL } from "../components/ChatWidget";
 
 const HERO_IMG = "https://images.unsplash.com/photo-1684230413889-836e331a8201?w=1200&q=80";
+
+const sellerStories = [
+  {
+    name: "Pak Hendra",
+    role: "Pemilik Rumah, Bogor",
+    initial: "H",
+    color: "#0025F5",
+    time: "Terjual dalam 12 hari",
+    quote:
+      "Saya coba pasang di banyak platform, tapi Huniaja yang paling cepat mendatangkan calon serius. Tanpa telepon iseng, semua pembeli sudah pre-screening. Anak saya bisa sekolah di rumah baru sebelum tahun ajaran mulai.",
+  },
+  {
+    name: "Bu Anisa",
+    role: "Agen Properti Independen",
+    initial: "A",
+    color: "#00B512",
+    time: "Komisi Rp 45 Juta pertama",
+    quote:
+      "Awalnya saya cuma coba-coba jadi affiliate. Tidak sampai 2 bulan, saya sudah dapat komisi pertama dari share link Huniaja ke grup WhatsApp keluarga. Sekarang ini pekerjaan sampingan yang menopang keluarga saya.",
+  },
+  {
+    name: "PT Griya Sejahtera",
+    role: "Developer Perumahan",
+    initial: "G",
+    color: "#F59E0B",
+    time: "320 unit terjual",
+    quote:
+      "Sejak kerjasama sebagai developer partner, cluster kami di Cibinong terjual 80% dalam 6 bulan. Tim Huniaja bantu dari foto, campaign digital, sampai pre-screening pembeli. Kami tidak perlu pusing lagi urus marketing.",
+  },
+];
+
+const differentiators = [
+  {
+    Icon: Eye,
+    title: "Terlihat oleh 2,4Jt Pencari Aktif",
+    desc: "Iklanmu bukan sekadar upload lalu tenggelam. Kami tampilkan ke pencari yang aktif mencari properti seperti punyamu.",
+    stat: "2,4Jt",
+    statLabel: "pengunjung/bulan",
+  },
+  {
+    Icon: Zap,
+    title: "AI Match dengan Pembeli",
+    desc: "Dea, asisten AI kami, otomatis mencocokkan iklanmu dengan calon pembeli yang cocok - kamu tidur, iklanmu bekerja.",
+    stat: "10x",
+    statLabel: "lebih cepat",
+  },
+  {
+    Icon: ShieldCheck,
+    title: "Screening Anti-Iseng",
+    desc: "Bosan menerima telepon iseng? Setiap calon pembeli kami verifikasi dulu sebelum kontak dilempar ke kamu.",
+    stat: "0%",
+    statLabel: "spam call",
+  },
+];
 
 const partnerCards = [
   {
@@ -119,20 +182,34 @@ export default function PasangIklanPage() {
       <Header />
 
       {/* Hero */}
-      <section className="bg-[#0025F5] text-white pt-10 md:pt-14 pb-14 md:pb-20">
-        <div className="max-w-6xl mx-auto px-4 md:px-6 grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-10 items-center">
+      <section className="bg-[#0025F5] text-white pt-10 md:pt-14 pb-14 md:pb-20 relative overflow-hidden">
+        <div className="absolute -top-24 -right-24 w-96 h-96 rounded-full bg-[#00B512]/20 blur-3xl pointer-events-none" />
+        <div className="absolute -bottom-24 -left-24 w-96 h-96 rounded-full bg-white/10 blur-3xl pointer-events-none" />
+        <div className="relative max-w-6xl mx-auto px-4 md:px-6 grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-10 items-center">
           <div>
+            <span className="inline-flex items-center gap-2 bg-white/10 backdrop-blur border border-white/20 rounded-full px-3 py-1 text-[11px] font-bold tracking-widest mb-4">
+              <Sparkles className="w-3.5 h-3.5" /> PASANG IKLAN GRATIS
+            </span>
             <h1 className="text-3xl md:text-5xl font-black leading-tight">
-              Pasang Iklan Properti{" "}
-              <span className="text-[#00B512]">Gratis</span> Tanpa Ribet
+              Rumahmu punya cerita.<br />
+              <span className="text-[#00B512]">Biar kami bantu ceritakan.</span>
             </h1>
-            <p className="mt-4 text-sm md:text-base text-white/90 max-w-lg">
-              Pasang iklan rumah atau properti lainnya cukup 1 menit, langsung
-              jangkau jutaan pencari properti dalam waktu singkat!
+            <p className="mt-5 text-sm md:text-lg text-white/90 max-w-lg leading-relaxed">
+              Setiap rumah menyimpan kenangan. Saat waktunya pindah, kami
+              memastikan cerita itu berlanjut ke keluarga yang tepat - cepat,
+              aman, dan tanpa ribet.
             </p>
-            <button className="mt-6 bg-[#00B512] hover:bg-[#009e0f] text-white font-bold rounded-full px-7 py-3 text-sm shadow-lg transition">
-              Mulai Pasang Iklan
-            </button>
+            <div className="mt-7 flex flex-wrap gap-3">
+              <button className="bg-[#00B512] hover:bg-[#009e0f] text-white font-bold rounded-full px-7 py-3 text-sm shadow-lg transition">
+                Mulai Pasang Iklan
+              </button>
+              <a
+                href="#stories"
+                className="bg-white/10 hover:bg-white/20 backdrop-blur border border-white/20 text-white font-bold rounded-full px-6 py-3 text-sm transition"
+              >
+                Lihat Cerita Pemilik
+              </a>
+            </div>
           </div>
           <div className="rounded-[40px] overflow-hidden shadow-2xl">
             <img
@@ -140,6 +217,132 @@ export default function PasangIklanPage() {
               alt="Pasang Iklan"
               className="w-full h-56 md:h-72 object-cover"
             />
+          </div>
+        </div>
+      </section>
+
+      {/* Manifesto */}
+      <section className="bg-white py-14 md:py-20">
+        <div className="max-w-4xl mx-auto px-4 md:px-6 text-center">
+          <Quote
+            className="w-14 h-14 md:w-16 md:h-16 text-[#0025F5]/10 mx-auto"
+            strokeWidth={2.5}
+          />
+          <p className="text-xl md:text-3xl font-black text-slate-900 leading-tight mt-4 tracking-tight">
+            "Menjual rumah bukan sekadar transaksi.<br className="hidden md:block" />
+            Ini{" "}
+            <span className="text-[#0025F5]">
+              serah terima memori
+            </span>{" "}
+            ke keluarga yang akan menuliskan babak selanjutnya."
+          </p>
+          <div className="mt-6 inline-flex items-center gap-3">
+            <div className="w-10 h-px bg-slate-300" />
+            <span className="text-xs font-bold text-slate-500 tracking-widest">
+              KEYAKINAN KAMI
+            </span>
+            <div className="w-10 h-px bg-slate-300" />
+          </div>
+        </div>
+      </section>
+
+      {/* Differentiators */}
+      <section className="bg-slate-50 py-14 md:py-20">
+        <div className="max-w-6xl mx-auto px-4 md:px-6">
+          <div className="text-center mb-12">
+            <span className="inline-block bg-white text-[#0025F5] text-[11px] font-bold rounded-full px-3 py-1 tracking-widest border border-blue-100">
+              MENGAPA HUNIAJA?
+            </span>
+            <h2 className="text-2xl md:text-4xl font-black text-slate-900 mt-4 leading-tight">
+              Bukan sekadar tempat pasang iklan.<br className="hidden md:block" />
+              <span className="text-[#00B512]">Ini mesin penjualan properti kamu.</span>
+            </h2>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-5 md:gap-6">
+            {differentiators.map((d) => (
+              <div
+                key={d.title}
+                className="bg-white rounded-3xl border border-slate-100 shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all p-7 relative overflow-hidden group"
+              >
+                <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#0025F5] to-[#00B512] scale-x-0 group-hover:scale-x-100 transition-transform origin-left" />
+                <div className="flex items-start justify-between">
+                  <div className="w-12 h-12 rounded-2xl bg-blue-50 flex items-center justify-center">
+                    <d.Icon className="w-6 h-6 text-[#0025F5]" strokeWidth={2} />
+                  </div>
+                  <div className="text-right">
+                    <div className="text-3xl font-black text-[#00B512]">
+                      {d.stat}
+                    </div>
+                    <div className="text-[10px] text-slate-500 tracking-wide">
+                      {d.statLabel}
+                    </div>
+                  </div>
+                </div>
+                <h3 className="font-black text-slate-900 mt-5 text-lg leading-tight">
+                  {d.title}
+                </h3>
+                <p className="text-sm text-slate-600 mt-2 leading-relaxed">
+                  {d.desc}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Success Stories */}
+      <section id="stories" className="bg-white py-14 md:py-20">
+        <div className="max-w-6xl mx-auto px-4 md:px-6">
+          <div className="text-center mb-12">
+            <span className="inline-block bg-slate-100 text-slate-600 text-[11px] font-bold rounded-full px-3 py-1 tracking-widest">
+              CERITA MEREKA
+            </span>
+            <h2 className="text-2xl md:text-4xl font-black text-slate-900 mt-4 leading-tight">
+              Dari upload iklan pertama,<br className="hidden md:block" />
+              hingga kunci berpindah tangan.
+            </h2>
+            <p className="text-sm md:text-base text-slate-500 mt-3 max-w-2xl mx-auto">
+              Ini bukan testimoni marketing. Ini cerita jujur dari orang-orang
+              yang mempercayakan rumah mereka kepada kami.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-5 md:gap-6">
+            {sellerStories.map((s) => (
+              <div
+                key={s.name}
+                className="bg-gradient-to-br from-white to-slate-50/70 rounded-3xl border border-slate-100 shadow-sm hover:shadow-md p-6 md:p-7 transition flex flex-col"
+              >
+                <Quote
+                  className="w-8 h-8 mb-3"
+                  style={{ color: s.color }}
+                  strokeWidth={2.5}
+                />
+                <p className="text-sm md:text-[15px] text-slate-700 leading-relaxed italic flex-1">
+                  "{s.quote}"
+                </p>
+                <div className="mt-5 pt-4 border-t border-slate-100 flex items-center gap-3">
+                  <div
+                    className="w-11 h-11 rounded-full flex items-center justify-center text-white font-black text-base shadow-md shrink-0"
+                    style={{ backgroundColor: s.color }}
+                  >
+                    {s.initial}
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <div className="text-sm font-bold text-slate-900 truncate">
+                      {s.name}
+                    </div>
+                    <div className="text-xs text-slate-500 truncate">
+                      {s.role}
+                    </div>
+                  </div>
+                </div>
+                <div className="mt-3 inline-flex items-center gap-1.5 bg-[#00B512]/10 text-[#00B512] rounded-full px-3 py-1 text-[11px] font-bold self-start">
+                  <Clock className="w-3 h-3" /> {s.time}
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </section>

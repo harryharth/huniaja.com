@@ -21,22 +21,15 @@ const legalDocs = [
     id: "sk",
     label: "Syarat & Ketentuan",
     Icon: Tag,
-    color: "#F59E0B",
+    color: "#0025F5",
     href: "/syarat-ketentuan",
   },
   {
     id: "privacy",
     label: "Kebijakan Privasi",
     Icon: Lock,
-    color: "#0EA5E9",
+    color: "#0025F5",
     href: "/kebijakan-privasi",
-  },
-  {
-    id: "help",
-    label: "Pusat Bantuan",
-    Icon: LifeBuoy,
-    color: "#00B512",
-    href: "/pusat-bantuan",
   },
 ];
 
