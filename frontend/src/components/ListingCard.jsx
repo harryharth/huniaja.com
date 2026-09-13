@@ -33,7 +33,7 @@ export default function ListingCard({ item, variant = "default" }) {
         <img
           src={item.image}
           alt={item.title}
-          className="w-full h-44 md:h-48 object-cover rounded-xl group-hover:scale-[1.01] transition-transform duration-500"
+          className="w-full aspect-square object-cover rounded-xl group-hover:scale-[1.01] transition-transform duration-500"
         />
       </div>
       <div className="px-3 pb-3">
@@ -79,13 +79,13 @@ export default function ListingCard({ item, variant = "default" }) {
           <Button
             className={`w-full h-9 text-xs font-semibold rounded-lg ${downloadClasses}`}
           >
-            <Download className="w-3.5 h-3.5 mr-1" /> Download E-Brosur
+            <FileText className="w-3.5 h-3.5 mr-1" /> Detail Project
           </Button>
           <Button
             variant="outline"
             className={`w-full h-9 text-xs font-semibold rounded-lg ${whatsappClasses}`}
           >
-            <MessageCircle className="w-3.5 h-3.5 mr-1" /> Ask via Whatsapp
+            <MessageCircle className="w-3.5 h-3.5 mr-1" /> Ask Whatsapp
           </Button>
         </div>
       </div>
