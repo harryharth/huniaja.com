@@ -1,11 +1,27 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { LOGO_WHITE } from "../mock";
 import { Facebook, Instagram, Youtube } from "lucide-react";
 
 const footerCols = [
-  ["Beli", "Jual", "Konsultasi", "KPR"],
-  ["Karir", "Tentang Kami", "Kerjasama", "Kontak"],
-  ["Berita", "Pusat Bantuan", "S&K", "Kerjasama"],
+  [
+    { label: "Beli", href: "/" },
+    { label: "Jual", href: "/" },
+    { label: "Konsultasi", href: "/" },
+    { label: "KPR", href: "/" },
+  ],
+  [
+    { label: "Karir", href: "/karir" },
+    { label: "Tentang Kami", href: "/" },
+    { label: "Kerjasama", href: "/" },
+    { label: "Kontak", href: "/" },
+  ],
+  [
+    { label: "Berita", href: "/" },
+    { label: "Pusat Bantuan", href: "/" },
+    { label: "S&K", href: "/" },
+    { label: "Kerjasama", href: "/" },
+  ],
 ];
 
 function TikTokIcon(props) {
@@ -74,19 +90,19 @@ export default function Footer() {
           {/* Right columns: link groups */}
           <div className="md:col-span-8 grid grid-cols-1 sm:grid-cols-3 gap-8 md:gap-6 md:pt-2">
             {footerCols.map((col, i) => (
-              <ul key={i} className="space-y-6 text-[15px] text-white/95">
-                {col.map((l, idx) => (
-                  <li key={idx}>
-                    <a
-                      href="#"
-                      className="hover:text-white/70 transition-colors"
-                    >
-                      {l}
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            ))}
+            <ul key={i} className="space-y-6 text-[15px] text-white/95">
+              {col.map((l, idx) => (
+                <li key={idx}>
+                  <Link
+                    to={l.href}
+                    className="hover:text-white/70 transition-colors"
+                  >
+                    {l.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          ))}
           </div>
         </div>
       </div>
