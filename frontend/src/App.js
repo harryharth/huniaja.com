@@ -5,7 +5,6 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Header from "./components/Header";
 import Hero from "./components/Hero";
 import QuickCategories from "./components/QuickCategories";
-import PromoStrip from "./components/PromoStrip";
 import NewListings from "./components/NewListings";
 import { SubsidiSection, PopulerSection } from "./components/HighlightSections";
 import KerjaSama from "./components/KerjaSama";
@@ -18,7 +17,6 @@ const Home = () => (
     <Header />
     <Hero />
     <QuickCategories />
-    <PromoStrip />
     <NewListings />
     <SubsidiSection />
     <PopulerSection />
