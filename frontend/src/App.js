@@ -37,6 +37,10 @@ import PropertyDetailPage from "./pages/PropertyDetailPage";
 import AdminLoginPage from "./pages/admin/AdminLoginPage";
 import AdminDashboardPage from "./pages/admin/AdminDashboardPage";
 import LoginPage from "./pages/LoginPage";
+import PotongRumputPage from "./pages/services/PotongRumputPage";
+import HomeCleaningPage from "./pages/services/HomeCleaningPage";
+import ServiceAcPage from "./pages/services/ServiceAcPage";
+import JagaRumahPage from "./pages/services/JagaRumahPage";
 import { useLocation } from "react-router-dom";
 
 const Home = () => (
@@ -79,6 +83,10 @@ function App() {
           <Route path="/admin/login" element={<AdminLoginPage />} />
           <Route path="/admin/dashboard" element={<AdminDashboardPage />} />
           <Route path="/login" element={<LoginPage />} />
+          <Route path="/layanan/potong-rumput" element={<PotongRumputPage />} />
+          <Route path="/layanan/home-cleaning" element={<HomeCleaningPage />} />
+          <Route path="/layanan/service-ac" element={<ServiceAcPage />} />
+          <Route path="/layanan/jaga-rumah" element={<JagaRumahPage />} />
         </Routes>
       </BrowserRouter>
       <ConditionalChat />

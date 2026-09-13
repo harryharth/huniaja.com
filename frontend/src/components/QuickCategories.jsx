@@ -5,10 +5,10 @@ import { ICON_BELI_PROPERTI, ICON_KERJASAMA, ICON_POTONG_RUMPUT, ICON_HOME_CLEAN
 const items = [
   { label: "Beli Properti", bg: "bg-blue-50", img: ICON_BELI_PROPERTI, href: "/cari-properti" },
   { label: "Kerjasama", bg: "bg-green-50", img: ICON_KERJASAMA, href: "/kerjasama" },
-  { label: "Potong Rumput", bg: "bg-transparent", img: ICON_POTONG_RUMPUT, href: "/kontak" },
-  { label: "Home Cleaning", bg: "bg-transparent", img: ICON_HOME_CLEANING, href: "/kontak" },
-  { label: "Service AC", bg: "bg-transparent", img: ICON_SERVICE_AC, href: "/kontak" },
-  { label: "Jaga Rumah", bg: "bg-transparent", img: ICON_JAGA_RUMAH, href: "/kontak" },
+  { label: "Potong Rumput", bg: "bg-transparent", img: ICON_POTONG_RUMPUT, href: "/layanan/potong-rumput" },
+  { label: "Home Cleaning", bg: "bg-transparent", img: ICON_HOME_CLEANING, href: "/layanan/home-cleaning" },
+  { label: "Service AC", bg: "bg-transparent", img: ICON_SERVICE_AC, href: "/layanan/service-ac" },
+  { label: "Jaga Rumah", bg: "bg-transparent", img: ICON_JAGA_RUMAH, href: "/layanan/jaga-rumah" },
 ];
 
 export default function QuickCategories() {
