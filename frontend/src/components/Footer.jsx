@@ -6,21 +6,21 @@ import { Facebook, Instagram, Youtube } from "lucide-react";
 const footerCols = [
   [
     { label: "Beli", href: "/" },
-    { label: "Jual", href: "/" },
-    { label: "Konsultasi", href: "/" },
+    { label: "Jual", href: "/pasang-iklan" },
+    { label: "Konsultasi", href: "/kontak" },
     { label: "KPR", href: "/kpr" },
   ],
   [
     { label: "Karir", href: "/karir" },
-    { label: "Tentang Kami", href: "/" },
-    { label: "Pasang Iklan", href: "/" },
-    { label: "Kontak", href: "/" },
+    { label: "Tentang Kami", href: "/tentang-kami" },
+    { label: "Pasang Iklan", href: "/pasang-iklan" },
+    { label: "Kontak", href: "/kontak" },
   ],
   [
-    { label: "Berita", href: "/" },
-    { label: "Pusat Bantuan", href: "/" },
-    { label: "S&K", href: "/" },
-    { label: "Kerjasama", href: "/" },
+    { label: "Berita", href: "/berita" },
+    { label: "Pusat Bantuan", href: "/pusat-bantuan" },
+    { label: "S&K", href: "/syarat-ketentuan" },
+    { label: "Kerjasama", href: "/kerjasama" },
   ],
 ];
 

@@ -11,8 +11,16 @@ import KerjaSama from "./components/KerjaSama";
 import WhyHuniaja from "./components/WhyHuniaja";
 import Footer from "./components/Footer";
 import { Toaster } from "./components/ui/toaster";
+
 import KarirPage from "./pages/KarirPage";
 import KprPage from "./pages/KprPage";
+import PasangIklanPage from "./pages/PasangIklanPage";
+import TentangKamiPage from "./pages/TentangKamiPage";
+import KontakPage from "./pages/KontakPage";
+import SKPage from "./pages/SKPage";
+import PusatBantuanPage from "./pages/PusatBantuanPage";
+import BeritaPage from "./pages/BeritaPage";
+import KerjasamaPage from "./pages/KerjasamaPage";
 
 const Home = () => (
   <div className="min-h-screen bg-white">
@@ -35,6 +43,13 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/karir" element={<KarirPage />} />
           <Route path="/kpr" element={<KprPage />} />
+          <Route path="/pasang-iklan" element={<PasangIklanPage />} />
+          <Route path="/tentang-kami" element={<TentangKamiPage />} />
+          <Route path="/kontak" element={<KontakPage />} />
+          <Route path="/syarat-ketentuan" element={<SKPage />} />
+          <Route path="/pusat-bantuan" element={<PusatBantuanPage />} />
+          <Route path="/berita" element={<BeritaPage />} />
+          <Route path="/kerjasama" element={<KerjasamaPage />} />
         </Routes>
       </BrowserRouter>
       <Toaster />
