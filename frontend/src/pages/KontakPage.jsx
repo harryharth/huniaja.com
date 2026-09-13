@@ -12,6 +12,7 @@ import {
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import { Button } from "../components/ui/button";
+import { WA_URL, WA_DISPLAY } from "../components/ChatWidget";
 
 const contactMethods = [
   {
@@ -24,15 +25,15 @@ const contactMethods = [
   {
     Icon: Phone,
     label: "Telepon",
-    value: "(+62) 811 1234 5678",
-    href: "tel:+628111234567",
+    value: WA_DISPLAY,
+    href: "tel:+6285119833362",
     color: "#12B815",
   },
   {
     Icon: MessageCircle,
     label: "WhatsApp",
     value: "Chat Tim Huniaja",
-    href: "#",
+    href: WA_URL(),
     color: "#22C55E",
   },
   {
@@ -193,7 +194,9 @@ export default function KontakPage() {
                     <Facebook className="w-4 h-4" />
                   </a>
                   <a
-                    href="#"
+                    href={WA_URL()}
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="w-10 h-10 rounded-full bg-white/15 hover:bg-white/25 flex items-center justify-center transition"
                   >
                     <MessageCircle className="w-4 h-4" />

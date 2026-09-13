@@ -12,6 +12,7 @@ import WhyHuniaja from "./components/WhyHuniaja";
 import Footer from "./components/Footer";
 import { Toaster } from "./components/ui/toaster";
 import ScrollToTop from "./components/ScrollToTop";
+import ChatWidget from "./components/ChatWidget";
 
 import KarirPage from "./pages/KarirPage";
 import KprPage from "./pages/KprPage";
@@ -54,6 +55,7 @@ function App() {
           <Route path="/kerjasama" element={<KerjasamaPage />} />
         </Routes>
       </BrowserRouter>
+      <ChatWidget />
       <Toaster />
     </div>
   );

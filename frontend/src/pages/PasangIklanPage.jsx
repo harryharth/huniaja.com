@@ -20,6 +20,7 @@ import {
   AccordionTrigger,
 } from "../components/ui/accordion";
 import { HERO_BANNER } from "../mock";
+import { WA_URL } from "../components/ChatWidget";
 
 const HERO_IMG = "https://images.unsplash.com/photo-1684230413889-836e331a8201?w=1200&q=80";
 
@@ -388,8 +389,13 @@ export default function PasangIklanPage() {
                 siap memberikan bantuan dengan penuh kesediaan dan
                 profesionalisme.
               </p>
-              <Button className="mt-5 bg-[#0025F5] hover:bg-[#001fd1] text-white rounded-full font-bold px-6 h-11">
-                Hubungi Kami
+              <Button
+                asChild
+                className="mt-5 bg-[#0025F5] hover:bg-[#001fd1] text-white rounded-full font-bold px-6 h-11"
+              >
+                <a href={WA_URL()} target="_blank" rel="noopener noreferrer">
+                  Hubungi Kami
+                </a>
               </Button>
             </div>
           </div>

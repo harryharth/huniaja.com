@@ -10,6 +10,7 @@ import {
   MessageCircle,
 } from "lucide-react";
 import { Button } from "./ui/button";
+import { WA_URL } from "./ChatWidget";
 
 export default function ListingCard({ item, variant = "default" }) {
   const [liked, setLiked] = useState(
@@ -95,10 +96,17 @@ export default function ListingCard({ item, variant = "default" }) {
             <FileText className="w-3.5 h-3.5 mr-1" /> Detail
           </Button>
           <Button
+            asChild
             variant="outline"
             className={`h-9 text-xs font-semibold rounded-full ${whatsappClasses}`}
           >
-            <MessageCircle className="w-3.5 h-3.5 mr-1" /> WhatsApp
+            <a
+              href={WA_URL(`Halo, saya tertarik dengan ${item.title} (${item.location}) seharga ${item.price}.`)}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <MessageCircle className="w-3.5 h-3.5 mr-1" /> WhatsApp
+            </a>
           </Button>
         </div>
       </div>

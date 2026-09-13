@@ -19,6 +19,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "../components/ui/accordion";
+import { WA_URL } from "../components/ChatWidget";
 
 const topics = [
   { Icon: User, label: "Akun & Verifikasi", count: 12, color: "#0025F5" },
@@ -176,7 +177,9 @@ export default function PusatBantuanPage() {
                 <Phone className="w-4 h-4" /> Hubungi Support
               </Link>
               <a
-                href="#"
+                href={WA_URL()}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="bg-[#12B815] hover:bg-[#0fa112] text-white font-bold rounded-full h-11 flex items-center justify-center gap-2 transition"
               >
                 <MessageCircle className="w-4 h-4" /> Chat WhatsApp
