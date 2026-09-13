@@ -586,22 +586,23 @@ export default function KerjasamaPage() {
       </section>
 
       {/* Final CTA strip */}
-      <section className="bg-[#001DF3] text-white py-14 md:py-20 relative overflow-hidden">
-        <div className="absolute -top-24 -right-24 w-96 h-96 rounded-full bg-[#00B512]/20 blur-3xl pointer-events-none" />
+      <section className="bg-[#00B512] text-white py-14 md:py-20 relative overflow-hidden">
+        <div className="absolute -top-24 -right-24 w-96 h-96 rounded-full bg-white/15 blur-3xl pointer-events-none" />
+        <div className="absolute -bottom-24 -left-24 w-96 h-96 rounded-full bg-[#001DF3]/25 blur-3xl pointer-events-none" />
         <div className="relative max-w-5xl mx-auto px-4 md:px-6 text-center">
-          <Star className="w-10 h-10 text-[#00B512] mx-auto fill-[#00B512]" />
+          <Star className="w-10 h-10 text-white mx-auto fill-white" />
           <p className="text-2xl md:text-4xl font-black leading-tight mt-4">
-            Kolaborasi terbaik dimulai<br className="hidden md:block" />
-            dari <span className="text-[#00B512]">satu percakapan</span>.
+            Ayo tumbuh bersama<br className="hidden md:block" />
+            <span className="text-[#000066]">Huniaja.com</span>
           </p>
-          <p className="text-sm md:text-base text-white/80 mt-4 max-w-xl mx-auto">
-            Kalau kamu sudah baca sampai di sini, artinya ada sesuatu yang
-            resonan. Yuk mulai obrolannya.
+          <p className="text-sm md:text-base text-white/90 mt-4 max-w-xl mx-auto">
+            Satu langkah kecil hari ini bisa jadi kolaborasi besar besok.
+            Ceritakan ide kerjasamamu — tim kami siap dengar.
           </p>
           <div className="mt-8 flex flex-wrap justify-center gap-3">
             <a
               href="#form"
-              className="bg-white text-[#001DF3] hover:bg-slate-100 font-bold rounded-full px-6 py-3 text-sm shadow-lg transition"
+              className="bg-white text-[#00B512] hover:bg-slate-100 font-bold rounded-full px-6 py-3 text-sm shadow-lg transition"
             >
               Ajukan via Form
             </a>
@@ -611,15 +612,9 @@ export default function KerjasamaPage() {
               )}
               target="_blank"
               rel="noopener noreferrer"
-              className="bg-[#00B512] hover:bg-[#009e0f] text-white font-bold rounded-full px-6 py-3 text-sm shadow-lg transition"
+              className="bg-[#001DF3] hover:bg-[#0016c2] text-white font-bold rounded-full px-6 py-3 text-sm shadow-lg transition"
             >
               Chat WhatsApp Sekarang
-            </a>
-            <a
-              href="mailto:partnership@huniaja.com"
-              className="bg-white/10 hover:bg-white/20 backdrop-blur border border-white/20 text-white font-bold rounded-full px-6 py-3 text-sm transition"
-            >
-              partnership@huniaja.com
             </a>
           </div>
         </div>

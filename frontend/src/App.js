@@ -44,13 +44,11 @@ const Home = () => (
     <Header />
     <Hero />
     <QuickCategories />
-    <HomeTrustStrip />
     <NewListings />
     <PopulerSection />
-    <HomeManifesto />
     <HomeHowItWorks />
-    <HomeStories />
     <KerjaSama />
+    <HomeStories />
     <WhyHuniaja />
     <HomeFinalCta />
     <Footer />

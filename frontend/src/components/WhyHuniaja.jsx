@@ -65,17 +65,19 @@ export default function WhyHuniaja() {
       <div className="relative max-w-6xl mx-auto px-4 md:px-6">
         <div className="max-w-2xl mx-auto text-center">
           <span
-            className="inline-block text-[11px] font-bold tracking-widest uppercase px-3 py-1.5 rounded-full text-white"
-            style={{ backgroundColor: "#001DF3" }}
+            className="inline-flex items-center gap-1.5 text-[11px] font-bold tracking-widest uppercase px-3 py-1.5 rounded-full text-white"
+            style={{ backgroundColor: "#00B512" }}
             data-testid="why-huniaja-tag"
           >
+            <span className="w-1.5 h-1.5 rounded-full bg-white/90" />
             Kenapa Huniaja
           </span>
           <h2
             className="mt-4 text-3xl md:text-4xl font-black leading-tight"
             style={{ color: "#000066" }}
           >
-            Alasan Ribuan Keluarga Memilih Huniaja.com
+            Alasan Ribuan Keluarga{" "}
+            <span style={{ color: "#00B512" }}>Memilih Huniaja.com</span>
           </h2>
           <p className="mt-3 text-sm md:text-base text-slate-600">
             Kami membangun ekosistem yang membuat urusan rumah menjadi jauh
@@ -90,33 +92,38 @@ export default function WhyHuniaja() {
               className="group relative bg-white rounded-3xl p-6 md:p-7 border border-blue-100 shadow-[0_4px_18px_-6px_rgba(0,29,243,0.15)] hover:shadow-[0_18px_36px_-12px_rgba(0,29,243,0.35)] hover:-translate-y-1 transition-all duration-300 overflow-hidden"
               data-testid={`why-card-${f.num}`}
             >
-              {/* top gradient bar */}
+              {/* top gradient bar: blue → green → navy */}
               <span
                 aria-hidden
                 className="absolute top-0 left-0 right-0 h-1"
                 style={{
                   background:
-                    "linear-gradient(90deg, #001DF3 0%, #000066 100%)",
+                    "linear-gradient(90deg, #001DF3 0%, #00B512 55%, #000066 100%)",
                 }}
               />
 
-              {/* number chip */}
+              {/* soft green corner glow */}
               <span
-                className="absolute top-5 right-5 text-[11px] font-black tracking-widest px-2.5 py-1 rounded-full"
-                style={{
-                  color: "#001DF3",
-                  backgroundColor: "rgba(0,29,243,0.08)",
-                }}
+                aria-hidden
+                className="absolute -top-14 -right-14 w-32 h-32 rounded-full blur-2xl opacity-0 group-hover:opacity-40 transition-opacity"
+                style={{ backgroundColor: "#00B512" }}
+              />
+
+              {/* number chip — green filled */}
+              <span
+                className="absolute top-5 right-5 text-[11px] font-black tracking-widest px-2.5 py-1 rounded-full text-white shadow-sm"
+                style={{ backgroundColor: "#00B512" }}
               >
                 0{f.num}
               </span>
 
-              {/* icon */}
+              {/* icon — blue tint, green ring on hover */}
               <div
-                className="w-14 h-14 md:w-16 md:h-16 rounded-2xl flex items-center justify-center transition-colors"
+                className="relative w-14 h-14 md:w-16 md:h-16 rounded-2xl flex items-center justify-center transition-all group-hover:ring-2 group-hover:ring-offset-2"
                 style={{
                   background:
-                    "linear-gradient(135deg, rgba(0,29,243,0.10) 0%, rgba(0,0,102,0.10) 100%)",
+                    "linear-gradient(135deg, rgba(0,29,243,0.10) 0%, rgba(0,181,18,0.12) 100%)",
+                  boxShadow: "inset 0 0 0 1px rgba(0,29,243,0.15)",
                 }}
               >
                 <f.Icon
@@ -132,7 +139,18 @@ export default function WhyHuniaja() {
               >
                 {f.title}
               </h3>
-              <p className="mt-2 text-sm md:text-[15px] text-slate-600 leading-relaxed">
+
+              {/* accent underline (green) — grows on hover */}
+              <span
+                aria-hidden
+                className="block h-[3px] rounded-full mt-2 transition-all"
+                style={{
+                  backgroundColor: "#00B512",
+                  width: "28px",
+                }}
+              />
+
+              <p className="mt-3 text-sm md:text-[15px] text-slate-600 leading-relaxed">
                 {f.desc}
               </p>
             </div>
