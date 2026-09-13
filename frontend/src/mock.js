@@ -11,12 +11,10 @@ export const ICON_SUBSIDI = "https://customer-assets-gfyr7b9c.emergentagent.net/
 export const ICON_POPULER = "https://customer-assets-gfyr7b9c.emergentagent.net/job_branding-suite-6/artifacts/fazpd8ej_populer.png";
 
 export const navLinks = [
-  { label: "Titip Jual", href: "#" },
-  { label: "Berita", href: "#" },
   { label: "Beli", href: "#" },
-  { label: "Sewa", href: "#" },
   { label: "KPR", href: "#" },
-  { label: "Agen", href: "#" },
+  { label: "Konsultasi", href: "#" },
+  { label: "Berita", href: "#" },
 ];
 
 export const searchTabs = ["Beli", "Sewa", "Baru"];
