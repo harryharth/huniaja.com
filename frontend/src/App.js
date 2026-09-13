@@ -5,11 +5,9 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Header from "./components/Header";
 import Hero from "./components/Hero";
 import QuickCategories from "./components/QuickCategories";
-import PropertyTypes from "./components/PropertyTypes";
 import PromoStrip from "./components/PromoStrip";
 import NewListings from "./components/NewListings";
 import { SubsidiSection, PopulerSection } from "./components/HighlightSections";
-import FavoriteLocations from "./components/FavoriteLocations";
 import KerjaSama from "./components/KerjaSama";
 import WhyHuniaja from "./components/WhyHuniaja";
 import Footer from "./components/Footer";
@@ -20,12 +18,10 @@ const Home = () => (
     <Header />
     <Hero />
     <QuickCategories />
-    <PropertyTypes />
     <PromoStrip />
     <NewListings />
     <SubsidiSection />
     <PopulerSection />
-    <FavoriteLocations />
     <KerjaSama />
     <WhyHuniaja />
     <Footer />
