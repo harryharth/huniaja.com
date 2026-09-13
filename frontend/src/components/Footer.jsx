@@ -7,7 +7,7 @@ const footerCols = [
   [
     { label: "Beli", href: "/cari-properti" },
     { label: "Jual", href: "/pasang-iklan" },
-    { label: "Konsultasi", href: "/kontak" },
+    { label: "Konsultasi", href: "/konsultasi" },
     { label: "KPR", href: "/kpr" },
   ],
   [
