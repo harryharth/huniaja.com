@@ -19,9 +19,9 @@ export default function Header() {
     <header className="bg-[#0025F5] text-white sticky top-0 z-50 border-b border-white/25">
       {/* Mobile top row: logo + hamburger */}
       <div className="lg:hidden max-w-7xl mx-auto px-4 pt-4 pb-3 flex items-center justify-between">
-        <a href="/" className="flex items-center shrink-0">
+        <Link to="/" className="flex items-center shrink-0">
           <img src={LOGO_WHITE} alt="Huniaja" className="h-7 w-auto" />
-        </a>
+        </Link>
         <button
           className="w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center"
           onClick={() => setMobileOpen((v) => !v)}
@@ -67,9 +67,9 @@ export default function Header() {
 
       {/* Desktop row (>= lg) */}
       <div className="hidden lg:flex max-w-7xl mx-auto px-8 py-5 md:py-6 items-center gap-8">
-        <a href="/" className="flex items-center shrink-0">
+        <Link to="/" className="flex items-center shrink-0">
           <img src={LOGO_WHITE} alt="Huniaja" className="h-9 w-auto" />
-        </a>
+        </Link>
 
         <div className="flex-1 max-w-3xl">
           <div className="flex items-center bg-white rounded-full pl-1 pr-1 py-1 shadow-sm">
@@ -132,15 +132,20 @@ export default function Header() {
               </Link>
             ))}
             <div className="pt-3 flex flex-col gap-2">
-              <Button className="w-full bg-[#DAFF3D] hover:bg-[#c8ee1c] text-[#0025F5] rounded-full font-bold h-11 shadow-sm">
+              <Link
+                to="/pasang-iklan"
+                onClick={() => setMobileOpen(false)}
+                className="w-full bg-[#DAFF3D] hover:bg-[#c8ee1c] text-[#0025F5] rounded-full font-bold h-11 flex items-center justify-center shadow-sm transition"
+              >
                 Pasang Iklan Gratis
-              </Button>
-              <Button
-                variant="outline"
-                className="w-full rounded-full bg-transparent border-white text-white hover:bg-white hover:text-[#0025F5] font-bold h-11"
+              </Link>
+              <Link
+                to="/kontak"
+                onClick={() => setMobileOpen(false)}
+                className="w-full rounded-full bg-transparent border border-white text-white hover:bg-white hover:text-[#0025F5] font-bold h-11 flex items-center justify-center transition"
               >
                 Daftar / Masuk
-              </Button>
+              </Link>
             </div>
           </nav>
         </div>

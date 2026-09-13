@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { Button } from "./ui/button";
 
 export default function KerjaSama() {
@@ -14,9 +15,12 @@ export default function KerjaSama() {
             partnership, co-branding, Marketing dan lainnya.
           </p>
         </div>
-        <Button className="bg-[#0025F5] hover:bg-[#001fd1] text-white rounded-full font-semibold px-6 md:px-8 h-11 md:h-12 text-sm md:text-base shadow-lg w-full md:w-auto">
+        <Link
+          to="/kerjasama"
+          className="bg-[#0025F5] hover:bg-[#001fd1] text-white rounded-full font-semibold px-6 md:px-8 h-11 md:h-12 text-sm md:text-base shadow-lg w-full md:w-auto flex items-center justify-center transition"
+        >
           Hubungi untuk Kolaborasi
-        </Button>
+        </Link>
       </div>
     </section>
   );

@@ -11,6 +11,7 @@ import KerjaSama from "./components/KerjaSama";
 import WhyHuniaja from "./components/WhyHuniaja";
 import Footer from "./components/Footer";
 import { Toaster } from "./components/ui/toaster";
+import ScrollToTop from "./components/ScrollToTop";
 
 import KarirPage from "./pages/KarirPage";
 import KprPage from "./pages/KprPage";
@@ -39,6 +40,7 @@ function App() {
   return (
     <div className="App">
       <BrowserRouter>
+        <ScrollToTop />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/karir" element={<KarirPage />} />

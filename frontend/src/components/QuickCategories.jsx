@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { ChevronRight } from "lucide-react";
+import { Link } from "react-router-dom";
 import {
   promoCards,
   LOGO_WHITE,
@@ -8,8 +9,8 @@ import {
 } from "../mock";
 
 const cats = [
-  { label: "Beli Properti", color: "#0025F5", icon: ICON_BELI_PROPERTI },
-  { label: "Kerjasama", color: "#12B815", icon: ICON_KERJASAMA },
+  { label: "Beli Properti", color: "#0025F5", icon: ICON_BELI_PROPERTI, href: "/" },
+  { label: "Kerjasama", color: "#12B815", icon: ICON_KERJASAMA, href: "/kerjasama" },
 ];
 
 export default function QuickCategories() {
@@ -22,8 +23,9 @@ export default function QuickCategories() {
           {/* Left: Pill categories */}
           <div className="lg:col-span-3 grid grid-cols-2 lg:grid-cols-1 gap-3 md:gap-4">
             {cats.map((c) => (
-              <button
+              <Link
                 key={c.label}
+                to={c.href}
                 className="group flex items-center gap-2 md:gap-3 bg-white border border-slate-200 hover:border-slate-300 hover:shadow-md rounded-[24px] md:rounded-[28px] p-2 pr-2 md:pr-4 shadow-sm transition-all min-w-0"
               >
                 <span className="shrink-0 w-11 h-11 md:w-14 md:h-14 flex items-center justify-center">
@@ -45,7 +47,7 @@ export default function QuickCategories() {
                     strokeWidth={3}
                   />
                 </span>
-              </button>
+              </Link>
             ))}
           </div>
 
