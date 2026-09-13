@@ -13,10 +13,10 @@ export const ICON_BELI_PROPERTI = "https://customer-assets-gfyr7b9c.emergentagen
 export const ICON_KERJASAMA = "https://customer-assets-gfyr7b9c.emergentagent.net/job_branding-suite-6/artifacts/sjy1m24v_logo%20kerjasama.png";
 
 export const navLinks = [
-  { label: "Beli", href: "#" },
-  { label: "KPR", href: "#" },
-  { label: "Konsultasi", href: "#" },
-  { label: "Berita", href: "#" },
+  { label: "Beli", href: "/" },
+  { label: "KPR", href: "/kpr" },
+  { label: "Konsultasi", href: "/" },
+  { label: "Berita", href: "/" },
 ];
 
 export const searchTabs = ["Beli", "Sewa", "Baru"];

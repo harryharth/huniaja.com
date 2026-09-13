@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Search, ChevronDown, Menu, X } from "lucide-react";
+import { Link } from "react-router-dom";
 import { LOGO_WHITE, navLinks, searchTabs } from "../mock";
 import { Button } from "./ui/button";
 import {

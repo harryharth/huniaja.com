@@ -13,7 +13,7 @@ const footerCols = [
   [
     { label: "Karir", href: "/karir" },
     { label: "Tentang Kami", href: "/" },
-    { label: "Kerjasama", href: "/" },
+    { label: "Pasang Iklan", href: "/" },
     { label: "Kontak", href: "/" },
   ],
   [

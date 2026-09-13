@@ -12,6 +12,7 @@ import WhyHuniaja from "./components/WhyHuniaja";
 import Footer from "./components/Footer";
 import { Toaster } from "./components/ui/toaster";
 import KarirPage from "./pages/KarirPage";
+import KprPage from "./pages/KprPage";
 
 const Home = () => (
   <div className="min-h-screen bg-white">
@@ -33,6 +34,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/karir" element={<KarirPage />} />
+          <Route path="/kpr" element={<KprPage />} />
         </Routes>
       </BrowserRouter>
       <Toaster />
