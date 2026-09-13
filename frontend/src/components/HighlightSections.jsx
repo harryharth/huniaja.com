@@ -1,13 +1,17 @@
 import React from "react";
 import ListingCard from "./ListingCard";
-import { subsidiListings, popularListings } from "../mock";
-import { Flame, Tag } from "lucide-react";
+import {
+  subsidiListings,
+  popularListings,
+  ICON_SUBSIDI,
+  ICON_POPULER,
+} from "../mock";
 
 export function SubsidiSection() {
   return (
     <Section
-      title="SUBSIDI"
-      icon={<Tag className="w-5 h-5 text-red-500" />}
+      iconSrc={ICON_SUBSIDI}
+      iconAlt="Subsidi"
       subtitle="Properti yang paling banyak Diskonnya"
       items={subsidiListings}
       wrapperBg="bg-[#F1F0FE]"
@@ -18,8 +22,8 @@ export function SubsidiSection() {
 export function PopulerSection() {
   return (
     <Section
-      title="POPULER"
-      icon={<Flame className="w-5 h-5 text-orange-500" />}
+      iconSrc={ICON_POPULER}
+      iconAlt="Populer"
       subtitle="Properti yang paling banyak dilihat pembeli"
       items={popularListings}
       wrapperBg="bg-[#EEF6EE]"
@@ -27,18 +31,15 @@ export function PopulerSection() {
   );
 }
 
-function Section({ title, icon, subtitle, items, wrapperBg }) {
+function Section({ iconSrc, iconAlt, subtitle, items, wrapperBg }) {
   return (
     <section className="bg-white pt-8">
       <div className="max-w-6xl mx-auto px-6">
         <div className={`${wrapperBg} rounded-2xl p-5`}>
-          <div className="flex flex-wrap items-center justify-between mb-4">
-            <div className="flex items-center gap-2">
-              <h3 className="text-xl font-extrabold italic text-[#0025F5]">
-                {title}
-              </h3>
-              {icon}
-              <span className="text-sm text-slate-600 ml-2">{subtitle}</span>
+          <div className="flex flex-wrap items-center justify-between mb-4 gap-3">
+            <div className="flex items-center gap-3">
+              <img src={iconSrc} alt={iconAlt} className="h-8 md:h-9 w-auto" />
+              <span className="text-sm text-slate-600">{subtitle}</span>
             </div>
             <button className="bg-[#E5FF3D] hover:bg-[#d6f01f] text-slate-900 text-xs font-semibold px-4 py-1.5 rounded-full transition">
               LIHAT SEMUA

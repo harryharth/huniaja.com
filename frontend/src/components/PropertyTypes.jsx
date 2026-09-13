@@ -10,9 +10,8 @@ import {
   Hotel,
   BedDouble,
   Palmtree,
-  Zap,
 } from "lucide-react";
-import { propertyTypes } from "../mock";
+import { propertyTypes, ICON_CARIYUK } from "../mock";
 
 const iconMap = {
   Home,
@@ -33,9 +32,7 @@ export default function PropertyTypes() {
   return (
     <section className="bg-white pt-10">
       <div className="max-w-6xl mx-auto px-6">
-        <h2 className="text-2xl font-extrabold italic text-[#0025F5] mb-6 flex items-center gap-2">
-          CARI<Zap className="w-6 h-6 fill-[#E5FF3D] text-[#E5FF3D]" />YUK
-        </h2>
+        <img src={ICON_CARIYUK} alt="Cari Yuk" className="h-8 md:h-9 w-auto mb-6" />
         <div className="grid grid-cols-5 md:grid-cols-10 gap-3">
           {propertyTypes.map((t) => {
             const Icon = iconMap[t.icon];

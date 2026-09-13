@@ -5,6 +5,11 @@ export const LOGO_WHITE = "https://customer-assets-m6fa6gv7.emergentagent.net/jo
 export const LOGO_MAIN = "https://customer-assets-m6fa6gv7.emergentagent.net/job_4eed1f12-2d88-44f4-9aaa-62ae00ad5a06/artifacts/jousiv9l_LOGO%20HUNIAJA.png";
 export const HERO_BANNER = "https://customer-assets-m6fa6gv7.emergentagent.net/job_4eed1f12-2d88-44f4-9aaa-62ae00ad5a06/artifacts/wle75380_Huniaja%201.webp";
 
+export const ICON_CARIYUK = "https://customer-assets-gfyr7b9c.emergentagent.net/job_branding-suite-6/artifacts/xzyv402x_cariyuk.png";
+export const ICON_LISTING_BARU = "https://customer-assets-gfyr7b9c.emergentagent.net/job_branding-suite-6/artifacts/kjaom8ge_listing%20baru.png";
+export const ICON_SUBSIDI = "https://customer-assets-gfyr7b9c.emergentagent.net/job_branding-suite-6/artifacts/d5dbjva7_subsidi.png";
+export const ICON_POPULER = "https://customer-assets-gfyr7b9c.emergentagent.net/job_branding-suite-6/artifacts/fazpd8ej_populer.png";
+
 export const navLinks = [
   { label: "Belajar Properti", href: "#" },
   { label: "Jasa Perawatan Rumah", href: "#" },

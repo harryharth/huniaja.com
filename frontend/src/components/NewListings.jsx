@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import ListingCard from "./ListingCard";
-import { listingTabs, newListings } from "../mock";
-import { Zap } from "lucide-react";
+import { listingTabs, newListings, ICON_LISTING_BARU } from "../mock";
 
 export default function NewListings() {
   const [active, setActive] = useState(listingTabs[0]);
@@ -10,9 +9,11 @@ export default function NewListings() {
     <section className="bg-white pt-12">
       <div className="max-w-6xl mx-auto px-6">
         <div className="flex flex-wrap items-center justify-between gap-4 mb-4">
-          <h2 className="text-2xl font-extrabold italic text-[#0025F5] flex items-center gap-2">
-            LIST<Zap className="w-6 h-6 fill-[#E5FF3D] text-[#E5FF3D]" />NG BARU
-          </h2>
+          <img
+            src={ICON_LISTING_BARU}
+            alt="Listing Baru"
+            className="h-8 md:h-9 w-auto"
+          />
           <div className="flex flex-wrap gap-2">
             {listingTabs.map((t) => (
               <button
