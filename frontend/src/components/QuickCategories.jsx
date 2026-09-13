@@ -1,5 +1,5 @@
 import React from "react";
-import { ChevronRight, Scissors, Sparkles, Wrench, ShieldCheck } from "lucide-react";
+import { Scissors, Sparkles, Wrench, ShieldCheck } from "lucide-react";
 import { Link } from "react-router-dom";
 import { ICON_BELI_PROPERTI, ICON_KERJASAMA } from "../mock";
 
@@ -43,15 +43,6 @@ export default function QuickCategories() {
               </span>
               <span className="text-xs md:text-sm font-semibold text-slate-800 mt-2 text-center leading-tight">
                 {c.label}
-              </span>
-              <span
-                className="w-6 h-6 rounded-full flex items-center justify-center mt-2"
-                style={{ backgroundColor: c.color }}
-              >
-                <ChevronRight
-                  className="w-3.5 h-3.5 text-white"
-                  strokeWidth={3}
-                />
               </span>
             </Link>
           ))}
