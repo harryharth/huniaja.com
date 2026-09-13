@@ -76,7 +76,7 @@ export default function Hero() {
   const Icon = s.Icon;
 
   return (
-    <section className="bg-[#0025F5] pb-10">
+    <section className="bg-[#0025F5] pt-8 md:pt-10 pb-10">
       <div className="max-w-7xl mx-auto px-4 md:px-8">
         <div
           className="relative overflow-hidden bg-white shadow-2xl h-[220px] sm:h-[280px] md:h-[340px] transition-all duration-700"
