@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   BadgeCheck,
   Zap,
@@ -18,6 +18,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "../components/ui/accordion";
+import { KprSyariahDialog, TakeOverDialog } from "./KprDialogs";
 
 const BANK_LOGOS = "https://customer-assets-gfyr7b9c.emergentagent.net/job_branding-suite-6/artifacts/z220basa_bank.png";
 
@@ -91,6 +92,9 @@ function PhoneMockup({ children }) {
 }
 
 export default function KprPage() {
+  const [kprOpen, setKprOpen] = useState(false);
+  const [takeoverOpen, setTakeoverOpen] = useState(false);
+
   return (
     <div className="min-h-screen bg-white">
       <Header />
@@ -176,6 +180,7 @@ export default function KprPage() {
               title="KPR Syariah"
               desc="Hitung estimasi cicilan KPR Syariah per bulan dari berbagai program bank yang tersedia."
               cta="Simulasikan Cicilan KPR Syariah"
+              onClick={() => setKprOpen(true)}
             />
             <div className="h-4" />
             <SimCard
@@ -184,6 +189,7 @@ export default function KprPage() {
               title="KPR Take Over Syariah"
               desc="Hitung estimasi cicilan KPR Take Over Syariah dari KPR yang sedang berjalan saat ini."
               cta="Simulasikan Take Over Syariah"
+              onClick={() => setTakeoverOpen(true)}
             />
           </div>
         </div>
@@ -256,11 +262,14 @@ export default function KprPage() {
       </section>
 
       <Footer />
+
+      <KprSyariahDialog open={kprOpen} onOpenChange={setKprOpen} />
+      <TakeOverDialog open={takeoverOpen} onOpenChange={setTakeoverOpen} />
     </div>
   );
 }
 
-function SimCard({ num, Icon, title, desc, cta }) {
+function SimCard({ num, Icon, title, desc, cta, onClick }) {
   return (
     <div className="relative bg-white rounded-3xl border border-slate-100 shadow-sm hover:shadow-md transition p-5 md:p-6 flex gap-4 items-start">
       <div className="w-8 h-8 rounded-full bg-[#12B815] text-white font-bold text-sm flex items-center justify-center shrink-0 shadow-md">
@@ -278,7 +287,10 @@ function SimCard({ num, Icon, title, desc, cta }) {
             </p>
           </div>
         </div>
-        <button className="mt-4 bg-[#12B815] hover:bg-[#0fa112] text-white font-bold rounded-full px-5 py-2 text-xs md:text-sm shadow transition">
+        <button
+          onClick={onClick}
+          className="mt-4 bg-[#12B815] hover:bg-[#0fa112] text-white font-bold rounded-full px-5 py-2 text-xs md:text-sm shadow transition"
+        >
           {cta}
         </button>
       </div>
