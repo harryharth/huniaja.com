@@ -27,6 +27,11 @@ import { KprSyariahDialog, TakeOverDialog } from "./KprDialogs";
 
 const BANK_LOGOS = "https://customer-assets-gfyr7b9c.emergentagent.net/job_branding-suite-6/artifacts/z220basa_bank.png";
 
+const MOCKUP_SIMULATOR =
+  "https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=900&q=85";
+const MOCKUP_STEPS =
+  "https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=900&q=85";
+
 const kprStories = [
   {
     name: "Keluarga Pak Andi",
@@ -317,8 +322,8 @@ export default function KprPage() {
           <div className="flex justify-center">
             <PhoneMockup>
               <img
-                src={HERO_BANNER}
-                alt="App"
+                src={MOCKUP_SIMULATOR}
+                alt="Simulasi KPR - kalkulator finansial"
                 className="w-full h-full object-cover"
               />
             </PhoneMockup>
@@ -407,8 +412,8 @@ export default function KprPage() {
             <div className="bg-white rounded-[44px] p-4 md:p-6 shadow-sm">
               <PhoneMockup>
                 <img
-                  src={HERO_BANNER}
-                  alt="App"
+                  src={MOCKUP_STEPS}
+                  alt="Kunci rumah - serah terima KPR"
                   className="w-full h-full object-cover"
                 />
               </PhoneMockup>
