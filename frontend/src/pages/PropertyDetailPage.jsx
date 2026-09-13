@@ -117,7 +117,7 @@ export default function PropertyDetailPage() {
                 />
                 <div className="absolute top-4 left-4 inline-flex items-center gap-1 bg-white/95 backdrop-blur text-[#001DF3] text-xs font-bold px-3 py-1.5 rounded-full shadow-sm">
                   <BadgeCheck className="w-3.5 h-3.5" />
-                  {item.tier} · Terverifikasi
+                  Terverifikasi
                 </div>
                 <div className="absolute top-4 right-4 flex gap-2">
                   <button
