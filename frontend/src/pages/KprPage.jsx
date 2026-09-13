@@ -8,6 +8,11 @@ import {
   Flame,
   Calculator,
   RefreshCw,
+  Quote,
+  Home,
+  Heart,
+  Clock,
+  Sparkles,
 } from "lucide-react";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
@@ -21,6 +26,36 @@ import {
 import { KprSyariahDialog, TakeOverDialog } from "./KprDialogs";
 
 const BANK_LOGOS = "https://customer-assets-gfyr7b9c.emergentagent.net/job_branding-suite-6/artifacts/z220basa_bank.png";
+
+const kprStories = [
+  {
+    name: "Keluarga Pak Andi",
+    role: "KPR Syariah - Cibubur",
+    initial: "A",
+    stat: "12 hari",
+    statLabel: "sampai akad",
+    quote:
+      "Kami sudah nabung 3 tahun untuk beli rumah, tapi bingung mulai dari mana. Tim Huniaja dampingi kami dari simulasi sampai akad - istri saya sampai nangis pas nerima kunci. Terima kasih sudah bikin proses ini terasa manusiawi.",
+  },
+  {
+    name: "Bu Nadia",
+    role: "Take Over Syariah - Depok",
+    initial: "N",
+    stat: "Rp 8Jt",
+    statLabel: "hemat per bulan",
+    quote:
+      "Cicilan lama saya berat karena bunga floating. Setelah take over ke Syariah lewat Huniaja, cicilan turun 30% dan tetap sampai lunas. Sekarang bisa napas lega dan nabung untuk pendidikan anak.",
+  },
+  {
+    name: "Mas Dimas",
+    role: "First-time Buyer - BSD",
+    initial: "D",
+    stat: "1x tolak",
+    statLabel: "lalu approved",
+    quote:
+      "KPR pertama saya ditolak bank karena data ga lengkap. Tim Huniaja bantu review ulang, bereskan dokumen, dan ajukan ke bank yang lebih cocok. Approved dalam 2 minggu. Mereka bener-bener sabar nemenin.",
+  },
+];
 
 const reasons = [
   {
@@ -99,23 +134,144 @@ export default function KprPage() {
     <div className="min-h-screen bg-white">
       <Header />
 
-      {/* Hero */}
-      <section className="bg-[#0025F5] text-white pt-10 md:pt-14 pb-14 md:pb-20">
-        <div className="max-w-6xl mx-auto px-4 md:px-6 grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-10 items-center">
+      {/* Hero - storytelling */}
+      <section className="bg-[#0025F5] text-white pt-12 md:pt-16 pb-14 md:pb-20 relative overflow-hidden">
+        <div className="absolute -top-24 -right-24 w-96 h-96 rounded-full bg-[#00B512]/20 blur-3xl pointer-events-none" />
+        <div className="absolute -bottom-24 -left-24 w-96 h-96 rounded-full bg-white/10 blur-3xl pointer-events-none" />
+        <div className="relative max-w-6xl mx-auto px-4 md:px-6 grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-10 items-center">
           <div>
+            <span className="inline-flex items-center gap-2 bg-white/10 backdrop-blur border border-white/20 rounded-full px-3 py-1 text-[11px] font-bold tracking-widest mb-4">
+              <Moon className="w-3.5 h-3.5" /> KPR SYARIAH · BEBAS RIBA
+            </span>
             <h1 className="text-3xl md:text-5xl font-black leading-tight">
-              KPR <span className="text-white">Syariah lebih mudah</span> dengan{" "}
-              <span className="text-[#00B512]">Huniaja</span>
+              Cicilan tetap.<br />
+              Hati tenang.<br />
+              <span className="text-[#00B512]">Rumah jadi milikmu.</span>
             </h1>
-            <p className="mt-4 text-sm md:text-base text-white/90 max-w-lg">
-              Pasang iklan rumah atau properti lainnya cukup 1 menit, langsung
-              jangkau jutaan pencari properti dalam waktu singkat!
+            <p className="mt-5 text-sm md:text-lg text-white/90 max-w-lg leading-relaxed">
+              Tidak semua orang harus mengerti akad Murabahah atau Musyarakah
+              Mutanaqisah untuk punya rumah. Kamu cukup punya niat - biar tim
+              kami yang temani sisanya, dengan sabar dan tanpa istilah rumit.
             </p>
-            <button className="mt-6 bg-[#00B512] hover:bg-[#009e0f] text-[#0025F5] font-bold rounded-full px-7 py-3 text-sm shadow-lg transition">
-              Mulai Pasang Iklan
-            </button>
+            <div className="mt-7 flex flex-wrap gap-3">
+              <a
+                href="#simulasi"
+                data-testid="kpr-hero-simulate"
+                className="bg-[#00B512] hover:bg-[#009e0f] text-white font-bold rounded-full px-7 py-3 text-sm shadow-lg transition"
+              >
+                Simulasi Cicilan Gratis
+              </a>
+              <a
+                href="#cerita"
+                className="bg-white/10 hover:bg-white/20 backdrop-blur border border-white/20 text-white font-bold rounded-full px-6 py-3 text-sm transition"
+              >
+                Lihat Cerita Mereka
+              </a>
+            </div>
+            <div className="mt-6 flex flex-wrap items-center gap-6 text-xs text-white/70">
+              <div className="flex items-center gap-1.5">
+                <ShieldCheck className="w-4 h-4 text-[#8FFF9F]" />
+                Fatwa DSN-MUI
+              </div>
+              <div className="flex items-center gap-1.5">
+                <BadgeCheck className="w-4 h-4 text-[#8FFF9F]" />
+                10+ Bank Rekanan
+              </div>
+              <div className="flex items-center gap-1.5">
+                <Heart className="w-4 h-4 text-[#8FFF9F]" />
+                12.500+ Keluarga
+              </div>
+            </div>
           </div>
-          <div className="bg-white rounded-[44px] h-56 md:h-72 shadow-2xl" />
+          <div className="rounded-[40px] overflow-hidden shadow-2xl">
+            <img
+              src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1200&q=85"
+              alt="Rumah impian"
+              className="w-full h-64 md:h-80 object-cover"
+            />
+          </div>
+        </div>
+      </section>
+
+      {/* Manifesto quote */}
+      <section className="bg-white py-14 md:py-20">
+        <div className="max-w-4xl mx-auto px-4 md:px-6 text-center">
+          <Quote
+            className="w-14 h-14 md:w-16 md:h-16 text-[#0025F5]/10 mx-auto"
+            strokeWidth={2.5}
+          />
+          <p className="text-xl md:text-3xl font-black text-slate-900 leading-tight mt-4 tracking-tight">
+            "KPR bukan cuma soal cicilan.<br className="hidden md:block" />
+            Ini soal{" "}
+            <span className="text-[#0025F5]">memilih ketenangan</span>{" "}
+            untuk 15-20 tahun ke depan."
+          </p>
+          <div className="mt-6 inline-flex items-center gap-3">
+            <div className="w-10 h-px bg-slate-300" />
+            <span className="text-xs font-bold text-slate-500 tracking-widest">
+              PRINSIP KAMI
+            </span>
+            <div className="w-10 h-px bg-slate-300" />
+          </div>
+        </div>
+      </section>
+
+      {/* Cerita Nyata KPR */}
+      <section id="cerita" className="bg-slate-50 py-14 md:py-20">
+        <div className="max-w-6xl mx-auto px-4 md:px-6">
+          <div className="text-center mb-12">
+            <span className="inline-block bg-white text-[#0025F5] text-[11px] font-bold rounded-full px-3 py-1 tracking-widest border border-blue-100">
+              CERITA MEREKA
+            </span>
+            <h2 className="text-2xl md:text-4xl font-black text-slate-900 mt-4 leading-tight">
+              Dari cicilan yang menghantui,<br className="hidden md:block" />
+              <span className="text-[#00B512]">jadi tidur yang nyenyak.</span>
+            </h2>
+            <p className="text-sm md:text-base text-slate-500 mt-3 max-w-2xl mx-auto">
+              Bukan angka, bukan data - ini cerita jujur keluarga yang
+              mempercayakan KPR mereka pada kami.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-5 md:gap-6">
+            {kprStories.map((s) => (
+              <div
+                key={s.name}
+                className="bg-white rounded-3xl border border-slate-100 shadow-sm hover:shadow-md hover:-translate-y-1 transition-all p-6 md:p-7 flex flex-col"
+              >
+                <div className="flex items-center justify-between">
+                  <Quote
+                    className="w-8 h-8 text-[#0025F5]"
+                    strokeWidth={2.5}
+                  />
+                  <div className="text-right">
+                    <div className="text-2xl font-black text-[#00B512]">
+                      {s.stat}
+                    </div>
+                    <div className="text-[10px] text-slate-500 tracking-wide uppercase">
+                      {s.statLabel}
+                    </div>
+                  </div>
+                </div>
+                <p className="text-sm md:text-[15px] text-slate-700 leading-relaxed italic mt-4 flex-1">
+                  "{s.quote}"
+                </p>
+                <div className="mt-5 pt-4 border-t border-slate-100 flex items-center gap-3">
+                  <div className="w-11 h-11 rounded-full flex items-center justify-center text-white font-black text-base shadow-md shrink-0 bg-[#0025F5]">
+                    {s.initial}
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <div className="text-sm font-bold text-slate-900 truncate">
+                      {s.name}
+                    </div>
+                    <div className="text-xs text-slate-500 truncate">
+                      {s.role}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 

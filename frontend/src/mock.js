@@ -15,8 +15,7 @@ export const ICON_KERJASAMA = "https://customer-assets-gfyr7b9c.emergentagent.ne
 export const navLinks = [
   { label: "Beli", href: "/cari-properti" },
   { label: "KPR", href: "/kpr" },
-  { label: "Konsultasi", href: "/konsultasi" },
-  { label: "Berita", href: "/berita" },
+  { label: "Kerjasama", href: "/kerjasama" },
 ];
 
 export const searchTabs = ["Beli", "Sewa", "Baru"];
