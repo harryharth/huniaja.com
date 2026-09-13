@@ -19,14 +19,10 @@ export default function ListingCard({ item, variant = "default" }) {
   );
 
   const detailClasses =
-    variant === "featured-download"
-      ? "bg-[#001DF3] hover:bg-[#0017c2] text-white shadow-sm"
-      : "bg-slate-900 hover:bg-slate-800 text-white";
+    "bg-white border border-slate-200 text-slate-800 hover:bg-[#001DF3] hover:border-[#001DF3] hover:text-white";
 
   const whatsappClasses =
-    variant === "featured-whatsapp"
-      ? "bg-[#00B512] hover:bg-[#009e0f] text-white border-transparent shadow-sm"
-      : "border-slate-200 hover:bg-slate-50 text-slate-800";
+    "border border-slate-200 bg-white text-slate-800 hover:bg-[#00B512] hover:border-[#00B512] hover:text-white";
 
   const detailUrl = `/properti/${item.id}`;
 

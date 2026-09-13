@@ -119,7 +119,7 @@ export default function Header() {
             data-testid="header-login-btn"
             className="bg-[#00B512] hover:bg-[#009e0f] text-white font-bold rounded-full px-5 h-10 flex items-center shadow-sm transition"
           >
-            Masuk
+            Masuk/Daftar
           </Link>
         </nav>
       </div>

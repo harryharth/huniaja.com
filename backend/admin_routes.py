@@ -165,6 +165,12 @@ class ArticleOut(ArticleIn):
     updated_at: str
 
 
+class SubmissionIn(BaseModel):
+    type: str  # konsultasi | karir | kontak
+    payload: dict
+    source_url: Optional[str] = None
+
+
 # --- Router -------------------------------------------------------------------
 def create_admin_router(db) -> APIRouter:
     router = APIRouter(prefix="/admin")
@@ -349,6 +355,34 @@ def create_admin_router(db) -> APIRouter:
         await db.articles.update_one({"id": aid}, {"$set": {"is_deleted": True}})
         return {"ok": True}
 
+    # --- SUBMISSIONS (admin view)
+    @router.get("/submissions")
+    async def list_submissions(type: str = "", status: str = "", _: str = Depends(require_admin)):
+        query = {}
+        if type:
+            query["type"] = type
+        if status:
+            query["status"] = status
+        items = await db.submissions.find(query).sort([("created_at", -1)]).to_list(500)
+        for i in items:
+            i.pop("_id", None)
+        return items
+
+    @router.patch("/submissions/{sid}")
+    async def update_submission(sid: str, body: dict, _: str = Depends(require_admin)):
+        allowed = {"status", "notes"}
+        upd = {k: v for k, v in body.items() if k in allowed}
+        upd["updated_at"] = now_iso()
+        r = await db.submissions.update_one({"id": sid}, {"$set": upd})
+        if r.matched_count == 0:
+            raise HTTPException(404, "Not found")
+        return {"ok": True}
+
+    @router.delete("/submissions/{sid}")
+    async def delete_submission(sid: str, _: str = Depends(require_admin)):
+        await db.submissions.delete_one({"id": sid})
+        return {"ok": True}
+
     return router
 
 
@@ -389,6 +423,52 @@ def create_public_router(db) -> APIRouter:
             i.pop("_id", None)
             i.pop("is_deleted", None)
         return items
+
+    # Public articles list & detail
+    @router.get("/articles")
+    async def public_articles(q: str = "", category: str = ""):
+        query = {"is_deleted": {"$ne": True}, "status": "published"}
+        if q:
+            query["$or"] = [
+                {"title": {"$regex": q, "$options": "i"}},
+                {"excerpt": {"$regex": q, "$options": "i"}},
+                {"tags": {"$regex": q, "$options": "i"}},
+            ]
+        if category and category not in ("Semua", ""):
+            query["category"] = category
+        items = await db.articles.find(query).sort([("sort_order", 1), ("created_at", -1)]).to_list(500)
+        for i in items:
+            i.pop("_id", None)
+            i.pop("is_deleted", None)
+        return items
+
+    @router.get("/articles/{slug}")
+    async def public_article(slug: str):
+        doc = await db.articles.find_one({"slug": slug, "is_deleted": {"$ne": True}, "status": "published"})
+        if not doc:
+            raise HTTPException(404, "Not found")
+        await db.articles.update_one({"slug": slug}, {"$inc": {"views": 1}})
+        doc.pop("_id", None)
+        doc.pop("is_deleted", None)
+        return doc
+
+    # Public submissions (form) - no auth
+    @router.post("/submissions/{type}")
+    async def create_submission(type: str, body: dict):
+        if type not in ("konsultasi", "karir", "kontak"):
+            raise HTTPException(400, "Invalid submission type")
+        rec = {
+            "id": str(uuid.uuid4()),
+            "type": type,
+            "payload": body,
+            "status": "new",
+            "notes": "",
+            "created_at": now_iso(),
+            "updated_at": now_iso(),
+        }
+        await db.submissions.insert_one(rec.copy())
+        rec.pop("_id", None)
+        return {"ok": True, "id": rec["id"]}
 
     # Serve uploaded files (public - no auth needed for image display)
     from fastapi import Response

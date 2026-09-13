@@ -86,10 +86,10 @@ export default function Footer() {
             </p>
           </div>
 
-          {/* Right columns: link groups (pushed to the right with breathing space from the logo) */}
-          <div className="md:col-span-7 md:col-start-6 grid grid-cols-1 sm:grid-cols-3 gap-8 md:gap-10 md:pt-2 md:justify-items-end">
+          {/* Right columns: link groups (left-aligned, with breathing space from the logo) */}
+          <div className="md:col-span-7 md:col-start-6 grid grid-cols-1 sm:grid-cols-3 gap-8 md:gap-10 md:pt-2 md:pl-8">
             {footerCols.map((col, i) => (
-            <ul key={i} className="space-y-6 text-[15px] text-white/95 md:text-right">
+            <ul key={i} className="space-y-6 text-[15px] text-white/95">
               {col.map((l, idx) => (
                 <li key={idx}>
                   <Link

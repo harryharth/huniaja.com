@@ -1,6 +1,8 @@
 """Seed initial data (properties, banners, articles) if DB is empty."""
 import uuid
+import json
 import logging
+from pathlib import Path
 from datetime import datetime, timezone
 
 logger = logging.getLogger(__name__)
@@ -39,7 +41,7 @@ async def seed_properties(db):
         idx = i % 7
         price = PRICES[idx] * 1000000
         items.append({
-            "id": f"list-{i}",  # keep existing IDs for URL continuity
+            "id": f"list-{i}",
             "title": TITLES[idx],
             "location": LOCATIONS[idx],
             "city": CITIES[idx],
@@ -66,70 +68,88 @@ async def seed_properties(db):
     logger.info(f"Seeded {len(items)} properties")
 
 
+HERO_SLIDES = [
+    {"title": "Deal Hot", "subtitle": "Dám Say!", "accent": "Rp50Jt",
+     "tagline": "Voucher Belanja Rumah Hingga Rp 50 Juta",
+     "eyebrow": "PROMO SPESIAL", "cta_label": "Klaim Voucher",
+     "cta_href": "/cari-properti", "bg": "#00B512", "icon_name": "Ticket",
+     "amount": "Rp50Jt", "tag": "HUNIAJA VOUCHER", "validity": "Berlaku s/d 31 Des"},
+    {"title": "KPR Mudah", "subtitle": "Disetujui!", "accent": "3jt/bln",
+     "tagline": "Bunga Ringan, Proses Cepat 3 Hari Kerja",
+     "eyebrow": "KPR TERBAIK", "cta_label": "Ajukan Sekarang",
+     "cta_href": "/kpr", "bg": "#001DF3", "icon_name": "Home",
+     "amount": "3jt/bln", "tag": "CICILAN MULAI", "validity": "Tenor s/d 20 Tahun"},
+    {"title": "Cashback", "subtitle": "Sampai 20%", "accent": "Rp100Jt",
+     "tagline": "Ratusan Properti Pilihan, Stok Terbatas",
+     "eyebrow": "CASHBACK BESAR", "cta_label": "Lihat Promo",
+     "cta_href": "/cari-properti", "bg": "#0EA5E9", "icon_name": "Percent",
+     "amount": "Rp100Jt", "tag": "CASHBACK HINGGA", "validity": "Untuk Rumah Terpilih"},
+    {"title": "Pilih Suka", "subtitle": "Beli Cepat!", "accent": "5000+",
+     "tagline": "Ribuan Properti Ready Stock Menantimu",
+     "eyebrow": "HUNIAJA PICKS", "cta_label": "Jelajahi",
+     "cta_href": "/cari-properti", "bg": "#F59E0B", "icon_name": "Sparkles",
+     "amount": "5000+", "tag": "REKOMENDASI", "validity": "Listing Pilihan"},
+    {"title": "Rumah Baru", "subtitle": "Harga Perdana", "accent": "Rp300Jt",
+     "tagline": "Beli Langsung dari Developer Tepercaya",
+     "eyebrow": "EKSKLUSIF DEVELOPER", "cta_label": "Lihat Proyek",
+     "cta_href": "/cari-properti", "bg": "#EC4899", "icon_name": "Home",
+     "amount": "Rp300Jt", "tag": "HARGA MULAI", "validity": "Unit Terbatas"},
+]
+
+
 async def seed_banners(db):
     if await db.banners.count_documents({}) > 0:
         return
-    items = [
-        {
+    items = []
+    for i, s in enumerate(HERO_SLIDES):
+        items.append({
             "id": str(uuid.uuid4()),
-            "title": "Deal Hot Diam Say!",
-            "subtitle": "Voucher Belanja Rumah Hingga Rp 50 Juta",
-            "accent": "Rp50Jt",
+            **s,
             "image": "",
-            "cta_label": "Klaim Voucher",
-            "cta_href": "/cari-properti",
-            "bg": "bg-[#001DF3]",
             "status": "published",
-            "sort_order": 0,
+            "sort_order": i,
             "is_deleted": False,
             "created_at": now_iso(),
             "updated_at": now_iso(),
-        },
-        {
-            "id": str(uuid.uuid4()),
-            "title": "#BeliRumahJadiMudah",
-            "subtitle": "Cari, bandingkan, beli rumah dalam satu platform",
-            "accent": "JadiMudah",
-            "image": "",
-            "cta_label": "Mulai Cari",
-            "cta_href": "/cari-properti",
-            "bg": "bg-[#001DF3]",
-            "status": "published",
-            "sort_order": 1,
-            "is_deleted": False,
-            "created_at": now_iso(),
-            "updated_at": now_iso(),
-        },
-    ]
+        })
     await db.banners.insert_many(items)
     logger.info(f"Seeded {len(items)} banners")
+
+
+# Article seeds — read from seed_articles.json produced offline (fallback to inline sample)
+def _load_article_seed():
+    path = Path(__file__).parent / "seed_articles.json"
+    if path.exists():
+        try:
+            return json.loads(path.read_text(encoding="utf-8"))
+        except Exception as e:
+            logger.warning(f"Failed to load seed_articles.json: {e}")
+    # fallback minimum
+    return [
+        {"slug": "cara-beli-rumah-pertama", "title": "Cara Beli Rumah Pertama",
+         "category": "Panduan", "excerpt": "Panduan A-Z beli rumah pertama.",
+         "image": HOUSE_IMAGES[0], "tags": ["Panduan"], "content": [{"type": "paragraph", "text": "Coming soon"}]},
+    ]
 
 
 async def seed_articles(db):
     if await db.articles.count_documents({}) > 0:
         return
-    # Import mock articles data
-    sample = [
-        {"slug": "cara-beli-rumah-pertama", "title": "Cara Beli Rumah Pertama", "category": "Panduan",
-         "excerpt": "Panduan A-Z beli rumah pertama.", "image": HOUSE_IMAGES[0]},
-        {"slug": "kpr-syariah-vs-konvensional", "title": "KPR Syariah vs Konvensional", "category": "KPR",
-         "excerpt": "Perbandingan lengkap.", "image": HOUSE_IMAGES[1]},
-        {"slug": "cek-legalitas-rumah", "title": "Cek Legalitas Rumah", "category": "Legal",
-         "excerpt": "7 dokumen wajib.", "image": HOUSE_IMAGES[2]},
-    ]
+    data = _load_article_seed()
     items = []
-    for i, s in enumerate(sample):
+    for i, s in enumerate(data):
         items.append({
             "id": str(uuid.uuid4()),
-            "slug": s["slug"],
-            "title": s["title"],
-            "excerpt": s["excerpt"],
-            "category": s["category"],
-            "date": "12 Feb 2026",
-            "read": "5 min",
-            "image": s["image"],
-            "tags": [s["category"]],
-            "content": [{"type": "paragraph", "text": s["excerpt"]}],
+            "slug": s.get("slug", f"article-{i}"),
+            "title": s.get("title", ""),
+            "excerpt": s.get("excerpt", ""),
+            "category": s.get("category", "Panduan"),
+            "date": s.get("date", "12 Feb 2026"),
+            "read": s.get("read", "5 min"),
+            "image": s.get("image", HOUSE_IMAGES[i % len(HOUSE_IMAGES)]),
+            "tags": s.get("tags", []),
+            "author": s.get("author", {"name": "Tim Huniaja", "role": "Editor", "initial": "H"}),
+            "content": s.get("content", []),
             "status": "published",
             "sort_order": i,
             "views": 0,
@@ -138,8 +158,9 @@ async def seed_articles(db):
             "created_at": now_iso(),
             "updated_at": now_iso(),
         })
-    await db.articles.insert_many(items)
-    logger.info(f"Seeded {len(items)} articles")
+    if items:
+        await db.articles.insert_many(items)
+        logger.info(f"Seeded {len(items)} articles")
 
 
 async def run_all(db):
