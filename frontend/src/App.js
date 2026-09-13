@@ -29,6 +29,7 @@ import KonsultasiPage from "./pages/KonsultasiPage";
 import PropertyDetailPage from "./pages/PropertyDetailPage";
 import AdminLoginPage from "./pages/admin/AdminLoginPage";
 import AdminDashboardPage from "./pages/admin/AdminDashboardPage";
+import LoginPage from "./pages/LoginPage";
 import { useLocation } from "react-router-dom";
 
 const Home = () => (
@@ -67,6 +68,7 @@ function App() {
           <Route path="/konsultasi" element={<KonsultasiPage />} />
           <Route path="/admin/login" element={<AdminLoginPage />} />
           <Route path="/admin/dashboard" element={<AdminDashboardPage />} />
+          <Route path="/login" element={<LoginPage />} />
         </Routes>
       </BrowserRouter>
       <ConditionalChat />

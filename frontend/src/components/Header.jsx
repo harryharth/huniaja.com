@@ -104,7 +104,7 @@ export default function Header() {
           </div>
         </div>
 
-        <nav className="flex items-center gap-8 text-[15px] font-medium shrink-0">
+        <nav className="flex items-center gap-6 text-[15px] font-medium shrink-0">
           {navLinks.map((l) => (
             <Link
               key={l.label}
@@ -114,6 +114,13 @@ export default function Header() {
               {l.label}
             </Link>
           ))}
+          <Link
+            to="/login"
+            data-testid="header-login-btn"
+            className="bg-[#00B512] hover:bg-[#009e0f] text-white font-bold rounded-full px-5 h-10 flex items-center shadow-sm transition"
+          >
+            Masuk
+          </Link>
         </nav>
       </div>
 
@@ -133,18 +140,11 @@ export default function Header() {
             ))}
             <div className="pt-3 flex flex-col gap-2">
               <Link
-                to="/pasang-iklan"
+                to="/login"
                 onClick={() => setMobileOpen(false)}
-                className="w-full bg-[#00B512] hover:bg-[#009e0f] text-[#001DF3] rounded-full font-bold h-11 flex items-center justify-center shadow-sm transition"
+                className="w-full bg-[#00B512] hover:bg-[#009e0f] text-white rounded-full font-bold h-11 flex items-center justify-center shadow-sm transition"
               >
-                Pasang Iklan Gratis
-              </Link>
-              <Link
-                to="/kontak"
-                onClick={() => setMobileOpen(false)}
-                className="w-full rounded-full bg-transparent border border-white text-white hover:bg-white hover:text-[#001DF3] font-bold h-11 flex items-center justify-center transition"
-              >
-                Daftar / Masuk
+                Masuk / Daftar
               </Link>
             </div>
           </nav>
