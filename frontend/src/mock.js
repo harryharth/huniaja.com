@@ -14,6 +14,7 @@ export const ICON_KERJASAMA = "https://customer-assets-gfyr7b9c.emergentagent.ne
 export const ICON_POTONG_RUMPUT = "https://customer-assets-gfyr7b9c.emergentagent.net/job_branding-suite-6/artifacts/4igyedeh_potong%20rumput.png";
 export const ICON_HOME_CLEANING = "https://customer-assets-gfyr7b9c.emergentagent.net/job_branding-suite-6/artifacts/bo9eddcu_home%20cleaning.png";
 export const ICON_SERVICE_AC = "https://customer-assets-gfyr7b9c.emergentagent.net/job_branding-suite-6/artifacts/nl0kdg72_service%20ac.png";
+export const ICON_JAGA_RUMAH = "https://customer-assets-gfyr7b9c.emergentagent.net/job_branding-suite-6/artifacts/dwm082xp_security.png";
 
 export const navLinks = [
   { label: "Beli", href: "/cari-properti" },
