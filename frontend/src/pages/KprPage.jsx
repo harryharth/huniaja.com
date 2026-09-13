@@ -105,13 +105,13 @@ export default function KprPage() {
           <div>
             <h1 className="text-3xl md:text-5xl font-black leading-tight">
               KPR <span className="text-white">Syariah lebih mudah</span> dengan{" "}
-              <span className="text-[#DAFF3D]">Huniaja</span>
+              <span className="text-[#00B512]">Huniaja</span>
             </h1>
             <p className="mt-4 text-sm md:text-base text-white/90 max-w-lg">
               Pasang iklan rumah atau properti lainnya cukup 1 menit, langsung
               jangkau jutaan pencari properti dalam waktu singkat!
             </p>
-            <button className="mt-6 bg-[#DAFF3D] hover:bg-[#c8ee1c] text-[#0025F5] font-bold rounded-full px-7 py-3 text-sm shadow-lg transition">
+            <button className="mt-6 bg-[#00B512] hover:bg-[#009e0f] text-[#0025F5] font-bold rounded-full px-7 py-3 text-sm shadow-lg transition">
               Mulai Pasang Iklan
             </button>
           </div>
@@ -131,7 +131,7 @@ export default function KprPage() {
                 key={r.title}
                 className="relative bg-white rounded-3xl px-6 pt-10 pb-8 shadow-sm hover:shadow-md transition-shadow"
               >
-                <div className="absolute -top-4 left-6 w-9 h-9 rounded-full bg-[#12B815] text-white font-extrabold text-sm flex items-center justify-center shadow-md">
+                <div className="absolute -top-4 left-6 w-9 h-9 rounded-full bg-[#00B512] text-white font-extrabold text-sm flex items-center justify-center shadow-md">
                   {idx + 1}
                 </div>
                 <div className="flex flex-col items-center text-center">
@@ -272,7 +272,7 @@ export default function KprPage() {
 function SimCard({ num, Icon, title, desc, cta, onClick }) {
   return (
     <div className="relative bg-white rounded-3xl border border-slate-100 shadow-sm hover:shadow-md transition p-5 md:p-6 flex gap-4 items-start">
-      <div className="w-8 h-8 rounded-full bg-[#12B815] text-white font-bold text-sm flex items-center justify-center shrink-0 shadow-md">
+      <div className="w-8 h-8 rounded-full bg-[#00B512] text-white font-bold text-sm flex items-center justify-center shrink-0 shadow-md">
         {num}
       </div>
       <div className="flex-1">
@@ -289,7 +289,7 @@ function SimCard({ num, Icon, title, desc, cta, onClick }) {
         </div>
         <button
           onClick={onClick}
-          className="mt-4 bg-[#12B815] hover:bg-[#0fa112] text-white font-bold rounded-full px-5 py-2 text-xs md:text-sm shadow transition"
+          className="mt-4 bg-[#00B512] hover:bg-[#009e0f] text-white font-bold rounded-full px-5 py-2 text-xs md:text-sm shadow transition"
         >
           {cta}
         </button>

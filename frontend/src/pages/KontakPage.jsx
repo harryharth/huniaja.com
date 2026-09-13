@@ -27,7 +27,7 @@ const contactMethods = [
     label: "Telepon",
     value: WA_DISPLAY,
     href: "tel:+6285119833362",
-    color: "#12B815",
+    color: "#00B512",
   },
   {
     Icon: MessageCircle,
@@ -156,7 +156,7 @@ export default function KontakPage() {
                   </Button>
                 </div>
                 {sent && (
-                  <p className="text-sm text-[#12B815] font-semibold text-right">
+                  <p className="text-sm text-[#00B512] font-semibold text-right">
                     Pesan terkirim. Terima kasih telah menghubungi kami!
                   </p>
                 )}

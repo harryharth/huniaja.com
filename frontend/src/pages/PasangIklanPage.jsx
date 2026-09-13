@@ -124,13 +124,13 @@ export default function PasangIklanPage() {
           <div>
             <h1 className="text-3xl md:text-5xl font-black leading-tight">
               Pasang Iklan Properti{" "}
-              <span className="text-[#12FF3D]">Gratis</span> Tanpa Ribet
+              <span className="text-[#00B512]">Gratis</span> Tanpa Ribet
             </h1>
             <p className="mt-4 text-sm md:text-base text-white/90 max-w-lg">
               Pasang iklan rumah atau properti lainnya cukup 1 menit, langsung
               jangkau jutaan pencari properti dalam waktu singkat!
             </p>
-            <button className="mt-6 bg-[#12B815] hover:bg-[#0fa112] text-white font-bold rounded-full px-7 py-3 text-sm shadow-lg transition">
+            <button className="mt-6 bg-[#00B512] hover:bg-[#009e0f] text-white font-bold rounded-full px-7 py-3 text-sm shadow-lg transition">
               Mulai Pasang Iklan
             </button>
           </div>
@@ -152,11 +152,11 @@ export default function PasangIklanPage() {
             <span className="text-[#0025F5]">Huniaja</span>
           </h2>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-5 items-stretch">
             {partnerCards.map((c) => (
               <div
                 key={c.title}
-                className="bg-white rounded-3xl shadow-sm hover:shadow-md p-6 transition"
+                className="bg-white rounded-3xl shadow-sm hover:shadow-md p-6 transition flex flex-col h-full"
               >
                 <div className="w-20 h-20 mx-auto rounded-2xl bg-blue-50 flex items-center justify-center">
                   <c.Icon
@@ -167,13 +167,13 @@ export default function PasangIklanPage() {
                 <h3 className="text-center font-bold text-slate-900 mt-4">
                   {c.title}
                 </h3>
-                <ul className="mt-4 space-y-2 text-sm">
+                <ul className="mt-4 space-y-2 text-sm flex-1">
                   {c.perks.map((p) => (
                     <li
                       key={p}
                       className="flex items-center gap-2 text-slate-700"
                     >
-                      <span className="w-4 h-4 rounded-full bg-[#12B815] text-white flex items-center justify-center shrink-0">
+                      <span className="w-4 h-4 rounded-full bg-[#00B512] text-white flex items-center justify-center shrink-0">
                         <Check className="w-3 h-3" strokeWidth={3} />
                       </span>
                       {p}
@@ -215,7 +215,7 @@ export default function PasangIklanPage() {
                 key={s.title}
                 className="relative bg-white rounded-3xl border border-slate-100 shadow-sm hover:shadow-md p-6 text-center transition"
               >
-                <div className="absolute -top-4 left-6 w-9 h-9 rounded-full bg-[#12B815] text-white font-extrabold text-sm flex items-center justify-center shadow-md">
+                <div className="absolute -top-4 left-6 w-9 h-9 rounded-full bg-[#00B512] text-white font-extrabold text-sm flex items-center justify-center shadow-md">
                   {i + 1}
                 </div>
                 <div className="w-16 h-16 mx-auto rounded-2xl bg-blue-50 flex items-center justify-center">
@@ -232,7 +232,7 @@ export default function PasangIklanPage() {
             ))}
           </div>
           <div className="flex justify-center mt-8">
-            <button className="bg-[#12B815] hover:bg-[#0fa112] text-white font-bold rounded-full px-7 py-3 text-sm shadow-lg transition">
+            <button className="bg-[#00B512] hover:bg-[#009e0f] text-white font-bold rounded-full px-7 py-3 text-sm shadow-lg transition">
               Mulai Pasang Iklan
             </button>
           </div>
@@ -264,7 +264,7 @@ export default function PasangIklanPage() {
               >
                 <AccordionTrigger className="hover:no-underline">
                   <div className="flex items-center gap-3">
-                    <span className="w-7 h-7 rounded-full bg-[#12B815] text-white font-bold text-xs flex items-center justify-center">
+                    <span className="w-7 h-7 rounded-full bg-[#00B512] text-white font-bold text-xs flex items-center justify-center">
                       1
                     </span>
                     <span className="font-semibold text-slate-800">
@@ -281,7 +281,7 @@ export default function PasangIklanPage() {
                     {[...keywordLeft, ...keywordRight].map((k) => (
                       <div key={k} className="flex items-center gap-2">
                         <Check
-                          className="w-3.5 h-3.5 text-[#12B815]"
+                          className="w-3.5 h-3.5 text-[#00B512]"
                           strokeWidth={3}
                         />
                         <span className="text-slate-700">{k}</span>
@@ -297,7 +297,7 @@ export default function PasangIklanPage() {
               >
                 <AccordionTrigger className="hover:no-underline">
                   <div className="flex items-center gap-3">
-                    <span className="w-7 h-7 rounded-full bg-[#12B815] text-white font-bold text-xs flex items-center justify-center">
+                    <span className="w-7 h-7 rounded-full bg-[#00B512] text-white font-bold text-xs flex items-center justify-center">
                       2
                     </span>
                     <span className="font-semibold text-slate-800">
@@ -317,7 +317,7 @@ export default function PasangIklanPage() {
               >
                 <AccordionTrigger className="hover:no-underline">
                   <div className="flex items-center gap-3">
-                    <span className="w-7 h-7 rounded-full bg-[#12B815] text-white font-bold text-xs flex items-center justify-center">
+                    <span className="w-7 h-7 rounded-full bg-[#00B512] text-white font-bold text-xs flex items-center justify-center">
                       3
                     </span>
                     <span className="font-semibold text-slate-800">
@@ -367,7 +367,7 @@ export default function PasangIklanPage() {
       {/* Green banner CTA */}
       <section className="bg-white pb-14 md:pb-20">
         <div className="max-w-6xl mx-auto px-4 md:px-6">
-          <div className="bg-[#12B815] rounded-[36px] md:rounded-[44px] relative overflow-hidden p-6 md:p-10 flex flex-col md:flex-row items-center gap-6">
+          <div className="bg-[#00B512] rounded-[36px] md:rounded-[44px] relative overflow-hidden p-6 md:p-10 flex flex-col md:flex-row items-center gap-6">
             <div className="relative shrink-0 -mt-4 md:-mt-16 md:-mb-16">
               <div className="w-[180px] md:w-[220px] aspect-[9/19] rounded-[36px] bg-slate-900 p-2 shadow-2xl mx-auto">
                 <div className="w-full h-full rounded-[28px] overflow-hidden bg-white">

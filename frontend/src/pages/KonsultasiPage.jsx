@@ -39,7 +39,7 @@ const chapters = [
     body: "Kami memetakan kebutuhan, budget, jarak kantor, dan rencana keluargamu. Alih-alih menawarkan ratusan properti acak, konsultan Huniaja mempersempit pilihan menjadi 3-5 properti yang benar-benar relevan.",
     image:
       "https://images.unsplash.com/photo-1523217582562-09d0def993a6?w=1200&q=80",
-    accent: "#12B815",
+    accent: "#00B512",
     Icon: MapPin,
   },
   {
@@ -163,7 +163,7 @@ export default function KonsultasiPage() {
       {/* Hero */}
       <section className="relative bg-[#0025F5] text-white overflow-hidden pt-16 md:pt-24 pb-20 md:pb-28">
         <div className="absolute -top-24 -left-16 w-96 h-96 rounded-full bg-white/10 blur-3xl pointer-events-none" />
-        <div className="absolute -bottom-32 -right-16 w-[28rem] h-[28rem] rounded-full bg-[#12B815]/25 blur-3xl pointer-events-none" />
+        <div className="absolute -bottom-32 -right-16 w-[28rem] h-[28rem] rounded-full bg-[#00B512]/25 blur-3xl pointer-events-none" />
         <div className="relative max-w-4xl mx-auto px-4 md:px-6 text-center">
           <span className="inline-flex items-center gap-2 bg-white/10 border border-white/20 rounded-full px-3 py-1 text-[11px] font-bold tracking-widest">
             <Sparkles className="w-3.5 h-3.5" /> KONSULTASI PROPERTI
@@ -172,7 +172,7 @@ export default function KonsultasiPage() {
             Setiap keputusan besar
             <br />
             dimulai dari{" "}
-            <span className="text-[#DAFF3D]">pertanyaan</span> yang tepat.
+            <span className="text-[#00B512]">pertanyaan</span> yang tepat.
           </h1>
           <p className="mt-5 text-sm md:text-lg text-white/85 max-w-2xl mx-auto leading-relaxed">
             Konsultan Huniaja hadir bukan untuk menjual. Kami hadir untuk
@@ -182,7 +182,7 @@ export default function KonsultasiPage() {
           <div className="mt-8 flex flex-wrap gap-3 justify-center">
             <a
               href="#form"
-              className="bg-[#DAFF3D] hover:bg-[#c8ee1c] text-[#0025F5] font-bold rounded-full px-6 py-3 text-sm shadow-lg transition"
+              className="bg-[#00B512] hover:bg-[#009e0f] text-[#0025F5] font-bold rounded-full px-6 py-3 text-sm shadow-lg transition"
             >
               Mulai Konsultasi Gratis
             </a>
@@ -342,7 +342,7 @@ export default function KonsultasiPage() {
       <section className="bg-[#0025F5] text-white py-16 md:py-24">
         <div className="max-w-6xl mx-auto px-4 md:px-6">
           <div className="text-center mb-12">
-            <Quote className="w-10 h-10 mx-auto text-[#DAFF3D]" />
+            <Quote className="w-10 h-10 mx-auto text-[#00B512]" />
             <h2 className="text-2xl md:text-3xl font-black mt-3">
               Cerita mereka yang sudah pulang ke rumahnya.
             </h2>
@@ -394,7 +394,7 @@ export default function KonsultasiPage() {
                 "Data pribadimu aman & privat.",
               ].map((b) => (
                 <div key={b} className="flex items-center gap-2 text-sm text-slate-700">
-                  <span className="w-5 h-5 rounded-full bg-[#12B815] text-white flex items-center justify-center shrink-0">
+                  <span className="w-5 h-5 rounded-full bg-[#00B512] text-white flex items-center justify-center shrink-0">
                     <Check className="w-3 h-3" strokeWidth={3} />
                   </span>
                   {b}
@@ -481,7 +481,7 @@ export default function KonsultasiPage() {
                 <Send className="w-4 h-4 mr-2" /> Pesan Sesi Konsultasi
               </Button>
               {sent && (
-                <p className="text-center text-sm text-[#12B815] font-semibold">
+                <p className="text-center text-sm text-[#00B512] font-semibold">
                   Terima kasih! Konsultan kami akan segera menghubungimu.
                 </p>
               )}

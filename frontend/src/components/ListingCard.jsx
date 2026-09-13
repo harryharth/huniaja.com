@@ -24,7 +24,7 @@ export default function ListingCard({ item, variant = "default" }) {
 
   const whatsappClasses =
     variant === "featured-whatsapp"
-      ? "bg-[#12B815] hover:bg-[#0fa112] text-white border-transparent shadow-sm"
+      ? "bg-[#00B512] hover:bg-[#009e0f] text-white border-transparent shadow-sm"
       : "border-slate-200 hover:bg-slate-50 text-slate-800";
 
   return (

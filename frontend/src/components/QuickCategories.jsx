@@ -10,7 +10,7 @@ import {
 
 const cats = [
   { label: "Beli Properti", color: "#0025F5", icon: ICON_BELI_PROPERTI, href: "/cari-properti" },
-  { label: "Kerjasama", color: "#12B815", icon: ICON_KERJASAMA, href: "/kerjasama" },
+  { label: "Kerjasama", color: "#00B512", icon: ICON_KERJASAMA, href: "/kerjasama" },
 ];
 
 export default function QuickCategories() {
@@ -68,7 +68,7 @@ export default function QuickCategories() {
                     {p.accent ? (
                       <>
                         <span>#BeliRumah</span>
-                        <span className="text-[#12FF3D]">JadiMudah</span>
+                        <span className="text-[#00B512]">JadiMudah</span>
                       </>
                     ) : (
                       p.title

@@ -47,7 +47,7 @@ export const promoCards = [
   },
   {
     title: "BUKA PILIH SUKA",
-    bg: "bg-[#12B815]",
+    bg: "bg-[#00B512]",
   },
 ];
 

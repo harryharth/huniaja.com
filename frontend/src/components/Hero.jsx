@@ -8,7 +8,7 @@ const slides = [
     subtitle: "Dám Say!",
     tagline: "Voucher Belanja Rumah Hingga Rp 50 Juta",
     cta: "Klaim Voucher",
-    accent: "#12B815",
+    accent: "#00B512",
     Icon: Ticket,
     tag: "HUNIAJA VOUCHER",
     amount: "Rp50Jt",
@@ -197,7 +197,7 @@ export default function Hero() {
               aria-label={`slide-${i}`}
               onClick={() => setActive(i)}
               className={`h-2 rounded-full transition-all ${
-                i === active ? "bg-[#DAFF3D] w-8" : "bg-white/40 w-2"
+                i === active ? "bg-[#00B512] w-8" : "bg-white/40 w-2"
               }`}
             />
           ))}

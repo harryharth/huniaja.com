@@ -172,7 +172,7 @@ export function KprSyariahDialog({ open, onOpenChange }) {
 
         <div className="flex gap-2 mt-4">
           <Button
-            className="flex-1 bg-[#12B815] hover:bg-[#0fa112] text-white rounded-full h-11 font-bold"
+            className="flex-1 bg-[#00B512] hover:bg-[#009e0f] text-white rounded-full h-11 font-bold"
             onClick={() => onOpenChange(false)}
           >
             Ajukan KPR Sekarang
@@ -302,7 +302,7 @@ export function TakeOverDialog({ open, onOpenChange }) {
             <Stat
               label={result.savings >= 0 ? "Hemat / Bulan" : "Selisih / Bulan"}
               value={formatIDR(Math.abs(result.savings))}
-              highlight={result.savings >= 0 ? "#DAFF3D" : "#FCA5A5"}
+              highlight={result.savings >= 0 ? "#00B512" : "#FCA5A5"}
             />
           </div>
         </div>
@@ -314,7 +314,7 @@ export function TakeOverDialog({ open, onOpenChange }) {
 
         <div className="flex gap-2 mt-4">
           <Button
-            className="flex-1 bg-[#12B815] hover:bg-[#0fa112] text-white rounded-full h-11 font-bold"
+            className="flex-1 bg-[#00B512] hover:bg-[#009e0f] text-white rounded-full h-11 font-bold"
             onClick={() => onOpenChange(false)}
           >
             Ajukan Take Over Sekarang

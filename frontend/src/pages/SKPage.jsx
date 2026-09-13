@@ -35,7 +35,7 @@ const legalDocs = [
     id: "help",
     label: "Pusat Bantuan",
     Icon: LifeBuoy,
-    color: "#12B815",
+    color: "#00B512",
     href: "/pusat-bantuan",
   },
 ];
@@ -139,7 +139,7 @@ export default function SKPage() {
                       <span className="flex-1 text-sm font-bold">
                         {d.label}
                       </span>
-                      <span className="w-7 h-7 rounded-full bg-[#12B815] flex items-center justify-center shrink-0">
+                      <span className="w-7 h-7 rounded-full bg-[#00B512] flex items-center justify-center shrink-0">
                         <Check className="w-4 h-4 text-white" strokeWidth={3} />
                       </span>
                     </Link>
@@ -169,7 +169,7 @@ export default function SKPage() {
                       {d.label}
                     </span>
                     {active ? (
-                      <span className="w-7 h-7 rounded-full bg-[#12B815] flex items-center justify-center shrink-0">
+                      <span className="w-7 h-7 rounded-full bg-[#00B512] flex items-center justify-center shrink-0">
                         <Check
                           className="w-4 h-4 text-white"
                           strokeWidth={3}

@@ -60,7 +60,7 @@ export default function WhyHuniaja() {
               key={f.num}
               className="relative bg-white rounded-3xl px-6 pt-10 pb-8 shadow-sm hover:shadow-md transition-shadow"
             >
-              <div className="absolute -top-4 left-6 w-9 h-9 rounded-full bg-[#12B815] text-white font-extrabold text-sm flex items-center justify-center shadow-md">
+              <div className="absolute -top-4 left-6 w-9 h-9 rounded-full bg-[#00B512] text-white font-extrabold text-sm flex items-center justify-center shadow-md">
                 {f.num}
               </div>
               <div className="flex flex-col items-center text-center">
@@ -68,7 +68,7 @@ export default function WhyHuniaja() {
                   <f.Icon
                     className="w-10 h-10"
                     strokeWidth={2.2}
-                    style={{ color: "#12B815" }}
+                    style={{ color: "#00B512" }}
                   />
                 </div>
                 <h3 className="text-base md:text-lg font-bold text-slate-900">

@@ -135,7 +135,7 @@ export default function Header() {
               <Link
                 to="/pasang-iklan"
                 onClick={() => setMobileOpen(false)}
-                className="w-full bg-[#DAFF3D] hover:bg-[#c8ee1c] text-[#0025F5] rounded-full font-bold h-11 flex items-center justify-center shadow-sm transition"
+                className="w-full bg-[#00B512] hover:bg-[#009e0f] text-[#0025F5] rounded-full font-bold h-11 flex items-center justify-center shadow-sm transition"
               >
                 Pasang Iklan Gratis
               </Link>

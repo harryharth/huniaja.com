@@ -22,7 +22,7 @@ export default function PromoStrip() {
                 {p.accent ? (
                   <>
                     <span>#BeliRumah</span>
-                    <span className="text-[#12FF3D]">JadiMudah</span>
+                    <span className="text-[#00B512]">JadiMudah</span>
                   </>
                 ) : (
                   p.title

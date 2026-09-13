@@ -4,7 +4,7 @@ import { Button } from "./ui/button";
 
 export default function KerjaSama() {
   return (
-    <section className="bg-[#12B815] text-white py-10 md:py-14 mt-4">
+    <section className="bg-[#00B512] text-white py-10 md:py-14 mt-4">
       <div className="max-w-6xl mx-auto px-4 md:px-6 flex flex-col md:flex-row items-start md:items-center justify-between gap-5 md:gap-6">
         <div className="max-w-2xl">
           <h2 className="text-xl md:text-3xl font-extrabold mb-2 md:mb-3">

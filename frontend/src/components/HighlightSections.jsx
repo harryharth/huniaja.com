@@ -18,7 +18,7 @@ export function PopulerSection() {
                 Properti yang paling banyak Diskonya
               </span>
             </div>
-            <button className="bg-[#12B815] hover:bg-[#0fa112] text-white text-xs font-bold px-5 py-2 rounded-full transition shadow-sm self-start md:self-auto">
+            <button className="bg-[#00B512] hover:bg-[#009e0f] text-white text-xs font-bold px-5 py-2 rounded-full transition shadow-sm self-start md:self-auto">
               LIHAT SEMUA
             </button>
           </div>

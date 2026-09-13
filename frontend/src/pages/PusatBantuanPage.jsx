@@ -23,7 +23,7 @@ import { WA_URL } from "../components/ChatWidget";
 
 const topics = [
   { Icon: User, label: "Akun & Verifikasi", count: 12, color: "#0025F5" },
-  { Icon: Home, label: "Cari & Beli Properti", count: 18, color: "#12B815" },
+  { Icon: Home, label: "Cari & Beli Properti", count: 18, color: "#00B512" },
   { Icon: Megaphone, label: "Pasang Iklan", count: 15, color: "#F59E0B" },
   { Icon: CreditCard, label: "KPR & Pembayaran", count: 9, color: "#0EA5E9" },
   { Icon: Shield, label: "Keamanan & Privasi", count: 7, color: "#EF4444" },
@@ -87,7 +87,7 @@ export default function PusatBantuanPage() {
               placeholder="Cari pertanyaan seputar Huniaja..."
               className="flex-1 min-w-0 bg-transparent outline-none px-3 py-3 text-sm text-slate-800 placeholder:text-slate-400"
             />
-            <button className="bg-[#12B815] hover:bg-[#0fa112] text-white font-bold text-sm rounded-full px-5 py-2 transition">
+            <button className="bg-[#00B512] hover:bg-[#009e0f] text-white font-bold text-sm rounded-full px-5 py-2 transition">
               Cari
             </button>
           </div>
@@ -180,7 +180,7 @@ export default function PusatBantuanPage() {
                 href={WA_URL()}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="bg-[#12B815] hover:bg-[#0fa112] text-white font-bold rounded-full h-11 flex items-center justify-center gap-2 transition"
+                className="bg-[#00B512] hover:bg-[#009e0f] text-white font-bold rounded-full h-11 flex items-center justify-center gap-2 transition"
               >
                 <MessageCircle className="w-4 h-4" /> Chat WhatsApp
               </a>

@@ -42,8 +42,8 @@ export default function ChatWidget() {
     }
   }, [messages, open]);
 
-  const send = async () => {
-    const text = input.trim();
+  const send = async (msgOverride) => {
+    const text = (msgOverride ?? input).trim();
     if (!text || loading) return;
     setMessages((prev) => [...prev, { role: "user", content: text }]);
     setInput("");
@@ -83,12 +83,13 @@ export default function ChatWidget() {
       {!open && (
         <button
           onClick={() => setOpen(true)}
+          data-testid="chat-fab"
           className="fixed bottom-5 right-5 z-40 bg-[#0025F5] hover:bg-[#001fd1] text-white rounded-full shadow-2xl flex items-center gap-2 pl-4 pr-5 h-14 transition-transform hover:-translate-y-0.5"
           aria-label="Buka chat"
         >
           <span className="relative">
             <MessageCircle className="w-6 h-6" />
-            <span className="absolute -top-1 -right-1 w-3 h-3 rounded-full bg-[#12B815] ring-2 ring-[#0025F5]" />
+            <span className="absolute -top-1 -right-1 w-3 h-3 rounded-full bg-[#00B512] ring-2 ring-[#0025F5]" />
           </span>
           <span className="font-bold text-sm hidden sm:inline">Chat AI</span>
         </button>
@@ -101,7 +102,7 @@ export default function ChatWidget() {
           <div className="bg-[#0025F5] text-white px-5 py-4 flex items-center gap-3">
             <div className="relative w-10 h-10 rounded-full bg-white/15 flex items-center justify-center">
               <MessageCircle className="w-5 h-5" />
-              <span className="absolute -bottom-0.5 -right-0.5 w-3 h-3 rounded-full bg-[#12B815] ring-2 ring-[#0025F5]" />
+              <span className="absolute -bottom-0.5 -right-0.5 w-3 h-3 rounded-full bg-[#00B512] ring-2 ring-[#0025F5]" />
             </div>
             <div className="flex-1">
               <p className="font-bold text-sm">Dea - Admin Huniaja.com</p>
@@ -140,7 +141,7 @@ export default function ChatWidget() {
             {loading && (
               <div className="flex justify-start">
                 <div className="bg-white border border-slate-100 rounded-2xl px-3.5 py-2.5 text-sm text-slate-500 flex items-center gap-2 shadow-sm">
-                  <Loader2 className="w-3.5 h-3.5 animate-spin" /> Huni sedang mengetik...
+                  <Loader2 className="w-3.5 h-3.5 animate-spin" /> Dea sedang mengetik...
                 </div>
               </div>
             )}
@@ -149,10 +150,7 @@ export default function ChatWidget() {
                 {suggestions.map((s) => (
                   <button
                     key={s}
-                    onClick={() => {
-                      setInput(s);
-                      setTimeout(send, 50);
-                    }}
+                    onClick={() => send(s)}
                     className="text-xs bg-white border border-slate-200 hover:border-[#0025F5] hover:text-[#0025F5] text-slate-700 rounded-full px-3 py-1.5 transition"
                   >
                     {s}
@@ -167,10 +165,11 @@ export default function ChatWidget() {
             href={WA_URL()}
             target="_blank"
             rel="noopener noreferrer"
-            className="mx-4 mt-1 mb-2 bg-[#12B815] hover:bg-[#0fa112] text-white rounded-full h-10 flex items-center justify-center gap-2 text-xs font-bold transition"
+            data-testid="chat-wa-handoff"
+            className="mx-4 mt-1 mb-2 bg-[#00B512] hover:bg-[#009e0f] text-white rounded-full h-10 flex items-center justify-center gap-2 text-xs font-bold transition"
           >
             <ExternalLink className="w-3.5 h-3.5" />
-            Lanjut ke WhatsApp ({WA_DISPLAY})
+            Chat WhatsApp
           </a>
 
           {/* Input */}
@@ -188,7 +187,7 @@ export default function ChatWidget() {
               className="flex-1 min-w-0 rounded-full border border-slate-200 focus:border-[#0025F5] outline-none px-4 py-2 text-sm text-slate-800 placeholder:text-slate-400"
             />
             <button
-              onClick={send}
+              onClick={() => send()}
               disabled={loading || !input.trim()}
               className="w-10 h-10 rounded-full bg-[#0025F5] hover:bg-[#001fd1] disabled:opacity-50 disabled:cursor-not-allowed text-white flex items-center justify-center transition"
               aria-label="Kirim"

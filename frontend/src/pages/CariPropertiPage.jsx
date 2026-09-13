@@ -5,14 +5,6 @@ import {
   ChevronUp,
   SlidersHorizontal,
   Home,
-  Trees,
-  Building2,
-  Store,
-  Briefcase,
-  Warehouse,
-  Factory,
-  Hotel,
-  BedDouble,
   Sparkles,
   RotateCcw,
   Gavel,
@@ -21,6 +13,10 @@ import {
   Wallet,
   ChevronLeft,
   ChevronRight,
+  Hammer,
+  CreditCard,
+  Trees,
+  Landmark,
 } from "lucide-react";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
@@ -36,14 +32,6 @@ import { Slider } from "../components/ui/slider";
 
 const propertyTypes = [
   { label: "Rumah", Icon: Home, key: "Rumah" },
-  { label: "Tanah", Icon: Trees, key: "Tanah" },
-  { label: "Apartemen", Icon: Building2, key: "Apartemen" },
-  { label: "Ruko", Icon: Store, key: "Ruko" },
-  { label: "Perkantoran", Icon: Briefcase, key: "Perkantoran" },
-  { label: "Gudang", Icon: Warehouse, key: "Gudang" },
-  { label: "Pabrik", Icon: Factory, key: "Pabrik" },
-  { label: "Hotel", Icon: Hotel, key: "Hotel" },
-  { label: "Kost", Icon: BedDouble, key: "Kost" },
 ];
 
 const conditions = [
@@ -149,34 +137,13 @@ export default function CariPropertiPage() {
 
       <section className="bg-white pt-8 md:pt-10 pb-14">
         <div className="max-w-6xl mx-auto px-4 md:px-6">
-          {/* Top search */}
-          <div className="flex items-center bg-white rounded-full pl-1 pr-1 py-1 shadow-sm border border-slate-200 max-w-3xl mx-auto mb-6">
-            <button className="flex items-center gap-1 text-[#0025F5] text-sm font-bold px-4 py-2 rounded-full hover:bg-blue-50 transition">
-              Beli
-              <ChevronDown className="w-4 h-4" />
-            </button>
-            <div className="w-px h-6 bg-slate-200 mx-1" />
-            <input
-              value={query}
-              onChange={(e) => {
-                setQuery(e.target.value);
-                setPage(1);
-              }}
-              placeholder='Cari "Rumah Subsidi Dibogor"'
-              className="flex-1 min-w-0 bg-transparent outline-none px-3 py-2 text-sm text-slate-800 placeholder:text-slate-400"
-            />
-            <button className="bg-[#0025F5] text-white p-2 rounded-full">
-              <Search className="w-4 h-4" />
-            </button>
-          </div>
-
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
             {/* Sidebar */}
             <aside className="lg:col-span-3 space-y-3">
               <div className="bg-white rounded-2xl border border-slate-200 shadow-sm p-3">
                 <div className="flex items-center gap-2 bg-slate-50 rounded-full px-3 py-2">
-                  <Search className="w-4 h-4 text-slate-400" />
-                  <span className="text-sm text-slate-500">Cari Properti</span>
+                  <Home className="w-4 h-4 text-[#0025F5]" />
+                  <span className="text-sm text-slate-500 font-semibold">Cari Rumah</span>
                 </div>
                 <div className="grid grid-cols-3 gap-2 mt-3">
                   {propertyTypes.map((t) => {
@@ -212,7 +179,7 @@ export default function CariPropertiPage() {
                 </div>
               </div>
 
-              <FilterAccordion title="Kondisi" defaultOpen>
+              <FilterAccordion title="Kondisi" Icon={Sparkles} defaultOpen>
                 <div className="grid grid-cols-3 gap-2">
                   {conditions.map((c) => {
                     const active = condition === c.key;
@@ -264,44 +231,7 @@ export default function CariPropertiPage() {
                 />
               </FilterAccordion>
 
-              <FilterAccordion title="Proses Konstruksi">
-                <RadioList
-                  name="konstruksi"
-                  options={["Ready Stock", "Indent", "Off Plan"]}
-                />
-              </FilterAccordion>
-
-              <FilterAccordion title="Listrik" Icon={Zap}>
-                <RadioList
-                  name="listrik"
-                  value={electricity}
-                  onChange={setElectricity}
-                  options={["900 VA", "1300 VA", "2200 VA", "3500 VA", "Lebih dari 4400 VA"]}
-                />
-              </FilterAccordion>
-
-              <FilterAccordion title="Sertifikat" Icon={BadgeCheck}>
-                <RadioList
-                  name="sertifikat"
-                  value={certificate}
-                  onChange={setCertificate}
-                  options={["SHM", "SHGB", "HGB", "AJB", "Girik"]}
-                />
-              </FilterAccordion>
-
-              <FilterAccordion title="Cicilan">
-                <label className="flex items-center gap-2 text-sm text-slate-700">
-                  <input
-                    type="checkbox"
-                    className="accent-[#0025F5]"
-                    checked={installmentOnly}
-                    onChange={(e) => setInstallmentOnly(e.target.checked)}
-                  />
-                  Hanya tampilkan yang tersedia cicilan
-                </label>
-              </FilterAccordion>
-
-              <FilterAccordion title="Fasilitas">
+              <FilterAccordion title="Fasilitas" Icon={Trees}>
                 <div className="grid grid-cols-2 gap-2 text-xs text-slate-700">
                   {[
                     "Kolam Renang",
@@ -330,7 +260,7 @@ export default function CariPropertiPage() {
                 </div>
               </FilterAccordion>
 
-              <FilterAccordion title="Jenis KPR">
+              <FilterAccordion title="Jenis KPR" Icon={Landmark}>
                 <RadioList
                   name="kpr"
                   value={kprType}
@@ -369,7 +299,7 @@ export default function CariPropertiPage() {
                     </button>
                   ))}
                 </div>
-                <button className="shrink-0 flex items-center gap-1 text-xs font-medium bg-[#12B815] text-white border border-transparent px-3 py-1.5 rounded-full">
+                <button className="shrink-0 flex items-center gap-1 text-xs font-medium bg-[#00B512] text-white border border-transparent px-3 py-1.5 rounded-full">
                   <SlidersHorizontal className="w-3.5 h-3.5" /> Filter Lokasi
                 </button>
               </div>
@@ -486,7 +416,7 @@ export default function CariPropertiPage() {
       {/* Promo banner */}
       <section className="bg-white pb-14 md:pb-20">
         <div className="max-w-6xl mx-auto px-4 md:px-6">
-          <div className="bg-[#12B815] rounded-[36px] md:rounded-[44px] overflow-hidden relative text-white px-6 md:px-14 py-10 md:py-14 flex flex-col md:flex-row items-center justify-center md:justify-between gap-4">
+          <div className="bg-[#00B512] rounded-[36px] md:rounded-[44px] overflow-hidden relative text-white px-6 md:px-14 py-10 md:py-14 flex flex-col md:flex-row items-center justify-center md:justify-between gap-4">
             <div className="absolute -top-16 -right-10 w-80 h-80 rounded-full bg-white/10 blur-3xl pointer-events-none" />
             <div className="text-center md:text-left">
               <div className="flex items-baseline gap-2 md:gap-4 justify-center md:justify-start">
@@ -503,7 +433,7 @@ export default function CariPropertiPage() {
                 <br />
                 Baru
               </p>
-              <button className="mt-4 bg-white text-[#12B815] font-bold rounded-full px-6 py-2 text-sm shadow-lg hover:shadow-xl transition">
+              <button className="mt-4 bg-white text-[#00B512] font-bold rounded-full px-6 py-2 text-sm shadow-lg hover:shadow-xl transition">
                 Klaim Sekarang
               </button>
             </div>

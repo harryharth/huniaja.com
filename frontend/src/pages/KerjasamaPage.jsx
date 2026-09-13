@@ -90,7 +90,7 @@ export default function KerjasamaPage() {
       <Header />
 
       {/* Hero */}
-      <section className="bg-[#12B815] text-white pt-12 md:pt-16 pb-14 md:pb-20">
+      <section className="bg-[#00B512] text-white pt-12 md:pt-16 pb-14 md:pb-20">
         <div className="max-w-6xl mx-auto px-4 md:px-6 grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
           <div>
             <span className="inline-block bg-white/15 text-white text-[11px] font-bold rounded-full px-3 py-1 tracking-widest">
@@ -169,7 +169,7 @@ export default function KerjasamaPage() {
                       className="flex items-center gap-2 text-slate-700"
                     >
                       <Check
-                        className="w-3.5 h-3.5 text-[#12B815]"
+                        className="w-3.5 h-3.5 text-[#00B512]"
                         strokeWidth={3}
                       />
                       {perk}
@@ -197,7 +197,7 @@ export default function KerjasamaPage() {
                 key={s.title}
                 className="relative bg-white rounded-3xl border border-slate-100 shadow-sm p-6 text-center"
               >
-                <div className="absolute -top-4 left-6 w-9 h-9 rounded-full bg-[#12B815] text-white font-extrabold text-sm flex items-center justify-center shadow-md">
+                <div className="absolute -top-4 left-6 w-9 h-9 rounded-full bg-[#00B512] text-white font-extrabold text-sm flex items-center justify-center shadow-md">
                   {i + 1}
                 </div>
                 <div className="w-14 h-14 mx-auto rounded-2xl bg-blue-50 flex items-center justify-center">
@@ -279,13 +279,13 @@ export default function KerjasamaPage() {
               <div className="flex justify-end">
                 <Button
                   type="submit"
-                  className="bg-[#12B815] hover:bg-[#0fa112] text-white rounded-full font-bold px-6 h-11 text-sm"
+                  className="bg-[#00B512] hover:bg-[#009e0f] text-white rounded-full font-bold px-6 h-11 text-sm"
                 >
                   <Send className="w-4 h-4 mr-2" /> Kirim Proposal
                 </Button>
               </div>
               {sent && (
-                <p className="text-sm text-[#12B815] font-semibold text-right">
+                <p className="text-sm text-[#00B512] font-semibold text-right">
                   Terima kasih! Proposal Anda telah kami terima.
                 </p>
               )}
