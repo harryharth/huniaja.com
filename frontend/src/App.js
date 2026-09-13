@@ -46,9 +46,9 @@ const Home = () => (
     <QuickCategories />
     <HomeTrustStrip />
     <NewListings />
+    <PopulerSection />
     <HomeManifesto />
     <HomeHowItWorks />
-    <PopulerSection />
     <HomeStories />
     <KerjaSama />
     <WhyHuniaja />
