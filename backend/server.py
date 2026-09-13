@@ -121,6 +121,29 @@ async def chat(req: ChatRequest):
 
 app.include_router(api_router)
 
+# --- Admin & public content routes -------------------------------------------
+from admin_routes import create_admin_router, create_public_router, init_storage as _init_storage
+
+api_router_admin = create_admin_router(db)
+api_router_public = create_public_router(db)
+app.include_router(api_router_admin, prefix="/api")
+app.include_router(api_router_public, prefix="/api")
+
+
+@app.on_event("startup")
+async def _startup_admin():
+    try:
+        _init_storage()
+        logging.info("Emergent Object Storage initialized")
+    except Exception as e:
+        logging.error(f"Storage init failed: {e}")
+    try:
+        from seed_data import run_all
+        await run_all(db)
+    except Exception as e:
+        logging.error(f"Seed failed: {e}")
+
+
 app.add_middleware(
     CORSMiddleware,
     allow_credentials=True,

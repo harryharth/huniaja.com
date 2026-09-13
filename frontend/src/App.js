@@ -27,6 +27,9 @@ import KerjasamaPage from "./pages/KerjasamaPage";
 import CariPropertiPage from "./pages/CariPropertiPage";
 import KonsultasiPage from "./pages/KonsultasiPage";
 import PropertyDetailPage from "./pages/PropertyDetailPage";
+import AdminLoginPage from "./pages/admin/AdminLoginPage";
+import AdminDashboardPage from "./pages/admin/AdminDashboardPage";
+import { useLocation } from "react-router-dom";
 
 const Home = () => (
   <div className="min-h-screen bg-white">
@@ -62,12 +65,20 @@ function App() {
           <Route path="/beli" element={<CariPropertiPage />} />
           <Route path="/properti/:id" element={<PropertyDetailPage />} />
           <Route path="/konsultasi" element={<KonsultasiPage />} />
+          <Route path="/admin/login" element={<AdminLoginPage />} />
+          <Route path="/admin/dashboard" element={<AdminDashboardPage />} />
         </Routes>
       </BrowserRouter>
-      <ChatWidget />
+      <ConditionalChat />
       <Toaster />
     </div>
   );
+}
+
+function ConditionalChat() {
+  const path = window.location.pathname;
+  if (path.startsWith("/admin")) return null;
+  return <ChatWidget />;
 }
 
 export default App;
