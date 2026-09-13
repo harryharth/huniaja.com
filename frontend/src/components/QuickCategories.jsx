@@ -51,26 +51,35 @@ export default function QuickCategories() {
           ))}
         </div>
 
-        {/* Additional services */}
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 md:gap-4">
+        {/* Additional services - same shape as main cats */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 md:gap-5">
           {services.map((s) => (
             <Link
               key={s.label}
               to={s.href}
               data-testid={`quickservice-${s.label}`}
-              className="group flex flex-col items-center justify-center bg-white border border-slate-200 hover:border-slate-300 hover:shadow-md rounded-[20px] md:rounded-[24px] p-3 md:p-4 shadow-sm transition-all"
+              className="group flex items-center gap-3 md:gap-4 bg-white border border-slate-200 hover:border-slate-300 hover:shadow-md rounded-[24px] md:rounded-[28px] p-3 md:p-4 shadow-sm transition-all min-w-0"
             >
               <span
-                className={`w-11 h-11 md:w-14 md:h-14 rounded-2xl ${s.bg} flex items-center justify-center group-hover:scale-105 transition-transform`}
+                className={`shrink-0 w-12 h-12 md:w-16 md:h-16 rounded-2xl ${s.bg} flex items-center justify-center`}
               >
                 <s.Icon
-                  className="w-5 h-5 md:w-6 md:h-6"
+                  className="w-6 h-6 md:w-8 md:h-8"
                   style={{ color: s.color }}
                   strokeWidth={2}
                 />
               </span>
-              <span className="text-xs md:text-sm font-semibold text-slate-800 mt-2 text-center leading-tight">
+              <span className="text-base md:text-lg font-semibold text-slate-800 flex-1 text-left truncate">
                 {s.label}
+              </span>
+              <span
+                className="w-7 h-7 md:w-8 md:h-8 rounded-full flex items-center justify-center shrink-0"
+                style={{ backgroundColor: s.color }}
+              >
+                <ChevronRight
+                  className="w-4 h-4 md:w-5 md:h-5 text-white"
+                  strokeWidth={3}
+                />
               </span>
             </Link>
           ))}
