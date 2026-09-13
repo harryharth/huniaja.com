@@ -16,7 +16,7 @@ export default function Header() {
 
   return (
     <header className="bg-[#0025F5] text-white sticky top-0 z-50">
-      <div className="max-w-7xl mx-auto px-4 md:px-8 py-4 flex items-center gap-4 md:gap-8">
+      <div className="max-w-7xl mx-auto px-4 md:px-8 pt-4 pb-8 md:pb-10 flex items-center gap-4 md:gap-8">
         {/* Logo */}
         <a href="/" className="flex items-center shrink-0">
           <img src={LOGO_WHITE} alt="Huniaja" className="h-8 md:h-9 w-auto" />
