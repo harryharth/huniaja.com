@@ -3,19 +3,18 @@ import { Button } from "./ui/button";
 
 export default function KerjaSama() {
   return (
-    <section className="bg-[#0025F5] text-white py-14 mt-4">
+    <section className="bg-[#12B815] text-white py-14 mt-4">
       <div className="max-w-6xl mx-auto px-6 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
         <div className="max-w-2xl">
           <h2 className="text-2xl md:text-3xl font-extrabold mb-3">
             Kerja Sama dengan Huniaja.com
           </h2>
-          <p className="text-sm md:text-base text-white/85 leading-relaxed">
+          <p className="text-sm md:text-base text-white/95 leading-relaxed">
             Huniaja.com terbuka untuk berbagai bentuk kerja sama, baik paid
-            partnership, co-branding, penyediaan atau pembiayaan properti, dan
-            lainnya.
+            partnership, co-branding, Marketing dan lainnya.
           </p>
         </div>
-        <Button className="bg-[#E5FF3D] hover:bg-[#d6f01f] text-slate-900 rounded-full font-semibold px-6 h-11">
+        <Button className="bg-[#0025F5] hover:bg-[#001fd1] text-white rounded-full font-semibold px-8 h-12 text-sm md:text-base shadow-lg">
           Hubungi untuk Kolaborasi
         </Button>
       </div>

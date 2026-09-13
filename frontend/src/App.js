@@ -11,9 +11,7 @@ import NewListings from "./components/NewListings";
 import { SubsidiSection, PopulerSection } from "./components/HighlightSections";
 import FavoriteLocations from "./components/FavoriteLocations";
 import KerjaSama from "./components/KerjaSama";
-import Testimonials from "./components/Testimonials";
 import WhyHuniaja from "./components/WhyHuniaja";
-import AppDownload from "./components/AppDownload";
 import Footer from "./components/Footer";
 import { Toaster } from "./components/ui/toaster";
 
@@ -29,9 +27,7 @@ const Home = () => (
     <PopulerSection />
     <FavoriteLocations />
     <KerjaSama />
-    <Testimonials />
     <WhyHuniaja />
-    <AppDownload />
     <Footer />
   </div>
 );

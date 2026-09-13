@@ -1,8 +1,51 @@
 import React from "react";
-import { TrendingUp, Cpu, ShieldCheck, Users, Megaphone } from "lucide-react";
-import { whyFeatures } from "../mock";
+import {
+  TrendingUp,
+  Cpu,
+  ShieldCheck,
+  Share2,
+  HandHeart,
+  Brush,
+} from "lucide-react";
 
-const iconMap = { TrendingUp, Cpu, ShieldCheck, Users, Megaphone };
+const features = [
+  {
+    num: 1,
+    title: "Tumbuh Cepat",
+    desc: "Platform properti yang berkembang paling pesat.",
+    Icon: TrendingUp,
+  },
+  {
+    num: 2,
+    title: "Teknologi AI",
+    desc: "Didukung kecerdasan buatan untuk kemudahan.",
+    Icon: Cpu,
+  },
+  {
+    num: 3,
+    title: "Tepercaya",
+    desc: "Ekosistem properti yang aman dan terpercaya.",
+    Icon: ShieldCheck,
+  },
+  {
+    num: 4,
+    title: "Jaringan Luas",
+    desc: "Memiliki Jaringan Agen dan developer di seluruh Indonesia.",
+    Icon: Share2,
+  },
+  {
+    num: 5,
+    title: "Afiliasi Unggul",
+    desc: "Sistem komisi jelas dan peluang besar cocok untuk segala kalangan.",
+    Icon: HandHeart,
+  },
+  {
+    num: 6,
+    title: "Layanan Lengkap",
+    desc: "Listing, KPR, hingga perawatan rumah.",
+    Icon: Brush,
+  },
+];
 
 export default function WhyHuniaja() {
   return (
@@ -11,23 +54,32 @@ export default function WhyHuniaja() {
         <h2 className="text-center text-xl md:text-2xl font-bold text-slate-900 mb-10">
           Kenapa harus Huniaja.com ?
         </h2>
-        <div className="grid grid-cols-2 md:grid-cols-5 gap-6">
-          {whyFeatures.map((f) => {
-            const Icon = iconMap[f.icon];
-            return (
-              <div
-                key={f.title}
-                className="flex flex-col items-center text-center gap-3 group"
-              >
-                <div className="w-16 h-16 rounded-2xl bg-white shadow-sm flex items-center justify-center group-hover:-translate-y-1 transition">
-                  <Icon className={`w-8 h-8 ${f.color}`} />
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 relative">
+          {features.map((f) => (
+            <div
+              key={f.num}
+              className="relative bg-white rounded-3xl px-6 pt-10 pb-8 shadow-sm hover:shadow-md transition-shadow"
+            >
+              <div className="absolute -top-4 left-6 w-9 h-9 rounded-full bg-[#12B815] text-white font-extrabold text-sm flex items-center justify-center shadow-md">
+                {f.num}
+              </div>
+              <div className="flex flex-col items-center text-center">
+                <div className="w-16 h-16 rounded-2xl flex items-center justify-center mb-4">
+                  <f.Icon
+                    className="w-10 h-10"
+                    strokeWidth={2.2}
+                    style={{ color: "#12B815" }}
+                  />
                 </div>
-                <p className="text-xs md:text-sm font-semibold text-slate-800 leading-snug max-w-[140px]">
+                <h3 className="text-base md:text-lg font-bold text-slate-900">
                   {f.title}
+                </h3>
+                <p className="text-sm text-slate-500 mt-2 max-w-xs leading-relaxed">
+                  {f.desc}
                 </p>
               </div>
-            );
-          })}
+            </div>
+          ))}
         </div>
       </div>
     </section>
