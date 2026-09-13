@@ -3,15 +3,9 @@ import { LOGO_WHITE } from "../mock";
 import { Facebook, Instagram, Youtube } from "lucide-react";
 
 const footerCols = [
-  {
-    links: ["Beli", "Jual", "Konsultasi", "KPR"],
-  },
-  {
-    links: ["Karir", "Tentang Kami", "Kerjasama", "Kontak"],
-  },
-  {
-    links: ["Berita", "Pusat Bantuan", "S&K", "Kerjasama"],
-  },
+  ["Beli", "Jual", "Konsultasi", "KPR"],
+  ["Karir", "Tentang Kami", "Kerjasama", "Kontak"],
+  ["Berita", "Pusat Bantuan", "S&K", "Kerjasama"],
 ];
 
 function TikTokIcon(props) {
@@ -24,17 +18,24 @@ function TikTokIcon(props) {
 
 export default function Footer() {
   return (
-    <footer className="bg-[#0025F5] text-white pt-14 pb-6">
+    <footer className="bg-[#0025F5] text-white pt-16 pb-10">
       <div className="max-w-6xl mx-auto px-6">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-10">
-          <div className="md:col-span-1">
-            <img src={LOGO_WHITE} alt="Huniaja" className="h-8 mb-5" />
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-8">
+          {/* Left column: logo + description + socials + copyright */}
+          <div className="md:col-span-4 flex flex-col">
+            <img
+              src={LOGO_WHITE}
+              alt="Huniaja"
+              className="w-32 md:w-36 h-auto mb-6"
+            />
             <p className="text-sm text-white/85 leading-relaxed max-w-xs">
-              Huniaja.com adalah platform properti digital berbasis teknologi
-              dan kecerdasan buatan (AI) yang menyatukan agen, pembeli, dan
-              pengembang dalam satu ekosistem.
+              Huniaja.com adalah platform properti digital
+              berbasis teknologi dan kecerdasan buatan (AI)
+              yang menyatukan agen, pembeli, dan pengembang
+              dalam satu ekosistem.
             </p>
-            <div className="flex gap-3 mt-6">
+
+            <div className="flex gap-3 mt-8">
               <a
                 href="#"
                 aria-label="Facebook"
@@ -64,25 +65,29 @@ export default function Footer() {
                 <TikTokIcon className="w-4 h-4" />
               </a>
             </div>
+
+            <p className="text-xs text-white/70 mt-6">
+              2025 @ PT Woodoo Kreatif Digital
+            </p>
           </div>
 
-          {footerCols.map((col, i) => (
-            <div key={i}>
-              <ul className="space-y-3 text-[15px] text-white/90">
-                {col.links.map((l) => (
-                  <li key={l}>
-                    <a href="#" className="hover:text-white transition-colors">
+          {/* Right columns: link groups */}
+          <div className="md:col-span-8 grid grid-cols-1 sm:grid-cols-3 gap-8 md:gap-6 md:pt-2">
+            {footerCols.map((col, i) => (
+              <ul key={i} className="space-y-6 text-[15px] text-white/95">
+                {col.map((l, idx) => (
+                  <li key={idx}>
+                    <a
+                      href="#"
+                      className="hover:text-white/70 transition-colors"
+                    >
                       {l}
                     </a>
                   </li>
                 ))}
               </ul>
-            </div>
-          ))}
-        </div>
-
-        <div className="mt-12 text-xs text-white/70">
-          2025 @ PT Woodoo Kreatif Digital
+            ))}
+          </div>
         </div>
       </div>
     </footer>
