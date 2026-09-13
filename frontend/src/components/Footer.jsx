@@ -8,6 +8,7 @@ const footerCols = [
     { label: "Beli", href: "/cari-properti" },
     { label: "Konsultasi", href: "/konsultasi" },
     { label: "KPR", href: "/kpr" },
+    { label: "Kerjasama", href: "/kerjasama" },
   ],
   [
     { label: "Karir", href: "/karir" },
@@ -19,7 +20,6 @@ const footerCols = [
     { label: "Berita", href: "/berita" },
     { label: "Pusat Bantuan", href: "/pusat-bantuan" },
     { label: "S&K", href: "/syarat-ketentuan" },
-    { label: "Kerjasama", href: "/kerjasama" },
   ],
 ];
 
