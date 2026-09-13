@@ -19,9 +19,12 @@ import {
   Trees,
   Wifi,
   CheckCircle2,
-  Building2,
-  Calendar,
-  User,
+  Quote,
+  Sparkles,
+  Clock,
+  Sun,
+  Coffee,
+  Users,
 } from "lucide-react";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
@@ -29,24 +32,25 @@ import ListingCard from "../components/ListingCard";
 import { Button } from "../components/ui/button";
 import { allListings } from "../mock";
 import { WA_URL } from "../components/ChatWidget";
+import { KprSyariahDialog } from "./KprDialogs";
 
 export default function PropertyDetailPage() {
   const { id } = useParams();
   const item = allListings.find((l) => l.id === id);
   const [liked, setLiked] = useState(item?.liked || false);
   const [activeImg, setActiveImg] = useState(0);
+  const [kprOpen, setKprOpen] = useState(false);
 
   if (!item) {
     return <Navigate to="/cari-properti" replace />;
   }
 
-  // Simulate multi-image gallery
   const gallery = [
     item.image,
-    "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=1200&q=80",
-    "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1200&q=80",
-    "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=1200&q=80",
-    "https://images.unsplash.com/photo-1600607687644-c7171b42498f?w=1200&q=80",
+    "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=1600&q=85",
+    "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1600&q=85",
+    "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=1600&q=85",
+    "https://images.unsplash.com/photo-1600607687644-c7171b42498f?w=1600&q=85",
   ];
 
   const related = allListings
@@ -68,9 +72,37 @@ export default function PropertyDetailPage() {
     { label: "Kamar Tidur", value: `${item.specs.kt} Kamar` },
     { label: "Kamar Mandi", value: `${item.specs.km} Kamar` },
     { label: "Sertifikat", value: "SHM" },
-    { label: "Tipe Properti", value: item.type },
+    { label: "Tipe", value: item.type },
     { label: "Kondisi", value: item.condition },
     { label: "Kota", value: item.city },
+  ];
+
+  // Storytelling: imagined day-in-the-life at this house
+  const dayStory = [
+    {
+      Icon: Sun,
+      time: "06.30",
+      title: "Pagi dimulai dengan sinar hangat",
+      desc: "Cahaya matahari masuk lewat jendela besar ruang tamu. Kamu duduk sebentar dengan kopi, sebelum anak-anak bangun.",
+    },
+    {
+      Icon: Coffee,
+      time: "12.00",
+      title: "Siang di dapur yang lapang",
+      desc: "Dapur bersih dengan pencahayaan alami membuat masak jadi meditasi. Aroma sayur asem mengisi rumah.",
+    },
+    {
+      Icon: Users,
+      time: "18.30",
+      title: "Sore di halaman kecil",
+      desc: "Anak-anak main sepeda di jalan cluster yang aman. Kamu ngobrol dengan tetangga sambil menyiram tanaman.",
+    },
+    {
+      Icon: Heart,
+      time: "22.00",
+      title: "Malam yang tenang",
+      desc: "Kamar tidur utama berjarak jauh dari jalan. Tidurmu tidak akan terganggu, dan besok pagi kamu akan bangun segar.",
+    },
   ];
 
   const share = () => {
@@ -88,223 +120,341 @@ export default function PropertyDetailPage() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-50">
+    <div className="min-h-screen bg-white">
       <Header />
 
-      {/* Breadcrumb */}
-      <section className="bg-white border-b border-slate-100">
-        <div className="max-w-6xl mx-auto px-4 md:px-6 py-4">
+      {/* CINEMATIC HERO */}
+      <section className="relative bg-slate-900 text-white overflow-hidden">
+        <div
+          className="absolute inset-0 bg-cover bg-center opacity-45"
+          style={{ backgroundImage: `url(${gallery[activeImg]})` }}
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-slate-900/60 via-slate-900/40 to-slate-900" />
+
+        <div className="relative max-w-6xl mx-auto px-4 md:px-6 pt-6 md:pt-10 pb-16 md:pb-24">
           <Link
             to="/cari-properti"
             data-testid="prop-back-link"
-            className="inline-flex items-center gap-2 text-sm text-slate-600 hover:text-[#0025F5] transition"
+            className="inline-flex items-center gap-2 text-sm text-white/85 hover:text-white transition"
           >
             <ArrowLeft className="w-4 h-4" /> Kembali ke Daftar Properti
           </Link>
+
+          <div className="mt-10 md:mt-16 max-w-3xl">
+            <div className="flex items-center gap-2 flex-wrap">
+              <span className="inline-flex items-center gap-1 bg-white/15 backdrop-blur border border-white/20 text-white text-[11px] font-bold rounded-full px-3 py-1 tracking-widest">
+                <BadgeCheck className="w-3.5 h-3.5" /> {item.tier} · TERVERIFIKASI
+              </span>
+              <span className="inline-block bg-[#00B512] text-white text-[11px] font-bold rounded-full px-3 py-1 tracking-widest">
+                {item.condition}
+              </span>
+            </div>
+            <h1 className="text-3xl md:text-5xl lg:text-6xl font-black tracking-tight mt-4 leading-[1.1]">
+              {item.title}
+            </h1>
+            <p className="mt-4 text-base md:text-lg text-white/85 flex items-center gap-2">
+              <MapPin className="w-5 h-5 shrink-0" /> {item.location}
+            </p>
+            <div className="mt-6 flex flex-wrap items-center gap-6 md:gap-8">
+              <div>
+                <div className="text-[11px] text-white/60 tracking-widest">
+                  HARGA
+                </div>
+                <div className="text-3xl md:text-4xl font-black text-[#8FFF9F] mt-1">
+                  {item.price}
+                </div>
+                <div className="text-xs text-white/70 mt-1">
+                  {item.installment}
+                </div>
+              </div>
+              <div className="flex items-center gap-4 text-sm">
+                <div className="flex items-center gap-1.5 text-white/85">
+                  <BedDouble className="w-4 h-4 text-white/60" />
+                  <span className="font-bold">{item.specs.kt}</span> KT
+                </div>
+                <div className="w-px h-4 bg-white/20" />
+                <div className="flex items-center gap-1.5 text-white/85">
+                  <Bath className="w-4 h-4 text-white/60" />
+                  <span className="font-bold">{item.specs.km}</span> KM
+                </div>
+                <div className="w-px h-4 bg-white/20" />
+                <div className="flex items-center gap-1.5 text-white/85">
+                  <Ruler className="w-4 h-4 text-white/60" />
+                  <span className="font-bold">{item.specs.lb}</span>
+                </div>
+              </div>
+            </div>
+
+            <div className="mt-8 flex flex-wrap gap-3">
+              <Button
+                asChild
+                className="h-12 bg-[#00B512] hover:bg-[#009e0f] text-white rounded-full font-bold text-sm shadow-lg px-6"
+              >
+                <a
+                  href={WA_URL(
+                    `Halo, saya tertarik dengan ${item.title} (${item.location}) seharga ${item.price}. Bisa dijadwalkan survey?`
+                  )}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  data-testid="prop-wa-btn"
+                >
+                  <MessageCircle className="w-4 h-4 mr-2" /> Chat via WhatsApp
+                </a>
+              </Button>
+              <Button
+                onClick={() => setKprOpen(true)}
+                data-testid="prop-kpr-btn"
+                className="h-12 bg-white text-slate-900 hover:bg-slate-100 rounded-full font-bold text-sm shadow-lg px-6"
+              >
+                <Calculator className="w-4 h-4 mr-2" /> Simulasi KPR
+              </Button>
+              <button
+                onClick={() => setLiked(!liked)}
+                data-testid="prop-like-btn"
+                className="h-12 w-12 rounded-full bg-white/10 hover:bg-white/20 backdrop-blur border border-white/20 flex items-center justify-center transition"
+                aria-label="Simpan"
+              >
+                <Heart
+                  className={`w-5 h-5 ${
+                    liked ? "fill-red-500 text-red-500" : "text-white"
+                  }`}
+                />
+              </button>
+              <button
+                onClick={share}
+                data-testid="prop-share-btn"
+                className="h-12 w-12 rounded-full bg-white/10 hover:bg-white/20 backdrop-blur border border-white/20 flex items-center justify-center transition"
+                aria-label="Bagikan"
+              >
+                <Share2 className="w-5 h-5 text-white" />
+              </button>
+            </div>
+          </div>
         </div>
       </section>
 
-      {/* Main */}
-      <section className="max-w-6xl mx-auto px-4 md:px-6 py-6 md:py-10">
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 md:gap-8">
-          {/* Left: Gallery + Details */}
-          <div className="lg:col-span-2 space-y-6">
-            {/* Gallery */}
-            <div className="bg-white rounded-3xl overflow-hidden border border-slate-100 shadow-sm">
-              <div className="relative">
-                <img
-                  src={gallery[activeImg]}
-                  alt={item.title}
-                  className="w-full aspect-[16/10] object-cover"
-                />
-                <div className="absolute top-4 left-4 inline-flex items-center gap-1 bg-white/95 backdrop-blur text-[#0025F5] text-xs font-bold px-3 py-1.5 rounded-full shadow-sm">
-                  <BadgeCheck className="w-3.5 h-3.5" />
-                  {item.tier} · Terverifikasi
-                </div>
-                <div className="absolute top-4 right-4 flex gap-2">
-                  <button
-                    onClick={() => setLiked(!liked)}
-                    data-testid="prop-like-btn"
-                    className="w-10 h-10 rounded-full bg-white/95 backdrop-blur flex items-center justify-center shadow-sm hover:scale-110 transition"
-                    aria-label="Simpan"
-                  >
-                    <Heart
-                      className={`w-4 h-4 ${
-                        liked ? "fill-red-500 text-red-500" : "text-slate-600"
-                      }`}
-                    />
-                  </button>
-                  <button
-                    onClick={share}
-                    data-testid="prop-share-btn"
-                    className="w-10 h-10 rounded-full bg-white/95 backdrop-blur flex items-center justify-center shadow-sm hover:scale-110 transition"
-                    aria-label="Bagikan"
-                  >
-                    <Share2 className="w-4 h-4 text-slate-600" />
-                  </button>
-                </div>
-              </div>
-              <div className="p-3 grid grid-cols-5 gap-2">
-                {gallery.map((g, i) => (
-                  <button
-                    key={i}
-                    onClick={() => setActiveImg(i)}
-                    className={`aspect-[4/3] rounded-xl overflow-hidden border-2 transition ${
-                      activeImg === i
-                        ? "border-[#0025F5]"
-                        : "border-transparent hover:border-slate-200"
-                    }`}
-                  >
-                    <img
-                      src={g}
-                      alt=""
-                      className="w-full h-full object-cover"
-                    />
-                  </button>
-                ))}
-              </div>
-            </div>
+      {/* Gallery thumbnails */}
+      <section className="bg-white py-6 border-b border-slate-100">
+        <div className="max-w-6xl mx-auto px-4 md:px-6">
+          <div className="grid grid-cols-5 gap-2 md:gap-3">
+            {gallery.map((g, i) => (
+              <button
+                key={i}
+                onClick={() => setActiveImg(i)}
+                className={`aspect-[4/3] rounded-xl md:rounded-2xl overflow-hidden border-2 transition ${
+                  activeImg === i
+                    ? "border-[#0025F5] shadow-md"
+                    : "border-transparent hover:border-slate-200"
+                }`}
+              >
+                <img src={g} alt="" className="w-full h-full object-cover" />
+              </button>
+            ))}
+          </div>
+        </div>
+      </section>
 
-            {/* Title + price mobile */}
-            <div className="bg-white rounded-3xl p-6 md:p-8 border border-slate-100 shadow-sm lg:hidden">
-              <PropertyHeader item={item} />
-            </div>
+      {/* Storytelling intro quote */}
+      <section className="bg-white py-14 md:py-20">
+        <div className="max-w-3xl mx-auto px-4 md:px-6 text-center">
+          <Quote
+            className="w-12 h-12 md:w-14 md:h-14 text-[#0025F5]/10 mx-auto"
+            strokeWidth={2.5}
+          />
+          <p className="text-xl md:text-3xl font-black text-slate-900 leading-tight mt-4 tracking-tight">
+            "Rumah ini menunggu keluarga<br className="hidden md:block" />
+            yang tepat untuk{" "}
+            <span className="text-[#0025F5]">membangun kenangannya</span>."
+          </p>
+        </div>
+      </section>
 
-            {/* Description */}
-            <div className="bg-white rounded-3xl p-6 md:p-8 border border-slate-100 shadow-sm">
-              <h2 className="text-lg md:text-xl font-black text-slate-900">
-                Tentang Properti Ini
-              </h2>
-              <p className="text-sm md:text-[15px] text-slate-600 mt-3 leading-[1.8]">
-                {item.title} berlokasi strategis di {item.location}. Rumah
-                dengan konsep modern minimalis ini menawarkan kenyamanan
-                keluarga muda dengan {item.specs.kt} kamar tidur luas,{" "}
-                {item.specs.km} kamar mandi, dan area bangunan {item.specs.lb}.
-              </p>
-              <p className="text-sm md:text-[15px] text-slate-600 mt-3 leading-[1.8]">
-                Akses mudah ke jalan tol, sekolah favorit, pusat perbelanjaan,
-                dan rumah sakit. Lingkungan cluster dengan keamanan 24 jam
-                menjadikan properti ini pilihan ideal untuk investasi jangka
-                panjang atau hunian keluarga.
-              </p>
-            </div>
-
-            {/* Specifications */}
-            <div className="bg-white rounded-3xl p-6 md:p-8 border border-slate-100 shadow-sm">
-              <h2 className="text-lg md:text-xl font-black text-slate-900">
-                Spesifikasi
-              </h2>
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-5">
-                {specifications.map((s) => (
-                  <div
-                    key={s.label}
-                    className="bg-slate-50 rounded-2xl p-4"
-                  >
-                    <div className="text-[11px] text-slate-500 uppercase tracking-wide">
-                      {s.label}
-                    </div>
-                    <div className="text-sm md:text-base font-bold text-slate-900 mt-1">
-                      {s.value}
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            {/* Facilities */}
-            <div className="bg-white rounded-3xl p-6 md:p-8 border border-slate-100 shadow-sm">
-              <h2 className="text-lg md:text-xl font-black text-slate-900">
-                Fasilitas
-              </h2>
-              <div className="grid grid-cols-2 md:grid-cols-3 gap-3 mt-5">
-                {facilities.map((f) => (
-                  <div
-                    key={f.label}
-                    className="flex items-center gap-3 bg-slate-50 rounded-2xl px-4 py-3"
-                  >
-                    <div className="w-9 h-9 rounded-xl bg-white flex items-center justify-center border border-slate-100">
-                      <f.Icon
-                        className="w-4 h-4 text-[#0025F5]"
-                        strokeWidth={2}
-                      />
-                    </div>
-                    <span className="text-sm text-slate-700 font-medium">
-                      {f.label}
-                    </span>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            {/* Location */}
-            <div className="bg-white rounded-3xl p-6 md:p-8 border border-slate-100 shadow-sm">
-              <h2 className="text-lg md:text-xl font-black text-slate-900">
-                Lokasi
-              </h2>
-              <div className="flex items-start gap-3 mt-3">
-                <MapPin className="w-5 h-5 text-[#0025F5] shrink-0 mt-0.5" />
-                <div>
-                  <div className="text-sm font-bold text-slate-900">
-                    {item.location}
-                  </div>
-                  <div className="text-xs text-slate-500 mt-1">
-                    {item.city}, Indonesia
-                  </div>
-                </div>
-              </div>
-              <div className="mt-5 rounded-2xl overflow-hidden aspect-[16/8] bg-slate-100 flex items-center justify-center">
-                <div className="text-center px-4">
-                  <MapPin className="w-10 h-10 text-slate-300 mx-auto" />
-                  <p className="text-sm text-slate-400 mt-2">
-                    Peta interaktif akan tersedia setelah kamu menghubungi
-                    agen kami.
-                  </p>
-                </div>
-              </div>
-            </div>
+      {/* Day in the life storytelling */}
+      <section className="bg-slate-50 py-14 md:py-20">
+        <div className="max-w-6xl mx-auto px-4 md:px-6">
+          <div className="text-center mb-12">
+            <span className="inline-block bg-white text-[#0025F5] text-[11px] font-bold rounded-full px-3 py-1 tracking-widest border border-blue-100">
+              SEHARI DI RUMAH INI
+            </span>
+            <h2 className="text-2xl md:text-4xl font-black text-slate-900 mt-4 leading-tight">
+              Bayangkan harimu<br className="md:hidden" />{" "}
+              <span className="text-[#00B512]">bermula di sini.</span>
+            </h2>
           </div>
 
-          {/* Right: Sticky sidebar */}
-          <div className="space-y-4">
-            <div className="hidden lg:block bg-white rounded-3xl p-6 border border-slate-100 shadow-sm sticky top-24">
-              <PropertyHeader item={item} />
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 md:gap-6">
+            {dayStory.map((d) => (
+              <div
+                key={d.time}
+                className="bg-white rounded-3xl border border-slate-100 shadow-sm hover:shadow-md hover:-translate-y-1 p-6 transition-all"
+              >
+                <div className="flex items-center justify-between">
+                  <div className="w-11 h-11 rounded-2xl bg-blue-50 flex items-center justify-center">
+                    <d.Icon
+                      className="w-5 h-5 text-[#0025F5]"
+                      strokeWidth={2.2}
+                    />
+                  </div>
+                  <span className="text-[11px] font-black tracking-widest text-[#00B512]">
+                    {d.time}
+                  </span>
+                </div>
+                <h3 className="font-black text-slate-900 mt-4 text-base leading-tight">
+                  {d.title}
+                </h3>
+                <p className="text-sm text-slate-600 mt-2 leading-relaxed">
+                  {d.desc}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
 
-              <div className="mt-5 space-y-2">
-                <Button
-                  asChild
-                  className="w-full h-12 bg-[#00B512] hover:bg-[#009e0f] text-white rounded-full font-bold text-sm"
-                >
-                  <a
-                    href={WA_URL(
-                      `Halo, saya tertarik dengan ${item.title} (${item.location}) seharga ${item.price}. Bisa dijadwalkan survey?`
-                    )}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    data-testid="prop-wa-btn"
-                  >
-                    <MessageCircle className="w-4 h-4 mr-2" /> Chat via WhatsApp
-                  </a>
-                </Button>
-                <Button
-                  asChild
-                  className="w-full h-12 bg-[#0025F5] hover:bg-[#001fd1] text-white rounded-full font-bold text-sm"
-                >
-                  <Link to="/kpr" data-testid="prop-kpr-btn">
-                    <Calculator className="w-4 h-4 mr-2" /> Simulasi KPR
-                  </Link>
-                </Button>
-                <Button
-                  variant="outline"
-                  className="w-full h-12 rounded-full font-bold text-sm border-slate-200 hover:bg-slate-50"
-                >
-                  <Phone className="w-4 h-4 mr-2" /> Jadwalkan Survey
-                </Button>
+      {/* Main details grid */}
+      <section className="bg-white py-14 md:py-20">
+        <div className="max-w-6xl mx-auto px-4 md:px-6">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 md:gap-8">
+            <div className="lg:col-span-2 space-y-6">
+              {/* Description */}
+              <div className="bg-white rounded-3xl p-6 md:p-8 border border-slate-100 shadow-sm">
+                <h2 className="text-lg md:text-xl font-black text-slate-900">
+                  Tentang Properti Ini
+                </h2>
+                <p className="text-sm md:text-[15px] text-slate-600 mt-3 leading-[1.8]">
+                  {item.title} berlokasi strategis di {item.location}. Rumah
+                  dengan konsep modern minimalis ini menawarkan kenyamanan
+                  keluarga muda dengan {item.specs.kt} kamar tidur luas,{" "}
+                  {item.specs.km} kamar mandi, dan area bangunan{" "}
+                  {item.specs.lb}.
+                </p>
+                <p className="text-sm md:text-[15px] text-slate-600 mt-3 leading-[1.8]">
+                  Akses mudah ke jalan tol, sekolah favorit, pusat
+                  perbelanjaan, dan rumah sakit. Lingkungan cluster dengan
+                  keamanan 24 jam menjadikan properti ini pilihan ideal untuk
+                  investasi jangka panjang atau hunian keluarga.
+                </p>
               </div>
 
-              {/* Agent card */}
-              <div className="mt-6 pt-6 border-t border-slate-100">
-                <div className="flex items-center gap-3">
-                  <div className="w-12 h-12 rounded-full bg-[#0025F5] text-white font-black flex items-center justify-center text-lg">
+              {/* Specifications */}
+              <div className="bg-white rounded-3xl p-6 md:p-8 border border-slate-100 shadow-sm">
+                <h2 className="text-lg md:text-xl font-black text-slate-900">
+                  Spesifikasi
+                </h2>
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-5">
+                  {specifications.map((s) => (
+                    <div key={s.label} className="bg-slate-50 rounded-2xl p-4">
+                      <div className="text-[11px] text-slate-500 uppercase tracking-wide">
+                        {s.label}
+                      </div>
+                      <div className="text-sm md:text-base font-bold text-slate-900 mt-1">
+                        {s.value}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Facilities */}
+              <div className="bg-white rounded-3xl p-6 md:p-8 border border-slate-100 shadow-sm">
+                <h2 className="text-lg md:text-xl font-black text-slate-900">
+                  Fasilitas
+                </h2>
+                <div className="grid grid-cols-2 md:grid-cols-3 gap-3 mt-5">
+                  {facilities.map((f) => (
+                    <div
+                      key={f.label}
+                      className="flex items-center gap-3 bg-slate-50 rounded-2xl px-4 py-3"
+                    >
+                      <div className="w-9 h-9 rounded-xl bg-white flex items-center justify-center border border-slate-100">
+                        <f.Icon
+                          className="w-4 h-4 text-[#0025F5]"
+                          strokeWidth={2}
+                        />
+                      </div>
+                      <span className="text-sm text-slate-700 font-medium">
+                        {f.label}
+                      </span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Location */}
+              <div className="bg-white rounded-3xl p-6 md:p-8 border border-slate-100 shadow-sm">
+                <h2 className="text-lg md:text-xl font-black text-slate-900">
+                  Lokasi
+                </h2>
+                <div className="flex items-start gap-3 mt-3">
+                  <MapPin className="w-5 h-5 text-[#0025F5] shrink-0 mt-0.5" />
+                  <div>
+                    <div className="text-sm font-bold text-slate-900">
+                      {item.location}
+                    </div>
+                    <div className="text-xs text-slate-500 mt-1">
+                      {item.city}, Indonesia
+                    </div>
+                  </div>
+                </div>
+                <div className="mt-5 rounded-2xl overflow-hidden aspect-[16/8] bg-slate-100 flex items-center justify-center">
+                  <div className="text-center px-4">
+                    <MapPin className="w-10 h-10 text-slate-300 mx-auto" />
+                    <p className="text-sm text-slate-400 mt-2">
+                      Peta interaktif akan dibagikan setelah kamu menghubungi
+                      agen kami.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Right sticky sidebar */}
+            <div className="space-y-4">
+              <div className="bg-white rounded-3xl p-6 border border-slate-100 shadow-sm lg:sticky lg:top-24">
+                <div className="text-[11px] text-slate-500 tracking-widest">
+                  BUTUH INFORMASI LEBIH LANJUT?
+                </div>
+                <h3 className="text-lg font-black text-slate-900 mt-2 leading-tight">
+                  Kami siap menemani setiap langkahmu.
+                </h3>
+                <p className="text-xs text-slate-500 mt-2 leading-relaxed">
+                  Dari survey, negosiasi harga, hingga pengajuan KPR - tim kami
+                  akan bantu tanpa biaya tambahan.
+                </p>
+
+                <div className="mt-5 space-y-2">
+                  <Button
+                    asChild
+                    className="w-full h-12 bg-[#00B512] hover:bg-[#009e0f] text-white rounded-full font-bold text-sm"
+                  >
+                    <a
+                      href={WA_URL(
+                        `Halo, saya tertarik dengan ${item.title}. Bisa dijadwalkan survey?`
+                      )}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      data-testid="prop-side-wa-btn"
+                    >
+                      <MessageCircle className="w-4 h-4 mr-2" /> Chat WhatsApp
+                    </a>
+                  </Button>
+                  <Button
+                    onClick={() => setKprOpen(true)}
+                    data-testid="prop-side-kpr-btn"
+                    className="w-full h-12 bg-[#0025F5] hover:bg-[#001fd1] text-white rounded-full font-bold text-sm"
+                  >
+                    <Calculator className="w-4 h-4 mr-2" /> Simulasi KPR
+                  </Button>
+                  <Button
+                    variant="outline"
+                    className="w-full h-12 rounded-full font-bold text-sm border-slate-200 hover:bg-slate-50"
+                  >
+                    <Phone className="w-4 h-4 mr-2" /> Jadwalkan Survey
+                  </Button>
+                </div>
+
+                <div className="mt-6 pt-6 border-t border-slate-100 flex items-center gap-3">
+                  <div className="w-11 h-11 rounded-full bg-[#0025F5] text-white font-black flex items-center justify-center text-base">
                     D
                   </div>
                   <div className="flex-1 min-w-0">
@@ -319,65 +469,67 @@ export default function PropertyDetailPage() {
                     </div>
                   </div>
                 </div>
-                <p className="text-xs text-slate-500 mt-3 leading-relaxed">
-                  Tim kami akan membantu proses survey, negosiasi, hingga
-                  serah terima kunci - gratis tanpa biaya tambahan.
-                </p>
-              </div>
 
-              {/* Trust badges */}
-              <div className="mt-5 grid grid-cols-2 gap-2 pt-5 border-t border-slate-100">
-                <div className="flex items-center gap-2 text-[11px] text-slate-600">
-                  <CheckCircle2 className="w-3.5 h-3.5 text-[#00B512]" />
-                  Terverifikasi
-                </div>
-                <div className="flex items-center gap-2 text-[11px] text-slate-600">
-                  <CheckCircle2 className="w-3.5 h-3.5 text-[#00B512]" />
-                  Legal Aman
-                </div>
-                <div className="flex items-center gap-2 text-[11px] text-slate-600">
-                  <CheckCircle2 className="w-3.5 h-3.5 text-[#00B512]" />
-                  Bebas Sengketa
-                </div>
-                <div className="flex items-center gap-2 text-[11px] text-slate-600">
-                  <CheckCircle2 className="w-3.5 h-3.5 text-[#00B512]" />
-                  KPR Ready
+                <div className="mt-5 grid grid-cols-2 gap-2 pt-5 border-t border-slate-100">
+                  <div className="flex items-center gap-2 text-[11px] text-slate-600">
+                    <CheckCircle2 className="w-3.5 h-3.5 text-[#00B512]" />
+                    Terverifikasi
+                  </div>
+                  <div className="flex items-center gap-2 text-[11px] text-slate-600">
+                    <CheckCircle2 className="w-3.5 h-3.5 text-[#00B512]" />
+                    Legal Aman
+                  </div>
+                  <div className="flex items-center gap-2 text-[11px] text-slate-600">
+                    <CheckCircle2 className="w-3.5 h-3.5 text-[#00B512]" />
+                    Bebas Sengketa
+                  </div>
+                  <div className="flex items-center gap-2 text-[11px] text-slate-600">
+                    <CheckCircle2 className="w-3.5 h-3.5 text-[#00B512]" />
+                    KPR Ready
+                  </div>
                 </div>
               </div>
             </div>
+          </div>
+        </div>
+      </section>
 
-            {/* Mobile CTA sticky */}
-            <div className="lg:hidden bg-white rounded-3xl p-4 border border-slate-100 shadow-sm space-y-2">
-              <Button
-                asChild
-                className="w-full h-12 bg-[#00B512] hover:bg-[#009e0f] text-white rounded-full font-bold text-sm"
-              >
-                <a
-                  href={WA_URL(
-                    `Halo, saya tertarik dengan ${item.title} seharga ${item.price}.`
-                  )}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <MessageCircle className="w-4 h-4 mr-2" /> Chat WhatsApp
-                </a>
-              </Button>
-              <Button
-                asChild
-                className="w-full h-12 bg-[#0025F5] hover:bg-[#001fd1] text-white rounded-full font-bold text-sm"
-              >
-                <Link to="/kpr">
-                  <Calculator className="w-4 h-4 mr-2" /> Simulasi KPR
-                </Link>
-              </Button>
-            </div>
+      {/* Final CTA strip */}
+      <section className="bg-[#0025F5] text-white py-14 md:py-20 relative overflow-hidden">
+        <div className="absolute -top-24 -right-24 w-96 h-96 rounded-full bg-[#00B512]/20 blur-3xl pointer-events-none" />
+        <div className="relative max-w-5xl mx-auto px-4 md:px-6 text-center">
+          <Sparkles className="w-10 h-10 text-[#8FFF9F] mx-auto" />
+          <p className="text-2xl md:text-4xl font-black leading-tight mt-4">
+            Kalau hatimu bilang{" "}
+            <span className="text-[#8FFF9F]">"ini rumahnya"</span>,
+            <br className="hidden md:block" />
+            biar kami yang mengurus sisanya.
+          </p>
+          <div className="mt-8 flex flex-wrap justify-center gap-3">
+            <a
+              href={WA_URL(
+                `Halo, saya siap membicarakan ${item.title} lebih lanjut.`
+              )}
+              target="_blank"
+              rel="noopener noreferrer"
+              data-testid="prop-final-wa-btn"
+              className="bg-[#00B512] hover:bg-[#009e0f] text-white font-bold rounded-full px-7 py-3 text-sm shadow-lg transition"
+            >
+              <MessageCircle className="w-4 h-4 mr-2 inline" /> Chat Sekarang
+            </a>
+            <button
+              onClick={() => setKprOpen(true)}
+              className="bg-white text-[#0025F5] hover:bg-slate-100 font-bold rounded-full px-7 py-3 text-sm shadow-lg transition"
+            >
+              Simulasi KPR Dulu
+            </button>
           </div>
         </div>
       </section>
 
       {/* Related */}
       {related.length > 0 && (
-        <section className="bg-white py-12 md:py-16 border-t border-slate-100">
+        <section className="bg-white py-12 md:py-16">
           <div className="max-w-6xl mx-auto px-4 md:px-6">
             <div className="flex items-end justify-between mb-6 md:mb-8">
               <div>
@@ -405,50 +557,8 @@ export default function PropertyDetailPage() {
       )}
 
       <Footer />
-    </div>
-  );
-}
 
-function PropertyHeader({ item }) {
-  return (
-    <div>
-      <div className="flex items-center gap-2 flex-wrap">
-        <span className="inline-block bg-blue-50 text-[#0025F5] text-[10px] font-bold rounded-full px-2 py-1 tracking-wider">
-          {item.type}
-        </span>
-        <span className="inline-block bg-slate-100 text-slate-600 text-[10px] font-bold rounded-full px-2 py-1 tracking-wider">
-          {item.condition}
-        </span>
-      </div>
-      <h1 className="text-2xl md:text-3xl font-black text-slate-900 mt-3 leading-tight">
-        {item.title}
-      </h1>
-      <p className="text-sm text-slate-500 mt-2 flex items-center gap-1">
-        <MapPin className="w-3.5 h-3.5" /> {item.location}
-      </p>
-      <div className="mt-4 pt-4 border-t border-slate-100">
-        <div className="text-[11px] text-slate-500 tracking-wide">
-          Harga Properti
-        </div>
-        <div className="text-3xl font-black text-[#0025F5] leading-none mt-1">
-          {item.price}
-        </div>
-        <div className="text-xs text-slate-500 mt-1.5">{item.installment}</div>
-      </div>
-      <div className="mt-4 flex items-center gap-4 text-sm text-slate-700 border-t border-slate-100 pt-4">
-        <span className="flex items-center gap-1.5">
-          <BedDouble className="w-4 h-4 text-slate-400" />
-          <span className="font-semibold">{item.specs.kt}</span> KT
-        </span>
-        <span className="flex items-center gap-1.5">
-          <Bath className="w-4 h-4 text-slate-400" />
-          <span className="font-semibold">{item.specs.km}</span> KM
-        </span>
-        <span className="flex items-center gap-1.5">
-          <Ruler className="w-4 h-4 text-slate-400" />
-          <span className="font-semibold">{item.specs.lb}</span>
-        </span>
-      </div>
+      <KprSyariahDialog open={kprOpen} onOpenChange={setKprOpen} />
     </div>
   );
 }

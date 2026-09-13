@@ -26,6 +26,7 @@ import BeritaDetailPage from "./pages/BeritaDetailPage";
 import KerjasamaPage from "./pages/KerjasamaPage";
 import CariPropertiPage from "./pages/CariPropertiPage";
 import KonsultasiPage from "./pages/KonsultasiPage";
+import PropertyDetailPage from "./pages/PropertyDetailPage";
 
 const Home = () => (
   <div className="min-h-screen bg-white">
@@ -59,6 +60,7 @@ function App() {
           <Route path="/kerjasama" element={<KerjasamaPage />} />
           <Route path="/cari-properti" element={<CariPropertiPage />} />
           <Route path="/beli" element={<CariPropertiPage />} />
+          <Route path="/properti/:id" element={<PropertyDetailPage />} />
           <Route path="/konsultasi" element={<KonsultasiPage />} />
         </Routes>
       </BrowserRouter>
