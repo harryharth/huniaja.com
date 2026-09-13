@@ -1,53 +1,34 @@
 import React from "react";
 import ListingCard from "./ListingCard";
-import {
-  subsidiListings,
-  popularListings,
-  ICON_SUBSIDI,
-  ICON_POPULER,
-} from "../mock";
-
-export function SubsidiSection() {
-  return (
-    <Section
-      iconSrc={ICON_SUBSIDI}
-      iconAlt="Subsidi"
-      subtitle="Properti yang paling banyak Diskonnya"
-      items={subsidiListings}
-      wrapperBg="bg-[#F1F0FE]"
-    />
-  );
-}
+import { popularListings, ICON_POPULER } from "../mock";
 
 export function PopulerSection() {
   return (
-    <Section
-      iconSrc={ICON_POPULER}
-      iconAlt="Populer"
-      subtitle="Properti yang paling banyak dilihat pembeli"
-      items={popularListings}
-      wrapperBg="bg-[#EEF6EE]"
-    />
-  );
-}
-
-function Section({ iconSrc, iconAlt, subtitle, items, wrapperBg }) {
-  return (
-    <section className="bg-white pt-8">
+    <section className="bg-white pt-10">
       <div className="max-w-6xl mx-auto px-6">
-        <div className={`${wrapperBg} rounded-2xl p-5`}>
+        <div className="bg-[#EEF6EE] rounded-2xl p-5">
           <div className="flex flex-wrap items-center justify-between mb-4 gap-3">
             <div className="flex items-center gap-3">
-              <img src={iconSrc} alt={iconAlt} className="h-8 md:h-9 w-auto" />
-              <span className="text-sm text-slate-600">{subtitle}</span>
+              <img
+                src={ICON_POPULER}
+                alt="Populer"
+                className="h-8 md:h-9 w-auto"
+              />
+              <span className="text-sm text-slate-600">
+                Properti yang paling banyak Diskonya
+              </span>
             </div>
-            <button className="bg-[#E5FF3D] hover:bg-[#d6f01f] text-slate-900 text-xs font-semibold px-4 py-1.5 rounded-full transition">
+            <button className="bg-[#12B815] hover:bg-[#0fa112] text-white text-xs font-bold px-5 py-2 rounded-full transition shadow-sm">
               LIHAT SEMUA
             </button>
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            {items.map((item, i) => (
-              <ListingCard key={item.id + i} item={item} />
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+            {popularListings.map((item, i) => (
+              <ListingCard
+                key={item.id + i}
+                item={item}
+                variant={i === 0 ? "featured-download" : "default"}
+              />
             ))}
           </div>
         </div>

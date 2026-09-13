@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import ListingCard from "./ListingCard";
-import { listingTabs, newListings, ICON_LISTING_BARU } from "../mock";
+import { listingTabs, newListings, ICON_CARIYUK } from "../mock";
 
 export default function NewListings() {
   const [active, setActive] = useState(listingTabs[0]);
@@ -10,8 +10,8 @@ export default function NewListings() {
       <div className="max-w-6xl mx-auto px-6">
         <div className="flex flex-wrap items-center justify-between gap-4 mb-4">
           <img
-            src={ICON_LISTING_BARU}
-            alt="Listing Baru"
+            src={ICON_CARIYUK}
+            alt="Cari Yuk"
             className="h-8 md:h-9 w-auto"
           />
           <div className="flex flex-wrap gap-2">
@@ -31,9 +31,13 @@ export default function NewListings() {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
           {newListings.map((item, i) => (
-            <ListingCard key={item.id + i} item={item} highlighted={i === 0} />
+            <ListingCard
+              key={item.id + i}
+              item={item}
+              variant={i === 0 ? "featured-whatsapp" : "default"}
+            />
           ))}
         </div>
       </div>

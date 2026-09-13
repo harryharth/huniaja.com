@@ -6,7 +6,7 @@ import Header from "./components/Header";
 import Hero from "./components/Hero";
 import QuickCategories from "./components/QuickCategories";
 import NewListings from "./components/NewListings";
-import { SubsidiSection, PopulerSection } from "./components/HighlightSections";
+import { PopulerSection } from "./components/HighlightSections";
 import KerjaSama from "./components/KerjaSama";
 import WhyHuniaja from "./components/WhyHuniaja";
 import Footer from "./components/Footer";
@@ -18,7 +18,6 @@ const Home = () => (
     <Hero />
     <QuickCategories />
     <NewListings />
-    <SubsidiSection />
     <PopulerSection />
     <KerjaSama />
     <WhyHuniaja />

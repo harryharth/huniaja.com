@@ -12,37 +12,55 @@ import {
 } from "lucide-react";
 import { Button } from "./ui/button";
 
-export default function ListingCard({ item, highlighted = false }) {
-  const [liked, setLiked] = useState(item.liked || false);
+export default function ListingCard({ item, variant = "default" }) {
+  const [liked, setLiked] = useState(
+    item.liked || variant === "featured-whatsapp" || variant === "featured-download"
+  );
+
+  const downloadClasses =
+    variant === "featured-download"
+      ? "bg-[#0025F5] hover:bg-[#001fd1] text-white"
+      : "bg-slate-100 hover:bg-slate-200 text-slate-800";
+
+  const whatsappClasses =
+    variant === "featured-whatsapp"
+      ? "bg-[#12B815] hover:bg-[#0fa112] text-white border-transparent"
+      : "border-slate-200 hover:bg-slate-50 text-slate-800";
 
   return (
     <div className="bg-white rounded-2xl border border-slate-200 overflow-hidden hover:shadow-lg transition-shadow group">
-      <div className="relative">
+      <div className="relative p-2">
         <img
           src={item.image}
           alt={item.title}
-          className="w-full h-40 object-cover group-hover:scale-[1.02] transition-transform duration-500"
+          className="w-full h-44 md:h-48 object-cover rounded-xl group-hover:scale-[1.01] transition-transform duration-500"
         />
-        <button
-          onClick={() => setLiked(!liked)}
-          className="absolute top-2 right-2 w-7 h-7 rounded-full bg-white/90 backdrop-blur flex items-center justify-center shadow-sm"
-        >
-          <Heart
-            className={`w-4 h-4 ${
-              liked ? "fill-red-500 text-red-500" : "text-slate-500"
-            }`}
-          />
-        </button>
       </div>
-      <div className="p-3">
-        <p className="text-xs text-slate-500">{item.title}</p>
-        <p className="text-lg font-extrabold text-slate-900 leading-tight mt-0.5">
-          {item.price}
-        </p>
-        <p className="text-[11px] text-slate-500 mt-0.5">{item.installment}</p>
+      <div className="px-3 pb-3">
+        <div className="flex items-start justify-between">
+          <div>
+            <p className="text-xs text-slate-500">{item.title}</p>
+            <p className="text-xl font-extrabold text-slate-900 leading-tight mt-0.5">
+              {item.price}
+            </p>
+            <p className="text-[11px] text-slate-500 mt-0.5">
+              {item.installment}
+            </p>
+          </div>
+          <button
+            onClick={() => setLiked(!liked)}
+            className="w-8 h-8 rounded-full bg-slate-50 flex items-center justify-center shrink-0"
+          >
+            <Heart
+              className={`w-4 h-4 ${
+                liked ? "fill-[#0025F5] text-[#0025F5]" : "text-slate-400"
+              }`}
+            />
+          </button>
+        </div>
 
-        <div className="mt-2 inline-flex items-center gap-1.5 bg-blue-50 text-[#0025F5] text-[11px] font-semibold px-2 py-1 rounded-full">
-          <span className="w-4 h-4 rounded-full bg-[#0025F5] text-white flex items-center justify-center text-[8px] font-bold">
+        <div className="mt-2 inline-flex items-center gap-1.5 text-[#0025F5] text-xs font-semibold">
+          <span className="w-6 h-6 rounded-full bg-[#0025F5] text-white flex items-center justify-center text-[10px] font-bold">
             H
           </span>
           {item.tier}
@@ -59,19 +77,15 @@ export default function ListingCard({ item, highlighted = false }) {
 
         <div className="mt-3 space-y-1.5">
           <Button
-            className={`w-full h-8 text-xs font-semibold rounded-lg ${
-              highlighted
-                ? "bg-[#E5FF3D] hover:bg-[#d6f01f] text-slate-900"
-                : "bg-slate-100 hover:bg-slate-200 text-slate-800"
-            }`}
+            className={`w-full h-9 text-xs font-semibold rounded-lg ${downloadClasses}`}
           >
-            <Download className="w-3 h-3 mr-1" /> Download E-Brosur
+            <Download className="w-3.5 h-3.5 mr-1" /> Download E-Brosur
           </Button>
           <Button
             variant="outline"
-            className="w-full h-8 text-xs font-semibold rounded-lg border-slate-200 hover:bg-slate-50"
+            className={`w-full h-9 text-xs font-semibold rounded-lg ${whatsappClasses}`}
           >
-            <MessageCircle className="w-3 h-3 mr-1" /> Ask via Whatsapp
+            <MessageCircle className="w-3.5 h-3.5 mr-1" /> Ask via Whatsapp
           </Button>
         </div>
       </div>

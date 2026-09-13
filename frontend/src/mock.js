@@ -93,7 +93,6 @@ export const newListings = [
   makeListing(0),
   makeListing(1),
   makeListing(2),
-  makeListing(3),
 ];
 
 export const subsidiListings = [
@@ -107,7 +106,6 @@ export const popularListings = [
   makeListing(8, "HH Pro"),
   makeListing(9, "HH Pro"),
   makeListing(10, "HH Pro"),
-  makeListing(0, "HH Pro"),
 ];
 
 export const favoriteLocations = [
