@@ -413,34 +413,6 @@ export default function CariPropertiPage() {
         </div>
       </section>
 
-      {/* Promo banner */}
-      <section className="bg-white pb-14 md:pb-20">
-        <div className="max-w-6xl mx-auto px-4 md:px-6">
-          <div className="bg-[#00B512] rounded-[36px] md:rounded-[44px] overflow-hidden relative text-white px-6 md:px-14 py-10 md:py-14 flex flex-col md:flex-row items-center justify-center md:justify-between gap-4">
-            <div className="absolute -top-16 -right-10 w-80 h-80 rounded-full bg-white/10 blur-3xl pointer-events-none" />
-            <div className="text-center md:text-left">
-              <div className="flex items-baseline gap-2 md:gap-4 justify-center md:justify-start">
-                <span className="text-4xl md:text-6xl font-black">Disc</span>
-                <span className="text-6xl md:text-8xl font-black leading-none">
-                  30
-                </span>
-                <span className="text-3xl md:text-5xl font-black">%</span>
-              </div>
-            </div>
-            <div className="text-center md:text-left">
-              <p className="text-3xl md:text-5xl font-black leading-tight">
-                Bagi Pengguna
-                <br />
-                Baru
-              </p>
-              <button className="mt-4 bg-white text-[#00B512] font-bold rounded-full px-6 py-2 text-sm shadow-lg hover:shadow-xl transition">
-                Klaim Sekarang
-              </button>
-            </div>
-          </div>
-        </div>
-      </section>
-
       <Footer />
     </div>
   );
