@@ -67,7 +67,7 @@ export default function Footer() {
             </div>
 
             <p className="text-xs text-white/70 mt-6">
-              2025 @ PT Woodoo Kreatif Digital
+              2026 @ PT. Harry Harth Corporation
             </p>
           </div>
 
