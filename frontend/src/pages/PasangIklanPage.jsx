@@ -38,7 +38,7 @@ const sellerStories = [
     name: "Pak Hendra",
     role: "Pemilik Rumah, Bogor",
     initial: "H",
-    color: "#0025F5",
+    color: "#001DF3",
     time: "Terjual dalam 12 hari",
     quote:
       "Saya coba pasang di banyak platform, tapi Huniaja yang paling cepat mendatangkan calon serius. Tanpa telepon iseng, semua pembeli sudah pre-screening. Anak saya bisa sekolah di rumah baru sebelum tahun ajaran mulai.",
@@ -182,7 +182,7 @@ export default function PasangIklanPage() {
       <Header />
 
       {/* Hero */}
-      <section className="bg-[#0025F5] text-white pt-10 md:pt-14 pb-14 md:pb-20 relative overflow-hidden">
+      <section className="bg-[#001DF3] text-white pt-10 md:pt-14 pb-14 md:pb-20 relative overflow-hidden">
         <div className="absolute -top-24 -right-24 w-96 h-96 rounded-full bg-[#00B512]/20 blur-3xl pointer-events-none" />
         <div className="absolute -bottom-24 -left-24 w-96 h-96 rounded-full bg-white/10 blur-3xl pointer-events-none" />
         <div className="relative max-w-6xl mx-auto px-4 md:px-6 grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-10 items-center">
@@ -225,13 +225,13 @@ export default function PasangIklanPage() {
       <section className="bg-white py-14 md:py-20">
         <div className="max-w-4xl mx-auto px-4 md:px-6 text-center">
           <Quote
-            className="w-14 h-14 md:w-16 md:h-16 text-[#0025F5]/10 mx-auto"
+            className="w-14 h-14 md:w-16 md:h-16 text-[#001DF3]/10 mx-auto"
             strokeWidth={2.5}
           />
           <p className="text-xl md:text-3xl font-black text-slate-900 leading-tight mt-4 tracking-tight">
             "Menjual rumah bukan sekadar transaksi.<br className="hidden md:block" />
             Ini{" "}
-            <span className="text-[#0025F5]">
+            <span className="text-[#001DF3]">
               serah terima memori
             </span>{" "}
             ke keluarga yang akan menuliskan babak selanjutnya."
@@ -250,7 +250,7 @@ export default function PasangIklanPage() {
       <section className="bg-slate-50 py-14 md:py-20">
         <div className="max-w-6xl mx-auto px-4 md:px-6">
           <div className="text-center mb-12">
-            <span className="inline-block bg-white text-[#0025F5] text-[11px] font-bold rounded-full px-3 py-1 tracking-widest border border-blue-100">
+            <span className="inline-block bg-white text-[#001DF3] text-[11px] font-bold rounded-full px-3 py-1 tracking-widest border border-blue-100">
               MENGAPA HUNIAJA?
             </span>
             <h2 className="text-2xl md:text-4xl font-black text-slate-900 mt-4 leading-tight">
@@ -265,10 +265,10 @@ export default function PasangIklanPage() {
                 key={d.title}
                 className="bg-white rounded-3xl border border-slate-100 shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all p-7 relative overflow-hidden group"
               >
-                <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#0025F5] to-[#00B512] scale-x-0 group-hover:scale-x-100 transition-transform origin-left" />
+                <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#001DF3] to-[#00B512] scale-x-0 group-hover:scale-x-100 transition-transform origin-left" />
                 <div className="flex items-start justify-between">
                   <div className="w-12 h-12 rounded-2xl bg-blue-50 flex items-center justify-center">
-                    <d.Icon className="w-6 h-6 text-[#0025F5]" strokeWidth={2} />
+                    <d.Icon className="w-6 h-6 text-[#001DF3]" strokeWidth={2} />
                   </div>
                   <div className="text-right">
                     <div className="text-3xl font-black text-[#00B512]">
@@ -352,7 +352,7 @@ export default function PasangIklanPage() {
         <div className="max-w-6xl mx-auto px-4 md:px-6">
           <h2 className="text-center text-xl md:text-2xl font-bold text-slate-900 mb-10">
             Keuntungan Bermitra di{" "}
-            <span className="text-[#0025F5]">Huniaja</span>
+            <span className="text-[#001DF3]">Huniaja</span>
           </h2>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-5 items-stretch">
@@ -363,7 +363,7 @@ export default function PasangIklanPage() {
               >
                 <div className="w-20 h-20 mx-auto rounded-2xl bg-blue-50 flex items-center justify-center">
                   <c.Icon
-                    className="w-10 h-10 text-[#0025F5]"
+                    className="w-10 h-10 text-[#001DF3]"
                     strokeWidth={1.8}
                   />
                 </div>
@@ -385,7 +385,7 @@ export default function PasangIklanPage() {
                   {c.highlight && (
                     <li className="flex items-center justify-between gap-2 bg-slate-50 border border-slate-100 rounded-lg px-3 py-2 mt-3">
                       <div className="flex items-center gap-2 text-slate-700 text-sm">
-                        <span className="w-6 h-6 rounded-full bg-blue-100 text-[#0025F5] flex items-center justify-center shrink-0">
+                        <span className="w-6 h-6 rounded-full bg-blue-100 text-[#001DF3] flex items-center justify-center shrink-0">
                           <Users className="w-3.5 h-3.5" />
                         </span>
                         {c.highlight}
@@ -394,7 +394,7 @@ export default function PasangIklanPage() {
                     </li>
                   )}
                 </ul>
-                <Button className="w-full bg-[#0025F5] hover:bg-[#001fd1] text-white rounded-full font-bold mt-5 h-11">
+                <Button className="w-full bg-[#001DF3] hover:bg-[#0017c2] text-white rounded-full font-bold mt-5 h-11">
                   {c.cta}
                 </Button>
               </div>
@@ -423,7 +423,7 @@ export default function PasangIklanPage() {
                 </div>
                 <div className="w-16 h-16 mx-auto rounded-2xl bg-blue-50 flex items-center justify-center">
                   <s.Icon
-                    className="w-8 h-8 text-[#0025F5]"
+                    className="w-8 h-8 text-[#001DF3]"
                     strokeWidth={2}
                   />
                 </div>
@@ -545,7 +545,7 @@ export default function PasangIklanPage() {
           <div className="max-w-xl">
             <h3 className="text-xl md:text-2xl font-bold text-slate-900 mb-2">
               Bingung Menentukan Harga{" "}
-              <span className="text-[#0025F5]">Properti</span> ?
+              <span className="text-[#001DF3]">Properti</span> ?
             </h3>
             <p className="text-sm text-slate-600 leading-relaxed">
               Peroleh estimasi nilai properti yang akurat berdasarkan lokasi
@@ -554,7 +554,7 @@ export default function PasangIklanPage() {
             </p>
           </div>
           <div className="flex gap-3">
-            <Button className="bg-[#0025F5] hover:bg-[#001fd1] text-white rounded-full font-bold px-6 h-11">
+            <Button className="bg-[#001DF3] hover:bg-[#0017c2] text-white rounded-full font-bold px-6 h-11">
               Coba Sekarang
             </Button>
             <Button
@@ -594,7 +594,7 @@ export default function PasangIklanPage() {
               </p>
               <Button
                 asChild
-                className="mt-5 bg-[#0025F5] hover:bg-[#001fd1] text-white rounded-full font-bold px-6 h-11"
+                className="mt-5 bg-[#001DF3] hover:bg-[#0017c2] text-white rounded-full font-bold px-6 h-11"
               >
                 <a href={WA_URL()} target="_blank" rel="noopener noreferrer">
                   Hubungi Kami

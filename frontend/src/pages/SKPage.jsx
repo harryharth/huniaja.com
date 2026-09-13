@@ -21,14 +21,14 @@ const legalDocs = [
     id: "sk",
     label: "Syarat & Ketentuan",
     Icon: Tag,
-    color: "#0025F5",
+    color: "#001DF3",
     href: "/syarat-ketentuan",
   },
   {
     id: "privacy",
     label: "Kebijakan Privasi",
     Icon: Lock,
-    color: "#0025F5",
+    color: "#001DF3",
     href: "/kebijakan-privasi",
   },
 ];
@@ -100,7 +100,7 @@ export default function SKPage() {
       <Header />
 
       {/* Hero */}
-      <section className="bg-[#0025F5] text-white pt-12 md:pt-16 pb-12 md:pb-16">
+      <section className="bg-[#001DF3] text-white pt-12 md:pt-16 pb-12 md:pb-16">
         <div className="max-w-6xl mx-auto px-4 md:px-6">
           <h1 className="text-3xl md:text-5xl font-black tracking-tight">
             Syarat & Ketentuan
@@ -124,7 +124,7 @@ export default function SKPage() {
                     <Link
                       key={d.id}
                       to={d.href}
-                      className="group flex items-center gap-3 bg-[#0025F5] text-white rounded-2xl p-2 pr-3 shadow-md hover:shadow-lg transition-all"
+                      className="group flex items-center gap-3 bg-[#001DF3] text-white rounded-2xl p-2 pr-3 shadow-md hover:shadow-lg transition-all"
                     >
                       <span className="w-10 h-10 rounded-xl bg-white/15 flex items-center justify-center shrink-0">
                         <Zap className="w-5 h-5 text-white" fill="white" />
@@ -144,7 +144,7 @@ export default function SKPage() {
                     onClick={() => setActiveDoc(d.id)}
                     className={`w-full group flex items-center gap-3 rounded-2xl p-2 pr-3 shadow-sm hover:shadow-md transition-all ${
                       active
-                        ? "bg-[#0025F5] text-white"
+                        ? "bg-[#001DF3] text-white"
                         : "bg-white border border-slate-200 text-slate-800 hover:border-slate-300"
                     }`}
                   >
@@ -184,7 +184,7 @@ export default function SKPage() {
                     <li key={s.id}>
                       <a
                         href={`#${s.id}`}
-                        className="flex items-center gap-2 text-sm rounded-lg px-2 py-2 text-slate-700 hover:bg-white hover:text-[#0025F5] transition"
+                        className="flex items-center gap-2 text-sm rounded-lg px-2 py-2 text-slate-700 hover:bg-white hover:text-[#001DF3] transition"
                       >
                         <s.Icon className="w-4 h-4 shrink-0" />
                         <span className="truncate">{s.title}</span>
@@ -207,7 +207,7 @@ export default function SKPage() {
                 >
                   <div className="flex items-center gap-3">
                     <div className="w-11 h-11 rounded-2xl bg-blue-50 flex items-center justify-center">
-                      <s.Icon className="w-5 h-5 text-[#0025F5]" />
+                      <s.Icon className="w-5 h-5 text-[#001DF3]" />
                     </div>
                     <h2 className="text-lg md:text-xl font-bold text-slate-900">
                       {s.title}

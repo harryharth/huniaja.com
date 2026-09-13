@@ -95,7 +95,7 @@ export default function PropertyDetailPage() {
           <Link
             to="/cari-properti"
             data-testid="prop-back-link"
-            className="inline-flex items-center gap-2 text-sm text-slate-600 hover:text-[#0025F5] transition"
+            className="inline-flex items-center gap-2 text-sm text-slate-600 hover:text-[#001DF3] transition"
           >
             <ArrowLeft className="w-4 h-4" /> Kembali ke Daftar Properti
           </Link>
@@ -115,7 +115,7 @@ export default function PropertyDetailPage() {
                   alt={item.title}
                   className="w-full aspect-[16/10] object-cover"
                 />
-                <div className="absolute top-4 left-4 inline-flex items-center gap-1 bg-white/95 backdrop-blur text-[#0025F5] text-xs font-bold px-3 py-1.5 rounded-full shadow-sm">
+                <div className="absolute top-4 left-4 inline-flex items-center gap-1 bg-white/95 backdrop-blur text-[#001DF3] text-xs font-bold px-3 py-1.5 rounded-full shadow-sm">
                   <BadgeCheck className="w-3.5 h-3.5" />
                   {item.tier} · Terverifikasi
                 </div>
@@ -149,7 +149,7 @@ export default function PropertyDetailPage() {
                     onClick={() => setActiveImg(i)}
                     className={`aspect-[4/3] rounded-xl overflow-hidden border-2 transition ${
                       activeImg === i
-                        ? "border-[#0025F5]"
+                        ? "border-[#001DF3]"
                         : "border-transparent hover:border-slate-200"
                     }`}
                   >
@@ -219,7 +219,7 @@ export default function PropertyDetailPage() {
                   >
                     <div className="w-9 h-9 rounded-xl bg-white flex items-center justify-center border border-slate-100">
                       <f.Icon
-                        className="w-4 h-4 text-[#0025F5]"
+                        className="w-4 h-4 text-[#001DF3]"
                         strokeWidth={2}
                       />
                     </div>
@@ -237,7 +237,7 @@ export default function PropertyDetailPage() {
                 Lokasi
               </h2>
               <div className="flex items-start gap-3 mt-3">
-                <MapPin className="w-5 h-5 text-[#0025F5] shrink-0 mt-0.5" />
+                <MapPin className="w-5 h-5 text-[#001DF3] shrink-0 mt-0.5" />
                 <div>
                   <div className="text-sm font-bold text-slate-900">
                     {item.location}
@@ -283,7 +283,7 @@ export default function PropertyDetailPage() {
                 <Button
                   onClick={() => setKprOpen(true)}
                   data-testid="prop-kpr-btn"
-                  className="w-full h-12 bg-[#0025F5] hover:bg-[#001fd1] text-white rounded-full font-bold text-sm"
+                  className="w-full h-12 bg-[#001DF3] hover:bg-[#0017c2] text-white rounded-full font-bold text-sm"
                 >
                   <Calculator className="w-4 h-4 mr-2" /> Simulasi KPR
                 </Button>
@@ -298,7 +298,7 @@ export default function PropertyDetailPage() {
               {/* Agent card */}
               <div className="mt-6 pt-6 border-t border-slate-100">
                 <div className="flex items-center gap-3">
-                  <div className="w-12 h-12 rounded-full bg-[#0025F5] text-white font-black flex items-center justify-center text-lg">
+                  <div className="w-12 h-12 rounded-full bg-[#001DF3] text-white font-black flex items-center justify-center text-lg">
                     D
                   </div>
                   <div className="flex-1 min-w-0">
@@ -360,7 +360,7 @@ export default function PropertyDetailPage() {
               <Button
                 onClick={() => setKprOpen(true)}
                 data-testid="prop-mobile-kpr-btn"
-                className="w-full h-12 bg-[#0025F5] hover:bg-[#001fd1] text-white rounded-full font-bold text-sm"
+                className="w-full h-12 bg-[#001DF3] hover:bg-[#0017c2] text-white rounded-full font-bold text-sm"
               >
                 <Calculator className="w-4 h-4 mr-2" /> Simulasi KPR
               </Button>
@@ -384,7 +384,7 @@ export default function PropertyDetailPage() {
               </div>
               <Link
                 to="/cari-properti"
-                className="hidden md:inline-flex items-center gap-1 text-sm font-bold text-[#0025F5] hover:underline"
+                className="hidden md:inline-flex items-center gap-1 text-sm font-bold text-[#001DF3] hover:underline"
               >
                 Lihat Semua →
               </Link>
@@ -409,7 +409,7 @@ function PropertyHeader({ item }) {
   return (
     <div>
       <div className="flex items-center gap-2 flex-wrap">
-        <span className="inline-block bg-blue-50 text-[#0025F5] text-[10px] font-bold rounded-full px-2 py-1 tracking-wider">
+        <span className="inline-block bg-blue-50 text-[#001DF3] text-[10px] font-bold rounded-full px-2 py-1 tracking-wider">
           {item.type}
         </span>
         <span className="inline-block bg-slate-100 text-slate-600 text-[10px] font-bold rounded-full px-2 py-1 tracking-wider">
@@ -426,7 +426,7 @@ function PropertyHeader({ item }) {
         <div className="text-[11px] text-slate-500 tracking-wide">
           Harga Properti
         </div>
-        <div className="text-3xl font-black text-[#0025F5] leading-none mt-1">
+        <div className="text-3xl font-black text-[#001DF3] leading-none mt-1">
           {item.price}
         </div>
         <div className="text-xs text-slate-500 mt-1.5">{item.installment}</div>

@@ -23,15 +23,15 @@ export default function FavoriteLocations() {
                 <span
                   className={`w-12 h-12 rounded-2xl flex items-center justify-center transition-all ${
                     isActive
-                      ? "bg-[#0025F5] text-white shadow-md"
-                      : "bg-blue-50 text-[#0025F5] hover:bg-blue-100"
+                      ? "bg-[#001DF3] text-white shadow-md"
+                      : "bg-blue-50 text-[#001DF3] hover:bg-blue-100"
                   }`}
                 >
                   <MapPin className="w-5 h-5" />
                 </span>
                 <span
                   className={`text-xs ${
-                    isActive ? "text-[#0025F5] font-semibold" : "text-slate-700"
+                    isActive ? "text-[#001DF3] font-semibold" : "text-slate-700"
                   }`}
                 >
                   {loc}

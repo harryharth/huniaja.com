@@ -17,7 +17,7 @@ export default function KerjaSama() {
         </div>
         <Link
           to="/kerjasama"
-          className="bg-[#0025F5] hover:bg-[#001fd1] text-white rounded-full font-semibold px-6 md:px-8 h-11 md:h-12 text-sm md:text-base shadow-lg w-full md:w-auto flex items-center justify-center transition"
+          className="bg-[#001DF3] hover:bg-[#0017c2] text-white rounded-full font-semibold px-6 md:px-8 h-11 md:h-12 text-sm md:text-base shadow-lg w-full md:w-auto flex items-center justify-center transition"
         >
           Hubungi untuk Kolaborasi
         </Link>

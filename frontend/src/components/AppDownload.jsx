@@ -5,7 +5,7 @@ export default function AppDownload() {
   return (
     <section className="bg-slate-50 pb-14">
       <div className="max-w-6xl mx-auto px-6">
-        <div className="bg-[#0025F5] rounded-3xl relative overflow-hidden px-8 md:px-14 pt-10 md:pt-6 pb-0 md:pb-0 flex flex-col md:flex-row items-center justify-between gap-6">
+        <div className="bg-[#001DF3] rounded-3xl relative overflow-hidden px-8 md:px-14 pt-10 md:pt-6 pb-0 md:pb-0 flex flex-col md:flex-row items-center justify-between gap-6">
           <div className="absolute -top-16 -right-10 w-72 h-72 rounded-full bg-white/10 blur-3xl pointer-events-none" />
           <div className="relative md:w-1/3 flex justify-center order-2 md:order-1">
             <div className="relative w-[220px] md:w-[240px]">

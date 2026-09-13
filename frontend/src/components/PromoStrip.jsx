@@ -37,7 +37,7 @@ export default function PromoStrip() {
               key={i}
               onClick={() => setActive(i)}
               className={`h-1.5 rounded-full transition-all ${
-                i === active ? "bg-[#0025F5] w-6" : "bg-slate-300 w-1.5"
+                i === active ? "bg-[#001DF3] w-6" : "bg-slate-300 w-1.5"
               }`}
             />
           ))}

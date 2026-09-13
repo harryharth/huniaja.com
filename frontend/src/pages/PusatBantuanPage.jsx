@@ -67,7 +67,7 @@ export default function PusatBantuanPage() {
       <Header />
 
       {/* Hero - simpler, cleaner */}
-      <section className="bg-[#0025F5] text-white pt-14 md:pt-20 pb-16 md:pb-24 relative overflow-hidden">
+      <section className="bg-[#001DF3] text-white pt-14 md:pt-20 pb-16 md:pb-24 relative overflow-hidden">
         <div className="absolute -top-24 -right-24 w-96 h-96 rounded-full bg-[#00B512]/15 blur-3xl pointer-events-none" />
         <div className="absolute -bottom-24 -left-24 w-96 h-96 rounded-full bg-white/10 blur-3xl pointer-events-none" />
         <div className="relative max-w-3xl mx-auto px-4 md:px-6 text-center">
@@ -76,7 +76,7 @@ export default function PusatBantuanPage() {
           </span>
           <h1 className="text-3xl md:text-5xl font-black tracking-tight mt-4 leading-tight">
             Kami di sini,<br className="md:hidden" />{" "}
-            <span className="text-[#8FFF9F]">untukmu.</span>
+            <span className="text-[#00B512]">untukmu.</span>
           </h1>
           <p className="mt-4 text-sm md:text-lg text-white/85 max-w-xl mx-auto leading-relaxed">
             Punya pertanyaan? Sebelum bertanya, coba ketik di sini dulu -
@@ -103,7 +103,7 @@ export default function PusatBantuanPage() {
           </span>
           <h2 className="text-2xl md:text-3xl font-black text-slate-900 mt-4 leading-tight">
             Setiap pertanyaan berhak<br className="hidden md:block" />
-            <span className="text-[#0025F5]">
+            <span className="text-[#001DF3]">
               dijawab dengan sabar dan jelas.
             </span>
           </h2>
@@ -119,7 +119,7 @@ export default function PusatBantuanPage() {
       <section className="bg-slate-50 py-14 md:py-20">
         <div className="max-w-3xl mx-auto px-4 md:px-6">
           <div className="text-center mb-10">
-            <span className="inline-block bg-white text-[#0025F5] text-[11px] font-bold rounded-full px-3 py-1 tracking-widest border border-blue-100">
+            <span className="inline-block bg-white text-[#001DF3] text-[11px] font-bold rounded-full px-3 py-1 tracking-widest border border-blue-100">
               PERTANYAAN POPULER
             </span>
             <h2 className="text-2xl md:text-3xl font-black text-slate-900 mt-3">
@@ -138,7 +138,7 @@ export default function PusatBantuanPage() {
                 >
                   <AccordionTrigger className="hover:no-underline text-left">
                     <div className="flex items-start gap-3 pr-2">
-                      <span className="w-7 h-7 rounded-full bg-[#0025F5] text-white font-bold text-xs flex items-center justify-center shrink-0 mt-0.5">
+                      <span className="w-7 h-7 rounded-full bg-[#001DF3] text-white font-bold text-xs flex items-center justify-center shrink-0 mt-0.5">
                         {i + 1}
                       </span>
                       <span className="text-sm md:text-base font-semibold text-slate-800 leading-snug">
@@ -169,11 +169,11 @@ export default function PusatBantuanPage() {
       {/* Still need help - simple, professional */}
       <section className="bg-white py-14 md:py-20">
         <div className="max-w-5xl mx-auto px-4 md:px-6">
-          <div className="relative bg-[#0025F5] text-white rounded-[32px] md:rounded-[44px] overflow-hidden p-8 md:p-14">
+          <div className="relative bg-[#001DF3] text-white rounded-[32px] md:rounded-[44px] overflow-hidden p-8 md:p-14">
             <div className="absolute -top-24 -right-24 w-96 h-96 rounded-full bg-[#00B512]/20 blur-3xl pointer-events-none" />
             <div className="relative grid grid-cols-1 md:grid-cols-3 gap-6 items-center">
               <div className="md:col-span-2">
-                <Sparkles className="w-9 h-9 text-[#8FFF9F]" />
+                <Sparkles className="w-9 h-9 text-[#00B512]" />
                 <h3 className="text-2xl md:text-3xl font-black mt-4 leading-tight">
                   Belum ketemu jawabannya?
                 </h3>

@@ -20,7 +20,7 @@ const slides = [
     subtitle: "Disetujui!",
     tagline: "Bunga Ringan, Proses Cepat 3 Hari Kerja",
     cta: "Ajukan Sekarang",
-    accent: "#0025F5",
+    accent: "#001DF3",
     Icon: Home,
     tag: "CICILAN MULAI",
     amount: "3jt/bln",
@@ -76,7 +76,7 @@ export default function Hero() {
   const Icon = s.Icon;
 
   return (
-    <section className="bg-[#0025F5] pt-6 md:pt-10 pb-8 md:pb-10">
+    <section className="bg-[#001DF3] pt-6 md:pt-10 pb-8 md:pb-10">
       <div className="max-w-7xl mx-auto px-4 md:px-8">
         <div
           className="relative overflow-hidden bg-white shadow-2xl h-[190px] sm:h-[280px] md:h-[340px] transition-all duration-700"
@@ -94,7 +94,7 @@ export default function Hero() {
             className="absolute inset-0 opacity-[0.05] pointer-events-none"
             style={{
               backgroundImage:
-                "radial-gradient(circle at 1px 1px, #0025F5 1px, transparent 0)",
+                "radial-gradient(circle at 1px 1px, #001DF3 1px, transparent 0)",
               backgroundSize: "22px 22px",
             }}
           />

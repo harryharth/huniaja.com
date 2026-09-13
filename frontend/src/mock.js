@@ -21,7 +21,7 @@ export const navLinks = [
 export const searchTabs = ["Beli", "Sewa", "Baru"];
 
 export const quickCategories = [
-  { label: "Beli Properti", icon: "Home", color: "bg-[#0025F5]" },
+  { label: "Beli Properti", icon: "Home", color: "bg-[#001DF3]" },
   { label: "Kerjasama", icon: "House", color: "bg-[#22C55E]" },
 ];
 
@@ -42,7 +42,7 @@ export const promoCards = [
   {
     title: "#BeliRumahJadiMudah",
     accent: "JadiMudah",
-    bg: "bg-[#0025F5]",
+    bg: "bg-[#001DF3]",
   },
   {
     title: "BUKA PILIH SUKA",

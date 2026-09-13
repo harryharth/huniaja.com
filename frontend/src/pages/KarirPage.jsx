@@ -44,7 +44,7 @@ const jobs = [
     location: "Bogor - Jawa Barat",
     type: "Full-time",
     Icon: Code2,
-    color: "#0025F5",
+    color: "#001DF3",
     desc: "Bangun fitur end-to-end di platform Huniaja bersama tim engineering yang kolaboratif.",
   },
   {
@@ -118,7 +118,7 @@ const chapters = [
     Icon: Compass,
     title: "Bergabung",
     desc: "Semua dimulai dari satu keputusan berani. Kami menyambutmu bukan sebagai karyawan baru, tapi sebagai bagian dari keluarga yang percaya bahwa properti bisa lebih manusiawi.",
-    color: "#0025F5",
+    color: "#001DF3",
   },
   {
     step: "Bab 02",
@@ -148,7 +148,7 @@ const stories = [
     name: "Rania Putri",
     role: "Product Designer - 3 tahun di Huniaja",
     initial: "R",
-    color: "#0025F5",
+    color: "#001DF3",
     quote:
       "Aku masuk sebagai junior designer yang gugup buka Figma di meeting. Sekarang aku memimpin desain fitur KPR yang dipakai ribuan keluarga muda. Huniaja bukan cuma tempat kerja - ini tempatku menemukan suara.",
   },
@@ -228,7 +228,7 @@ const values = [
     Icon: Star,
     title: "Kualitas Tanpa Kompromi",
     desc: "Detail kecil adalah bahasa cinta kami untuk pengguna. Baik pixel maupun kata, kami selesaikan dengan hati.",
-    color: "#0025F5",
+    color: "#001DF3",
   },
 ];
 
@@ -259,7 +259,7 @@ export default function KarirPage() {
       <Header />
 
       {/* Hero */}
-      <section className="relative bg-[#0025F5] text-white overflow-hidden pt-16 md:pt-20 pb-16 md:pb-24">
+      <section className="relative bg-[#001DF3] text-white overflow-hidden pt-16 md:pt-20 pb-16 md:pb-24">
         <div className="absolute -top-24 -right-16 w-96 h-96 rounded-full bg-white/10 blur-3xl pointer-events-none" />
         <div className="absolute -bottom-24 -left-16 w-96 h-96 rounded-full bg-[#00B512]/25 blur-3xl pointer-events-none" />
         <div className="relative max-w-4xl mx-auto px-4 md:px-6 text-center">
@@ -277,7 +277,7 @@ export default function KarirPage() {
           <div className="mt-8 flex flex-wrap justify-center gap-3">
             <a
               href="#openings"
-              className="bg-[#00B512] hover:bg-[#009e0f] text-[#0025F5] font-bold rounded-full px-6 py-3 text-sm shadow-lg transition"
+              className="bg-[#00B512] hover:bg-[#009e0f] text-[#001DF3] font-bold rounded-full px-6 py-3 text-sm shadow-lg transition"
             >
               Mulai Babmu
             </a>
@@ -301,7 +301,7 @@ export default function KarirPage() {
                 className="bg-white rounded-3xl border border-slate-100 shadow-md hover:shadow-lg transition p-6"
               >
                 <div className="w-12 h-12 rounded-2xl bg-blue-50 flex items-center justify-center">
-                  <p.Icon className="w-6 h-6 text-[#0025F5]" strokeWidth={2} />
+                  <p.Icon className="w-6 h-6 text-[#001DF3]" strokeWidth={2} />
                 </div>
                 <h3 className="font-bold text-slate-900 mt-4">{p.title}</h3>
                 <p className="text-sm text-slate-600 mt-2 leading-relaxed">
@@ -317,7 +317,7 @@ export default function KarirPage() {
       <section className="bg-white pb-14 md:pb-20">
         <div className="max-w-4xl mx-auto px-4 md:px-6">
           <div className="relative bg-gradient-to-br from-slate-50 to-blue-50/40 rounded-[36px] p-8 md:p-12 border border-slate-100">
-            <Quote className="absolute top-6 left-6 md:top-8 md:left-8 w-10 h-10 md:w-14 md:h-14 text-[#0025F5]/15" strokeWidth={2.5} />
+            <Quote className="absolute top-6 left-6 md:top-8 md:left-8 w-10 h-10 md:w-14 md:h-14 text-[#001DF3]/15" strokeWidth={2.5} />
             <p className="relative text-base md:text-xl text-slate-700 leading-relaxed font-medium italic pl-4 md:pl-8">
               "Kami tidak sedang membangun perusahaan. Kami sedang membangun
               tempat di mana orang berani datang dengan seluruh dirinya - dengan
@@ -326,7 +326,7 @@ export default function KarirPage() {
               kamu memang milik kami."
             </p>
             <div className="mt-6 pl-4 md:pl-8 flex items-center gap-3">
-              <div className="w-10 h-10 rounded-full bg-[#0025F5] text-white font-black flex items-center justify-center text-sm">
+              <div className="w-10 h-10 rounded-full bg-[#001DF3] text-white font-black flex items-center justify-center text-sm">
                 H
               </div>
               <div>
@@ -342,7 +342,7 @@ export default function KarirPage() {
       <section className="bg-slate-50 py-14 md:py-20">
         <div className="max-w-6xl mx-auto px-4 md:px-6">
           <div className="text-center mb-10 md:mb-14">
-            <span className="inline-block bg-white text-[#0025F5] text-[11px] font-bold rounded-full px-3 py-1 tracking-widest border border-blue-100">
+            <span className="inline-block bg-white text-[#001DF3] text-[11px] font-bold rounded-full px-3 py-1 tracking-widest border border-blue-100">
               PERJALANANMU BERSAMA KAMI
             </span>
             <h2 className="text-2xl md:text-4xl font-black text-slate-900 mt-4 leading-tight">
@@ -353,7 +353,7 @@ export default function KarirPage() {
 
           <div className="relative">
             {/* connecting line desktop */}
-            <div className="hidden md:block absolute top-14 left-0 right-0 h-0.5 bg-gradient-to-r from-[#0025F5]/20 via-[#00B512]/30 to-[#7C3AED]/20" />
+            <div className="hidden md:block absolute top-14 left-0 right-0 h-0.5 bg-gradient-to-r from-[#001DF3]/20 via-[#00B512]/30 to-[#7C3AED]/20" />
             <div className="grid grid-cols-1 md:grid-cols-4 gap-5 md:gap-6 relative">
               {chapters.map((c, idx) => (
                 <div
@@ -434,7 +434,7 @@ export default function KarirPage() {
       </section>
 
       {/* Sehari Bersama Kami */}
-      <section className="bg-[#0025F5] text-white py-14 md:py-20 relative overflow-hidden">
+      <section className="bg-[#001DF3] text-white py-14 md:py-20 relative overflow-hidden">
         <div className="absolute -top-32 -right-24 w-96 h-96 rounded-full bg-[#00B512]/10 blur-3xl pointer-events-none" />
         <div className="absolute -bottom-32 -left-24 w-96 h-96 rounded-full bg-[#00B512]/20 blur-3xl pointer-events-none" />
         <div className="relative max-w-6xl mx-auto px-4 md:px-6">
@@ -456,7 +456,7 @@ export default function KarirPage() {
               >
                 <div className="flex items-center justify-between">
                   <div className="w-11 h-11 rounded-2xl bg-[#00B512] flex items-center justify-center">
-                    <d.Icon className="w-5 h-5 text-[#0025F5]" strokeWidth={2.5} />
+                    <d.Icon className="w-5 h-5 text-[#001DF3]" strokeWidth={2.5} />
                   </div>
                   <span className="text-xs font-black tracking-widest text-[#00B512]">
                     {d.time}
@@ -516,7 +516,7 @@ export default function KarirPage() {
       {/* Bridge to Openings */}
       <section className="bg-slate-50 py-10 md:py-14">
         <div className="max-w-3xl mx-auto px-4 md:px-6 text-center">
-          <span className="inline-flex items-center gap-2 bg-[#00B512] text-[#0025F5] rounded-full px-4 py-1.5 text-[11px] font-black tracking-widest">
+          <span className="inline-flex items-center gap-2 bg-[#00B512] text-[#001DF3] rounded-full px-4 py-1.5 text-[11px] font-black tracking-widest">
             <Sparkles className="w-3.5 h-3.5" /> SIAP TULIS BAB BARUMU?
           </span>
           <h2 className="text-2xl md:text-3xl font-black text-slate-900 mt-4">
@@ -528,7 +528,7 @@ export default function KarirPage() {
           </p>
           <a
             href="#openings"
-            className="inline-block mt-6 bg-[#0025F5] hover:bg-[#001fd1] text-white font-bold rounded-full px-7 py-3 text-sm shadow-lg transition"
+            className="inline-block mt-6 bg-[#001DF3] hover:bg-[#0017c2] text-white font-bold rounded-full px-7 py-3 text-sm shadow-lg transition"
           >
             Lihat Lowongan di Bawah ↓
           </a>
@@ -549,7 +549,7 @@ export default function KarirPage() {
             </div>
             <button
               onClick={() => setTalentOpen(true)}
-              className="text-sm font-semibold text-[#0025F5] hover:underline text-left md:text-right"
+              className="text-sm font-semibold text-[#001DF3] hover:underline text-left md:text-right"
             >
               Tidak menemukan posisimu? Daftar Talent Pool ->
             </button>
@@ -607,7 +607,7 @@ export default function KarirPage() {
       {/* Big CTA */}
       <section className="bg-white py-14 md:py-16">
         <div className="max-w-5xl mx-auto px-4 md:px-6">
-          <div className="bg-[#0025F5] text-white rounded-[36px] md:rounded-[44px] relative overflow-hidden p-8 md:p-12 grid grid-cols-1 md:grid-cols-3 gap-6 items-center">
+          <div className="bg-[#001DF3] text-white rounded-[36px] md:rounded-[44px] relative overflow-hidden p-8 md:p-12 grid grid-cols-1 md:grid-cols-3 gap-6 items-center">
             <div className="md:col-span-2">
               <h3 className="text-xl md:text-2xl font-bold">
                 Belum menemukan posisi yang cocok?
@@ -621,7 +621,7 @@ export default function KarirPage() {
             <div className="flex md:justify-end">
               <button
                 onClick={() => setTalentOpen(true)}
-                className="bg-[#00B512] hover:bg-[#009e0f] text-[#0025F5] font-bold rounded-full px-6 py-3 text-sm shadow-lg transition"
+                className="bg-[#00B512] hover:bg-[#009e0f] text-[#001DF3] font-bold rounded-full px-6 py-3 text-sm shadow-lg transition"
               >
                 Daftar Talent Pool
               </button>
@@ -680,7 +680,7 @@ export default function KarirPage() {
           <DialogHeader>
             <div className="flex items-center gap-3">
               <div className="w-11 h-11 rounded-2xl bg-blue-50 flex items-center justify-center">
-                <Sparkles className="w-5 h-5 text-[#0025F5]" />
+                <Sparkles className="w-5 h-5 text-[#001DF3]" />
               </div>
               <div>
                 <DialogTitle className="text-lg">
@@ -748,11 +748,11 @@ function ApplyForm({ form, handle, submit, sent, positionLabel }) {
         rows={4}
         value={form.message}
         onChange={handle}
-        className="w-full rounded-2xl border border-slate-200 focus:border-[#0025F5] focus:ring-1 focus:ring-[#0025F5] outline-none px-4 py-3 text-sm text-slate-800 placeholder:text-slate-400"
+        className="w-full rounded-2xl border border-slate-200 focus:border-[#001DF3] focus:ring-1 focus:ring-[#001DF3] outline-none px-4 py-3 text-sm text-slate-800 placeholder:text-slate-400"
       />
       <Button
         type="submit"
-        className="w-full bg-[#0025F5] hover:bg-[#001fd1] text-white rounded-full font-bold h-11 text-sm"
+        className="w-full bg-[#001DF3] hover:bg-[#0017c2] text-white rounded-full font-bold h-11 text-sm"
       >
         <Send className="w-4 h-4 mr-2" /> Kirim Lamaran
       </Button>
@@ -770,7 +770,7 @@ function Input(props) {
   return (
     <input
       {...props}
-      className="w-full rounded-full border border-slate-200 focus:border-[#0025F5] focus:ring-1 focus:ring-[#0025F5] outline-none px-4 py-3 text-sm text-slate-800 placeholder:text-slate-400"
+      className="w-full rounded-full border border-slate-200 focus:border-[#001DF3] focus:ring-1 focus:ring-[#001DF3] outline-none px-4 py-3 text-sm text-slate-800 placeholder:text-slate-400"
     />
   );
 }

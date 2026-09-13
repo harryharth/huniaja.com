@@ -35,7 +35,7 @@ export default function Testimonials() {
                   key={i}
                   onClick={() => setIdx(i)}
                   className={`h-2 rounded-full transition-all ${
-                    i === idx ? "bg-[#0025F5] w-6" : "bg-slate-300 w-2"
+                    i === idx ? "bg-[#001DF3] w-6" : "bg-slate-300 w-2"
                   }`}
                 />
               ))}

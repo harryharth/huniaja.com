@@ -46,15 +46,15 @@ export default function PropertyTypes() {
                 <span
                   className={`w-14 h-14 rounded-full flex items-center justify-center transition-all ${
                     isActive
-                      ? "bg-[#0025F5] text-white shadow-md scale-105"
-                      : "bg-blue-50 text-[#0025F5] group-hover:bg-blue-100"
+                      ? "bg-[#001DF3] text-white shadow-md scale-105"
+                      : "bg-blue-50 text-[#001DF3] group-hover:bg-blue-100"
                   }`}
                 >
                   <Icon className="w-6 h-6" />
                 </span>
                 <span
                   className={`text-xs font-medium ${
-                    isActive ? "text-[#0025F5]" : "text-slate-700"
+                    isActive ? "text-[#001DF3]" : "text-slate-700"
                   }`}
                 >
                   {t.label}

@@ -99,10 +99,10 @@ export default function ChatWidget() {
       {open && (
         <div className="fixed bottom-5 right-5 z-40 w-[360px] max-w-[calc(100vw-24px)] max-h-[80vh] bg-white rounded-3xl shadow-2xl overflow-hidden flex flex-col border border-slate-200">
           {/* Header */}
-          <div className="bg-[#0025F5] text-white px-5 py-4 flex items-center gap-3">
+          <div className="bg-[#001DF3] text-white px-5 py-4 flex items-center gap-3">
             <div className="relative w-10 h-10 rounded-full bg-white/15 flex items-center justify-center">
               <MessageCircle className="w-5 h-5" />
-              <span className="absolute -bottom-0.5 -right-0.5 w-3 h-3 rounded-full bg-[#00B512] ring-2 ring-[#0025F5]" />
+              <span className="absolute -bottom-0.5 -right-0.5 w-3 h-3 rounded-full bg-[#00B512] ring-2 ring-[#001DF3]" />
             </div>
             <div className="flex-1">
               <p className="font-bold text-sm">Dea - Admin Huniaja.com</p>
@@ -130,7 +130,7 @@ export default function ChatWidget() {
                 <div
                   className={`max-w-[85%] px-3.5 py-2.5 rounded-2xl text-sm leading-relaxed whitespace-pre-line ${
                     m.role === "user"
-                      ? "bg-[#0025F5] text-white rounded-br-md"
+                      ? "bg-[#001DF3] text-white rounded-br-md"
                       : "bg-white text-slate-800 border border-slate-100 shadow-sm rounded-bl-md"
                   }`}
                 >
@@ -151,7 +151,7 @@ export default function ChatWidget() {
                   <button
                     key={s}
                     onClick={() => send(s)}
-                    className="text-xs bg-white border border-slate-200 hover:border-[#0025F5] hover:text-[#0025F5] text-slate-700 rounded-full px-3 py-1.5 transition"
+                    className="text-xs bg-white border border-slate-200 hover:border-[#001DF3] hover:text-[#001DF3] text-slate-700 rounded-full px-3 py-1.5 transition"
                   >
                     {s}
                   </button>
@@ -184,12 +184,12 @@ export default function ChatWidget() {
                 }
               }}
               placeholder="Ketik pertanyaan..."
-              className="flex-1 min-w-0 rounded-full border border-slate-200 focus:border-[#0025F5] outline-none px-4 py-2 text-sm text-slate-800 placeholder:text-slate-400"
+              className="flex-1 min-w-0 rounded-full border border-slate-200 focus:border-[#001DF3] outline-none px-4 py-2 text-sm text-slate-800 placeholder:text-slate-400"
             />
             <button
               onClick={() => send()}
               disabled={loading || !input.trim()}
-              className="w-10 h-10 rounded-full bg-[#0025F5] hover:bg-[#001fd1] disabled:opacity-50 disabled:cursor-not-allowed text-white flex items-center justify-center transition"
+              className="w-10 h-10 rounded-full bg-[#001DF3] hover:bg-[#0017c2] disabled:opacity-50 disabled:cursor-not-allowed text-white flex items-center justify-center transition"
               aria-label="Kirim"
             >
               <Send className="w-4 h-4" />

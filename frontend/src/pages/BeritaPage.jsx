@@ -24,7 +24,7 @@ export default function BeritaPage() {
       <Header />
 
       {/* Hero */}
-      <section className="bg-[#0025F5] text-white pt-12 md:pt-16 pb-14 md:pb-16">
+      <section className="bg-[#001DF3] text-white pt-12 md:pt-16 pb-14 md:pb-16">
         <div className="max-w-6xl mx-auto px-4 md:px-6">
           <div className="inline-flex items-center gap-2 bg-white/10 border border-white/20 rounded-full px-3 py-1 text-[11px] font-bold tracking-widest">
             <BookOpen className="w-3.5 h-3.5" /> PUSAT EDUKASI PROPERTI
@@ -60,7 +60,7 @@ export default function BeritaPage() {
                 data-testid={`berita-category-${c}`}
                 className={`shrink-0 text-xs md:text-sm font-semibold px-4 py-2 rounded-full border transition ${
                   active === c
-                    ? "bg-[#0025F5] text-white border-[#0025F5]"
+                    ? "bg-[#001DF3] text-white border-[#001DF3]"
                     : "bg-white text-slate-700 border-slate-200 hover:border-slate-300"
                 }`}
               >
@@ -88,7 +88,7 @@ export default function BeritaPage() {
                 />
               </div>
               <div>
-                <span className="inline-block bg-[#0025F5] text-white text-[11px] font-bold rounded-full px-3 py-1 tracking-widest">
+                <span className="inline-block bg-[#001DF3] text-white text-[11px] font-bold rounded-full px-3 py-1 tracking-widest">
                   {featured.category}
                 </span>
                 <h2 className="text-xl md:text-2xl font-bold text-slate-900 mt-3 leading-snug">
@@ -105,7 +105,7 @@ export default function BeritaPage() {
                     <Clock className="w-3.5 h-3.5" /> {featured.read} baca
                   </span>
                 </div>
-                <span className="inline-flex items-center gap-1 text-[#0025F5] font-bold text-sm mt-4">
+                <span className="inline-flex items-center gap-1 text-[#001DF3] font-bold text-sm mt-4">
                   Baca Selengkapnya <ArrowRight className="w-4 h-4" />
                 </span>
               </div>
@@ -129,7 +129,7 @@ export default function BeritaPage() {
                     />
                   </div>
                   <div className="p-5 flex-1 flex flex-col">
-                    <span className="inline-block bg-blue-50 text-[#0025F5] text-[10px] font-bold rounded-full px-2 py-1 tracking-wider self-start">
+                    <span className="inline-block bg-blue-50 text-[#001DF3] text-[10px] font-bold rounded-full px-2 py-1 tracking-wider self-start">
                       {a.category}
                     </span>
                     <h3 className="font-bold text-slate-900 mt-3 leading-snug line-clamp-2">

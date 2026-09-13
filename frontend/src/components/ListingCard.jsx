@@ -20,7 +20,7 @@ export default function ListingCard({ item, variant = "default" }) {
 
   const detailClasses =
     variant === "featured-download"
-      ? "bg-[#0025F5] hover:bg-[#001fd1] text-white shadow-sm"
+      ? "bg-[#001DF3] hover:bg-[#0017c2] text-white shadow-sm"
       : "bg-slate-900 hover:bg-slate-800 text-white";
 
   const whatsappClasses =
@@ -44,7 +44,7 @@ export default function ListingCard({ item, variant = "default" }) {
             className="w-full aspect-[4/3] object-cover group-hover:scale-[1.03] transition-transform duration-500"
           />
           {/* Tier badge */}
-          <div className="absolute top-3 left-3 inline-flex items-center gap-1 bg-white/95 backdrop-blur text-[#0025F5] text-[10px] font-bold px-2 py-1 rounded-full shadow-sm">
+          <div className="absolute top-3 left-3 inline-flex items-center gap-1 bg-white/95 backdrop-blur text-[#001DF3] text-[10px] font-bold px-2 py-1 rounded-full shadow-sm">
             <BadgeCheck className="w-3 h-3" />
             {item.tier}
           </div>
@@ -69,7 +69,7 @@ export default function ListingCard({ item, variant = "default" }) {
 
       {/* Content */}
       <div className="p-4 flex-1 flex flex-col">
-        <Link to={detailUrl} className="block group-hover:text-[#0025F5] transition">
+        <Link to={detailUrl} className="block group-hover:text-[#001DF3] transition">
           <h3 className="text-base font-bold text-slate-900 leading-tight truncate">
             {item.title}
           </h3>
@@ -79,7 +79,7 @@ export default function ListingCard({ item, variant = "default" }) {
           </p>
 
           <div className="mt-3">
-            <p className="text-lg md:text-xl font-extrabold text-[#0025F5] leading-none">
+            <p className="text-lg md:text-xl font-extrabold text-[#001DF3] leading-none">
               {item.price}
             </p>
             <p className="text-[11px] text-slate-500 mt-1">

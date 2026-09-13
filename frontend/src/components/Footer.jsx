@@ -34,7 +34,7 @@ function TikTokIcon(props) {
 
 export default function Footer() {
   return (
-    <footer className="bg-[#0025F5] text-white pt-16 pb-10">
+    <footer className="bg-[#001DF3] text-white pt-16 pb-10">
       <div className="max-w-6xl mx-auto px-6">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-8">
           {/* Left column: logo + description + socials + copyright */}

@@ -30,7 +30,7 @@ export default function BeritaDetailPage() {
       <Header />
 
       {/* Hero */}
-      <section className="bg-gradient-to-b from-[#0025F5] to-[#0020c9] text-white pt-10 md:pt-14 pb-24 md:pb-32 relative overflow-hidden">
+      <section className="bg-gradient-to-b from-[#001DF3] to-[#000066] text-white pt-10 md:pt-14 pb-24 md:pb-32 relative overflow-hidden">
         <div className="absolute -top-24 -right-24 w-96 h-96 rounded-full bg-white/5 blur-3xl pointer-events-none" />
         <div className="absolute -bottom-24 -left-24 w-96 h-96 rounded-full bg-[#00B512]/15 blur-3xl pointer-events-none" />
         <div className="relative max-w-4xl mx-auto px-4 md:px-6">
@@ -78,7 +78,7 @@ export default function BeritaDetailPage() {
             {/* Author row */}
             <div className="px-6 md:px-10 pt-6 pb-2 flex items-center justify-between border-b border-slate-100">
               <div className="flex items-center gap-3">
-                <div className="w-11 h-11 rounded-full bg-[#0025F5] text-white font-black flex items-center justify-center text-lg shadow-sm">
+                <div className="w-11 h-11 rounded-full bg-[#001DF3] text-white font-black flex items-center justify-center text-lg shadow-sm">
                   {article.author?.initial}
                 </div>
                 <div>
@@ -141,7 +141,7 @@ export default function BeritaDetailPage() {
                           key={idx}
                           className="text-[15px] md:text-base text-slate-700 leading-relaxed flex gap-3"
                         >
-                          <span className="w-1.5 h-1.5 rounded-full bg-[#0025F5] mt-2.5 shrink-0" />
+                          <span className="w-1.5 h-1.5 rounded-full bg-[#001DF3] mt-2.5 shrink-0" />
                           <span>{item}</span>
                         </li>
                       ))}
@@ -164,7 +164,7 @@ export default function BeritaDetailPage() {
                   return (
                     <div
                       key={i}
-                      className="bg-gradient-to-br from-[#0025F5] to-[#0020c9] rounded-3xl p-6 md:p-8 text-white mt-8"
+                      className="bg-gradient-to-br from-[#001DF3] to-[#000066] rounded-3xl p-6 md:p-8 text-white mt-8"
                     >
                       <div className="flex items-start gap-3">
                         <div className="w-10 h-10 rounded-full bg-white/15 flex items-center justify-center shrink-0">
@@ -223,7 +223,7 @@ export default function BeritaDetailPage() {
           <div className="max-w-6xl mx-auto px-4 md:px-6">
             <div className="flex items-end justify-between mb-8">
               <div>
-                <span className="inline-block bg-white text-[#0025F5] text-[11px] font-bold rounded-full px-3 py-1 tracking-widest border border-blue-100">
+                <span className="inline-block bg-white text-[#001DF3] text-[11px] font-bold rounded-full px-3 py-1 tracking-widest border border-blue-100">
                   BACA JUGA
                 </span>
                 <h3 className="text-xl md:text-2xl font-black text-slate-900 mt-3">
@@ -232,7 +232,7 @@ export default function BeritaDetailPage() {
               </div>
               <Link
                 to="/berita"
-                className="hidden md:inline-flex items-center gap-1 text-sm font-bold text-[#0025F5] hover:underline"
+                className="hidden md:inline-flex items-center gap-1 text-sm font-bold text-[#001DF3] hover:underline"
               >
                 Lihat Semua <ArrowRight className="w-4 h-4" />
               </Link>
@@ -253,7 +253,7 @@ export default function BeritaDetailPage() {
                     />
                   </div>
                   <div className="p-5 flex-1 flex flex-col">
-                    <span className="inline-block bg-blue-50 text-[#0025F5] text-[10px] font-bold rounded-full px-2 py-1 tracking-wider self-start">
+                    <span className="inline-block bg-blue-50 text-[#001DF3] text-[10px] font-bold rounded-full px-2 py-1 tracking-wider self-start">
                       {a.category}
                     </span>
                     <h4 className="font-bold text-slate-900 mt-3 leading-snug line-clamp-2 flex-1">

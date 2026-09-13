@@ -142,7 +142,7 @@ export default function CariPropertiPage() {
             <aside className="lg:col-span-3 space-y-3">
               <div className="bg-white rounded-2xl border border-slate-200 shadow-sm p-3">
                 <div className="flex items-center gap-2 bg-slate-50 rounded-full px-3 py-2">
-                  <Home className="w-4 h-4 text-[#0025F5]" />
+                  <Home className="w-4 h-4 text-[#001DF3]" />
                   <span className="text-sm text-slate-500 font-semibold">Cari Rumah</span>
                 </div>
                 <div className="grid grid-cols-3 gap-2 mt-3">
@@ -160,15 +160,15 @@ export default function CariPropertiPage() {
                         <span
                           className={`w-10 h-10 rounded-full flex items-center justify-center transition ${
                             active
-                              ? "bg-[#0025F5] text-white shadow-md"
-                              : "bg-blue-50 text-[#0025F5] hover:bg-blue-100"
+                              ? "bg-[#001DF3] text-white shadow-md"
+                              : "bg-blue-50 text-[#001DF3] hover:bg-blue-100"
                           }`}
                         >
                           <t.Icon className="w-5 h-5" />
                         </span>
                         <span
                           className={`text-[10px] ${
-                            active ? "text-[#0025F5] font-semibold" : "text-slate-600"
+                            active ? "text-[#001DF3] font-semibold" : "text-slate-600"
                           }`}
                         >
                           {t.label}
@@ -195,7 +195,7 @@ export default function CariPropertiPage() {
                         <span
                           className={`w-10 h-10 rounded-full flex items-center justify-center transition ${
                             active
-                              ? "bg-[#0025F5] text-white shadow-md"
+                              ? "bg-[#001DF3] text-white shadow-md"
                               : "bg-slate-50 hover:bg-slate-100"
                           }`}
                           style={active ? {} : { color: c.color }}
@@ -204,7 +204,7 @@ export default function CariPropertiPage() {
                         </span>
                         <span
                           className={`text-[11px] ${
-                            active ? "text-[#0025F5] font-semibold" : "text-slate-700"
+                            active ? "text-[#001DF3] font-semibold" : "text-slate-700"
                           }`}
                         >
                           {c.label}
@@ -246,7 +246,7 @@ export default function CariPropertiPage() {
                     <label key={f} className="flex items-center gap-2">
                       <input
                         type="checkbox"
-                        className="accent-[#0025F5]"
+                        className="accent-[#001DF3]"
                         checked={facility.includes(f)}
                         onChange={(e) => {
                           if (e.target.checked)
@@ -271,7 +271,7 @@ export default function CariPropertiPage() {
 
               <button
                 onClick={resetFilters}
-                className="w-full mt-2 border border-slate-200 rounded-full py-2 text-xs font-semibold text-slate-700 hover:border-[#0025F5] hover:text-[#0025F5] transition"
+                className="w-full mt-2 border border-slate-200 rounded-full py-2 text-xs font-semibold text-slate-700 hover:border-[#001DF3] hover:text-[#001DF3] transition"
               >
                 Reset Filter
               </button>
@@ -291,7 +291,7 @@ export default function CariPropertiPage() {
                       }}
                       className={`shrink-0 text-xs font-medium px-3 py-1.5 rounded-full border transition ${
                         city === t
-                          ? "bg-[#0025F5] text-white border-[#0025F5]"
+                          ? "bg-[#001DF3] text-white border-[#001DF3]"
                           : "bg-white text-slate-700 border-slate-200 hover:border-slate-300"
                       }`}
                     >
@@ -335,7 +335,7 @@ export default function CariPropertiPage() {
                   <button
                     onClick={() => setPage(Math.max(1, currentPage - 1))}
                     disabled={currentPage === 1}
-                    className="w-9 h-9 rounded-full border border-slate-200 hover:border-[#0025F5] hover:text-[#0025F5] flex items-center justify-center disabled:opacity-40 transition"
+                    className="w-9 h-9 rounded-full border border-slate-200 hover:border-[#001DF3] hover:text-[#001DF3] flex items-center justify-center disabled:opacity-40 transition"
                   >
                     <ChevronLeft className="w-4 h-4" />
                   </button>
@@ -346,8 +346,8 @@ export default function CariPropertiPage() {
                         onClick={() => setPage(p)}
                         className={`w-9 h-9 rounded-full text-sm font-semibold transition ${
                           p === currentPage
-                            ? "bg-[#0025F5] text-white"
-                            : "border border-slate-200 text-slate-700 hover:border-[#0025F5] hover:text-[#0025F5]"
+                            ? "bg-[#001DF3] text-white"
+                            : "border border-slate-200 text-slate-700 hover:border-[#001DF3] hover:text-[#001DF3]"
                         }`}
                       >
                         {p}
@@ -359,7 +359,7 @@ export default function CariPropertiPage() {
                       setPage(Math.min(totalPages, currentPage + 1))
                     }
                     disabled={currentPage === totalPages}
-                    className="w-9 h-9 rounded-full border border-slate-200 hover:border-[#0025F5] hover:text-[#0025F5] flex items-center justify-center disabled:opacity-40 transition"
+                    className="w-9 h-9 rounded-full border border-slate-200 hover:border-[#001DF3] hover:text-[#001DF3] flex items-center justify-center disabled:opacity-40 transition"
                   >
                     <ChevronRight className="w-4 h-4" />
                   </button>
@@ -386,7 +386,7 @@ export default function CariPropertiPage() {
                 >
                   <AccordionTrigger className="hover:no-underline">
                     <div className="flex items-center gap-3 text-left">
-                      <span className="w-7 h-7 rounded-full bg-[#0025F5] text-white font-bold text-xs flex items-center justify-center">
+                      <span className="w-7 h-7 rounded-full bg-[#001DF3] text-white font-bold text-xs flex items-center justify-center">
                         {i + 1}
                       </span>
                       <span className="text-sm font-semibold text-slate-800">
@@ -455,7 +455,7 @@ function FilterAccordion({ title, Icon, children, defaultOpen = false }) {
         className="w-full flex items-center justify-between px-4 py-3 text-sm font-semibold text-slate-800 hover:bg-slate-50 transition"
       >
         <span className="flex items-center gap-2">
-          {Icon && <Icon className="w-4 h-4 text-[#0025F5]" />}
+          {Icon && <Icon className="w-4 h-4 text-[#001DF3]" />}
           {title}
         </span>
         {open ? (
@@ -480,7 +480,7 @@ function RadioList({ name, options, value, onChange }) {
           <input
             type="radio"
             name={name}
-            className="accent-[#0025F5]"
+            className="accent-[#001DF3]"
             checked={value === o}
             onChange={() => onChange && onChange(o)}
           />

@@ -20,7 +20,7 @@ const contactMethods = [
     label: "Email",
     value: "halo@huniaja.com",
     href: "mailto:halo@huniaja.com",
-    color: "#0025F5",
+    color: "#001DF3",
   },
   {
     Icon: Phone,
@@ -67,7 +67,7 @@ export default function KontakPage() {
       <Header />
 
       {/* Hero */}
-      <section className="bg-[#0025F5] text-white pt-12 md:pt-16 pb-14 md:pb-20">
+      <section className="bg-[#001DF3] text-white pt-12 md:pt-16 pb-14 md:pb-20">
         <div className="max-w-6xl mx-auto px-4 md:px-6 text-center">
           <h1 className="text-3xl md:text-5xl font-black tracking-tight">
             Hubungi Kami
@@ -145,12 +145,12 @@ export default function KontakPage() {
                   rows={5}
                   value={form.message}
                   onChange={handle}
-                  className="w-full rounded-2xl border border-slate-200 focus:border-[#0025F5] focus:ring-1 focus:ring-[#0025F5] outline-none px-4 py-3 text-sm text-slate-800 placeholder:text-slate-400"
+                  className="w-full rounded-2xl border border-slate-200 focus:border-[#001DF3] focus:ring-1 focus:ring-[#001DF3] outline-none px-4 py-3 text-sm text-slate-800 placeholder:text-slate-400"
                 />
                 <div className="flex justify-end">
                   <Button
                     type="submit"
-                    className="bg-[#0025F5] hover:bg-[#001fd1] text-white rounded-full font-bold px-6 h-11 text-sm"
+                    className="bg-[#001DF3] hover:bg-[#0017c2] text-white rounded-full font-bold px-6 h-11 text-sm"
                   >
                     <Send className="w-4 h-4 mr-2" /> Kirim Pesan
                   </Button>
@@ -168,13 +168,13 @@ export default function KontakPage() {
               <div className="bg-slate-50 rounded-[32px] p-6 md:p-8">
                 <h4 className="font-bold text-slate-900">Kantor Pusat</h4>
                 <p className="flex items-start gap-2 text-sm text-slate-600 mt-3 leading-relaxed">
-                  <MapPin className="w-4 h-4 mt-0.5 text-[#0025F5] shrink-0" />
+                  <MapPin className="w-4 h-4 mt-0.5 text-[#001DF3] shrink-0" />
                   Sentul City Business Park, Bogor, Jawa Barat 16810,
                   Indonesia.
                 </p>
               </div>
 
-              <div className="bg-[#0025F5] text-white rounded-[32px] p-6 md:p-8">
+              <div className="bg-[#001DF3] text-white rounded-[32px] p-6 md:p-8">
                 <h4 className="font-bold">Ikuti Kami</h4>
                 <p className="text-sm text-white/85 mt-2">
                   Update tips properti, listing terbaru dan promo di media
@@ -217,7 +217,7 @@ function Input(props) {
   return (
     <input
       {...props}
-      className="w-full rounded-full border border-slate-200 focus:border-[#0025F5] focus:ring-1 focus:ring-[#0025F5] outline-none px-4 py-3 text-sm text-slate-800 placeholder:text-slate-400"
+      className="w-full rounded-full border border-slate-200 focus:border-[#001DF3] focus:ring-1 focus:ring-[#001DF3] outline-none px-4 py-3 text-sm text-slate-800 placeholder:text-slate-400"
     />
   );
 }

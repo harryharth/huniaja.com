@@ -9,7 +9,7 @@ import {
 } from "../mock";
 
 const cats = [
-  { label: "Beli Properti", color: "#0025F5", icon: ICON_BELI_PROPERTI, href: "/cari-properti" },
+  { label: "Beli Properti", color: "#001DF3", icon: ICON_BELI_PROPERTI, href: "/cari-properti" },
   { label: "Kerjasama", color: "#00B512", icon: ICON_KERJASAMA, href: "/kerjasama" },
 ];
 
@@ -84,7 +84,7 @@ export default function QuickCategories() {
                   aria-label={`dot-${i}`}
                   onClick={() => setActive(i)}
                   className={`h-1.5 rounded-full transition-all ${
-                    i === active ? "bg-[#0025F5] w-6" : "bg-slate-300 w-1.5"
+                    i === active ? "bg-[#001DF3] w-6" : "bg-slate-300 w-1.5"
                   }`}
                 />
               ))}

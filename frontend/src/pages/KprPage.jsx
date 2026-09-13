@@ -140,7 +140,7 @@ export default function KprPage() {
       <Header />
 
       {/* Hero - storytelling */}
-      <section className="bg-[#0025F5] text-white pt-12 md:pt-16 pb-14 md:pb-20 relative overflow-hidden">
+      <section className="bg-[#001DF3] text-white pt-12 md:pt-16 pb-14 md:pb-20 relative overflow-hidden">
         <div className="absolute -top-24 -right-24 w-96 h-96 rounded-full bg-[#00B512]/20 blur-3xl pointer-events-none" />
         <div className="absolute -bottom-24 -left-24 w-96 h-96 rounded-full bg-white/10 blur-3xl pointer-events-none" />
         <div className="relative max-w-6xl mx-auto px-4 md:px-6 grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-10 items-center">
@@ -175,15 +175,15 @@ export default function KprPage() {
             </div>
             <div className="mt-6 flex flex-wrap items-center gap-6 text-xs text-white/70">
               <div className="flex items-center gap-1.5">
-                <ShieldCheck className="w-4 h-4 text-[#8FFF9F]" />
+                <ShieldCheck className="w-4 h-4 text-[#00B512]" />
                 Fatwa DSN-MUI
               </div>
               <div className="flex items-center gap-1.5">
-                <BadgeCheck className="w-4 h-4 text-[#8FFF9F]" />
+                <BadgeCheck className="w-4 h-4 text-[#00B512]" />
                 10+ Bank Rekanan
               </div>
               <div className="flex items-center gap-1.5">
-                <Heart className="w-4 h-4 text-[#8FFF9F]" />
+                <Heart className="w-4 h-4 text-[#00B512]" />
                 12.500+ Keluarga
               </div>
             </div>
@@ -202,13 +202,13 @@ export default function KprPage() {
       <section className="bg-white py-14 md:py-20">
         <div className="max-w-4xl mx-auto px-4 md:px-6 text-center">
           <Quote
-            className="w-14 h-14 md:w-16 md:h-16 text-[#0025F5]/10 mx-auto"
+            className="w-14 h-14 md:w-16 md:h-16 text-[#001DF3]/10 mx-auto"
             strokeWidth={2.5}
           />
           <p className="text-xl md:text-3xl font-black text-slate-900 leading-tight mt-4 tracking-tight">
             "KPR bukan cuma soal cicilan.<br className="hidden md:block" />
             Ini soal{" "}
-            <span className="text-[#0025F5]">memilih ketenangan</span>{" "}
+            <span className="text-[#001DF3]">memilih ketenangan</span>{" "}
             untuk 15-20 tahun ke depan."
           </p>
           <div className="mt-6 inline-flex items-center gap-3">
@@ -225,7 +225,7 @@ export default function KprPage() {
       <section id="cerita" className="bg-slate-50 py-14 md:py-20">
         <div className="max-w-6xl mx-auto px-4 md:px-6">
           <div className="text-center mb-12">
-            <span className="inline-block bg-white text-[#0025F5] text-[11px] font-bold rounded-full px-3 py-1 tracking-widest border border-blue-100">
+            <span className="inline-block bg-white text-[#001DF3] text-[11px] font-bold rounded-full px-3 py-1 tracking-widest border border-blue-100">
               CERITA MEREKA
             </span>
             <h2 className="text-2xl md:text-4xl font-black text-slate-900 mt-4 leading-tight">
@@ -246,7 +246,7 @@ export default function KprPage() {
               >
                 <div className="flex items-center justify-between">
                   <Quote
-                    className="w-8 h-8 text-[#0025F5]"
+                    className="w-8 h-8 text-[#001DF3]"
                     strokeWidth={2.5}
                   />
                   <div className="text-right">
@@ -262,7 +262,7 @@ export default function KprPage() {
                   "{s.quote}"
                 </p>
                 <div className="mt-5 pt-4 border-t border-slate-100 flex items-center gap-3">
-                  <div className="w-11 h-11 rounded-full flex items-center justify-center text-white font-black text-base shadow-md shrink-0 bg-[#0025F5]">
+                  <div className="w-11 h-11 rounded-full flex items-center justify-center text-white font-black text-base shadow-md shrink-0 bg-[#001DF3]">
                     {s.initial}
                   </div>
                   <div className="flex-1 min-w-0">
@@ -300,7 +300,7 @@ export default function KprPage() {
                     <r.Icon
                       className="w-8 h-8"
                       strokeWidth={2.2}
-                      style={{ color: "#0025F5" }}
+                      style={{ color: "#001DF3" }}
                     />
                   </div>
                   <h3 className="text-base md:text-lg font-bold text-slate-900">
@@ -361,7 +361,7 @@ export default function KprPage() {
         <div className="max-w-6xl mx-auto px-4 md:px-6">
           <h2 className="text-center text-lg md:text-2xl font-bold text-slate-900 mb-10 md:mb-12">
             Bank yang bekerjasama dengan{" "}
-            <span className="text-[#0025F5]">Huniaja</span>
+            <span className="text-[#001DF3]">Huniaja</span>
           </h2>
 
           <div className="flex justify-center">
@@ -382,7 +382,7 @@ export default function KprPage() {
               Langkah Mudah Mengajukan
               <br />
               KPR Syariah di{" "}
-              <span className="text-[#0025F5]">Huniaja</span>
+              <span className="text-[#001DF3]">Huniaja</span>
             </h2>
             <Accordion type="single" collapsible defaultValue="step-0" className="space-y-3">
               {steps.map((s, i) => (
@@ -393,7 +393,7 @@ export default function KprPage() {
                 >
                   <AccordionTrigger className="py-4 hover:no-underline">
                     <div className="flex items-center gap-4 text-left">
-                      <span className="w-8 h-8 rounded-full bg-[#0025F5] text-white font-bold text-sm flex items-center justify-center shrink-0">
+                      <span className="w-8 h-8 rounded-full bg-[#001DF3] text-white font-bold text-sm flex items-center justify-center shrink-0">
                         {i + 1}
                       </span>
                       <span className="text-sm md:text-base font-semibold text-slate-800">
@@ -439,7 +439,7 @@ function SimCard({ num, Icon, title, desc, cta, onClick }) {
       <div className="flex-1">
         <div className="flex items-start gap-3">
           <div className="w-12 h-12 rounded-2xl bg-blue-50 flex items-center justify-center shrink-0">
-            <Icon className="w-6 h-6 text-[#0025F5]" strokeWidth={2.2} />
+            <Icon className="w-6 h-6 text-[#001DF3]" strokeWidth={2.2} />
           </div>
           <div className="flex-1">
             <h4 className="font-bold text-slate-900">{title}</h4>

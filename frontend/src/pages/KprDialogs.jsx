@@ -17,7 +17,7 @@ function NumField({ label, value, onChange, prefix, suffix, min, max, step }) {
   return (
     <div>
       <label className="text-xs font-semibold text-slate-600">{label}</label>
-      <div className="mt-1 flex items-center bg-slate-50 border border-slate-200 rounded-xl px-3 h-11 focus-within:border-[#0025F5] focus-within:ring-1 focus-within:ring-[#0025F5]">
+      <div className="mt-1 flex items-center bg-slate-50 border border-slate-200 rounded-xl px-3 h-11 focus-within:border-[#001DF3] focus-within:ring-1 focus-within:ring-[#001DF3]">
         {prefix && (
           <span className="text-sm text-slate-500 pr-2 shrink-0">{prefix}</span>
         )}
@@ -59,7 +59,7 @@ export function KprSyariahDialog({ open, onOpenChange }) {
         <DialogHeader>
           <div className="flex items-center gap-3">
             <div className="w-11 h-11 rounded-2xl bg-blue-50 flex items-center justify-center">
-              <Calculator className="w-6 h-6 text-[#0025F5]" />
+              <Calculator className="w-6 h-6 text-[#001DF3]" />
             </div>
             <div>
               <DialogTitle className="text-lg md:text-xl">
@@ -150,7 +150,7 @@ export function KprSyariahDialog({ open, onOpenChange }) {
           </div>
         </div>
 
-        <div className="mt-5 bg-gradient-to-br from-[#0025F5] to-[#0033ff] text-white rounded-3xl p-5 md:p-6">
+        <div className="mt-5 bg-gradient-to-br from-[#001DF3] to-[#0033ff] text-white rounded-3xl p-5 md:p-6">
           <p className="text-xs uppercase tracking-widest text-white/70">
             Estimasi Cicilan Bulanan
           </p>
@@ -210,7 +210,7 @@ export function TakeOverDialog({ open, onOpenChange }) {
         <DialogHeader>
           <div className="flex items-center gap-3">
             <div className="w-11 h-11 rounded-2xl bg-blue-50 flex items-center justify-center">
-              <RefreshCw className="w-6 h-6 text-[#0025F5]" />
+              <RefreshCw className="w-6 h-6 text-[#001DF3]" />
             </div>
             <div>
               <DialogTitle className="text-lg md:text-xl">
@@ -289,7 +289,7 @@ export function TakeOverDialog({ open, onOpenChange }) {
           </div>
         </div>
 
-        <div className="mt-5 bg-gradient-to-br from-[#0025F5] to-[#0033ff] text-white rounded-3xl p-5 md:p-6">
+        <div className="mt-5 bg-gradient-to-br from-[#001DF3] to-[#0033ff] text-white rounded-3xl p-5 md:p-6">
           <p className="text-xs uppercase tracking-widest text-white/70">
             Cicilan Baru per Bulan
           </p>

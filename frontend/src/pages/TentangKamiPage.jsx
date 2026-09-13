@@ -59,7 +59,7 @@ const timeline = [
     title: "MVP dan 100 Listing Pertama",
     desc: "Di tengah pandemi, kami merilis versi pertama Huniaja. Modal patungan Rp 50 juta, tim 4 orang, dan mimpi sebesar samudera. Bulan ketiga, 100 listing terpasang - dan pengguna pertama menemukan rumahnya.",
     Icon: Rocket,
-    color: "#0025F5",
+    color: "#001DF3",
   },
   {
     year: "2022",
@@ -95,7 +95,7 @@ const values = [
     Icon: ShieldCheck,
     title: "Transparansi Tanpa Kompromi",
     desc: "Harga jelas, komisi jelas, legalitas jelas. Kami percaya kepercayaan dibangun dari kejujuran kecil, konsisten, setiap hari.",
-    color: "#0025F5",
+    color: "#001DF3",
   },
   {
     Icon: Sparkles,
@@ -134,7 +134,7 @@ const founders = [
     name: "Reza Pratama",
     role: "CEO & Co-Founder",
     initial: "R",
-    color: "#0025F5",
+    color: "#001DF3",
     quote: "Rumah bukan tentang bata dan semen. Ini tentang tempat di mana anak-anak kita tumbuh, di mana kita menua bersama orang yang kita cintai. Membangun Huniaja adalah cara saya memastikan lebih banyak keluarga bisa punya cerita seperti itu.",
   },
   {
@@ -181,7 +181,7 @@ export default function TentangKamiPage() {
             </span>
             <h1 className="text-4xl md:text-6xl lg:text-7xl font-black tracking-tight mt-6 leading-[1.05]">
               Kami tidak menjual rumah.<br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#00B512] to-[#8FFF9F]">
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#00B512] to-[#00B512]">
                 Kami menemani orang pulang.
               </span>
             </h1>
@@ -229,10 +229,10 @@ export default function TentangKamiPage() {
       {/* Manifesto - Opening quote */}
       <section className="bg-white py-20 md:py-28 relative">
         <div className="max-w-4xl mx-auto px-4 md:px-6 text-center">
-          <Quote className="w-16 h-16 md:w-20 md:h-20 text-[#0025F5]/10 mx-auto" strokeWidth={2.5} />
+          <Quote className="w-16 h-16 md:w-20 md:h-20 text-[#001DF3]/10 mx-auto" strokeWidth={2.5} />
           <p className="text-2xl md:text-4xl font-black text-slate-900 leading-tight mt-6 tracking-tight">
             "Rumah pertama adalah{" "}
-            <span className="text-[#0025F5]">tempat mimpi menjadi alamat</span>.
+            <span className="text-[#001DF3]">tempat mimpi menjadi alamat</span>.
             Kami di sini untuk memastikan alamat itu bukan sekadar angka - tapi
             awal dari babak terbaik dalam hidupmu."
           </p>
@@ -259,7 +259,7 @@ export default function TentangKamiPage() {
             </div>
             <div className="absolute -bottom-6 -right-6 md:-bottom-8 md:-right-8 bg-white rounded-2xl shadow-xl px-5 py-4 border border-slate-100">
               <div className="flex items-center gap-3">
-                <div className="w-11 h-11 rounded-full bg-[#0025F5] flex items-center justify-center">
+                <div className="w-11 h-11 rounded-full bg-[#001DF3] flex items-center justify-center">
                   <Star className="w-5 h-5 text-white fill-white" />
                 </div>
                 <div>
@@ -275,7 +275,7 @@ export default function TentangKamiPage() {
           </div>
 
           <div className="lg:col-span-3">
-            <span className="inline-block bg-white border border-slate-200 text-[#0025F5] text-[11px] font-bold rounded-full px-3 py-1 tracking-widest">
+            <span className="inline-block bg-white border border-slate-200 text-[#001DF3] text-[11px] font-bold rounded-full px-3 py-1 tracking-widest">
               BAGAIMANA KAMI DIMULAI
             </span>
             <h2 className="text-3xl md:text-4xl font-black text-slate-900 mt-4 leading-tight">
@@ -315,12 +315,12 @@ export default function TentangKamiPage() {
             </span>
             <h2 className="text-3xl md:text-5xl font-black text-slate-900 mt-4 leading-tight">
               Tujuh tahun.<br className="md:hidden" />{" "}
-              <span className="text-[#0025F5]">Ribuan cerita.</span>
+              <span className="text-[#001DF3]">Ribuan cerita.</span>
             </h2>
           </div>
 
           <div className="relative">
-            <div className="hidden md:block absolute left-1/2 top-0 bottom-0 w-0.5 bg-gradient-to-b from-[#0025F5]/20 via-[#00B512]/30 to-[#EC4899]/20 -translate-x-1/2" />
+            <div className="hidden md:block absolute left-1/2 top-0 bottom-0 w-0.5 bg-gradient-to-b from-[#001DF3]/20 via-[#00B512]/30 to-[#EC4899]/20 -translate-x-1/2" />
 
             <div className="space-y-8 md:space-y-16">
               {timeline.map((t, idx) => (
@@ -361,8 +361,8 @@ export default function TentangKamiPage() {
       </section>
 
       {/* Founders Speak */}
-      <section className="bg-gradient-to-b from-slate-900 to-[#0020c9] text-white py-16 md:py-24 relative overflow-hidden">
-        <div className="absolute -top-32 -right-24 w-96 h-96 rounded-full bg-[#0025F5]/30 blur-3xl pointer-events-none" />
+      <section className="bg-gradient-to-b from-slate-900 to-[#000066] text-white py-16 md:py-24 relative overflow-hidden">
+        <div className="absolute -top-32 -right-24 w-96 h-96 rounded-full bg-[#001DF3]/30 blur-3xl pointer-events-none" />
         <div className="absolute -bottom-32 -left-24 w-96 h-96 rounded-full bg-[#00B512]/20 blur-3xl pointer-events-none" />
 
         <div className="relative max-w-6xl mx-auto px-4 md:px-6">
@@ -372,7 +372,7 @@ export default function TentangKamiPage() {
             </span>
             <h2 className="text-3xl md:text-5xl font-black mt-4 leading-tight">
               Empat suara.<br className="md:hidden" />{" "}
-              <span className="text-[#8FFF9F]">Satu misi.</span>
+              <span className="text-[#00B512]">Satu misi.</span>
             </h2>
             <p className="text-sm md:text-base text-white/70 mt-4 max-w-2xl mx-auto">
               Mereka bukan super hero. Mereka empat orang biasa yang percaya
@@ -423,7 +423,7 @@ export default function TentangKamiPage() {
               <h2 className="text-3xl md:text-5xl font-black text-slate-900 mt-4 leading-tight">
                 Empat kata<br />
                 yang jadi{" "}
-                <span className="text-[#0025F5]">kompas</span> kami.
+                <span className="text-[#001DF3]">kompas</span> kami.
               </h2>
               <p className="text-sm md:text-base text-slate-600 mt-4 leading-relaxed">
                 Bukan tulisan di dinding kantor. Ini keputusan sulit yang
@@ -483,7 +483,7 @@ export default function TentangKamiPage() {
       <section className="bg-slate-50 py-16 md:py-24">
         <div className="max-w-6xl mx-auto px-4 md:px-6">
           <div className="text-center mb-12">
-            <span className="inline-block bg-white text-[#0025F5] text-[11px] font-bold rounded-full px-3 py-1 tracking-widest border border-blue-100">
+            <span className="inline-block bg-white text-[#001DF3] text-[11px] font-bold rounded-full px-3 py-1 tracking-widest border border-blue-100">
               JANJI KAMI KEPADAMU
             </span>
             <h2 className="text-3xl md:text-4xl font-black text-slate-900 mt-4 leading-tight">
@@ -497,10 +497,10 @@ export default function TentangKamiPage() {
                 key={c.title}
                 className="bg-white rounded-3xl border border-slate-100 shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all p-7 relative overflow-hidden group"
               >
-                <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#0025F5] via-[#00B512] to-[#0025F5] scale-x-0 group-hover:scale-x-100 transition-transform origin-left" />
+                <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#001DF3] via-[#00B512] to-[#001DF3] scale-x-0 group-hover:scale-x-100 transition-transform origin-left" />
                 <div className="w-14 h-14 rounded-2xl bg-blue-50 flex items-center justify-center">
                   <c.Icon
-                    className="w-7 h-7 text-[#0025F5]"
+                    className="w-7 h-7 text-[#001DF3]"
                     strokeWidth={2}
                   />
                 </div>
@@ -555,13 +555,13 @@ export default function TentangKamiPage() {
       </section>
 
       {/* Impact quote strip */}
-      <section className="bg-[#0025F5] text-white py-16 md:py-20">
+      <section className="bg-[#001DF3] text-white py-16 md:py-20">
         <div className="max-w-5xl mx-auto px-4 md:px-6 text-center">
-          <TrendingUp className="w-10 h-10 text-[#8FFF9F] mx-auto" />
+          <TrendingUp className="w-10 h-10 text-[#00B512] mx-auto" />
           <p className="text-2xl md:text-4xl font-black leading-tight mt-6">
             "Setiap kunci yang berpindah tangan,<br />
             adalah{" "}
-            <span className="text-[#8FFF9F]">satu keluarga</span>{" "}
+            <span className="text-[#00B512]">satu keluarga</span>{" "}
             yang akhirnya pulang."
           </p>
           <p className="text-sm md:text-base text-white/70 mt-4">
@@ -609,7 +609,7 @@ export default function TentangKamiPage() {
                   key={c}
                   className="flex items-center gap-2 bg-slate-50 rounded-full px-4 py-2"
                 >
-                  <MapPin className="w-3.5 h-3.5 text-[#0025F5] shrink-0" />
+                  <MapPin className="w-3.5 h-3.5 text-[#001DF3] shrink-0" />
                   <span className="text-xs md:text-sm text-slate-700 font-semibold">
                     {c}
                   </span>
@@ -623,12 +623,12 @@ export default function TentangKamiPage() {
       {/* Final CTA */}
       <section className="bg-slate-50 py-16 md:py-24">
         <div className="max-w-5xl mx-auto px-4 md:px-6">
-          <div className="relative bg-gradient-to-br from-[#0025F5] to-[#0020c9] rounded-[36px] md:rounded-[48px] p-8 md:p-16 overflow-hidden text-white">
+          <div className="relative bg-gradient-to-br from-[#001DF3] to-[#000066] rounded-[36px] md:rounded-[48px] p-8 md:p-16 overflow-hidden text-white">
             <div className="absolute -top-24 -right-24 w-96 h-96 rounded-full bg-[#00B512]/20 blur-3xl pointer-events-none" />
             <div className="absolute -bottom-24 -left-24 w-96 h-96 rounded-full bg-white/10 blur-3xl pointer-events-none" />
             <div className="relative grid grid-cols-1 md:grid-cols-3 gap-8 items-center">
               <div className="md:col-span-2">
-                <Building2 className="w-10 h-10 text-[#8FFF9F]" />
+                <Building2 className="w-10 h-10 text-[#00B512]" />
                 <h3 className="text-3xl md:text-4xl font-black leading-tight mt-4">
                   Siap menulis<br />
                   babak selanjutnya bersama kami?
@@ -642,7 +642,7 @@ export default function TentangKamiPage() {
                 <Link
                   to="/cari-properti"
                   data-testid="tk-final-cta-cari"
-                  className="bg-white text-[#0025F5] hover:bg-slate-100 font-bold rounded-full px-6 py-3 text-sm shadow-lg text-center transition"
+                  className="bg-white text-[#001DF3] hover:bg-slate-100 font-bold rounded-full px-6 py-3 text-sm shadow-lg text-center transition"
                 >
                   Cari Rumah Impian
                 </Link>

@@ -32,7 +32,7 @@ const partnerships = [
     title: "Paid Partnership",
     desc: "Kerja sama iklan bersponsor, listing prioritas, dan campaign co-marketing untuk brand Anda.",
     perks: ["Konten bersponsor", "Iklan prioritas", "Laporan performa"],
-    color: "#0025F5",
+    color: "#001DF3",
   },
   {
     Icon: Handshake,
@@ -62,7 +62,7 @@ const partnerStories = [
     name: "Bank Mitra Nusantara",
     role: "Bank Partner KPR",
     initial: "BMN",
-    color: "#0025F5",
+    color: "#001DF3",
     stat: "Rp 850M",
     statLabel: "Total disburse KPR",
     quote:
@@ -119,7 +119,7 @@ const timeline = [
     title: "Kenalan & Diskusi",
     desc: "Kami dengarkan tujuan, target, dan batasanmu. Bukan pitch produk - ini sesi memahami.",
     Icon: Mail,
-    color: "#0025F5",
+    color: "#001DF3",
   },
   {
     step: "02",
@@ -188,7 +188,7 @@ export default function KerjasamaPage() {
           style={{ backgroundImage: `url(${HERO_IMG})` }}
         />
         <div className="absolute inset-0 bg-gradient-to-b from-slate-900/70 via-slate-900/60 to-slate-900" />
-        <div className="absolute -top-32 -right-24 w-96 h-96 rounded-full bg-[#0025F5]/40 blur-3xl pointer-events-none" />
+        <div className="absolute -top-32 -right-24 w-96 h-96 rounded-full bg-[#001DF3]/40 blur-3xl pointer-events-none" />
         <div className="absolute -bottom-32 -left-24 w-96 h-96 rounded-full bg-[#00B512]/25 blur-3xl pointer-events-none" />
 
         <div className="relative max-w-6xl mx-auto px-4 md:px-6 pt-16 md:pt-24 pb-20 md:pb-28">
@@ -198,7 +198,7 @@ export default function KerjasamaPage() {
             </span>
             <h1 className="text-4xl md:text-6xl lg:text-7xl font-black tracking-tight mt-6 leading-[1.05]">
               Kami tidak mencari klien.<br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#00B512] to-[#8FFF9F]">
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#00B512] to-[#00B512]">
                 Kami mencari mitra.
               </span>
             </h1>
@@ -247,12 +247,12 @@ export default function KerjasamaPage() {
       <section className="bg-white py-16 md:py-24">
         <div className="max-w-4xl mx-auto px-4 md:px-6 text-center">
           <Quote
-            className="w-14 h-14 md:w-20 md:h-20 text-[#0025F5]/10 mx-auto"
+            className="w-14 h-14 md:w-20 md:h-20 text-[#001DF3]/10 mx-auto"
             strokeWidth={2.5}
           />
           <p className="text-2xl md:text-4xl font-black text-slate-900 leading-tight mt-6 tracking-tight">
             "Partnership terbaik dimulai dari{" "}
-            <span className="text-[#0025F5]">
+            <span className="text-[#001DF3]">
               rasa hormat
             </span>
             , dilanjutkan dengan{" "}
@@ -273,7 +273,7 @@ export default function KerjasamaPage() {
       <section className="bg-slate-50 py-16 md:py-24">
         <div className="max-w-6xl mx-auto px-4 md:px-6">
           <div className="text-center mb-12">
-            <span className="inline-block bg-white text-[#0025F5] text-[11px] font-bold rounded-full px-3 py-1 tracking-widest border border-blue-100">
+            <span className="inline-block bg-white text-[#001DF3] text-[11px] font-bold rounded-full px-3 py-1 tracking-widest border border-blue-100">
               MENGAPA HUNIAJA?
             </span>
             <h2 className="text-3xl md:text-4xl font-black text-slate-900 mt-4 leading-tight">
@@ -297,7 +297,7 @@ export default function KerjasamaPage() {
                 <div className="flex-1">
                   <div className="w-11 h-11 rounded-2xl bg-blue-50 flex items-center justify-center mb-3">
                     <w.Icon
-                      className="w-5 h-5 text-[#0025F5]"
+                      className="w-5 h-5 text-[#001DF3]"
                       strokeWidth={2}
                     />
                   </div>
@@ -374,8 +374,8 @@ export default function KerjasamaPage() {
       </section>
 
       {/* Partner Stories - testimonials */}
-      <section className="bg-gradient-to-b from-slate-900 to-[#0020c9] text-white py-16 md:py-24 relative overflow-hidden">
-        <div className="absolute -top-32 -right-24 w-96 h-96 rounded-full bg-[#0025F5]/30 blur-3xl pointer-events-none" />
+      <section className="bg-gradient-to-b from-slate-900 to-[#000066] text-white py-16 md:py-24 relative overflow-hidden">
+        <div className="absolute -top-32 -right-24 w-96 h-96 rounded-full bg-[#001DF3]/30 blur-3xl pointer-events-none" />
         <div className="absolute -bottom-32 -left-24 w-96 h-96 rounded-full bg-[#00B512]/20 blur-3xl pointer-events-none" />
 
         <div className="relative max-w-6xl mx-auto px-4 md:px-6">
@@ -385,7 +385,7 @@ export default function KerjasamaPage() {
             </span>
             <h2 className="text-3xl md:text-5xl font-black mt-4 leading-tight">
               Bukan angka.<br className="md:hidden" />{" "}
-              <span className="text-[#8FFF9F]">Cerita orang.</span>
+              <span className="text-[#00B512]">Cerita orang.</span>
             </h2>
             <p className="text-sm md:text-base text-white/70 mt-4 max-w-2xl mx-auto">
               Setiap partner kami punya perjalanan sendiri di Huniaja. Ini
@@ -449,7 +449,7 @@ export default function KerjasamaPage() {
             </span>
             <h2 className="text-3xl md:text-4xl font-black text-slate-900 mt-4 leading-tight">
               Empat langkah.<br className="md:hidden" />{" "}
-              <span className="text-[#0025F5]">Empat belas hari.</span>
+              <span className="text-[#001DF3]">Empat belas hari.</span>
             </h2>
             <p className="text-sm md:text-base text-slate-500 mt-3 max-w-2xl mx-auto">
               Dari kenalan pertama hingga kampanye pertama - kami tidak suka
@@ -458,7 +458,7 @@ export default function KerjasamaPage() {
           </div>
 
           <div className="relative">
-            <div className="hidden md:block absolute top-14 left-[12.5%] right-[12.5%] h-0.5 bg-gradient-to-r from-[#0025F5]/20 via-[#00B512]/30 to-[#EC4899]/20" />
+            <div className="hidden md:block absolute top-14 left-[12.5%] right-[12.5%] h-0.5 bg-gradient-to-r from-[#001DF3]/20 via-[#00B512]/30 to-[#EC4899]/20" />
             <div className="grid grid-cols-1 md:grid-cols-4 gap-5 md:gap-6 relative">
               {timeline.map((t) => (
                 <div
@@ -494,7 +494,7 @@ export default function KerjasamaPage() {
       <section id="form" className="bg-slate-50 py-16 md:py-24">
         <div className="max-w-4xl mx-auto px-4 md:px-6">
           <div className="text-center mb-8">
-            <span className="inline-block bg-white text-[#0025F5] text-[11px] font-bold rounded-full px-3 py-1 tracking-widest border border-blue-100">
+            <span className="inline-block bg-white text-[#001DF3] text-[11px] font-bold rounded-full px-3 py-1 tracking-widest border border-blue-100">
               MULAI PERCAKAPAN
             </span>
             <h2 className="text-3xl md:text-4xl font-black text-slate-900 mt-4 leading-tight">
@@ -546,7 +546,7 @@ export default function KerjasamaPage() {
                   name="type"
                   value={form.type}
                   onChange={handle}
-                  className="mt-1 w-full rounded-full border border-slate-200 focus:border-[#0025F5] focus:ring-1 focus:ring-[#0025F5] outline-none px-4 py-3 text-sm text-slate-800 bg-white"
+                  className="mt-1 w-full rounded-full border border-slate-200 focus:border-[#001DF3] focus:ring-1 focus:ring-[#001DF3] outline-none px-4 py-3 text-sm text-slate-800 bg-white"
                 >
                   {partnerships.map((p) => (
                     <option key={p.title}>{p.title}</option>
@@ -560,7 +560,7 @@ export default function KerjasamaPage() {
                 rows={5}
                 value={form.message}
                 onChange={handle}
-                className="w-full rounded-2xl border border-slate-200 focus:border-[#0025F5] focus:ring-1 focus:ring-[#0025F5] outline-none px-4 py-3 text-sm text-slate-800 placeholder:text-slate-400"
+                className="w-full rounded-2xl border border-slate-200 focus:border-[#001DF3] focus:ring-1 focus:ring-[#001DF3] outline-none px-4 py-3 text-sm text-slate-800 placeholder:text-slate-400"
               />
               <div className="flex flex-col sm:flex-row gap-3 sm:justify-between sm:items-center pt-2">
                 <p className="text-xs text-slate-500">
@@ -586,13 +586,13 @@ export default function KerjasamaPage() {
       </section>
 
       {/* Final CTA strip */}
-      <section className="bg-[#0025F5] text-white py-14 md:py-20 relative overflow-hidden">
+      <section className="bg-[#001DF3] text-white py-14 md:py-20 relative overflow-hidden">
         <div className="absolute -top-24 -right-24 w-96 h-96 rounded-full bg-[#00B512]/20 blur-3xl pointer-events-none" />
         <div className="relative max-w-5xl mx-auto px-4 md:px-6 text-center">
-          <Star className="w-10 h-10 text-[#8FFF9F] mx-auto fill-[#8FFF9F]" />
+          <Star className="w-10 h-10 text-[#00B512] mx-auto fill-[#00B512]" />
           <p className="text-2xl md:text-4xl font-black leading-tight mt-4">
             Kolaborasi terbaik dimulai<br className="hidden md:block" />
-            dari <span className="text-[#8FFF9F]">satu percakapan</span>.
+            dari <span className="text-[#00B512]">satu percakapan</span>.
           </p>
           <p className="text-sm md:text-base text-white/80 mt-4 max-w-xl mx-auto">
             Kalau kamu sudah baca sampai di sini, artinya ada sesuatu yang
@@ -601,7 +601,7 @@ export default function KerjasamaPage() {
           <div className="mt-8 flex flex-wrap justify-center gap-3">
             <a
               href="#form"
-              className="bg-white text-[#0025F5] hover:bg-slate-100 font-bold rounded-full px-6 py-3 text-sm shadow-lg transition"
+              className="bg-white text-[#001DF3] hover:bg-slate-100 font-bold rounded-full px-6 py-3 text-sm shadow-lg transition"
             >
               Ajukan via Form
             </a>
@@ -634,7 +634,7 @@ function Input(props) {
   return (
     <input
       {...props}
-      className="w-full rounded-full border border-slate-200 focus:border-[#0025F5] focus:ring-1 focus:ring-[#0025F5] outline-none px-4 py-3 text-sm text-slate-800 placeholder:text-slate-400"
+      className="w-full rounded-full border border-slate-200 focus:border-[#001DF3] focus:ring-1 focus:ring-[#001DF3] outline-none px-4 py-3 text-sm text-slate-800 placeholder:text-slate-400"
     />
   );
 }

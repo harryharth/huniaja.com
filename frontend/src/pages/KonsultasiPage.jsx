@@ -29,7 +29,7 @@ const chapters = [
     body: "\"Rumah seperti apa yang cocok untuk lima tahun ke depan?\" Dari pertanyaan sederhana ini, banyak keluarga akhirnya menemukan hunian yang benar-benar mereka butuhkan. Konsultan Huniaja hadir untuk membantumu merumuskan pertanyaan-pertanyaan penting itu.",
     image:
       "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1200&q=80",
-    accent: "#0025F5",
+    accent: "#001DF3",
     Icon: Compass,
   },
   {
@@ -161,7 +161,7 @@ export default function KonsultasiPage() {
       <Header />
 
       {/* Hero */}
-      <section className="relative bg-[#0025F5] text-white overflow-hidden pt-16 md:pt-24 pb-20 md:pb-28">
+      <section className="relative bg-[#001DF3] text-white overflow-hidden pt-16 md:pt-24 pb-20 md:pb-28">
         <div className="absolute -top-24 -left-16 w-96 h-96 rounded-full bg-white/10 blur-3xl pointer-events-none" />
         <div className="absolute -bottom-32 -right-16 w-[28rem] h-[28rem] rounded-full bg-[#00B512]/25 blur-3xl pointer-events-none" />
         <div className="relative max-w-4xl mx-auto px-4 md:px-6 text-center">
@@ -182,7 +182,7 @@ export default function KonsultasiPage() {
           <div className="mt-8 flex flex-wrap gap-3 justify-center">
             <a
               href="#form"
-              className="bg-[#00B512] hover:bg-[#009e0f] text-[#0025F5] font-bold rounded-full px-6 py-3 text-sm shadow-lg transition"
+              className="bg-[#00B512] hover:bg-[#009e0f] text-[#001DF3] font-bold rounded-full px-6 py-3 text-sm shadow-lg transition"
             >
               Mulai Konsultasi Gratis
             </a>
@@ -270,7 +270,7 @@ export default function KonsultasiPage() {
                 className="bg-white rounded-3xl border border-slate-100 shadow-sm hover:shadow-md hover:-translate-y-0.5 p-6 md:p-7 transition-all"
               >
                 <div className="w-14 h-14 rounded-2xl bg-blue-50 flex items-center justify-center">
-                  <p.Icon className="w-7 h-7 text-[#0025F5]" strokeWidth={2} />
+                  <p.Icon className="w-7 h-7 text-[#001DF3]" strokeWidth={2} />
                 </div>
                 <h3 className="font-bold text-slate-900 mt-4">{p.title}</h3>
                 <p className="text-sm text-slate-600 mt-2 leading-relaxed">
@@ -314,7 +314,7 @@ export default function KonsultasiPage() {
                           right ? "md:mr-0 md:ml-10" : ""
                         }`}
                       >
-                        <span className="text-[11px] font-bold text-[#0025F5]">
+                        <span className="text-[11px] font-bold text-[#001DF3]">
                           {s.time}
                         </span>
                         <h3 className="font-bold text-slate-900 mt-1">
@@ -326,7 +326,7 @@ export default function KonsultasiPage() {
                       </div>
                     </div>
                     <div
-                      className={`absolute left-0 top-4 md:top-1/2 md:-translate-y-1/2 md:left-1/2 md:-translate-x-1/2 w-12 h-12 rounded-full bg-[#0025F5] text-white flex items-center justify-center shadow-lg z-10`}
+                      className={`absolute left-0 top-4 md:top-1/2 md:-translate-y-1/2 md:left-1/2 md:-translate-x-1/2 w-12 h-12 rounded-full bg-[#001DF3] text-white flex items-center justify-center shadow-lg z-10`}
                     >
                       <s.Icon className="w-5 h-5" />
                     </div>
@@ -339,7 +339,7 @@ export default function KonsultasiPage() {
       </section>
 
       {/* Testimonial */}
-      <section className="bg-[#0025F5] text-white py-16 md:py-24">
+      <section className="bg-[#001DF3] text-white py-16 md:py-24">
         <div className="max-w-6xl mx-auto px-4 md:px-6">
           <div className="text-center mb-12">
             <Quote className="w-10 h-10 mx-auto text-[#00B512]" />
@@ -472,11 +472,11 @@ export default function KonsultasiPage() {
                 placeholder="Ceritakan singkat kondisi & impianmu (opsional)"
                 value={form.message}
                 onChange={handle}
-                className="w-full rounded-2xl border border-slate-200 focus:border-[#0025F5] focus:ring-1 focus:ring-[#0025F5] outline-none px-4 py-3 text-sm text-slate-800 placeholder:text-slate-400"
+                className="w-full rounded-2xl border border-slate-200 focus:border-[#001DF3] focus:ring-1 focus:ring-[#001DF3] outline-none px-4 py-3 text-sm text-slate-800 placeholder:text-slate-400"
               />
               <Button
                 type="submit"
-                className="w-full bg-[#0025F5] hover:bg-[#001fd1] text-white rounded-full font-bold h-12 text-sm shadow-md"
+                className="w-full bg-[#001DF3] hover:bg-[#0017c2] text-white rounded-full font-bold h-12 text-sm shadow-md"
               >
                 <Send className="w-4 h-4 mr-2" /> Pesan Sesi Konsultasi
               </Button>
@@ -502,7 +502,7 @@ export default function KonsultasiPage() {
           </p>
           <a
             href="#form"
-            className="inline-flex items-center gap-2 bg-[#0025F5] hover:bg-[#001fd1] text-white font-bold rounded-full px-6 py-3 text-sm shadow-lg mt-8 transition"
+            className="inline-flex items-center gap-2 bg-[#001DF3] hover:bg-[#0017c2] text-white font-bold rounded-full px-6 py-3 text-sm shadow-lg mt-8 transition"
           >
             Mulai Konsultasi <ArrowRight className="w-4 h-4" />
           </a>
@@ -518,7 +518,7 @@ function Field(props) {
   return (
     <input
       {...props}
-      className="w-full rounded-full border border-slate-200 focus:border-[#0025F5] focus:ring-1 focus:ring-[#0025F5] outline-none px-4 py-3 text-sm text-slate-800 placeholder:text-slate-400"
+      className="w-full rounded-full border border-slate-200 focus:border-[#001DF3] focus:ring-1 focus:ring-[#001DF3] outline-none px-4 py-3 text-sm text-slate-800 placeholder:text-slate-400"
     />
   );
 }
@@ -533,7 +533,7 @@ function SelectField({ name, label, value, onChange, options }) {
         name={name}
         value={value}
         onChange={onChange}
-        className="mt-1 w-full rounded-full border border-slate-200 focus:border-[#0025F5] focus:ring-1 focus:ring-[#0025F5] outline-none px-4 py-3 text-sm text-slate-800 bg-white"
+        className="mt-1 w-full rounded-full border border-slate-200 focus:border-[#001DF3] focus:ring-1 focus:ring-[#001DF3] outline-none px-4 py-3 text-sm text-slate-800 bg-white"
       >
         {options.map((o) => (
           <option key={o}>{o}</option>
