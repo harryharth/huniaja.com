@@ -1,52 +1,15 @@
 import React, { useState } from "react";
 import { ChevronRight } from "lucide-react";
-import { promoCards, LOGO_WHITE } from "../mock";
-
-// Huniaja-style squircle icon with smile mark
-function HuniajaIcon({ color = "#0025F5", size = 56 }) {
-  return (
-    <svg
-      width={size}
-      height={size}
-      viewBox="0 0 100 100"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        d="M50 4 C82 4 96 18 96 50 C96 82 82 96 50 96 C18 96 4 82 4 50 C4 18 18 4 50 4 Z"
-        fill={color}
-      />
-      {/* Left eye - inverted U */}
-      <path
-        d="M28 46 c0 -7 5 -12 11 -12 c6 0 11 5 11 12"
-        stroke="white"
-        strokeWidth="7"
-        strokeLinecap="round"
-        fill="none"
-      />
-      {/* Right eye - inverted U */}
-      <path
-        d="M50 46 c0 -7 5 -12 11 -12 c6 0 11 5 11 12"
-        stroke="white"
-        strokeWidth="7"
-        strokeLinecap="round"
-        fill="none"
-      />
-      {/* Big smile */}
-      <path
-        d="M26 54 c4 14 14 20 24 20 c10 0 20 -6 24 -20"
-        stroke="white"
-        strokeWidth="7"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        fill="none"
-      />
-    </svg>
-  );
-}
+import {
+  promoCards,
+  LOGO_WHITE,
+  ICON_BELI_PROPERTI,
+  ICON_KERJASAMA,
+} from "../mock";
 
 const cats = [
-  { label: "Beli Properti", color: "#0025F5" },
-  { label: "Kerjasama", color: "#12B815" },
+  { label: "Beli Properti", color: "#0025F5", icon: ICON_BELI_PROPERTI },
+  { label: "Kerjasama", color: "#12B815", icon: ICON_KERJASAMA },
 ];
 
 export default function QuickCategories() {
@@ -63,8 +26,12 @@ export default function QuickCategories() {
                 key={c.label}
                 className="group flex-1 flex items-center gap-3 md:gap-4 bg-white border border-slate-200 hover:border-slate-300 hover:shadow-md rounded-[28px] p-2 pr-3 md:pr-4 shadow-sm transition-all"
               >
-                <span className="shrink-0">
-                  <HuniajaIcon color={c.color} size={56} />
+                <span className="shrink-0 w-14 h-14 flex items-center justify-center">
+                  <img
+                    src={c.icon}
+                    alt={c.label}
+                    className="w-14 h-14 object-contain"
+                  />
                 </span>
                 <span className="text-[15px] md:text-base font-semibold text-slate-800 whitespace-nowrap flex-1 text-left">
                   {c.label}

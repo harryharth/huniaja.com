@@ -9,6 +9,8 @@ export const ICON_CARIYUK = "https://customer-assets-gfyr7b9c.emergentagent.net/
 export const ICON_LISTING_BARU = "https://customer-assets-gfyr7b9c.emergentagent.net/job_branding-suite-6/artifacts/kjaom8ge_listing%20baru.png";
 export const ICON_SUBSIDI = "https://customer-assets-gfyr7b9c.emergentagent.net/job_branding-suite-6/artifacts/d5dbjva7_subsidi.png";
 export const ICON_POPULER = "https://customer-assets-gfyr7b9c.emergentagent.net/job_branding-suite-6/artifacts/fazpd8ej_populer.png";
+export const ICON_BELI_PROPERTI = "https://customer-assets-gfyr7b9c.emergentagent.net/job_branding-suite-6/artifacts/rwzcb4o4_logo%20beli%20properti.png";
+export const ICON_KERJASAMA = "https://customer-assets-gfyr7b9c.emergentagent.net/job_branding-suite-6/artifacts/sjy1m24v_logo%20kerjasama.png";
 
 export const navLinks = [
   { label: "Beli", href: "#" },
