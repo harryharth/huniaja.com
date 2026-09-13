@@ -76,18 +76,6 @@ export default function LoginPage() {
               Simpan properti favorit, lanjutkan konsultasi, dan pantau
               perjalanan pencarian rumahmu - semua di satu tempat.
             </p>
-            <div className="mt-6 bg-white/10 backdrop-blur border border-white/20 rounded-2xl p-4 max-w-md">
-              <div className="text-[11px] font-bold tracking-widest text-[#00B512]">
-                AKUN ADMIN DEMO
-              </div>
-              <div className="text-xs text-white/85 mt-2 space-y-0.5">
-                <div>Email: <span className="font-semibold">admin@huniaja.com</span></div>
-                <div>Password: <span className="font-semibold">huniaja2026</span></div>
-              </div>
-              <div className="text-[10px] text-white/60 mt-2">
-                Gunakan kredensial di atas untuk masuk ke Dashboard Admin.
-              </div>
-            </div>
           </div>
           <div className="relative grid grid-cols-3 gap-4 text-white/85">
             <div>
