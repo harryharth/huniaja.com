@@ -16,13 +16,60 @@ export default function Header() {
 
   return (
     <header className="bg-[#0025F5] text-white sticky top-0 z-50 border-b border-white/25">
-      <div className="max-w-7xl mx-auto px-4 md:px-8 py-5 md:py-6 flex items-center gap-4 md:gap-8">
-        {/* Logo */}
+      {/* Mobile top row: logo + hamburger */}
+      <div className="lg:hidden max-w-7xl mx-auto px-4 pt-4 pb-3 flex items-center justify-between">
         <a href="/" className="flex items-center shrink-0">
-          <img src={LOGO_WHITE} alt="Huniaja" className="h-8 md:h-9 w-auto" />
+          <img src={LOGO_WHITE} alt="Huniaja" className="h-7 w-auto" />
+        </a>
+        <button
+          className="w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center"
+          onClick={() => setMobileOpen((v) => !v)}
+          aria-label="menu"
+        >
+          {mobileOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+        </button>
+      </div>
+
+      {/* Mobile search row */}
+      <div className="lg:hidden max-w-7xl mx-auto px-4 pb-4">
+        <div className="flex items-center bg-white rounded-full pl-1 pr-1 py-1 shadow-sm">
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <button className="flex items-center gap-1 text-[#0025F5] text-sm font-bold px-3 py-1.5 rounded-full hover:bg-blue-50 transition">
+                {tab}
+                <ChevronDown className="w-3.5 h-3.5" />
+              </button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="start">
+              {searchTabs.map((t) => (
+                <DropdownMenuItem key={t} onClick={() => setTab(t)}>
+                  {t}
+                </DropdownMenuItem>
+              ))}
+            </DropdownMenuContent>
+          </DropdownMenu>
+          <div className="w-px h-6 bg-slate-200 mx-1" />
+          <input
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+            placeholder="Cari properti..."
+            className="flex-1 min-w-0 bg-transparent outline-none px-2 py-1.5 text-sm text-slate-800 placeholder:text-slate-400"
+          />
+          <button
+            aria-label="Search"
+            className="text-[#0025F5] hover:bg-blue-50 transition p-1.5 rounded-full"
+          >
+            <Search className="w-4 h-4" strokeWidth={2.5} />
+          </button>
+        </div>
+      </div>
+
+      {/* Desktop row (>= lg) */}
+      <div className="hidden lg:flex max-w-7xl mx-auto px-8 py-5 md:py-6 items-center gap-8">
+        <a href="/" className="flex items-center shrink-0">
+          <img src={LOGO_WHITE} alt="Huniaja" className="h-9 w-auto" />
         </a>
 
-        {/* Search - center */}
         <div className="flex-1 max-w-3xl">
           <div className="flex items-center bg-white rounded-full pl-1 pr-1 py-1 shadow-sm">
             <DropdownMenu>
@@ -56,8 +103,7 @@ export default function Header() {
           </div>
         </div>
 
-        {/* Nav links - desktop */}
-        <nav className="hidden lg:flex items-center gap-8 text-[15px] font-medium shrink-0">
+        <nav className="flex items-center gap-8 text-[15px] font-medium shrink-0">
           {navLinks.map((l) => (
             <a
               key={l.label}
@@ -68,15 +114,6 @@ export default function Header() {
             </a>
           ))}
         </nav>
-
-        {/* Mobile hamburger */}
-        <button
-          className="lg:hidden w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center shrink-0"
-          onClick={() => setMobileOpen((v) => !v)}
-          aria-label="menu"
-        >
-          {mobileOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
-        </button>
       </div>
 
       {/* Mobile nav dropdown */}

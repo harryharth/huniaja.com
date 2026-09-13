@@ -76,13 +76,12 @@ export default function Hero() {
   const Icon = s.Icon;
 
   return (
-    <section className="bg-[#0025F5] pt-8 md:pt-10 pb-10">
+    <section className="bg-[#0025F5] pt-6 md:pt-10 pb-8 md:pb-10">
       <div className="max-w-7xl mx-auto px-4 md:px-8">
         <div
-          className="relative overflow-hidden bg-white shadow-2xl h-[220px] sm:h-[280px] md:h-[340px] transition-all duration-700"
-          style={{ borderRadius: "80px" }}
+          className="relative overflow-hidden bg-white shadow-2xl h-[190px] sm:h-[280px] md:h-[340px] transition-all duration-700"
+          style={{ borderRadius: "48px" }}
         >
-          {/* Soft accent glows */}
           <div
             className="absolute -top-24 -left-16 w-80 h-80 rounded-full blur-3xl pointer-events-none opacity-20"
             style={{ backgroundColor: s.accent }}
@@ -91,7 +90,6 @@ export default function Hero() {
             className="absolute -bottom-24 -right-16 w-96 h-96 rounded-full blur-3xl pointer-events-none opacity-10"
             style={{ backgroundColor: s.accent }}
           />
-          {/* Subtle grid pattern */}
           <div
             className="absolute inset-0 opacity-[0.05] pointer-events-none"
             style={{
@@ -101,11 +99,10 @@ export default function Hero() {
             }}
           />
 
-          {/* Content */}
-          <div className="relative h-full flex items-center px-8 sm:px-14 md:px-20">
+          <div className="relative h-full flex items-center px-6 sm:px-14 md:px-20">
             <div className="max-w-md flex-1">
               <div
-                className="inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-[10px] md:text-[11px] font-black tracking-[0.15em] mb-2 md:mb-3"
+                className="inline-flex items-center gap-1.5 rounded-full px-2.5 py-0.5 md:px-3 md:py-1 text-[9px] md:text-[11px] font-black tracking-[0.15em] mb-1.5 md:mb-3"
                 style={{
                   backgroundColor: `${s.accent}15`,
                   color: s.accent,
@@ -115,28 +112,27 @@ export default function Hero() {
                 <Sparkles className="w-3 h-3" />
                 {s.eyebrow}
               </div>
-              <h1 className="text-3xl sm:text-4xl md:text-6xl font-black tracking-tight leading-[0.95] text-slate-900">
+              <h1 className="text-2xl sm:text-4xl md:text-6xl font-black tracking-tight leading-[0.95] text-slate-900">
                 {s.title}
               </h1>
               <p
-                className="text-2xl sm:text-3xl md:text-5xl font-black italic tracking-tight leading-none mt-1"
+                className="text-xl sm:text-3xl md:text-5xl font-black italic tracking-tight leading-none mt-1"
                 style={{ color: s.accent }}
               >
                 {s.subtitle}
               </p>
-              <p className="mt-2 md:mt-3 text-xs sm:text-sm md:text-base text-slate-600 max-w-sm hidden sm:block">
+              <p className="mt-2 md:mt-3 text-[11px] sm:text-sm md:text-base text-slate-600 max-w-sm hidden sm:block">
                 {s.tagline}
               </p>
               <button
-                className="mt-3 md:mt-5 inline-flex items-center gap-1.5 text-white font-bold text-xs md:text-sm rounded-full px-4 py-2 md:px-5 md:py-2.5 shadow-lg hover:shadow-xl hover:-translate-y-0.5 transition"
+                className="mt-2 md:mt-5 inline-flex items-center gap-1.5 text-white font-bold text-[11px] md:text-sm rounded-full px-3 py-1.5 md:px-5 md:py-2.5 shadow-lg hover:shadow-xl hover:-translate-y-0.5 transition"
                 style={{ backgroundColor: s.accent }}
               >
                 {s.cta}
-                <ArrowRight className="w-4 h-4" />
+                <ArrowRight className="w-3 h-3 md:w-4 md:h-4" />
               </button>
             </div>
 
-            {/* Right visual */}
             <div className="hidden sm:flex items-center justify-center relative w-48 md:w-72 h-full shrink-0">
               <div
                 className="absolute w-40 h-40 md:w-64 md:h-64 rounded-full"
@@ -194,7 +190,7 @@ export default function Hero() {
           </div>
         </div>
 
-        <div className="flex justify-center gap-2 mt-4">
+        <div className="flex justify-center gap-2 mt-3 md:mt-4">
           {slides.map((_, i) => (
             <button
               key={i}

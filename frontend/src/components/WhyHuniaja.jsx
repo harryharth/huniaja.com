@@ -49,12 +49,12 @@ const features = [
 
 export default function WhyHuniaja() {
   return (
-    <section className="bg-slate-50 py-14">
-      <div className="max-w-6xl mx-auto px-6">
-        <h2 className="text-center text-xl md:text-2xl font-bold text-slate-900 mb-10">
+    <section className="bg-slate-50 py-10 md:py-14">
+      <div className="max-w-6xl mx-auto px-4 md:px-6">
+        <h2 className="text-center text-lg md:text-2xl font-bold text-slate-900 mb-8 md:mb-10">
           Kenapa harus Huniaja.com ?
         </h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 relative">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-8 relative">
           {features.map((f) => (
             <div
               key={f.num}
