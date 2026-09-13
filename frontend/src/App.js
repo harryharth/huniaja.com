@@ -9,6 +9,13 @@ import NewListings from "./components/NewListings";
 import { PopulerSection } from "./components/HighlightSections";
 import KerjaSama from "./components/KerjaSama";
 import WhyHuniaja from "./components/WhyHuniaja";
+import {
+  HomeTrustStrip,
+  HomeHowItWorks,
+  HomeStories,
+  HomeManifesto,
+  HomeFinalCta,
+} from "./components/HomeStorySections";
 import Footer from "./components/Footer";
 import { Toaster } from "./components/ui/toaster";
 import ScrollToTop from "./components/ScrollToTop";
@@ -37,10 +44,15 @@ const Home = () => (
     <Header />
     <Hero />
     <QuickCategories />
+    <HomeTrustStrip />
     <NewListings />
+    <HomeManifesto />
+    <HomeHowItWorks />
     <PopulerSection />
+    <HomeStories />
     <KerjaSama />
     <WhyHuniaja />
+    <HomeFinalCta />
     <Footer />
   </div>
 );
