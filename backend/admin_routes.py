@@ -63,6 +63,7 @@ def get_object(path: str) -> tuple:
 
 # --- Auth ---------------------------------------------------------------------
 ADMIN_PASSWORD = os.environ.get("ADMIN_PASSWORD", "")
+ADMIN_EMAIL = os.environ.get("ADMIN_EMAIL", "admin@huniaja.com").strip().lower()
 ADMIN_SECRET = os.environ.get("ADMIN_SESSION_SECRET", "changeme")
 
 _active_tokens: set = set()
@@ -84,6 +85,7 @@ def now_iso() -> str:
 
 class LoginRequest(BaseModel):
     password: str
+    email: Optional[str] = None
 
 
 class LoginResponse(BaseModel):
@@ -171,7 +173,10 @@ def create_admin_router(db) -> APIRouter:
     @router.post("/login", response_model=LoginResponse)
     async def login(req: LoginRequest):
         if not ADMIN_PASSWORD or req.password != ADMIN_PASSWORD:
-            raise HTTPException(401, "Password salah")
+            raise HTTPException(401, "Email atau password salah")
+        # If email provided, verify it matches too (backward compatible: no email = password-only OK)
+        if req.email and req.email.strip().lower() != ADMIN_EMAIL:
+            raise HTTPException(401, "Email atau password salah")
         token = uuid.uuid4().hex + uuid.uuid4().hex
         _active_tokens.add(token)
         return LoginResponse(token=token)

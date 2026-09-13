@@ -1,17 +1,47 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
-import { Mail, Lock, Eye, EyeOff, ArrowLeft } from "lucide-react";
+import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
+import { Mail, Lock, Eye, EyeOff, ArrowLeft, Loader2 } from "lucide-react";
 import { LOGO_WHITE } from "../mock";
 
+const API = `${process.env.REACT_APP_BACKEND_URL}/api`;
+
 export default function LoginPage() {
+  const navigate = useNavigate();
   const [tab, setTab] = useState("login");
   const [showPw, setShowPw] = useState(false);
   const [form, setForm] = useState({ name: "", email: "", password: "" });
-  const [sent, setSent] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+  const [info, setInfo] = useState("");
 
-  const submit = (e) => {
+  const submit = async (e) => {
     e.preventDefault();
-    setSent(true);
+    setError("");
+    setInfo("");
+    setLoading(true);
+    try {
+      if (tab === "login") {
+        // Try admin login (email+password auth)
+        const { data } = await axios.post(`${API}/admin/login`, {
+          email: form.email,
+          password: form.password,
+        });
+        localStorage.setItem("huniaja_admin_token", data.token);
+        navigate("/admin/dashboard");
+        return;
+      }
+      // Register - placeholder
+      setInfo("Terima kasih! Kami akan aktifkan akunmu segera dan beritahu via email.");
+    } catch (err) {
+      if (err.response?.status === 401) {
+        setError("Email atau password salah. Coba lagi.");
+      } else {
+        setError("Terjadi kesalahan. Coba beberapa saat lagi.");
+      }
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -46,6 +76,18 @@ export default function LoginPage() {
               Simpan properti favorit, lanjutkan konsultasi, dan pantau
               perjalanan pencarian rumahmu - semua di satu tempat.
             </p>
+            <div className="mt-6 bg-white/10 backdrop-blur border border-white/20 rounded-2xl p-4 max-w-md">
+              <div className="text-[11px] font-bold tracking-widest text-[#00B512]">
+                AKUN ADMIN DEMO
+              </div>
+              <div className="text-xs text-white/85 mt-2 space-y-0.5">
+                <div>Email: <span className="font-semibold">admin@huniaja.com</span></div>
+                <div>Password: <span className="font-semibold">huniaja2026</span></div>
+              </div>
+              <div className="text-[10px] text-white/60 mt-2">
+                Gunakan kredensial di atas untuk masuk ke Dashboard Admin.
+              </div>
+            </div>
           </div>
           <div className="relative grid grid-cols-3 gap-4 text-white/85">
             <div>
@@ -68,7 +110,7 @@ export default function LoginPage() {
           <div className="w-full max-w-md">
             <div className="flex bg-white rounded-full p-1 shadow-sm border border-slate-100">
               <button
-                onClick={() => { setTab("login"); setSent(false); }}
+                onClick={() => { setTab("login"); setError(""); setInfo(""); }}
                 data-testid="tab-login"
                 className={`flex-1 h-10 rounded-full text-sm font-bold transition ${
                   tab === "login" ? "bg-[#001DF3] text-white" : "text-slate-600"
@@ -77,7 +119,7 @@ export default function LoginPage() {
                 Masuk
               </button>
               <button
-                onClick={() => { setTab("register"); setSent(false); }}
+                onClick={() => { setTab("register"); setError(""); setInfo(""); }}
                 data-testid="tab-register"
                 className={`flex-1 h-10 rounded-full text-sm font-bold transition ${
                   tab === "register" ? "bg-[#001DF3] text-white" : "text-slate-600"
@@ -149,17 +191,22 @@ export default function LoginPage() {
 
               <button
                 type="submit"
+                disabled={loading}
                 data-testid="login-submit"
-                className="w-full h-12 bg-[#00B512] hover:bg-[#009e0f] text-white rounded-full font-bold text-sm shadow-lg transition mt-2"
+                className="w-full h-12 bg-[#00B512] hover:bg-[#009e0f] disabled:opacity-50 text-white rounded-full font-bold text-sm shadow-lg transition mt-2 flex items-center justify-center gap-2"
               >
+                {loading && <Loader2 className="w-4 h-4 animate-spin" />}
                 {tab === "login" ? "Masuk Sekarang" : "Buat Akun"}
               </button>
 
-              {sent && (
+              {error && (
+                <div className="bg-red-50 border border-red-100 text-red-600 text-sm rounded-2xl px-4 py-3">
+                  {error}
+                </div>
+              )}
+              {info && (
                 <div className="bg-green-50 border border-green-100 text-[#009e0f] text-sm rounded-2xl px-4 py-3">
-                  {tab === "login"
-                    ? "Fitur login penuh segera hadir - untuk sementara silakan hubungi kami via WhatsApp."
-                    : "Terima kasih! Kami akan aktifkan akunmu segera dan beritahu via email."}
+                  {info}
                 </div>
               )}
             </form>
