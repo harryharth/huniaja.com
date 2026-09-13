@@ -567,44 +567,6 @@ export default function PasangIklanPage() {
         </div>
       </section>
 
-      {/* Green banner CTA */}
-      <section className="bg-white pb-14 md:pb-20">
-        <div className="max-w-6xl mx-auto px-4 md:px-6">
-          <div className="bg-[#00B512] rounded-[36px] md:rounded-[44px] relative overflow-hidden p-6 md:p-10 flex flex-col md:flex-row items-center gap-6">
-            <div className="relative shrink-0 -mt-4 md:-mt-16 md:-mb-16">
-              <div className="w-[180px] md:w-[220px] aspect-[9/19] rounded-[36px] bg-slate-900 p-2 shadow-2xl mx-auto">
-                <div className="w-full h-full rounded-[28px] overflow-hidden bg-white">
-                  <img
-                    src={HERO_BANNER}
-                    alt="App"
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-              </div>
-            </div>
-            <div className="flex-1 text-white text-center md:text-left">
-              <h3 className="text-xl md:text-2xl font-bold mb-2">
-                Perlu Bantuan atau Konsultasi?
-              </h3>
-              <p className="text-sm text-white/90 max-w-xl">
-                Jangan ragu untuk menghubungi kami jika Anda memiliki
-                pertanyaan atau memerlukan konsultasi lebih lanjut. Tim kami
-                siap memberikan bantuan dengan penuh kesediaan dan
-                profesionalisme.
-              </p>
-              <Button
-                asChild
-                className="mt-5 bg-[#001DF3] hover:bg-[#0017c2] text-white rounded-full font-bold px-6 h-11"
-              >
-                <a href={WA_URL()} target="_blank" rel="noopener noreferrer">
-                  Hubungi Kami
-                </a>
-              </Button>
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* FAQ */}
       <section className="bg-white pb-16 md:pb-20">
         <div className="max-w-5xl mx-auto px-4 md:px-6 grid grid-cols-1 md:grid-cols-3 gap-8">
