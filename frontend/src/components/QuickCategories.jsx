@@ -9,7 +9,7 @@ import {
 } from "../mock";
 
 const cats = [
-  { label: "Beli Properti", color: "#0025F5", icon: ICON_BELI_PROPERTI, href: "/" },
+  { label: "Beli Properti", color: "#0025F5", icon: ICON_BELI_PROPERTI, href: "/cari-properti" },
   { label: "Kerjasama", color: "#12B815", icon: ICON_KERJASAMA, href: "/kerjasama" },
 ];
 

@@ -23,6 +23,7 @@ import SKPage from "./pages/SKPage";
 import PusatBantuanPage from "./pages/PusatBantuanPage";
 import BeritaPage from "./pages/BeritaPage";
 import KerjasamaPage from "./pages/KerjasamaPage";
+import CariPropertiPage from "./pages/CariPropertiPage";
 
 const Home = () => (
   <div className="min-h-screen bg-white">
@@ -53,6 +54,8 @@ function App() {
           <Route path="/pusat-bantuan" element={<PusatBantuanPage />} />
           <Route path="/berita" element={<BeritaPage />} />
           <Route path="/kerjasama" element={<KerjasamaPage />} />
+          <Route path="/cari-properti" element={<CariPropertiPage />} />
+          <Route path="/beli" element={<CariPropertiPage />} />
         </Routes>
       </BrowserRouter>
       <ChatWidget />

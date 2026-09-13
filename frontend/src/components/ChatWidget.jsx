@@ -26,7 +26,7 @@ export default function ChatWidget() {
     {
       role: "assistant",
       content:
-        "Halo! Saya Huni, asisten virtual Huniaja. Ada yang bisa saya bantu seputar properti, KPR Syariah, atau pasang iklan?",
+        "Halo! Saya Dea, admin Huniaja.com. Ada yang bisa saya bantu seputar properti, KPR Syariah, atau pasang iklan?",
     },
   ]);
   const scrollRef = useRef(null);
@@ -104,7 +104,7 @@ export default function ChatWidget() {
               <span className="absolute -bottom-0.5 -right-0.5 w-3 h-3 rounded-full bg-[#12B815] ring-2 ring-[#0025F5]" />
             </div>
             <div className="flex-1">
-              <p className="font-bold text-sm">Huni - Asisten Huniaja</p>
+              <p className="font-bold text-sm">Dea - Admin Huniaja.com</p>
               <p className="text-[11px] text-white/80">Online sekarang</p>
             </div>
             <button

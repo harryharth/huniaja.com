@@ -13,7 +13,7 @@ export const ICON_BELI_PROPERTI = "https://customer-assets-gfyr7b9c.emergentagen
 export const ICON_KERJASAMA = "https://customer-assets-gfyr7b9c.emergentagent.net/job_branding-suite-6/artifacts/sjy1m24v_logo%20kerjasama.png";
 
 export const navLinks = [
-  { label: "Beli", href: "/" },
+  { label: "Beli", href: "/cari-properti" },
   { label: "KPR", href: "/kpr" },
   { label: "Konsultasi", href: "/kontak" },
   { label: "Berita", href: "/berita" },
@@ -86,7 +86,19 @@ const makeListing = (i, tier = "HH Pro") => ({
     "Tangerang Selatan",
     "BSD City",
   ][i % 7],
-  price: "Rp 500.000.000",
+  city: [
+    "Kab. Bogor",
+    "Kab. Bogor",
+    "Kab. Bogor",
+    "Kota Depok",
+    "Kota Bekasi",
+    "Tangerang",
+    "Kab. Bekasi",
+  ][i % 7],
+  type: ["Rumah", "Villa", "Rumah", "Apartemen", "Rumah", "Ruko", "Rumah"][i % 7],
+  condition: ["Baru", "Second", "Baru", "Baru", "Second", "Baru", "Lelang"][i % 7],
+  priceValue: [500, 650, 420, 780, 550, 900, 380][i % 7] * 1000000,
+  price: "Rp " + ([500, 650, 420, 780, 550, 900, 380][i % 7]).toLocaleString("id-ID") + ".000.000",
   installment: "Angsuran mulai 3 Jutaan/bln",
   tier,
   verified: true,
@@ -112,6 +124,8 @@ export const newListings = [
   makeListing(1),
   makeListing(2),
 ];
+
+export const allListings = Array.from({ length: 24 }, (_, i) => makeListing(i));
 
 export const subsidiListings = [
   makeListing(4, "HH Pro"),

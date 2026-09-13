@@ -5,7 +5,7 @@ import { Facebook, Instagram, Youtube } from "lucide-react";
 
 const footerCols = [
   [
-    { label: "Beli", href: "/" },
+    { label: "Beli", href: "/cari-properti" },
     { label: "Jual", href: "/pasang-iklan" },
     { label: "Konsultasi", href: "/kontak" },
     { label: "KPR", href: "/kpr" },
