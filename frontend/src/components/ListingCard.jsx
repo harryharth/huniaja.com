@@ -1,13 +1,12 @@
 import React, { useState } from "react";
 import {
   Heart,
-  Ruler,
-  Square,
   BedDouble,
   Bath,
-  Car,
+  Ruler,
+  MapPin,
+  BadgeCheck,
   FileText,
-  Download,
   MessageCircle,
 } from "lucide-react";
 import { Button } from "./ui/button";
@@ -17,87 +16,92 @@ export default function ListingCard({ item, variant = "default" }) {
     item.liked || variant === "featured-whatsapp" || variant === "featured-download"
   );
 
-  const downloadClasses =
+  const detailClasses =
     variant === "featured-download"
-      ? "bg-[#0025F5] hover:bg-[#001fd1] text-white"
-      : "bg-slate-100 hover:bg-slate-200 text-slate-800";
+      ? "bg-[#0025F5] hover:bg-[#001fd1] text-white shadow-sm"
+      : "bg-slate-900 hover:bg-slate-800 text-white";
 
   const whatsappClasses =
     variant === "featured-whatsapp"
-      ? "bg-[#12B815] hover:bg-[#0fa112] text-white border-transparent"
+      ? "bg-[#12B815] hover:bg-[#0fa112] text-white border-transparent shadow-sm"
       : "border-slate-200 hover:bg-slate-50 text-slate-800";
 
   return (
-    <div className="bg-white rounded-2xl border border-slate-200 overflow-hidden hover:shadow-lg transition-shadow group">
-      <div className="relative p-2">
+    <div className="bg-white rounded-2xl border border-slate-200 overflow-hidden hover:shadow-lg hover:-translate-y-0.5 transition-all group flex flex-col">
+      {/* Image */}
+      <div className="relative">
         <img
           src={item.image}
           alt={item.title}
-          className="w-full aspect-square object-cover rounded-xl group-hover:scale-[1.01] transition-transform duration-500"
+          className="w-full aspect-[4/3] object-cover group-hover:scale-[1.03] transition-transform duration-500"
         />
-      </div>
-      <div className="px-3 pb-3">
-        <div className="flex items-start justify-between">
-          <div>
-            <p className="text-xs text-slate-500">{item.title}</p>
-            <p className="text-xl font-extrabold text-slate-900 leading-tight mt-0.5">
-              {item.price}
-            </p>
-            <p className="text-[11px] text-slate-500 mt-0.5">
-              {item.installment}
-            </p>
-          </div>
-          <button
-            onClick={() => setLiked(!liked)}
-            className="w-8 h-8 rounded-full bg-slate-50 flex items-center justify-center shrink-0"
-          >
-            <Heart
-              className={`w-4 h-4 ${
-                liked ? "fill-[#0025F5] text-[#0025F5]" : "text-slate-400"
-              }`}
-            />
-          </button>
-        </div>
-
-        <div className="mt-2 inline-flex items-center gap-1.5 text-[#0025F5] text-xs font-semibold">
-          <span className="w-6 h-6 rounded-full bg-[#0025F5] text-white flex items-center justify-center text-[10px] font-bold">
-            H
-          </span>
+        {/* Tier badge */}
+        <div className="absolute top-3 left-3 inline-flex items-center gap-1 bg-white/95 backdrop-blur text-[#0025F5] text-[10px] font-bold px-2 py-1 rounded-full shadow-sm">
+          <BadgeCheck className="w-3 h-3" />
           {item.tier}
         </div>
+        {/* Heart */}
+        <button
+          onClick={() => setLiked(!liked)}
+          className="absolute top-3 right-3 w-8 h-8 rounded-full bg-white/95 backdrop-blur flex items-center justify-center shadow-sm hover:scale-110 transition-transform"
+          aria-label="Simpan"
+        >
+          <Heart
+            className={`w-4 h-4 ${
+              liked ? "fill-red-500 text-red-500" : "text-slate-500"
+            }`}
+          />
+        </button>
+      </div>
 
-        <div className="grid grid-cols-6 gap-1 mt-2 text-[10px] text-slate-600">
-          <Spec icon={Square} label={item.specs.lb} />
-          <Spec icon={Ruler} label={item.specs.lt} />
-          <Spec icon={BedDouble} label={item.specs.kt} />
-          <Spec icon={Bath} label={item.specs.km} />
-          <Spec icon={Car} label={item.specs.cp} />
-          <Spec icon={FileText} label={item.specs.sert} />
+      {/* Content */}
+      <div className="p-4 flex-1 flex flex-col">
+        <h3 className="text-base font-bold text-slate-900 leading-tight truncate">
+          {item.title}
+        </h3>
+        <p className="mt-1 flex items-center gap-1 text-xs text-slate-500 truncate">
+          <MapPin className="w-3 h-3 shrink-0" />
+          <span className="truncate">{item.location}</span>
+        </p>
+
+        <div className="mt-3">
+          <p className="text-lg md:text-xl font-extrabold text-[#0025F5] leading-none">
+            {item.price}
+          </p>
+          <p className="text-[11px] text-slate-500 mt-1">{item.installment}</p>
         </div>
 
-        <div className="mt-3 space-y-1.5">
+        {/* Specs */}
+        <div className="mt-3 flex items-center gap-4 text-xs text-slate-600 border-t border-slate-100 pt-3">
+          <span className="flex items-center gap-1">
+            <BedDouble className="w-3.5 h-3.5 text-slate-400" />
+            {item.specs.kt} KT
+          </span>
+          <span className="flex items-center gap-1">
+            <Bath className="w-3.5 h-3.5 text-slate-400" />
+            {item.specs.km} KM
+          </span>
+          <span className="flex items-center gap-1 ml-auto">
+            <Ruler className="w-3.5 h-3.5 text-slate-400" />
+            {item.specs.lb}
+          </span>
+        </div>
+
+        {/* Actions */}
+        <div className="mt-4 grid grid-cols-2 gap-2">
           <Button
-            className={`w-full h-9 text-xs font-semibold rounded-lg ${downloadClasses}`}
+            className={`h-9 text-xs font-semibold rounded-full ${detailClasses}`}
           >
-            <FileText className="w-3.5 h-3.5 mr-1" /> Detail Project
+            <FileText className="w-3.5 h-3.5 mr-1" /> Detail
           </Button>
           <Button
             variant="outline"
-            className={`w-full h-9 text-xs font-semibold rounded-lg ${whatsappClasses}`}
+            className={`h-9 text-xs font-semibold rounded-full ${whatsappClasses}`}
           >
-            <MessageCircle className="w-3.5 h-3.5 mr-1" /> Ask Whatsapp
+            <MessageCircle className="w-3.5 h-3.5 mr-1" /> WhatsApp
           </Button>
         </div>
       </div>
-    </div>
-  );
-}
-
-function Spec({ icon: Icon, label }) {
-  return (
-    <div className="flex flex-col items-center gap-0.5">
-      <Icon className="w-3 h-3 text-slate-400" />
-      <span>{label}</span>
     </div>
   );
 }
