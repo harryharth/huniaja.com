@@ -21,11 +21,7 @@ export const searchTabs = ["Beli", "Sewa", "Baru"];
 
 export const quickCategories = [
   { label: "Beli Properti", icon: "Home", color: "bg-[#0025F5]" },
-  { label: "Sewa Properti", icon: "House", color: "bg-[#22C55E]" },
-  { label: "Pasang Iklan", icon: "Megaphone", color: "bg-[#EF4444]" },
-  { label: "Cuan Dirumah", icon: "UserRound", color: "bg-[#7C3AED]" },
-  { label: "Paket Developer", icon: "HomeCheck", color: "bg-[#0EA5E9]" },
-  { label: "Layanan Rumah", icon: "ThumbsUp", color: "bg-[#16A34A]" },
+  { label: "Kerjasama", icon: "House", color: "bg-[#22C55E]" },
 ];
 
 export const propertyTypes = [
@@ -43,22 +39,13 @@ export const propertyTypes = [
 
 export const promoCards = [
   {
-    title: "#BELIRUMAHJADIMUDAH",
-    subtitle: "Program spesial pembelian rumah",
-    bg: "bg-blue-700",
-    cta: "Selengkapnya",
-  },
-  {
-    title: "Diskon 1K poin thưởng",
-    subtitle: "1 chuyến Taxi hằng ngày",
-    bg: "bg-amber-300",
-    cta: "Klaim Sekarang",
+    title: "#BeliRumahJadiMudah",
+    accent: "JadiMudah",
+    bg: "bg-[#0025F5]",
   },
   {
     title: "BUKA PILIH SUKA",
-    subtitle: "Ribuan properti pilihan",
-    bg: "bg-blue-700",
-    cta: "Jelajahi",
+    bg: "bg-[#12B815]",
   },
 ];
 
