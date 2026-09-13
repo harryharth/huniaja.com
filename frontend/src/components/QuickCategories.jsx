@@ -1,12 +1,12 @@
 import React from "react";
-import { Scissors, Sparkles, Wrench, ShieldCheck } from "lucide-react";
+import { Sparkles, Wrench, ShieldCheck } from "lucide-react";
 import { Link } from "react-router-dom";
-import { ICON_BELI_PROPERTI, ICON_KERJASAMA } from "../mock";
+import { ICON_BELI_PROPERTI, ICON_KERJASAMA, ICON_POTONG_RUMPUT } from "../mock";
 
 const items = [
   { label: "Beli Properti", color: "#001DF3", bg: "bg-blue-50", img: ICON_BELI_PROPERTI, href: "/cari-properti" },
   { label: "Kerjasama", color: "#00B512", bg: "bg-green-50", img: ICON_KERJASAMA, href: "/kerjasama" },
-  { label: "Potong Rumput", color: "#00B512", bg: "bg-green-50", Icon: Scissors, href: "/kontak" },
+  { label: "Potong Rumput", color: "#00B512", bg: "bg-transparent", img: ICON_POTONG_RUMPUT, href: "/kontak" },
   { label: "Home Cleaning", color: "#001DF3", bg: "bg-blue-50", Icon: Sparkles, href: "/kontak" },
   { label: "Service AC", color: "#001DF3", bg: "bg-blue-50", Icon: Wrench, href: "/kontak" },
   { label: "Jaga Rumah", color: "#00B512", bg: "bg-green-50", Icon: ShieldCheck, href: "/kontak" },
