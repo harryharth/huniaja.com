@@ -8,7 +8,7 @@ const footerCols = [
     { label: "Beli", href: "/" },
     { label: "Jual", href: "/" },
     { label: "Konsultasi", href: "/" },
-    { label: "KPR", href: "/" },
+    { label: "KPR", href: "/kpr" },
   ],
   [
     { label: "Karir", href: "/karir" },

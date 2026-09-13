@@ -6,14 +6,20 @@ import {
   BarChart3,
   Moon,
   Flame,
-  Landmark,
   Calculator,
   RefreshCw,
-  ArrowRight,
 } from "lucide-react";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import { HERO_BANNER } from "../mock";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "../components/ui/accordion";
+
+const BANK_LOGOS = "https://customer-assets-gfyr7b9c.emergentagent.net/job_branding-suite-6/artifacts/z220basa_bank.png";
 
 const reasons = [
   {
@@ -48,21 +54,27 @@ const reasons = [
   },
 ];
 
-const banks = [
-  { name: "Bank Muamalat", color: "#0F7A5A" },
-  { name: "BCA Syariah", color: "#0060AF" },
-  { name: "CIMB Niaga Syariah", color: "#D52027" },
-  { name: "BSI - Bank Syariah Indonesia", color: "#00A79D" },
-  { name: "Maybank Syariah", color: "#F7B500" },
-  { name: "BTN Syariah", color: "#0075BE" },
-];
-
 const steps = [
-  "Simulasi harga tenor",
-  "Pilih Program",
-  "Lengkapi data pendukung",
-  "Pengajuan dikirim ke Bank",
-  "Akad (Tandatangan Perjanjian Kredit Syariah)",
+  {
+    q: "Simulasi harga tenor",
+    a: "Mulai dengan menghitung estimasi cicilan bulanan sesuai harga properti, uang muka, dan tenor yang Anda inginkan.",
+  },
+  {
+    q: "Pilih Program",
+    a: "Pilih program KPR Syariah yang paling sesuai dari berbagai bank rekanan Huniaja, lengkap dengan detail margin dan tenor.",
+  },
+  {
+    q: "Lengkapi data pendukung",
+    a: "Unggah dokumen persyaratan seperti KTP, NPWP, slip gaji, dan dokumen pendukung lainnya melalui platform Huniaja.",
+  },
+  {
+    q: "Pengajuan dikirim ke Bank",
+    a: "Tim Huniaja meneruskan pengajuan Anda ke bank pilihan dan memantau progres verifikasi hingga selesai.",
+  },
+  {
+    q: "Akad (Tandatangan Perjanjian Kredit Syariah)",
+    a: "Setelah disetujui, lakukan akad syariah bersama pihak bank. KPR aktif dan cicilan pertama mulai berjalan.",
+  },
 ];
 
 function PhoneMockup({ children }) {
@@ -185,31 +197,17 @@ export default function KprPage() {
             <span className="text-[#0025F5]">Huniaja</span>
           </h2>
 
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-6">
-            {banks.map((b) => (
-              <div
-                key={b.name}
-                className="bg-white rounded-3xl border border-slate-100 shadow-sm hover:shadow-md transition-shadow h-28 md:h-36 flex items-center justify-center px-4"
-              >
-                <div className="flex items-center gap-2">
-                  <Landmark
-                    className="w-6 h-6 md:w-8 md:h-8"
-                    style={{ color: b.color }}
-                  />
-                  <span
-                    className="font-extrabold tracking-tight text-sm md:text-lg"
-                    style={{ color: b.color }}
-                  >
-                    {b.name}
-                  </span>
-                </div>
-              </div>
-            ))}
+          <div className="flex justify-center">
+            <img
+              src={BANK_LOGOS}
+              alt="Bank Syariah yang bekerjasama"
+              className="w-full max-w-4xl h-auto"
+            />
           </div>
         </div>
       </section>
 
-      {/* Steps */}
+      {/* Steps FAQ */}
       <section className="bg-slate-50 py-14 md:py-20">
         <div className="max-w-6xl mx-auto px-4 md:px-6 grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-12 items-center">
           <div>
@@ -219,22 +217,29 @@ export default function KprPage() {
               KPR Syariah di{" "}
               <span className="text-[#0025F5]">Huniaja</span>
             </h2>
-            <div className="space-y-3">
+            <Accordion type="single" collapsible defaultValue="step-0" className="space-y-3">
               {steps.map((s, i) => (
-                <div
+                <AccordionItem
                   key={i}
-                  className="bg-white rounded-full border border-slate-200 shadow-sm hover:shadow-md flex items-center gap-4 px-3 py-2.5 md:py-3 transition"
+                  value={`step-${i}`}
+                  className="bg-white rounded-2xl border border-slate-200 shadow-sm hover:shadow-md transition px-4 md:px-5"
                 >
-                  <span className="w-8 h-8 rounded-full bg-[#0025F5] text-white font-bold text-sm flex items-center justify-center shrink-0">
-                    {i + 1}
-                  </span>
-                  <span className="text-sm md:text-base font-medium text-slate-800">
-                    {s}
-                  </span>
-                  <ArrowRight className="ml-auto w-4 h-4 text-slate-400" />
-                </div>
+                  <AccordionTrigger className="py-4 hover:no-underline">
+                    <div className="flex items-center gap-4 text-left">
+                      <span className="w-8 h-8 rounded-full bg-[#0025F5] text-white font-bold text-sm flex items-center justify-center shrink-0">
+                        {i + 1}
+                      </span>
+                      <span className="text-sm md:text-base font-semibold text-slate-800">
+                        {s.q}
+                      </span>
+                    </div>
+                  </AccordionTrigger>
+                  <AccordionContent className="text-sm text-slate-600 leading-relaxed pl-12 pb-5">
+                    {s.a}
+                  </AccordionContent>
+                </AccordionItem>
               ))}
-            </div>
+            </Accordion>
           </div>
           <div className="flex justify-center">
             <div className="bg-white rounded-[44px] p-4 md:p-6 shadow-sm">

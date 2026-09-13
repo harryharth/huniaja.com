@@ -106,13 +106,13 @@ export default function Header() {
 
         <nav className="flex items-center gap-8 text-[15px] font-medium shrink-0">
           {navLinks.map((l) => (
-            <a
+            <Link
               key={l.label}
-              href={l.href}
+              to={l.href}
               className="text-white/90 hover:text-white transition-colors"
             >
               {l.label}
-            </a>
+            </Link>
           ))}
         </nav>
       </div>
@@ -122,14 +122,14 @@ export default function Header() {
         <div className="lg:hidden border-t border-white/15 bg-[#0025F5]">
           <nav className="px-4 py-3 flex flex-col">
             {navLinks.map((l) => (
-              <a
+              <Link
                 key={l.label}
-                href={l.href}
+                to={l.href}
                 className="py-2.5 text-[15px] font-medium text-white/90 hover:text-white border-b border-white/10"
                 onClick={() => setMobileOpen(false)}
               >
                 {l.label}
-              </a>
+              </Link>
             ))}
             <div className="pt-3 flex flex-col gap-2">
               <Button className="w-full bg-[#DAFF3D] hover:bg-[#c8ee1c] text-[#0025F5] rounded-full font-bold h-11 shadow-sm">
