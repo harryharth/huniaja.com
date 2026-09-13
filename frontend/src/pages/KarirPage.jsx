@@ -1,101 +1,137 @@
 import React, { useState } from "react";
 import {
-  Truck,
-  Sprout,
+  Code2,
+  Palette,
+  Megaphone,
+  Video,
+  TrendingUp,
+  Headphones,
+  PenTool,
+  MapPin,
+  Briefcase,
   Users,
-  Eye,
-  Handshake,
-  Lightbulb,
-  Award,
+  Sprout,
+  Heart,
+  Send,
   Sparkles,
+  Check,
+  X,
 } from "lucide-react";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import { Button } from "../components/ui/button";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogDescription,
+} from "../components/ui/dialog";
 
 const jobs = [
   {
     position: "Full-Stack Developer",
     code: "HAFSD",
     location: "Bogor - Jawa Barat",
+    type: "Full-time",
+    Icon: Code2,
+    color: "#0025F5",
+    desc: "Bangun fitur end-to-end di platform Huniaja bersama tim engineering yang kolaboratif.",
   },
   {
     position: "Graphic Designer",
     code: "HAUXD",
     location: "Bogor - Jawa Barat",
+    type: "Full-time",
+    Icon: Palette,
+    color: "#EC4899",
+    desc: "Rancang visual campaign, konten sosial, dan aset produk yang konsisten dengan brand kami.",
   },
   {
     position: "Digital Marketing Specialist",
     code: "HADMS",
     location: "Bogor - Jawa Barat",
+    type: "Full-time",
+    Icon: Megaphone,
+    color: "#F59E0B",
+    desc: "Kelola kampanye performance & branding lintas kanal untuk mempercepat pertumbuhan pengguna.",
   },
   {
     position: "Content Creator",
     code: "HACC",
     location: "Bogor - Jawa Barat",
+    type: "Full-time",
+    Icon: Video,
+    color: "#EF4444",
+    desc: "Produksi konten video, foto, dan copy yang mengedukasi audiens seputar properti.",
   },
   {
     position: "Sales & Business Development",
     code: "HASBD",
     location: "Jabodetabek",
+    type: "Full-time",
+    Icon: TrendingUp,
+    color: "#12B815",
+    desc: "Bangun kemitraan strategis dengan developer, agen, dan brand di seluruh Jabodetabek.",
   },
   {
-    position: "Customer Support & Community Manager",
+    position: "Customer Support & Community",
     code: "HACSCM",
     location: "Bogor - Jawa Barat",
+    type: "Full-time",
+    Icon: Headphones,
+    color: "#0EA5E9",
+    desc: "Layani pengguna dan bangun komunitas Huniaja yang saling mendukung dan aktif.",
   },
   {
     position: "Copywriting",
     code: "HACP",
     location: "Bogor - Jawa Barat",
+    type: "Full-time",
+    Icon: PenTool,
+    color: "#7C3AED",
+    desc: "Tulis narasi properti, artikel Berita, dan copy campaign yang mengundang aksi.",
   },
 ];
 
-const whyJoin = [
+const perks = [
   {
-    Icon: Truck,
-    title: "Lingkungan Kolaboratif & Inovatif",
-    desc: "Kami percaya ide-ide terbaik lahir dari kerja tim dan budaya terbuka.",
+    Icon: Users,
+    title: "Lingkungan Kolaboratif",
+    desc: "Ide-ide terbaik lahir dari kerja tim dan budaya terbuka.",
   },
   {
     Icon: Sprout,
     title: "Kesempatan Bertumbuh",
-    desc: "Dengan mentorship dan proyek menantang, Anda bisa meningkatkan skill dan karier Anda lebih cepat.",
+    desc: "Mentorship, learning budget, dan proyek yang menantang.",
   },
   {
-    Icon: Users,
-    title: "Misi yang Berdampak Nyata",
-    desc: "Setiap langkah Anda membawa perubahan untuk mempermudah jual beli properti di Indonesia.",
+    Icon: Heart,
+    title: "Dampak Nyata",
+    desc: "Setiap langkahmu mempermudah jual-beli properti di Indonesia.",
   },
-];
-
-const values = [
-  { Icon: Truck, title: "Fokus & Konsisten", desc: "Bergerak cepat tanpa kehilangan kualitas." },
-  { Icon: Eye, title: "Transparan", desc: "Jujur, terbuka, dan saling menghargai." },
-  { Icon: Handshake, title: "Kolaborasi Tanpa Ego", desc: "Sukses tim di atas kepentingan pribadi." },
-  { Icon: Lightbulb, title: "Solutif", desc: "Temukan jalan meski minim sumber daya." },
-  { Icon: Award, title: "Tanggung Jawab Penuh", desc: "Pegang komitmen sampai tuntas." },
-  { Icon: Sparkles, title: "Selalu Lebih Baik", desc: "Bertumbuh sedikit demi sedikit, setiap hari." },
 ];
 
 export default function KarirPage() {
-  const [form, setForm] = useState({
-    name: "",
-    email: "",
-    phone: "",
-    resume: "",
-    message: "",
-  });
-  const [submitted, setSubmitted] = useState(false);
+  const [openJob, setOpenJob] = useState(null);
+  const [talentOpen, setTalentOpen] = useState(false);
+  const [sent, setSent] = useState(false);
+  const [form, setForm] = useState(defaultForm());
 
-  const handleChange = (e) =>
-    setForm({ ...form, [e.target.name]: e.target.value });
+  function defaultForm() {
+    return { name: "", email: "", phone: "", resume: "", message: "" };
+  }
 
-  const handleSubmit = (e) => {
+  const handle = (e) => setForm({ ...form, [e.target.name]: e.target.value });
+  const submit = (e) => {
     e.preventDefault();
-    setSubmitted(true);
-    setTimeout(() => setSubmitted(false), 3500);
-    setForm({ name: "", email: "", phone: "", resume: "", message: "" });
+    setSent(true);
+    setForm(defaultForm());
+    setTimeout(() => {
+      setSent(false);
+      setOpenJob(null);
+      setTalentOpen(false);
+    }, 2500);
   };
 
   return (
@@ -103,236 +139,287 @@ export default function KarirPage() {
       <Header />
 
       {/* Hero */}
-      <section className="bg-[#0025F5] text-white pt-10 md:pt-16 pb-14 md:pb-20">
-        <div className="max-w-6xl mx-auto px-4 md:px-6 text-center">
-          <h1 className="text-4xl md:text-6xl font-black tracking-tight">
-            CAREERS
+      <section className="relative bg-[#0025F5] text-white overflow-hidden pt-16 md:pt-20 pb-16 md:pb-24">
+        <div className="absolute -top-24 -right-16 w-96 h-96 rounded-full bg-white/10 blur-3xl pointer-events-none" />
+        <div className="absolute -bottom-24 -left-16 w-96 h-96 rounded-full bg-[#12B815]/25 blur-3xl pointer-events-none" />
+        <div className="relative max-w-4xl mx-auto px-4 md:px-6 text-center">
+          <span className="inline-flex items-center gap-2 bg-white/10 border border-white/20 rounded-full px-3 py-1 text-[11px] font-bold tracking-widest">
+            <Sparkles className="w-3.5 h-3.5" /> KARIR DI HUNIAJA
+          </span>
+          <h1 className="text-4xl md:text-6xl font-black tracking-tight mt-4">
+            Bangun masa depan properti Indonesia bersama kami.
           </h1>
-          <p className="mt-3 md:mt-4 text-sm md:text-base text-white/90">
-            Customers see, hear and feel the power of energy.
+          <p className="mt-4 text-sm md:text-lg text-white/85 max-w-2xl mx-auto">
+            Kami sedang mencari talenta yang berani, kolaboratif, dan
+            berdampak untuk tumbuh bersama Huniaja.
           </p>
+          <div className="mt-8 flex flex-wrap justify-center gap-3">
+            <a
+              href="#openings"
+              className="bg-[#DAFF3D] hover:bg-[#c8ee1c] text-[#0025F5] font-bold rounded-full px-6 py-3 text-sm shadow-lg transition"
+            >
+              Lihat Lowongan
+            </a>
+            <button
+              onClick={() => setTalentOpen(true)}
+              className="bg-white/10 hover:bg-white/20 text-white border border-white/25 font-bold rounded-full px-6 py-3 text-sm transition"
+            >
+              Daftar Talent Pool
+            </button>
+          </div>
         </div>
       </section>
 
-      {/* Job Openings */}
-      <section className="bg-white py-14 md:py-16">
+      {/* Perks */}
+      <section className="bg-white py-14 md:py-16 -mt-8 md:-mt-12">
         <div className="max-w-5xl mx-auto px-4 md:px-6">
-          <div className="text-center mb-8 md:mb-10">
-            <h2 className="text-xl md:text-2xl font-bold text-slate-900">
-              Bergabunglah Bersama Tim Huniaja.com!
-            </h2>
-            <p className="text-sm md:text-base text-slate-600 max-w-3xl mx-auto mt-2">
-              Kami percaya bahwa setiap orang bisa berkontribusi untuk membuat
-              proses jual beli properti lebih mudah, transparan, dan
-              menyenangkan. Sebagai startup proptech baru, kami membuka peluang
-              untuk bergabung dan tumbuh bersama di posisi kunci berikut:
-            </p>
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 md:gap-6">
+            {perks.map((p) => (
+              <div
+                key={p.title}
+                className="bg-white rounded-3xl border border-slate-100 shadow-md hover:shadow-lg transition p-6"
+              >
+                <div className="w-12 h-12 rounded-2xl bg-blue-50 flex items-center justify-center">
+                  <p.Icon className="w-6 h-6 text-[#0025F5]" strokeWidth={2} />
+                </div>
+                <h3 className="font-bold text-slate-900 mt-4">{p.title}</h3>
+                <p className="text-sm text-slate-600 mt-2 leading-relaxed">
+                  {p.desc}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Job Openings - Cards */}
+      <section id="openings" className="bg-slate-50 py-14 md:py-20">
+        <div className="max-w-6xl mx-auto px-4 md:px-6">
+          <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-3 mb-8">
+            <div>
+              <h2 className="text-2xl md:text-3xl font-black text-slate-900">
+                Lowongan Terbuka
+              </h2>
+              <p className="text-sm text-slate-500 mt-2">
+                {jobs.length} posisi menanti kamu.
+              </p>
+            </div>
+            <button
+              onClick={() => setTalentOpen(true)}
+              className="text-sm font-semibold text-[#0025F5] hover:underline text-left md:text-right"
+            >
+              Tidak menemukan posisimu? Daftar Talent Pool ->
+            </button>
           </div>
 
-          <div className="rounded-2xl border border-slate-200 overflow-hidden shadow-sm">
-            <div className="grid grid-cols-12 bg-[#0025F5] text-white text-xs md:text-sm font-semibold">
-              <div className="col-span-5 md:col-span-6 px-4 py-3">Posisi</div>
-              <div className="col-span-3 md:col-span-2 px-4 py-3">Code</div>
-              <div className="col-span-4 px-4 py-3">Location</div>
-            </div>
-            {jobs.map((j, idx) => (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5">
+            {jobs.map((j) => (
               <div
                 key={j.code}
-                className={`grid grid-cols-12 items-center border-t border-slate-100 text-xs md:text-sm ${
-                  idx % 2 === 0 ? "bg-white" : "bg-slate-50/50"
-                }`}
+                className="bg-white rounded-3xl border border-slate-100 shadow-sm hover:shadow-md hover:-translate-y-0.5 p-5 md:p-6 transition-all flex flex-col"
               >
-                <div className="col-span-12 md:col-span-6 px-4 py-3 md:py-4 font-medium text-slate-800">
+                <div className="flex items-start justify-between gap-3">
+                  <div
+                    className="w-12 h-12 rounded-2xl flex items-center justify-center shrink-0"
+                    style={{ backgroundColor: `${j.color}15` }}
+                  >
+                    <j.Icon
+                      className="w-6 h-6"
+                      style={{ color: j.color }}
+                      strokeWidth={2}
+                    />
+                  </div>
+                  <span className="text-[10px] font-bold tracking-widest bg-slate-100 text-slate-600 rounded-full px-2 py-1">
+                    {j.code}
+                  </span>
+                </div>
+                <h3 className="font-bold text-slate-900 mt-4 text-base md:text-lg leading-tight">
                   {j.position}
+                </h3>
+                <p className="text-xs md:text-sm text-slate-500 mt-2 leading-relaxed flex-1">
+                  {j.desc}
+                </p>
+                <div className="flex items-center gap-3 mt-4 text-xs text-slate-600">
+                  <span className="flex items-center gap-1">
+                    <MapPin className="w-3.5 h-3.5 text-slate-400" />
+                    {j.location}
+                  </span>
+                  <span className="flex items-center gap-1">
+                    <Briefcase className="w-3.5 h-3.5 text-slate-400" />
+                    {j.type}
+                  </span>
                 </div>
-                <div className="col-span-4 md:col-span-2 px-4 pb-2 md:py-4 text-slate-600">
-                  {j.code}
-                </div>
-                <div className="col-span-8 md:col-span-3 px-4 pb-3 md:py-4 text-slate-600">
-                  {j.location}
-                </div>
-                <div className="col-span-12 md:col-span-1 px-4 pb-4 md:py-3 flex md:justify-end">
-                  <button className="bg-[#12B815] hover:bg-[#0fa112] text-white text-xs font-bold px-6 py-1.5 rounded-full transition shadow-sm">
-                    APPLY
-                  </button>
-                </div>
+                <Button
+                  onClick={() => setOpenJob(j)}
+                  className="w-full mt-5 bg-[#12B815] hover:bg-[#0fa112] text-white rounded-full font-bold h-11 text-sm"
+                >
+                  Lamar Sekarang
+                </Button>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Team image + Why Join */}
-      <section className="bg-white pb-14 md:pb-20">
+      {/* Big CTA */}
+      <section className="bg-white py-14 md:py-16">
         <div className="max-w-5xl mx-auto px-4 md:px-6">
-          <div className="rounded-[40px] overflow-hidden shadow-lg">
-            <img
-              src="https://images.unsplash.com/photo-1568992687947-868a62a9f521?w=1400&q=80"
-              alt="Tim Huniaja"
-              className="w-full h-64 md:h-96 object-cover"
-            />
-          </div>
-
-          <div className="text-center mt-10 md:mt-14">
-            <h2 className="text-xl md:text-2xl font-bold text-slate-900">
-              Mengapa Bergabung Bersama Kami?
-            </h2>
-            <p className="text-sm text-slate-500 mt-1">
-              Alasan Memilih Karier di Huniaja.com
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-5 md:gap-6 mt-8">
-            {whyJoin.map((w) => (
-              <div
-                key={w.title}
-                className="bg-white rounded-3xl border border-slate-100 shadow-sm hover:shadow-md p-6 text-center transition"
-              >
-                <div className="w-16 h-16 mx-auto rounded-2xl bg-blue-50 flex items-center justify-center">
-                  <w.Icon
-                    className="w-8 h-8 text-[#0025F5]"
-                    strokeWidth={2}
-                  />
-                </div>
-                <h3 className="font-bold text-slate-900 mt-4">{w.title}</h3>
-                <p className="text-xs md:text-sm text-slate-500 mt-2 leading-relaxed">
-                  {w.desc}
-                </p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* CTA Banner */}
-      <section className="bg-[#0025F5] text-white py-10 md:py-12">
-        <div className="max-w-6xl mx-auto px-4 md:px-6 flex flex-col md:flex-row md:items-center justify-between gap-6">
-          <div className="max-w-2xl">
-            <h3 className="text-xl md:text-2xl font-extrabold mb-2">
-              Tertarik? Kirim Lamaran Anda!
-            </h3>
-            <p className="text-sm md:text-base text-white/90">
-              Kami ingin mendengar cerita dan keahlian Anda. Unggah CV Anda
-              dan bergabunglah dalam perjalanan kami untuk membuat jual-beli
-              properti lebih mudah dan transparan.
-            </p>
-          </div>
-          <Button className="bg-[#DAFF3D] hover:bg-[#c8ee1c] text-[#0025F5] rounded-full font-bold h-12 px-8 shadow-lg self-start md:self-auto">
-            Kirim Lamaran Anda Sekarang
-          </Button>
-        </div>
-      </section>
-
-      {/* Values */}
-      <section className="bg-slate-50 py-14 md:py-20">
-        <div className="max-w-6xl mx-auto px-4 md:px-6">
-          <div className="text-center mb-10">
-            <h2 className="text-xl md:text-2xl font-bold text-slate-900">
-              Nilai Utama Kami
-            </h2>
-            <p className="text-sm text-slate-500 mt-2 max-w-2xl mx-auto">
-              Kami mendukung setiap orang untuk berkembang optimal Di
-              huniaja.com, kami melihat potensi setiap individu. Apapun tujuan
-              kariermu, menjadi pemimpin tim, mengeksplorasi peran baru, atau
-              memperluas keterampilan kami siap mendukung perjalananmu.
-            </p>
-          </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6">
-            {values.map((v) => (
-              <div
-                key={v.title}
-                className="bg-white rounded-3xl border border-slate-100 shadow-sm hover:shadow-md p-6 text-center transition"
-              >
-                <div className="w-14 h-14 mx-auto rounded-2xl bg-blue-50 flex items-center justify-center">
-                  <v.Icon className="w-7 h-7 text-[#0025F5]" />
-                </div>
-                <h3 className="font-bold text-slate-900 mt-4">{v.title}</h3>
-                <p className="text-xs md:text-sm text-slate-500 mt-2 leading-relaxed">
-                  {v.desc}
-                </p>
-                <button className="text-[#0025F5] text-xs font-semibold mt-4 hover:underline">
-                  Lihat Detail
-                </button>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Talent Pool Form */}
-      <section className="bg-slate-50 pb-16 md:pb-20">
-        <div className="max-w-3xl mx-auto px-4 md:px-6">
-          <div className="text-center mb-8">
-            <h2 className="text-xl md:text-2xl font-bold text-slate-900">
-              Daftar Talent Pool huniaja.com
-            </h2>
-            <p className="text-sm text-slate-500 mt-2 max-w-xl mx-auto">
-              Gabung di Talent Pool kami dan jadi orang pertama yang mendapat
-              info peluang karier terbaru.
-            </p>
-          </div>
-
-          <form
-            onSubmit={handleSubmit}
-            className="bg-white rounded-[32px] shadow-lg p-6 md:p-10"
-          >
-            <h3 className="text-center text-lg md:text-xl font-bold text-slate-900 mb-6">
-              We always hire talented and new people
-            </h3>
-            <div className="space-y-3">
-              <Input
-                name="name"
-                placeholder="Your name"
-                value={form.name}
-                onChange={handleChange}
-              />
-              <Input
-                name="email"
-                type="email"
-                placeholder="Your E-mail"
-                value={form.email}
-                onChange={handleChange}
-              />
-              <Input
-                name="phone"
-                placeholder="Your Phone"
-                value={form.phone}
-                onChange={handleChange}
-              />
-              <Input
-                name="resume"
-                placeholder="Your Resume (link CV / Google Drive)"
-                value={form.resume}
-                onChange={handleChange}
-              />
-              <textarea
-                name="message"
-                placeholder="Your Message"
-                value={form.message}
-                onChange={handleChange}
-                rows={4}
-                className="w-full rounded-2xl border border-slate-200 focus:border-[#0025F5] focus:ring-1 focus:ring-[#0025F5] outline-none px-4 py-3 text-sm text-slate-800 placeholder:text-slate-400"
-              />
-            </div>
-            <div className="flex justify-center mt-6">
-              <Button
-                type="submit"
-                className="bg-[#0025F5] hover:bg-[#001fd1] text-white rounded-full font-bold px-10 h-12 text-sm shadow-md"
-              >
-                APPLY NOW
-              </Button>
-            </div>
-            {submitted && (
-              <p className="text-center text-sm text-[#12B815] font-semibold mt-4">
-                Lamaran terkirim! Kami akan menghubungi Anda segera.
+          <div className="bg-[#0025F5] text-white rounded-[36px] md:rounded-[44px] relative overflow-hidden p-8 md:p-12 grid grid-cols-1 md:grid-cols-3 gap-6 items-center">
+            <div className="md:col-span-2">
+              <h3 className="text-xl md:text-2xl font-bold">
+                Belum menemukan posisi yang cocok?
+              </h3>
+              <p className="text-sm md:text-base text-white/85 mt-2 max-w-xl">
+                Daftar di Talent Pool kami dan jadi yang pertama tahu saat
+                peluang baru dibuka. Kami akan menghubungi ketika ada peran
+                yang cocok denganmu.
               </p>
-            )}
-          </form>
+            </div>
+            <div className="flex md:justify-end">
+              <button
+                onClick={() => setTalentOpen(true)}
+                className="bg-[#DAFF3D] hover:bg-[#c8ee1c] text-[#0025F5] font-bold rounded-full px-6 py-3 text-sm shadow-lg transition"
+              >
+                Daftar Talent Pool
+              </button>
+            </div>
+          </div>
         </div>
       </section>
 
       <Footer />
+
+      {/* Apply Modal */}
+      <Dialog
+        open={!!openJob}
+        onOpenChange={(v) => !v && setOpenJob(null)}
+      >
+        <DialogContent className="max-w-lg rounded-3xl">
+          <DialogHeader>
+            <div className="flex items-center gap-3">
+              {openJob && (
+                <div
+                  className="w-11 h-11 rounded-2xl flex items-center justify-center"
+                  style={{ backgroundColor: `${openJob.color}15` }}
+                >
+                  <openJob.Icon
+                    className="w-5 h-5"
+                    style={{ color: openJob.color }}
+                  />
+                </div>
+              )}
+              <div>
+                <DialogTitle className="text-lg">
+                  {openJob ? `Lamar: ${openJob.position}` : "Lamar"}
+                </DialogTitle>
+                <DialogDescription className="text-xs">
+                  {openJob ? `Kode: ${openJob.code} • ${openJob.location}` : ""}
+                </DialogDescription>
+              </div>
+            </div>
+          </DialogHeader>
+          <ApplyForm
+            form={form}
+            handle={handle}
+            submit={submit}
+            sent={sent}
+            positionLabel={openJob?.position}
+          />
+        </DialogContent>
+      </Dialog>
+
+      {/* Talent Pool Modal */}
+      <Dialog
+        open={talentOpen}
+        onOpenChange={setTalentOpen}
+      >
+        <DialogContent className="max-w-lg rounded-3xl">
+          <DialogHeader>
+            <div className="flex items-center gap-3">
+              <div className="w-11 h-11 rounded-2xl bg-blue-50 flex items-center justify-center">
+                <Sparkles className="w-5 h-5 text-[#0025F5]" />
+              </div>
+              <div>
+                <DialogTitle className="text-lg">
+                  Daftar Talent Pool Huniaja
+                </DialogTitle>
+                <DialogDescription className="text-xs">
+                  Kami akan menghubungi saat ada peluang yang cocok.
+                </DialogDescription>
+              </div>
+            </div>
+          </DialogHeader>
+          <ApplyForm
+            form={form}
+            handle={handle}
+            submit={submit}
+            sent={sent}
+            positionLabel="Talent Pool"
+          />
+        </DialogContent>
+      </Dialog>
     </div>
+  );
+}
+
+function ApplyForm({ form, handle, submit, sent, positionLabel }) {
+  return (
+    <form onSubmit={submit} className="space-y-3 mt-2">
+      <Input
+        name="name"
+        placeholder="Nama Lengkap"
+        value={form.name}
+        onChange={handle}
+        required
+      />
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+        <Input
+          name="email"
+          type="email"
+          placeholder="Email"
+          value={form.email}
+          onChange={handle}
+          required
+        />
+        <Input
+          name="phone"
+          placeholder="Nomor WhatsApp"
+          value={form.phone}
+          onChange={handle}
+          required
+        />
+      </div>
+      <Input
+        name="resume"
+        placeholder="Link CV / Portofolio (Google Drive, LinkedIn...)"
+        value={form.resume}
+        onChange={handle}
+      />
+      <textarea
+        name="message"
+        placeholder={
+          positionLabel
+            ? `Ceritakan kenapa kamu cocok untuk ${positionLabel}...`
+            : "Ceritakan singkat tentang dirimu"
+        }
+        rows={4}
+        value={form.message}
+        onChange={handle}
+        className="w-full rounded-2xl border border-slate-200 focus:border-[#0025F5] focus:ring-1 focus:ring-[#0025F5] outline-none px-4 py-3 text-sm text-slate-800 placeholder:text-slate-400"
+      />
+      <Button
+        type="submit"
+        className="w-full bg-[#0025F5] hover:bg-[#001fd1] text-white rounded-full font-bold h-11 text-sm"
+      >
+        <Send className="w-4 h-4 mr-2" /> Kirim Lamaran
+      </Button>
+      {sent && (
+        <div className="flex items-center justify-center gap-2 text-sm text-[#12B815] font-semibold pt-1">
+          <Check className="w-4 h-4" /> Lamaran terkirim! Kami akan menghubungi
+          Anda.
+        </div>
+      )}
+    </form>
   );
 }
 
