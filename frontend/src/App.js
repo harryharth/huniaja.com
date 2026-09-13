@@ -50,7 +50,6 @@ const Home = () => (
     <QuickCategories />
     <NewListings />
     <PopulerSection />
-    <HomeHowItWorks />
     <KerjaSama />
     <HomeStories />
     <WhyHuniaja />
