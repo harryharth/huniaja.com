@@ -25,6 +25,8 @@ import {
   AccordionTrigger,
 } from "../components/ui/accordion";
 import { KprSyariahDialog, TakeOverDialog } from "./KprDialogs";
+import { Building2, Sparkle } from "lucide-react";
+import { KPR_GLOSSARY, ALPHABET } from "../data/kprGlossary";
 
 const BANK_LOGOS = "https://customer-assets-gfyr7b9c.emergentagent.net/job_branding-suite-6/artifacts/z220basa_bank.png";
 
@@ -135,6 +137,8 @@ function PhoneMockup({ children }) {
 export default function KprPage() {
   const [kprOpen, setKprOpen] = useState(false);
   const [takeoverOpen, setTakeoverOpen] = useState(false);
+  const [kprType, setKprType] = useState("konvensional"); // "konvensional" | "syariah"
+  const [activeLetter, setActiveLetter] = useState("A");
   const t = useT();
 
   return (
@@ -348,24 +352,75 @@ export default function KprPage() {
             <h2 className="text-xl md:text-2xl font-bold text-slate-900 mb-6">
               {t("Simulasi Cicilan KPR")}
               <br />
-              {t("dan Take Over Syariah")}
+              {kprType === "syariah"
+                ? t("dan Take Over Syariah")
+                : "dan Take Over Konvensional"}
             </h2>
+
+            {/* KPR type pill toggle */}
+            <div
+              className="inline-flex items-center gap-2 bg-white rounded-full p-1.5 shadow-sm border border-slate-200 mb-6"
+              data-testid="kpr-type-toggle"
+            >
+              {[
+                { id: "konvensional", label: "KPR Konvensional", Icon: Building2 },
+                { id: "syariah", label: "KPR Syariah", Icon: Moon },
+              ].map(({ id, label, Icon }) => {
+                const active = kprType === id;
+                return (
+                  <button
+                    key={id}
+                    type="button"
+                    onClick={() => setKprType(id)}
+                    data-testid={`kpr-type-${id}`}
+                    className={`inline-flex items-center gap-2 rounded-full px-4 py-2 text-xs md:text-sm font-bold transition-all ${
+                      active
+                        ? "bg-white text-[#001DF3] border-2 border-[#001DF3] shadow-sm"
+                        : "text-slate-500 hover:text-slate-800 border-2 border-transparent"
+                    }`}
+                  >
+                    <Icon className="w-4 h-4" />
+                    {label}
+                  </button>
+                );
+              })}
+            </div>
 
             <SimCard
               num={1}
               Icon={Calculator}
-              title={t("KPR Syariah")}
-              desc="Hitung estimasi cicilan KPR Syariah per bulan dari berbagai program bank yang tersedia."
-              cta={t("Simulasikan Cicilan KPR Syariah")}
+              title={kprType === "syariah" ? t("KPR Syariah") : "KPR Konvensional"}
+              desc={
+                kprType === "syariah"
+                  ? "Hitung estimasi cicilan KPR Syariah per bulan dari berbagai program bank yang tersedia."
+                  : "Hitung estimasi cicilan KPR Konvensional per bulan dari berbagai program bank yang tersedia."
+              }
+              cta={
+                kprType === "syariah"
+                  ? t("Simulasikan Cicilan KPR Syariah")
+                  : "Simulasikan Cicilan KPR Konvensional"
+              }
               onClick={() => setKprOpen(true)}
             />
             <div className="h-4" />
             <SimCard
               num={2}
               Icon={RefreshCw}
-              title={t("KPR Take Over Syariah")}
-              desc="Hitung estimasi cicilan KPR Take Over Syariah dari KPR yang sedang berjalan saat ini."
-              cta={t("Simulasikan Take Over Syariah")}
+              title={
+                kprType === "syariah"
+                  ? t("KPR Take Over Syariah")
+                  : "KPR Take Over Konvensional"
+              }
+              desc={
+                kprType === "syariah"
+                  ? "Hitung estimasi cicilan KPR Take Over Syariah dari KPR yang sedang berjalan saat ini."
+                  : "Hitung estimasi cicilan Take Over Konvensional dari KPR yang sedang berjalan saat ini."
+              }
+              cta={
+                kprType === "syariah"
+                  ? t("Simulasikan Take Over Syariah")
+                  : "Simulasikan Take Over Konvensional"
+              }
               onClick={() => setTakeoverOpen(true)}
             />
           </div>
@@ -445,6 +500,70 @@ export default function KprPage() {
                   92% disetujui
                 </div>
               </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Kamus KPR */}
+      <section className="bg-white py-14 md:py-20" data-testid="kpr-glossary-section">
+        <div className="max-w-6xl mx-auto px-4 md:px-6">
+          <div className="mb-8">
+            <h2 className="text-2xl md:text-3xl font-black text-slate-900 tracking-tight">
+              Kamus KPR
+            </h2>
+            <p className="text-sm text-slate-500 mt-2">
+              Cari istilah seputar KPR yang belum kamu ketahui
+            </p>
+            <div className="h-px bg-slate-200 mt-5" />
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12">
+            {/* Alphabet picker */}
+            <div className="md:col-span-1">
+              <div className="grid grid-cols-6 gap-2 md:gap-2.5">
+                {ALPHABET.map((L) => {
+                  const active = activeLetter === L;
+                  const hasEntries = (KPR_GLOSSARY[L] || []).length > 0;
+                  return (
+                    <button
+                      key={L}
+                      onClick={() => setActiveLetter(L)}
+                      disabled={!hasEntries}
+                      data-testid={`kpr-glossary-letter-${L}`}
+                      className={`w-10 h-10 md:w-11 md:h-11 rounded-full text-sm font-bold flex items-center justify-center transition-all ${
+                        active
+                          ? "border-2 border-[#001DF3] text-[#001DF3] bg-white shadow-sm"
+                          : hasEntries
+                          ? "border border-slate-200 text-slate-700 hover:border-[#001DF3] hover:text-[#001DF3] bg-white"
+                          : "border border-slate-100 text-slate-300 bg-slate-50 cursor-not-allowed"
+                      }`}
+                    >
+                      {L}
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
+
+            {/* Terms list */}
+            <div className="md:col-span-2 space-y-5" data-testid="kpr-glossary-terms">
+              {(KPR_GLOSSARY[activeLetter] || []).length === 0 ? (
+                <p className="text-sm text-slate-400 italic">
+                  Belum ada istilah untuk huruf ini.
+                </p>
+              ) : (
+                (KPR_GLOSSARY[activeLetter] || []).map((item, i) => (
+                  <div key={i}>
+                    <h3 className="font-bold text-slate-900 text-[15px] md:text-base">
+                      {item.term}
+                    </h3>
+                    <p className="text-sm text-slate-600 leading-relaxed mt-1.5">
+                      {item.def}
+                    </p>
+                  </div>
+                ))
+              )}
             </div>
           </div>
         </div>
