@@ -20,6 +20,7 @@ import {
   Trees,
   Wifi,
   CheckCircle2,
+  ChevronDown,
 } from "lucide-react";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
@@ -248,66 +249,7 @@ export default function PropertyDetailPage() {
               <h2 className="text-lg md:text-xl font-black text-slate-900">
                 Fasilitas &amp; Lingkungan
               </h2>
-              {(() => {
-                const grouped = groupFacilities(item.facilities || []);
-                const entries = Object.entries(grouped);
-                if (entries.length === 0) {
-                  return (
-                    <p className="text-sm text-slate-500 mt-4">
-                      Belum ada fasilitas yang ditandai untuk properti ini.
-                    </p>
-                  );
-                }
-                return (
-                  <div className="mt-5 space-y-5">
-                    {entries.map(([category, items]) => {
-                      const color = (CATEGORY_META[category] || { color: "#001DF3" }).color;
-                      return (
-                        <div key={category}>
-                          <div className="flex items-center gap-2 mb-3">
-                            <span
-                              className="w-2 h-2 rounded-full"
-                              style={{ backgroundColor: color }}
-                            />
-                            <span
-                              className="text-[11px] font-black uppercase tracking-widest"
-                              style={{ color }}
-                            >
-                              {category}
-                            </span>
-                            <span className="text-[11px] text-slate-400 font-semibold">
-                              ({items.length})
-                            </span>
-                          </div>
-                          <div className="grid grid-cols-2 md:grid-cols-3 gap-2.5">
-                            {items.map((name) => (
-                              <div
-                                key={name}
-                                data-testid={`facility-${name}`}
-                                className="flex items-center gap-2.5 bg-slate-50 rounded-2xl px-3 py-2.5"
-                              >
-                                <span
-                                  className="w-7 h-7 rounded-lg flex items-center justify-center shrink-0"
-                                  style={{ backgroundColor: `${color}18` }}
-                                >
-                                  <CheckCircle2
-                                    className="w-4 h-4"
-                                    style={{ color }}
-                                    strokeWidth={2.2}
-                                  />
-                                </span>
-                                <span className="text-sm text-slate-700 font-medium leading-tight">
-                                  {name}
-                                </span>
-                              </div>
-                            ))}
-                          </div>
-                        </div>
-                      );
-                    })}
-                  </div>
-                );
-              })()}
+              <FacilitiesAccordion facilities={item.facilities || []} />
             </div>
 
             {/* Location */}
@@ -531,6 +473,111 @@ function PropertyHeader({ item }) {
           <span className="font-semibold">{item.specs.lb}</span>
         </span>
       </div>
+    </div>
+  );
+}
+
+
+function FacilitiesAccordion({ facilities }) {
+  const grouped = groupFacilities(facilities);
+  const entries = Object.entries(grouped);
+  // Default: first category expanded, rest collapsed (nicer FTUE than all closed)
+  const [openMap, setOpenMap] = useState(() => {
+    const init = {};
+    entries.forEach(([cat], idx) => {
+      init[cat] = idx === 0;
+    });
+    return init;
+  });
+
+  if (entries.length === 0) {
+    return (
+      <p className="text-sm text-slate-500 mt-4">
+        Belum ada fasilitas yang ditandai untuk properti ini.
+      </p>
+    );
+  }
+
+  const toggle = (cat) =>
+    setOpenMap((m) => ({ ...m, [cat]: !m[cat] }));
+
+  return (
+    <div className="mt-5 space-y-3">
+      {entries.map(([category, items]) => {
+        const color = (CATEGORY_META[category] || { color: "#001DF3" }).color;
+        const isOpen = !!openMap[category];
+        return (
+          <div
+            key={category}
+            data-testid={`facility-cat-${category}`}
+            className="rounded-2xl border border-slate-100 overflow-hidden bg-white"
+          >
+            <button
+              type="button"
+              onClick={() => toggle(category)}
+              aria-expanded={isOpen}
+              className="w-full flex items-center justify-between gap-3 px-4 md:px-5 py-3.5 md:py-4 hover:bg-slate-50 transition text-left"
+            >
+              <div className="flex items-center gap-3 min-w-0">
+                <span
+                  className="w-8 h-8 rounded-xl flex items-center justify-center shrink-0"
+                  style={{ backgroundColor: `${color}18` }}
+                >
+                  <CheckCircle2
+                    className="w-4 h-4"
+                    style={{ color }}
+                    strokeWidth={2.4}
+                  />
+                </span>
+                <div className="flex items-baseline gap-2 min-w-0">
+                  <span
+                    className="text-sm md:text-[15px] font-black uppercase tracking-wide truncate"
+                    style={{ color }}
+                  >
+                    {category}
+                  </span>
+                  <span className="text-[11px] text-slate-400 font-semibold shrink-0">
+                    ({items.length})
+                  </span>
+                </div>
+              </div>
+              <ChevronDown
+                className={`w-5 h-5 shrink-0 text-slate-400 transition-transform ${
+                  isOpen ? "rotate-180" : ""
+                }`}
+                style={isOpen ? { color } : undefined}
+              />
+            </button>
+            {isOpen && (
+              <div className="px-4 md:px-5 pb-4 md:pb-5 pt-1 border-t border-slate-100">
+                <div className="grid grid-cols-2 md:grid-cols-3 gap-2.5 mt-3">
+                  {items.map((name) => (
+                    <div
+                      key={name}
+                      data-testid={`facility-${name}`}
+                      className="flex items-center gap-2.5 bg-slate-50 rounded-2xl px-3 py-2.5"
+                    >
+                      <span
+                        className="w-7 h-7 rounded-lg flex items-center justify-center shrink-0"
+                        style={{ backgroundColor: `${color}18` }}
+                      >
+                        <CheckCircle2
+                          className="w-4 h-4"
+                          style={{ color }}
+                          strokeWidth={2.2}
+                        />
+                      </span>
+                      <span className="text-sm text-slate-700 font-medium leading-tight">
+                        {name}
+                      </span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+          </div>
+        );
+      })}
     </div>
   );
 }

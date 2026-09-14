@@ -20,6 +20,7 @@ import Header from "../components/Header";
 import Footer from "../components/Footer";
 import { Button } from "../components/ui/button";
 import { WA_URL, WA_DISPLAY } from "../components/ChatWidget";
+import { submitLead } from "../lib/publicApi";
 
 const chapters = [
   {
@@ -140,20 +141,45 @@ export default function KonsultasiPage() {
     message: "",
   });
   const [sent, setSent] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
 
   const handle = (e) => setForm({ ...form, [e.target.name]: e.target.value });
-  const submit = (e) => {
+  const submit = async (e) => {
     e.preventDefault();
-    setSent(true);
-    setForm({
-      name: "",
-      phone: "",
-      goal: "Beli Rumah Pertama",
-      budget: "300 - 600 Juta",
-      timeline: "Dalam 3 Bulan",
-      message: "",
-    });
-    setTimeout(() => setSent(false), 4000);
+    if (!form.name.trim() || !form.phone.trim()) {
+      setError("Nama & nomor WhatsApp wajib diisi.");
+      return;
+    }
+    setError("");
+    setLoading(true);
+    try {
+      await submitLead("konsultasi", form);
+      // Build WhatsApp handoff message
+      const waMsg =
+        `Halo Huniaja, saya ingin sesi konsultasi properti.\n\n` +
+        `Nama: ${form.name}\n` +
+        `WhatsApp: ${form.phone}\n` +
+        `Tujuan: ${form.goal}\n` +
+        `Budget: ${form.budget}\n` +
+        `Timeline: ${form.timeline}` +
+        (form.message ? `\nCatatan: ${form.message}` : "");
+      window.open(WA_URL(waMsg), "_blank", "noopener,noreferrer");
+      setSent(true);
+      setForm({
+        name: "",
+        phone: "",
+        goal: "Beli Rumah Pertama",
+        budget: "300 - 600 Juta",
+        timeline: "Dalam 3 Bulan",
+        message: "",
+      });
+      setTimeout(() => setSent(false), 5000);
+    } catch (err) {
+      setError("Gagal mengirim data. Coba lagi ya.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -476,13 +502,22 @@ export default function KonsultasiPage() {
               />
               <Button
                 type="submit"
-                className="w-full bg-[#001DF3] hover:bg-[#0017c2] text-white rounded-full font-bold h-12 text-sm shadow-md"
+                disabled={loading}
+                data-testid="konsultasi-submit-button"
+                className="w-full bg-[#001DF3] hover:bg-[#0017c2] text-white rounded-full font-bold h-12 text-sm shadow-md disabled:opacity-60"
               >
-                <Send className="w-4 h-4 mr-2" /> Pesan Sesi Konsultasi
+                <Send className="w-4 h-4 mr-2" />{" "}
+                {loading ? "Mengirim..." : "Pesan Sesi Konsultasi"}
               </Button>
+              {error && (
+                <p className="text-center text-sm text-red-600 font-semibold">
+                  {error}
+                </p>
+              )}
               {sent && (
                 <p className="text-center text-sm text-[#00B512] font-semibold">
-                  Terima kasih! Konsultan kami akan segera menghubungimu.
+                  Terima kasih! Konsultan kami akan segera menghubungimu via
+                  WhatsApp.
                 </p>
               )}
             </form>

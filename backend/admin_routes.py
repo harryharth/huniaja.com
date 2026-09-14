@@ -466,7 +466,7 @@ def create_public_router(db) -> APIRouter:
     # Public submissions (form) - no auth
     @router.post("/submissions/{type}")
     async def create_submission(type: str, body: dict):
-        if type not in ("konsultasi", "karir", "kontak"):
+        if type not in ("konsultasi", "karir", "kontak", "brosur"):
             raise HTTPException(400, "Invalid submission type")
         rec = {
             "id": str(uuid.uuid4()),

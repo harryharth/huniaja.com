@@ -13,6 +13,7 @@ import Header from "../components/Header";
 import Footer from "../components/Footer";
 import { Button } from "../components/ui/button";
 import { WA_URL, WA_DISPLAY } from "../components/ChatWidget";
+import { submitLead } from "../lib/publicApi";
 
 const contactMethods = [
   {
@@ -53,13 +54,35 @@ export default function KontakPage() {
     message: "",
   });
   const [sent, setSent] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
 
   const handle = (e) => setForm({ ...form, [e.target.name]: e.target.value });
-  const submit = (e) => {
+  const submit = async (e) => {
     e.preventDefault();
-    setSent(true);
-    setForm({ name: "", email: "", subject: "", message: "" });
-    setTimeout(() => setSent(false), 3500);
+    if (!form.name.trim() || !form.email.trim() || !form.message.trim()) {
+      setError("Nama, email, dan pesan wajib diisi.");
+      return;
+    }
+    setError("");
+    setLoading(true);
+    try {
+      await submitLead("kontak", form);
+      const waMsg =
+        `Halo Huniaja, saya ingin menghubungi tim melalui form Kontak.\n\n` +
+        `Nama: ${form.name}\n` +
+        `Email: ${form.email}` +
+        (form.subject ? `\nSubjek: ${form.subject}` : "") +
+        `\n\nPesan:\n${form.message}`;
+      window.open(WA_URL(waMsg), "_blank", "noopener,noreferrer");
+      setSent(true);
+      setForm({ name: "", email: "", subject: "", message: "" });
+      setTimeout(() => setSent(false), 5000);
+    } catch (err) {
+      setError("Gagal mengirim pesan. Coba lagi ya.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -150,14 +173,22 @@ export default function KontakPage() {
                 <div className="flex justify-end">
                   <Button
                     type="submit"
-                    className="bg-[#001DF3] hover:bg-[#0017c2] text-white rounded-full font-bold px-6 h-11 text-sm"
+                    disabled={loading}
+                    data-testid="kontak-submit-button"
+                    className="bg-[#001DF3] hover:bg-[#0017c2] text-white rounded-full font-bold px-6 h-11 text-sm disabled:opacity-60"
                   >
-                    <Send className="w-4 h-4 mr-2" /> Kirim Pesan
+                    <Send className="w-4 h-4 mr-2" />{" "}
+                    {loading ? "Mengirim..." : "Kirim Pesan"}
                   </Button>
                 </div>
+                {error && (
+                  <p className="text-sm text-red-600 font-semibold text-right">
+                    {error}
+                  </p>
+                )}
                 {sent && (
                   <p className="text-sm text-[#00B512] font-semibold text-right">
-                    Pesan terkirim. Terima kasih telah menghubungi kami!
+                    Pesan terkirim & terhubung ke WhatsApp. Terima kasih!
                   </p>
                 )}
               </form>

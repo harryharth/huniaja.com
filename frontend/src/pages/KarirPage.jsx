@@ -29,6 +29,8 @@ import {
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import { Button } from "../components/ui/button";
+import { WA_URL } from "../components/ChatWidget";
+import { submitLead } from "../lib/publicApi";
 import {
   Dialog,
   DialogContent,
@@ -236,6 +238,8 @@ export default function KarirPage() {
   const [openJob, setOpenJob] = useState(null);
   const [talentOpen, setTalentOpen] = useState(false);
   const [sent, setSent] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
   const [form, setForm] = useState(defaultForm());
 
   function defaultForm() {
@@ -243,15 +247,42 @@ export default function KarirPage() {
   }
 
   const handle = (e) => setForm({ ...form, [e.target.name]: e.target.value });
-  const submit = (e) => {
+  const submit = async (e) => {
     e.preventDefault();
-    setSent(true);
-    setForm(defaultForm());
-    setTimeout(() => {
-      setSent(false);
-      setOpenJob(null);
-      setTalentOpen(false);
-    }, 2500);
+    if (!form.name.trim() || !form.phone.trim() || !form.email.trim()) {
+      setError("Nama, email & nomor WhatsApp wajib diisi.");
+      return;
+    }
+    setError("");
+    setLoading(true);
+    const positionLabel = openJob?.position || "Talent Pool";
+    const positionCode = openJob?.code || "TALENT-POOL";
+    try {
+      await submitLead("karir", {
+        ...form,
+        position: positionLabel,
+        code: positionCode,
+      });
+      const waMsg =
+        `Halo Huniaja, saya ingin melamar posisi *${positionLabel}* (${positionCode}).\n\n` +
+        `Nama: ${form.name}\n` +
+        `Email: ${form.email}\n` +
+        `WhatsApp: ${form.phone}` +
+        (form.resume ? `\nCV/Portofolio: ${form.resume}` : "") +
+        (form.message ? `\n\nCatatan:\n${form.message}` : "");
+      window.open(WA_URL(waMsg), "_blank", "noopener,noreferrer");
+      setSent(true);
+      setForm(defaultForm());
+      setTimeout(() => {
+        setSent(false);
+        setOpenJob(null);
+        setTalentOpen(false);
+      }, 3000);
+    } catch (err) {
+      setError("Gagal mengirim lamaran. Coba lagi ya.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -666,6 +697,8 @@ export default function KarirPage() {
             handle={handle}
             submit={submit}
             sent={sent}
+            loading={loading}
+            error={error}
             positionLabel={openJob?.position}
           />
         </DialogContent>
@@ -697,6 +730,8 @@ export default function KarirPage() {
             handle={handle}
             submit={submit}
             sent={sent}
+            loading={loading}
+            error={error}
             positionLabel="Talent Pool"
           />
         </DialogContent>
@@ -705,7 +740,7 @@ export default function KarirPage() {
   );
 }
 
-function ApplyForm({ form, handle, submit, sent, positionLabel }) {
+function ApplyForm({ form, handle, submit, sent, loading, error, positionLabel }) {
   return (
     <form onSubmit={submit} className="space-y-3 mt-2">
       <Input
@@ -752,14 +787,21 @@ function ApplyForm({ form, handle, submit, sent, positionLabel }) {
       />
       <Button
         type="submit"
-        className="w-full bg-[#001DF3] hover:bg-[#0017c2] text-white rounded-full font-bold h-11 text-sm"
+        disabled={loading}
+        data-testid="karir-submit-button"
+        className="w-full bg-[#001DF3] hover:bg-[#0017c2] text-white rounded-full font-bold h-11 text-sm disabled:opacity-60"
       >
-        <Send className="w-4 h-4 mr-2" /> Kirim Lamaran
+        <Send className="w-4 h-4 mr-2" /> {loading ? "Mengirim..." : "Kirim Lamaran"}
       </Button>
+      {error && (
+        <div className="text-sm text-red-600 font-semibold text-center">
+          {error}
+        </div>
+      )}
       {sent && (
-        <div className="flex items-center justify-center gap-2 text-sm text-[#00B512] font-semibold pt-1">
-          <Check className="w-4 h-4" /> Lamaran terkirim! Kami akan menghubungi
-          Anda.
+        <div className="flex items-center justify-center gap-2 text-sm text-[#00B512] font-semibold pt-1 text-center">
+          <Check className="w-4 h-4" /> Lamaran terkirim! Tim rekrutmen akan
+          menghubungimu via WhatsApp.
         </div>
       )}
     </form>

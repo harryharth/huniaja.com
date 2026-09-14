@@ -1,0 +1,19 @@
+{
+  "summary": "Verified new lead-capture wiring for Konsultasi/Karir/Kontak + Brosur, admin submissions listing, whitelist rejection, and KerjasamaPage visual regression. Backend: 6/6 pytest pass (POST /api/submissions/{konsultasi|karir|kontak|brosur} return {ok:true,id}; other_random -> 400; admin GET /api/admin/submissions?type=konsultasi returns created record with correct type & payload). Frontend: All 3 form submit buttons (data-testid konsultasi-submit-button, karir-submit-button, kontak-submit-button) successfully POST to backend, show Indonesian success message, and open new tab to https://wa.me/6285119833362 (redirects to api.whatsapp.com) with correct pre-filled text including user name and, for Karir, the position name (Full-Stack Developer, Talent Pool). Both 'Lamar Sekarang' and 'Daftar Talent Pool' dialogs submit successfully. KerjasamaPage: 'CERITA MEREKA' and final 'Ayo tumbuh bersama Huniaja.com' sections confirmed rendered with class bg-slate-100 text-slate-900 (light gray, readable).",
+  "backend_issues": {"critical": [], "minor": []},
+  "frontend_issues": {"ui_bugs": [], "integration_issues": [], "design_issues": []},
+  "test_report_links": ["/app/backend/tests/test_submissions.py", "/app/test_reports/pytest/pytest_results.xml"],
+  "action_items": [],
+  "critical_code_review_comments": [
+    "publicApi.submitLead throws on non-2xx allowing UI to show error state - good. UI already handles loading/error/success.",
+    "KerjasamaPage bg change is correctly applied via Tailwind class bg-slate-100 on both target sections (line ~377 Partner Stories and ~589 Final CTA).",
+    "WA_URL uses wa.me/6285119833362 (correct per +62 851-1983-3362). Browser follows wa.me -> api.whatsapp.com redirect which is expected."
+  ],
+  "updated_files": ["/app/backend/tests/test_submissions.py"],
+  "success_rate": {"backend": "100%", "frontend": "100%"},
+  "test_credentials": "admin@huniaja.com / huniaja2026",
+  "seed_data_creation": "Test submissions with name prefix 'TEST_' inserted into `submissions` collection (konsultasi/karir/kontak/brosur). Not cleaned - harmless test rows.",
+  "retest_needed": false,
+  "should_main_agent_self_test": true,
+  "context_for_next_testing_agent": "Backend submissions whitelist = {konsultasi, karir, kontak, brosur}. WA number constant lives in ChatWidget.jsx (WA_NUMBER=6285119833362, WA_URL(msg)). Success indicators to look for: 'Terima kasih' (konsultasi/kontak) and 'Lamaran terkirim' (karir). Popup opened via window.open - Playwright captures via context 'page' event."
+}

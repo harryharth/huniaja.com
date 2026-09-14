@@ -19,3 +19,10 @@ export async function fetchProperty(id) {
     return null;
   }
 }
+
+// Submit a public form (konsultasi | karir | kontak | brosur) to the backend.
+// Returns { ok, id } on success or throws on network error.
+export async function submitLead(type, payload) {
+  const { data } = await axios.post(`${API}/submissions/${type}`, payload);
+  return data;
+}

@@ -56,6 +56,22 @@ Buatkan website persis seperti gambar contoh (Indonesian property marketplace "H
 - ✅ Filter dihilangkan: Proses Konstruksi, Listrik, Sertifikat, Cicilan
 - ✅ Filter aktif dengan icon: Kondisi, Harga, Fasilitas, Jenis KPR
 
+### Lead-Capture Forms → Backend + WhatsApp (Feb 14, 2026)
+- ✅ `KonsultasiPage`, `KarirPage`, `KontakPage` form submit → `POST /api/submissions/{konsultasi|karir|kontak}` + auto-open WhatsApp (`+62 851-1983-3362`) dengan pesan pre-filled berisi data user
+- ✅ Backend whitelist diperluas ke `brosur` juga (memperbaiki 400 bug tersembunyi)
+- ✅ Helper `submitLead(type, payload)` di `/app/frontend/src/lib/publicApi.js`
+- ✅ Loading state, error state, dan pesan sukses per form (data-testid: `konsultasi-submit-button`, `karir-submit-button`, `kontak-submit-button`)
+- ✅ Tested end-to-end oleh testing agent (iteration_6): 6/6 backend pass, 3/3 frontend flow pass
+
+### PropertyDetailPage — Fasilitas Accordion (Feb 14, 2026)
+- ✅ Section "Fasilitas & Lingkungan" dirapikan menjadi dropdown/accordion per kategori (Fasilitas Properti, Utilitas, Keamanan & Cluster, Interior, Dekat Dengan) mengikuti pola FAQ
+- ✅ Kategori pertama default terbuka, sisanya collapsed → lebih ringkas & user-friendly
+- ✅ Chevron rotate 180° + tint warna kategori saat aktif
+
+### KerjasamaPage Visual Update (Feb 14, 2026)
+- ✅ Section "CERITA MEREKA" (line 377): background dari gradient navy → `bg-slate-100`, heading navy, badge & card putih
+- ✅ Final CTA "Ayo tumbuh bersama Huniaja.com" (line 589): background dari solid green → `bg-slate-100`, star hijau, tombol putih↔biru hover + tombol WA hijau
+
 ### PasangIklanPage
 - ✅ 3 partner cards (Pemilik/Agen/Developer) sekarang rata dengan `flex flex-col h-full` + `flex-1` pada ul → tombol sejajar di bawah
 
@@ -67,8 +83,8 @@ Buatkan website persis seperti gambar contoh (Indonesian property marketplace "H
 - ✅ `#0fa112`, `#c8ee1c` → `#009e0f`
 
 ## Backlog (P1/P2)
-- P1: Backend integration untuk form (Konsultasi, Karir, Kontak, Kerjasama) → MongoDB + email/WA notifikasi
-- P1: Property listings dari MongoDB (bukan mock)
-- P1: Property detail page (klik dari ListingCard)
-- P2: User authentication ("Daftar / Masuk")
-- P2: Favorites system (simpan properti favorit)
+- P1: QuickCategories — user request untuk menambahkan/mengganti kategori "Cat Rumah" (pending konfirmasi user apakah tambah kategori ke-7 atau replace existing)
+- P1: Admin CRUD untuk Articles/Berita + wiring `BeritaPage` ke `/api/articles` (30 artikel sudah ter-seed di Mongo, tinggal CMS)
+- P2: User authentication publik ("Daftar / Masuk" untuk buyer/agent, terpisah dari admin flow)
+- P2: Favorites system (simpan properti favorit ke akun user)
+

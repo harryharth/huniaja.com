@@ -374,20 +374,20 @@ export default function KerjasamaPage() {
       </section>
 
       {/* Partner Stories - testimonials */}
-      <section className="bg-gradient-to-b from-slate-900 to-[#000066] text-white py-16 md:py-24 relative overflow-hidden">
-        <div className="absolute -top-32 -right-24 w-96 h-96 rounded-full bg-[#001DF3]/30 blur-3xl pointer-events-none" />
-        <div className="absolute -bottom-32 -left-24 w-96 h-96 rounded-full bg-[#00B512]/20 blur-3xl pointer-events-none" />
+      <section className="bg-slate-100 text-slate-900 py-16 md:py-24 relative overflow-hidden">
+        <div className="absolute -top-32 -right-24 w-96 h-96 rounded-full bg-[#001DF3]/10 blur-3xl pointer-events-none" />
+        <div className="absolute -bottom-32 -left-24 w-96 h-96 rounded-full bg-[#00B512]/10 blur-3xl pointer-events-none" />
 
         <div className="relative max-w-6xl mx-auto px-4 md:px-6">
           <div className="text-center mb-14">
-            <span className="inline-block bg-white/10 border border-white/20 text-white text-[11px] font-bold rounded-full px-3 py-1 tracking-widest">
+            <span className="inline-block bg-white border border-slate-200 text-[#000066] text-[11px] font-bold rounded-full px-3 py-1 tracking-widest">
               CERITA MEREKA
             </span>
-            <h2 className="text-3xl md:text-5xl font-black mt-4 leading-tight">
+            <h2 className="text-3xl md:text-5xl font-black mt-4 leading-tight text-[#000066]">
               Bukan angka.<br className="md:hidden" />{" "}
               <span className="text-[#00B512]">Cerita orang.</span>
             </h2>
-            <p className="text-sm md:text-base text-white/70 mt-4 max-w-2xl mx-auto">
+            <p className="text-sm md:text-base text-slate-600 mt-4 max-w-2xl mx-auto">
               Setiap partner kami punya perjalanan sendiri di Huniaja. Ini
               beberapa yang bersedia berbagi.
             </p>
@@ -397,7 +397,7 @@ export default function KerjasamaPage() {
             {partnerStories.map((s) => (
               <div
                 key={s.name}
-                className="bg-white/5 backdrop-blur border border-white/10 rounded-3xl p-6 md:p-7 hover:bg-white/10 transition flex flex-col"
+                className="bg-white border border-slate-200 rounded-3xl p-6 md:p-7 hover:shadow-lg hover:border-slate-300 transition flex flex-col"
               >
                 <div className="flex items-center justify-between">
                   <Quote
@@ -412,15 +412,15 @@ export default function KerjasamaPage() {
                     >
                       {s.stat}
                     </div>
-                    <div className="text-[10px] text-white/60 tracking-wide">
+                    <div className="text-[10px] text-slate-500 tracking-wide">
                       {s.statLabel}
                     </div>
                   </div>
                 </div>
-                <p className="text-sm text-white/85 leading-relaxed italic mt-4 flex-1">
+                <p className="text-sm text-slate-700 leading-relaxed italic mt-4 flex-1">
                   "{s.quote}"
                 </p>
-                <div className="mt-5 pt-4 border-t border-white/10 flex items-center gap-3">
+                <div className="mt-5 pt-4 border-t border-slate-200 flex items-center gap-3">
                   <div
                     className="w-11 h-11 rounded-full flex items-center justify-center text-white font-black text-sm shadow-md shrink-0"
                     style={{ backgroundColor: s.color }}
@@ -428,8 +428,8 @@ export default function KerjasamaPage() {
                     {s.initial}
                   </div>
                   <div className="flex-1 min-w-0">
-                    <div className="text-sm font-bold truncate">{s.name}</div>
-                    <div className="text-xs text-white/60 truncate">
+                    <div className="text-sm font-bold text-[#000066] truncate">{s.name}</div>
+                    <div className="text-xs text-slate-500 truncate">
                       {s.role}
                     </div>
                   </div>
@@ -586,23 +586,23 @@ export default function KerjasamaPage() {
       </section>
 
       {/* Final CTA strip */}
-      <section className="bg-[#00B512] text-white py-14 md:py-20 relative overflow-hidden">
-        <div className="absolute -top-24 -right-24 w-96 h-96 rounded-full bg-white/15 blur-3xl pointer-events-none" />
-        <div className="absolute -bottom-24 -left-24 w-96 h-96 rounded-full bg-[#001DF3]/25 blur-3xl pointer-events-none" />
+      <section className="bg-slate-100 text-slate-900 py-14 md:py-20 relative overflow-hidden">
+        <div className="absolute -top-24 -right-24 w-96 h-96 rounded-full bg-[#001DF3]/10 blur-3xl pointer-events-none" />
+        <div className="absolute -bottom-24 -left-24 w-96 h-96 rounded-full bg-[#00B512]/10 blur-3xl pointer-events-none" />
         <div className="relative max-w-5xl mx-auto px-4 md:px-6 text-center">
-          <Star className="w-10 h-10 text-white mx-auto fill-white" />
-          <p className="text-2xl md:text-4xl font-black leading-tight mt-4">
+          <Star className="w-10 h-10 text-[#00B512] mx-auto fill-[#00B512]" />
+          <p className="text-2xl md:text-4xl font-black leading-tight mt-4 text-[#000066]">
             Ayo tumbuh bersama<br className="hidden md:block" />
-            <span className="text-[#000066]">Huniaja.com</span>
+            <span className="text-[#00B512]">Huniaja.com</span>
           </p>
-          <p className="text-sm md:text-base text-white/90 mt-4 max-w-xl mx-auto">
+          <p className="text-sm md:text-base text-slate-600 mt-4 max-w-xl mx-auto">
             Satu langkah kecil hari ini bisa jadi kolaborasi besar besok.
             Ceritakan ide kerjasamamu — tim kami siap dengar.
           </p>
           <div className="mt-8 flex flex-wrap justify-center gap-3">
             <a
               href="#form"
-              className="bg-white text-[#00B512] hover:bg-slate-100 font-bold rounded-full px-6 py-3 text-sm shadow-lg transition"
+              className="bg-white border border-slate-200 text-[#000066] hover:bg-[#001DF3] hover:text-white hover:border-[#001DF3] font-bold rounded-full px-6 py-3 text-sm shadow-md transition"
             >
               Ajukan via Form
             </a>
@@ -612,7 +612,7 @@ export default function KerjasamaPage() {
               )}
               target="_blank"
               rel="noopener noreferrer"
-              className="bg-[#001DF3] hover:bg-[#0016c2] text-white font-bold rounded-full px-6 py-3 text-sm shadow-lg transition"
+              className="bg-[#00B512] hover:bg-[#009c10] text-white font-bold rounded-full px-6 py-3 text-sm shadow-lg transition"
             >
               Chat WhatsApp Sekarang
             </a>
