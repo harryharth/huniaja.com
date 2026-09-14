@@ -114,11 +114,11 @@ export default function Footer() {
               alt="Huniaja"
               className="w-32 md:w-36 h-auto mb-6"
             />
-            <p className="text-sm text-white/85 leading-relaxed max-w-xs">
-              Huniaja.com adalah platform properti digital
-              berbasis teknologi dan kecerdasan buatan (AI)
-              yang menyatukan agen, pembeli, dan pengembang
-              dalam satu ekosistem.
+            <p className="text-sm text-white/85 leading-relaxed max-w-sm text-justify hyphens-auto">
+              Huniaja.com adalah platform properti digital berbasis teknologi
+              dan kecerdasan buatan (AI) yang menyatukan agen, pembeli, dan
+              pengembang dalam satu ekosistem — dari pencarian rumah,
+              simulasi KPR, hingga layanan perawatan pasca-akad.
             </p>
 
             <div className="flex gap-3 mt-8">
