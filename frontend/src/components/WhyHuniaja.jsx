@@ -30,7 +30,7 @@ const features = [
   {
     num: 4,
     title: "Jaringan Luas",
-    desc: "Memiliki Jaringan Agen dan developer di seluruh Indonesia.",
+    desc: "Memiliki jaringan agen dan developer di seluruh Indonesia.",
     Icon: Share2,
   },
   {
@@ -49,110 +49,59 @@ const features = [
 
 export default function WhyHuniaja() {
   return (
-    <section className="relative overflow-hidden py-14 md:py-20 bg-gradient-to-b from-white via-blue-50/60 to-white">
-      {/* decorative background blobs */}
-      <div
-        aria-hidden
-        className="absolute -top-16 -left-16 w-72 h-72 rounded-full blur-3xl opacity-20"
-        style={{ backgroundColor: "#001DF3" }}
-      />
-      <div
-        aria-hidden
-        className="absolute -bottom-24 -right-24 w-96 h-96 rounded-full blur-3xl opacity-15"
-        style={{ backgroundColor: "#000066" }}
-      />
-
-      <div className="relative max-w-6xl mx-auto px-4 md:px-6">
-        <div className="max-w-2xl mx-auto text-center">
-          <span
-            className="inline-flex items-center gap-1.5 text-[11px] font-bold tracking-widest uppercase px-3 py-1.5 rounded-full text-white"
-            style={{ backgroundColor: "#00B512" }}
-            data-testid="why-huniaja-tag"
-          >
-            <span className="w-1.5 h-1.5 rounded-full bg-white/90" />
-            Kenapa Huniaja
-          </span>
-          <h2
-            className="mt-4 text-3xl md:text-4xl font-black leading-tight"
-            style={{ color: "#000066" }}
-          >
-            Alasan Ribuan Keluarga{" "}
-            <span style={{ color: "#00B512" }}>Memilih Huniaja.com</span>
+    <section className="bg-white py-16 md:py-24">
+      <div className="max-w-6xl mx-auto px-4 md:px-6">
+        <div className="text-center max-w-2xl mx-auto">
+          <div className="inline-flex items-center gap-2">
+            <span className="w-8 h-px bg-[#001DF3]" />
+            <span
+              className="text-[11px] font-bold tracking-[0.25em] uppercase"
+              style={{ color: "#001DF3" }}
+              data-testid="why-huniaja-tag"
+            >
+              Kenapa Huniaja
+            </span>
+            <span className="w-8 h-px bg-[#001DF3]" />
+          </div>
+          <h2 className="mt-4 text-3xl md:text-4xl lg:text-5xl font-black leading-tight text-slate-900">
+            Kenapa harus Huniaja.com?
           </h2>
-          <p className="mt-3 text-sm md:text-base text-slate-600">
-            Kami membangun ekosistem yang membuat urusan rumah menjadi jauh
-            lebih tenang, transparan, dan menyenangkan.
+          <p className="mt-4 text-sm md:text-base text-slate-500 leading-relaxed">
+            Kami membangun ekosistem yang membuat urusan rumah menjadi jauh lebih
+            tenang, transparan, dan menyenangkan.
           </p>
         </div>
 
-        <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6">
+        <div className="mt-14 md:mt-16 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-7 relative">
           {features.map((f) => (
             <div
               key={f.num}
-              className="group relative bg-white rounded-3xl p-6 md:p-7 border border-blue-100 shadow-[0_4px_18px_-6px_rgba(0,29,243,0.15)] hover:shadow-[0_18px_36px_-12px_rgba(0,29,243,0.35)] hover:-translate-y-1 transition-all duration-300 overflow-hidden"
+              className="group relative bg-white rounded-[28px] px-7 pt-11 pb-8 border border-slate-100 shadow-[0_1px_2px_rgba(15,23,42,0.04)] hover:shadow-[0_18px_40px_-12px_rgba(0,29,243,0.20)] hover:-translate-y-0.5 hover:border-[#001DF3]/25 transition-all duration-300"
               data-testid={`why-card-${f.num}`}
             >
-              {/* top gradient bar: blue → green → navy */}
-              <span
-                aria-hidden
-                className="absolute top-0 left-0 right-0 h-1"
-                style={{
-                  background:
-                    "linear-gradient(90deg, #001DF3 0%, #00B512 55%, #000066 100%)",
-                }}
-              />
-
-              {/* soft green corner glow */}
-              <span
-                aria-hidden
-                className="absolute -top-14 -right-14 w-32 h-32 rounded-full blur-2xl opacity-0 group-hover:opacity-40 transition-opacity"
-                style={{ backgroundColor: "#00B512" }}
-              />
-
-              {/* number chip — green filled */}
-              <span
-                className="absolute top-5 right-5 text-[11px] font-black tracking-widest px-2.5 py-1 rounded-full text-white shadow-sm"
-                style={{ backgroundColor: "#00B512" }}
-              >
-                0{f.num}
-              </span>
-
-              {/* icon — blue tint, green ring on hover */}
+              {/* number badge */}
               <div
-                className="relative w-14 h-14 md:w-16 md:h-16 rounded-2xl flex items-center justify-center transition-all group-hover:ring-2 group-hover:ring-offset-2"
-                style={{
-                  background:
-                    "linear-gradient(135deg, rgba(0,29,243,0.10) 0%, rgba(0,181,18,0.12) 100%)",
-                  boxShadow: "inset 0 0 0 1px rgba(0,29,243,0.15)",
-                }}
+                className="absolute -top-4 left-7 w-9 h-9 rounded-full text-white font-black text-sm flex items-center justify-center shadow-md ring-4 ring-white"
+                style={{ backgroundColor: "#001DF3" }}
               >
-                <f.Icon
-                  className="w-7 h-7 md:w-8 md:h-8"
-                  strokeWidth={2.2}
-                  style={{ color: "#001DF3" }}
-                />
+                {f.num}
               </div>
 
-              <h3
-                className="mt-5 text-lg md:text-xl font-extrabold leading-snug"
-                style={{ color: "#000066" }}
-              >
-                {f.title}
-              </h3>
-
-              {/* accent underline (green) — grows on hover */}
-              <span
-                aria-hidden
-                className="block h-[3px] rounded-full mt-2 transition-all"
-                style={{
-                  backgroundColor: "#00B512",
-                  width: "28px",
-                }}
-              />
-
-              <p className="mt-3 text-sm md:text-[15px] text-slate-600 leading-relaxed">
-                {f.desc}
-              </p>
+              <div className="flex flex-col items-center text-center">
+                <div className="w-16 h-16 rounded-2xl flex items-center justify-center mb-5 bg-slate-50 group-hover:bg-[#001DF3]/8 transition-colors">
+                  <f.Icon
+                    className="w-9 h-9 transition-transform group-hover:scale-110"
+                    strokeWidth={1.8}
+                    style={{ color: "#001DF3" }}
+                  />
+                </div>
+                <h3 className="text-lg md:text-xl font-extrabold text-slate-900 leading-snug">
+                  {f.title}
+                </h3>
+                <p className="text-sm text-slate-500 mt-2.5 max-w-xs leading-relaxed">
+                  {f.desc}
+                </p>
+              </div>
             </div>
           ))}
         </div>

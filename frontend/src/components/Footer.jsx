@@ -20,6 +20,7 @@ const footerCols = [
     { label: "Berita", href: "/berita" },
     { label: "Pusat Bantuan", href: "/pusat-bantuan" },
     { label: "S&K", href: "/syarat-ketentuan" },
+    { label: "Kebijakan Privasi", href: "/kebijakan-privasi" },
   ],
 ];
 
