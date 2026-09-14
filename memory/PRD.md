@@ -88,6 +88,13 @@ Buatkan website persis seperti gambar contoh (Indonesian property marketplace "H
 ### PasangIklanPage
 - ✅ 3 partner cards (Pemilik/Agen/Developer) sekarang rata dengan `flex flex-col h-full` + `flex-1` pada ul → tombol sejajar di bawah
 
+### Post-Deploy Auth Persistence Fix + New Features (Feb 14, 2026)
+- ✅ **Admin login persistent across restart/redeploy**: `admin_users` collection (bcrypt hash) + `admin_sessions` collection (7-day TTL) di Mongo. `seed_admin(db)` idempotent di startup — env `ADMIN_EMAIL`/`ADMIN_PASSWORD` hanya untuk initial seed. Token survive `supervisorctl restart backend` (14/14 test pass)
+- ✅ **Public /login form email+password**: field email/password + toggle show/hide + submit ke `/api/auth/login`, di samping tombol Google. data-testid: `pw-login-email`, `pw-login-password`, `pw-login-submit`
+- ✅ **Berita CMS**: Full CRUD dari admin (Tulis/Edit/Hapus) dengan modal form (Judul/Slug/Kategori/Excerpt/Tanggal/Waktu baca/Status/Cover Image upload/Tag/Content). BeritaPage sekarang fetch live dari `GET /api/articles`
+- ✅ **CariPropertiPage**: tombol "Filter Lokasi" dipindah ke KIRI dari location tab pills
+- ✅ **Footer mobile**: menu disusun 2 kolom di atas logo Huniaja; desktop tetap 3 kolom
+
 ### Admin Dashboard Floe-Style Redesign (Feb 14, 2026)
 - ✅ Shell dibangun ulang mengikuti referensi Floe: sidebar putih dengan icon nav collapsible, section Favourites, badge notifikasi live dari `submissions.new`
 - ✅ Top bar unified: search global (⌘F hint) + "Credits remaining" + avatar admin

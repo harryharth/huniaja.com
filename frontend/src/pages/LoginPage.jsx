@@ -1,8 +1,11 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { ArrowLeft, ShieldCheck, Sparkles, Heart, ClipboardList } from "lucide-react";
+import axios from "axios";
+import { ArrowLeft, ShieldCheck, Sparkles, Heart, ClipboardList, Mail, Lock, Eye, EyeOff } from "lucide-react";
 import { LOGO_BLUE } from "../mock";
 import { useAuth } from "../context/AuthContext";
+
+const API = `${process.env.REACT_APP_BACKEND_URL}/api`;
 
 // REMINDER: DO NOT HARDCODE THE URL, OR ADD ANY FALLBACKS OR REDIRECT URLS, THIS BREAKS THE AUTH
 function startGoogleLogin() {
@@ -32,11 +35,39 @@ const benefits = [
 
 export default function LoginPage() {
   const navigate = useNavigate();
-  const { user, loading } = useAuth();
+  const { user, loading, refresh } = useAuth();
+  const [pwForm, setPwForm] = useState({ email: "", password: "" });
+  const [pwLoading, setPwLoading] = useState(false);
+  const [pwError, setPwError] = useState("");
+  const [showPw, setShowPw] = useState(false);
 
   useEffect(() => {
     if (!loading && user) navigate("/akun", { replace: true });
   }, [loading, user, navigate]);
+
+  const submitPassword = async (e) => {
+    e.preventDefault();
+    if (!pwForm.email.trim() || !pwForm.password) {
+      setPwError("Email & password wajib diisi.");
+      return;
+    }
+    setPwLoading(true);
+    setPwError("");
+    try {
+      await axios.post(
+        `${API}/auth/login`,
+        { email: pwForm.email.trim().toLowerCase(), password: pwForm.password },
+        { withCredentials: true }
+      );
+      await refresh();
+      navigate("/akun", { replace: true });
+    } catch (err) {
+      const detail = err.response?.data?.detail;
+      setPwError(typeof detail === "string" ? detail : "Email atau password salah.");
+    } finally {
+      setPwLoading(false);
+    }
+  };
 
   return (
     <div className="min-h-screen relative flex flex-col overflow-hidden bg-white">
@@ -122,6 +153,61 @@ export default function LoginPage() {
                 </svg>
                 Lanjutkan dengan Google
               </button>
+
+              <div className="mt-6 flex items-center gap-3">
+                <div className="flex-1 h-px bg-slate-200" />
+                <span className="text-[11px] tracking-widest text-slate-400 font-bold">
+                  ATAU MASUK DENGAN EMAIL
+                </span>
+                <div className="flex-1 h-px bg-slate-200" />
+              </div>
+
+              <form onSubmit={submitPassword} className="mt-5 space-y-3">
+                <div className="relative">
+                  <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
+                  <input
+                    type="email"
+                    autoComplete="email"
+                    value={pwForm.email}
+                    onChange={(e) => setPwForm({ ...pwForm, email: e.target.value })}
+                    placeholder="Email"
+                    data-testid="pw-login-email"
+                    className="w-full h-12 pl-11 pr-4 rounded-full bg-white border border-slate-200 focus:border-[#001DF3] outline-none text-sm text-slate-900 placeholder:text-slate-400 transition"
+                  />
+                </div>
+                <div className="relative">
+                  <Lock className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
+                  <input
+                    type={showPw ? "text" : "password"}
+                    autoComplete="current-password"
+                    value={pwForm.password}
+                    onChange={(e) => setPwForm({ ...pwForm, password: e.target.value })}
+                    placeholder="Password"
+                    data-testid="pw-login-password"
+                    className="w-full h-12 pl-11 pr-11 rounded-full bg-white border border-slate-200 focus:border-[#001DF3] outline-none text-sm text-slate-900 placeholder:text-slate-400 transition"
+                  />
+                  <button
+                    type="button"
+                    onClick={() => setShowPw((v) => !v)}
+                    className="absolute right-3 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full text-slate-400 hover:text-slate-700 flex items-center justify-center"
+                  >
+                    {showPw ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+                  </button>
+                </div>
+                {pwError && (
+                  <p className="text-xs text-[#001DF3] font-semibold text-center">
+                    {pwError}
+                  </p>
+                )}
+                <button
+                  type="submit"
+                  disabled={pwLoading}
+                  data-testid="pw-login-submit"
+                  className="w-full h-12 rounded-full bg-[#001DF3] hover:bg-[#0017c2] text-white font-bold text-sm shadow-sm disabled:opacity-60 transition"
+                >
+                  {pwLoading ? "Masuk..." : "Masuk"}
+                </button>
+              </form>
 
               <div className="mt-6 flex items-center gap-3">
                 <div className="flex-1 h-px bg-slate-200" />

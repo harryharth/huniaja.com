@@ -2,7 +2,7 @@
 import os
 import uuid
 import logging
-from datetime import datetime, timezone
+from datetime import datetime, timezone, timedelta
 from typing import List, Optional
 
 import requests
@@ -62,20 +62,60 @@ def get_object(path: str) -> tuple:
 
 
 # --- Auth ---------------------------------------------------------------------
-ADMIN_PASSWORD = os.environ.get("ADMIN_PASSWORD", "")
+# Admin credentials are seeded into the DB on first boot; env vars are used
+# only for the initial seed so they survive redeploys and restarts.
+ADMIN_PASSWORD = os.environ.get("ADMIN_PASSWORD", "huniaja2026")
 ADMIN_EMAIL = os.environ.get("ADMIN_EMAIL", "admin@huniaja.com").strip().lower()
-ADMIN_SECRET = os.environ.get("ADMIN_SESSION_SECRET", "changeme")
-
-_active_tokens: set = set()
+_ADMIN_TOKEN_TTL_HOURS = 24 * 7  # 7 days
 
 
-def require_admin(authorization: str = Header(default="")):
-    if not authorization.startswith("Bearer "):
-        raise HTTPException(401, "Missing bearer token")
-    token = authorization[7:]
-    if token not in _active_tokens:
-        raise HTTPException(401, "Invalid or expired token")
-    return token
+async def seed_admin(db):
+    """Ensure admin user exists in DB. Idempotent."""
+    import bcrypt as _bcrypt
+    existing = await db.admin_users.find_one({"email": ADMIN_EMAIL}, {"_id": 0})
+    hashed = _bcrypt.hashpw(ADMIN_PASSWORD.encode("utf-8"), _bcrypt.gensalt()).decode("utf-8")
+    if not existing:
+        await db.admin_users.insert_one({
+            "email": ADMIN_EMAIL,
+            "password_hash": hashed,
+            "created_at": datetime.now(timezone.utc).isoformat(),
+        })
+    else:
+        # Re-sync password if env-provided value has changed
+        try:
+            ok = _bcrypt.checkpw(ADMIN_PASSWORD.encode("utf-8"), existing["password_hash"].encode("utf-8"))
+        except Exception:
+            ok = False
+        if not ok:
+            await db.admin_users.update_one(
+                {"email": ADMIN_EMAIL},
+                {"$set": {"password_hash": hashed}},
+            )
+
+
+def _make_admin_require(db):
+    """Factory: returns a dependency that verifies admin token via DB."""
+    async def require_admin(authorization: str = Header(default="")):
+        if not authorization.startswith("Bearer "):
+            raise HTTPException(401, "Missing bearer token")
+        token = authorization[7:]
+        sess = await db.admin_sessions.find_one({"token": token}, {"_id": 0})
+        if not sess:
+            raise HTTPException(401, "Invalid or expired token")
+        expires_at = sess.get("expires_at")
+        if isinstance(expires_at, str):
+            try:
+                expires_at = datetime.fromisoformat(expires_at)
+            except Exception:
+                expires_at = None
+        if expires_at:
+            if expires_at.tzinfo is None:
+                expires_at = expires_at.replace(tzinfo=timezone.utc)
+            if expires_at < datetime.now(timezone.utc):
+                await db.admin_sessions.delete_one({"token": token})
+                raise HTTPException(401, "Session expired")
+        return token
+    return require_admin
 
 
 # --- Models -------------------------------------------------------------------
@@ -182,22 +222,38 @@ class SubmissionIn(BaseModel):
 # --- Router -------------------------------------------------------------------
 def create_admin_router(db) -> APIRouter:
     router = APIRouter(prefix="/admin")
+    require_admin = _make_admin_require(db)
 
     # --- AUTH
     @router.post("/login", response_model=LoginResponse)
     async def login(req: LoginRequest):
-        if not ADMIN_PASSWORD or req.password != ADMIN_PASSWORD:
+        import bcrypt as _bcrypt
+        email = (req.email or ADMIN_EMAIL).strip().lower()
+        user = await db.admin_users.find_one({"email": email}, {"_id": 0})
+        if not user:
             raise HTTPException(401, "Email atau password salah")
-        # If email provided, verify it matches too (backward compatible: no email = password-only OK)
-        if req.email and req.email.strip().lower() != ADMIN_EMAIL:
+        try:
+            ok = _bcrypt.checkpw(
+                (req.password or "").encode("utf-8"),
+                user["password_hash"].encode("utf-8"),
+            )
+        except Exception:
+            ok = False
+        if not ok:
             raise HTTPException(401, "Email atau password salah")
         token = uuid.uuid4().hex + uuid.uuid4().hex
-        _active_tokens.add(token)
+        expires_at = datetime.now(timezone.utc) + timedelta(hours=_ADMIN_TOKEN_TTL_HOURS)
+        await db.admin_sessions.insert_one({
+            "token": token,
+            "email": email,
+            "created_at": datetime.now(timezone.utc).isoformat(),
+            "expires_at": expires_at,
+        })
         return LoginResponse(token=token)
 
     @router.post("/logout")
     async def logout(token: str = Depends(require_admin)):
-        _active_tokens.discard(token)
+        await db.admin_sessions.delete_one({"token": token})
         return {"ok": True}
 
     @router.get("/me")

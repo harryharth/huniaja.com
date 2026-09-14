@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Calendar,
   Clock,
@@ -19,9 +19,12 @@ import {
   ShieldCheck,
 } from "lucide-react";
 import { Link } from "react-router-dom";
+import axios from "axios";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
-import { articles, articleCategories } from "../data/articles";
+import { articles as fallbackArticles, articleCategories as fallbackCats } from "../data/articles";
+
+const API = `${process.env.REACT_APP_BACKEND_URL}/api`;
 
 // Small color palette per category
 const CAT_COLORS = {
@@ -58,12 +61,34 @@ const CAT_ICONS = {
 export default function BeritaPage() {
   const [active, setActive] = useState("Semua");
   const [query, setQuery] = useState("");
+  const [articles, setArticles] = useState(fallbackArticles);
+
+  useEffect(() => {
+    let cancelled = false;
+    axios
+      .get(`${API}/articles`)
+      .then((r) => {
+        if (cancelled) return;
+        if (Array.isArray(r.data) && r.data.length > 0) setArticles(r.data);
+      })
+      .catch(() => {});
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
+  // Build category list dynamically from live articles (union with fallback list)
+  const articleCategories = React.useMemo(() => {
+    const set = new Set(fallbackCats);
+    articles.forEach((a) => a.category && set.add(a.category));
+    return ["Semua", ...[...set].filter((c) => c !== "Semua")];
+  }, [articles]);
 
   const filtered = articles.filter(
     (a) =>
       (active === "Semua" || a.category === active) &&
-      (a.title.toLowerCase().includes(query.toLowerCase()) ||
-        a.excerpt.toLowerCase().includes(query.toLowerCase()))
+      ((a.title || "").toLowerCase().includes(query.toLowerCase()) ||
+        (a.excerpt || "").toLowerCase().includes(query.toLowerCase()))
   );
 
   return (

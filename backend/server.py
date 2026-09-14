@@ -145,6 +145,12 @@ async def _startup_admin():
         await run_all(db)
     except Exception as e:
         logging.error(f"Seed failed: {e}")
+    try:
+        from admin_routes import seed_admin
+        await seed_admin(db)
+        logging.info("Admin user seeded")
+    except Exception as e:
+        logging.error(f"Admin seed failed: {e}")
 
 
 app.add_middleware(

@@ -1815,31 +1815,425 @@ function BannersPanel() {
 // ============================ ARTICLES ============================
 function ArticlesPanel() {
   const [list, setList] = useState([]);
-  const load = async () => setList((await adminApi.get("/admin/articles")).data);
-  useEffect(() => { load(); }, []);
+  const [q, setQ] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [editing, setEditing] = useState(null); // null | {new: true} | article
+
+  const load = async () => {
+    setLoading(true);
+    try {
+      const { data } = await adminApi.get(
+        `/admin/articles${q ? `?q=${encodeURIComponent(q)}` : ""}`
+      );
+      setList(data || []);
+    } finally {
+      setLoading(false);
+    }
+  };
+  useEffect(() => {
+    load();
+  }, []);
+  useEffect(() => {
+    const t = setTimeout(load, 300);
+    return () => clearTimeout(t);
+  }, [q]);
+
+  const remove = async (id) => {
+    if (!window.confirm("Hapus artikel ini?")) return;
+    await adminApi.delete(`/admin/articles/${id}`);
+    load();
+  };
+
   return (
     <div>
-      <h2 className="text-2xl font-black text-slate-900">Artikel Berita</h2>
-      <p className="text-sm text-slate-500 mt-1">{list.length} artikel · fitur edit lengkap segera hadir</p>
-      <div className="mt-6 bg-white rounded-2xl border border-slate-100 shadow-sm">
-        <table className="w-full text-sm">
-          <thead className="bg-slate-50 text-xs uppercase text-slate-600">
-            <tr><th className="p-4 text-left">Judul</th><th className="p-4 text-left">Kategori</th><th className="p-4 text-left">Status</th></tr>
-          </thead>
-          <tbody>
-            {list.map((a) => (
-              <tr key={a.id} className="border-t border-slate-100">
-                <td className="p-4">{a.title}</td>
-                <td className="p-4 text-slate-500">{a.category}</td>
-                <td className="p-4">
-                  <span className={`px-2 py-1 rounded-full text-[10px] font-bold ${a.status === "published" ? "bg-green-50 text-[#00B512]" : "bg-slate-100"}`}>
-                    {a.status === "published" ? "Tayang" : "Draft"}
-                  </span>
-                </td>
+      <div className="flex flex-wrap items-center justify-between gap-4 mb-6">
+        <div>
+          <h1 className="text-2xl md:text-3xl font-black text-slate-900">Berita</h1>
+          <p className="text-sm text-slate-500 mt-1">
+            Kelola artikel yang tayang di /berita.
+          </p>
+        </div>
+        <button
+          onClick={() => setEditing({ new: true })}
+          data-testid="article-add-btn"
+          className="inline-flex items-center gap-2 bg-[#001DF3] hover:bg-[#0017c2] text-white rounded-full font-bold px-5 h-10 text-sm shadow-sm transition"
+        >
+          <Plus className="w-4 h-4" /> Tulis Artikel
+        </button>
+      </div>
+
+      <div className="relative max-w-sm mb-4">
+        <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400 pointer-events-none" />
+        <input
+          value={q}
+          onChange={(e) => setQ(e.target.value)}
+          data-testid="article-search"
+          placeholder="Cari judul atau slug..."
+          className="w-full h-10 pl-10 pr-4 rounded-full bg-white border border-slate-200 focus:border-[#001DF3] outline-none text-sm text-slate-700 placeholder:text-slate-400"
+        />
+      </div>
+
+      {loading ? (
+        <Loader />
+      ) : list.length === 0 ? (
+        <div className="rounded-3xl bg-white border border-slate-200 p-14 text-center">
+          <Newspaper className="w-8 h-8 text-slate-300 mx-auto" />
+          <p className="text-sm text-slate-500 mt-3">Belum ada artikel.</p>
+        </div>
+      ) : (
+        <div className="bg-white rounded-3xl border border-slate-200 overflow-hidden">
+          <table className="w-full text-sm">
+            <thead className="bg-slate-50 text-xs uppercase text-slate-500">
+              <tr>
+                <th className="p-4 text-left font-bold">Judul</th>
+                <th className="p-4 text-left font-bold">Kategori</th>
+                <th className="p-4 text-left font-bold">Status</th>
+                <th className="p-4 text-left font-bold">Views</th>
+                <th className="p-4 text-right font-bold">Aksi</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {list.map((a) => (
+                <tr
+                  key={a.id}
+                  data-testid={`article-row-${a.id}`}
+                  className="border-t border-slate-100 hover:bg-slate-50"
+                >
+                  <td className="p-4">
+                    <div className="flex items-center gap-3">
+                      {a.image ? (
+                        <img
+                          src={a.image}
+                          alt=""
+                          className="w-12 h-12 rounded-lg object-cover shrink-0"
+                        />
+                      ) : (
+                        <div className="w-12 h-12 rounded-lg bg-slate-100 flex items-center justify-center shrink-0">
+                          <Newspaper className="w-4 h-4 text-slate-400" />
+                        </div>
+                      )}
+                      <div className="min-w-0">
+                        <div className="font-bold text-slate-900 truncate">
+                          {a.title}
+                        </div>
+                        <div className="text-xs text-slate-400 truncate">
+                          /{a.slug}
+                        </div>
+                      </div>
+                    </div>
+                  </td>
+                  <td className="p-4 text-slate-500">{a.category}</td>
+                  <td className="p-4">
+                    <span
+                      className={`px-2 py-1 rounded-full text-[10px] font-bold ${
+                        a.status === "published"
+                          ? "bg-[#00B512]/10 text-[#00B512]"
+                          : "bg-slate-100 text-slate-600"
+                      }`}
+                    >
+                      {a.status === "published" ? "Tayang" : "Draft"}
+                    </span>
+                  </td>
+                  <td className="p-4 text-slate-500">{a.views || 0}</td>
+                  <td className="p-4 text-right">
+                    <div className="inline-flex items-center gap-1">
+                      <IconBtn
+                        onClick={() => setEditing(a)}
+                        testid={`article-edit-${a.id}`}
+                        title="Edit"
+                      >
+                        <Edit3 className="w-4 h-4" />
+                      </IconBtn>
+                      <IconBtn
+                        onClick={() => remove(a.id)}
+                        testid={`article-delete-${a.id}`}
+                        title="Hapus"
+                        red
+                      >
+                        <Trash2 className="w-4 h-4" />
+                      </IconBtn>
+                    </div>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      )}
+
+      {editing && (
+        <ArticleFormModal
+          item={editing.new ? null : editing}
+          onClose={() => setEditing(null)}
+          onSaved={() => {
+            setEditing(null);
+            load();
+          }}
+        />
+      )}
+    </div>
+  );
+}
+
+function ArticleFormModal({ item, onClose, onSaved }) {
+  const isEdit = !!item;
+  const [form, setForm] = useState(
+    item
+      ? { ...item, tags: (item.tags || []).join(", ") }
+      : {
+          slug: "",
+          title: "",
+          excerpt: "",
+          category: "Panduan",
+          date: new Date().toLocaleDateString("id-ID", {
+            day: "numeric",
+            month: "long",
+            year: "numeric",
+          }),
+          read: "5 min",
+          image: "",
+          tags: "",
+          content: "",
+          status: "published",
+        }
+  );
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [uploading, setUploading] = useState(false);
+
+  const uploadCover = async (e) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    setUploading(true);
+    try {
+      const fd = new FormData();
+      fd.append("file", file);
+      const { data } = await adminApi.post("/admin/upload", fd, {
+        headers: { "Content-Type": "multipart/form-data" },
+      });
+      setForm((f) => ({ ...f, image: data.url }));
+    } catch {
+      setError("Gagal upload cover.");
+    } finally {
+      setUploading(false);
+    }
+  };
+
+  const submit = async (e) => {
+    e.preventDefault();
+    if (!form.title.trim() || !form.slug.trim()) {
+      setError("Judul dan slug wajib.");
+      return;
+    }
+    setLoading(true);
+    setError("");
+    const payload = {
+      slug: form.slug.trim(),
+      title: form.title.trim(),
+      excerpt: form.excerpt || "",
+      category: form.category || "Panduan",
+      date: form.date || "",
+      read: form.read || "5 min",
+      image: form.image || "",
+      status: form.status || "published",
+      tags:
+        typeof form.tags === "string"
+          ? form.tags.split(",").map((t) => t.trim()).filter(Boolean)
+          : form.tags || [],
+      content:
+        typeof form.content === "string"
+          ? [{ type: "p", text: form.content }]
+          : form.content || [],
+      sort_order: form.sort_order || 0,
+    };
+    try {
+      if (isEdit) {
+        await adminApi.put(`/admin/articles/${item.id}`, payload);
+      } else {
+        await adminApi.post("/admin/articles", payload);
+      }
+      onSaved();
+    } catch (err) {
+      const detail = err.response?.data?.detail;
+      setError(typeof detail === "string" ? detail : "Gagal menyimpan artikel.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return (
+    <div
+      className="fixed inset-0 z-50 bg-slate-900/40 backdrop-blur-sm flex items-center justify-center p-4"
+      onClick={onClose}
+    >
+      <div
+        className="bg-white rounded-3xl max-w-2xl w-full max-h-[92vh] overflow-hidden flex flex-col shadow-2xl"
+        onClick={(e) => e.stopPropagation()}
+      >
+        <div className="p-6 border-b border-slate-100 flex items-center justify-between">
+          <h3 className="text-lg font-black text-slate-900">
+            {isEdit ? "Edit Artikel" : "Tulis Artikel Baru"}
+          </h3>
+          <button
+            onClick={onClose}
+            className="w-9 h-9 rounded-full text-slate-400 hover:bg-slate-100 hover:text-slate-700 flex items-center justify-center transition"
+          >
+            <X className="w-4 h-4" />
+          </button>
+        </div>
+        <form onSubmit={submit} className="p-6 overflow-y-auto space-y-4">
+          <Field label="Judul">
+            <input
+              value={form.title}
+              onChange={(e) => setForm({ ...form, title: e.target.value })}
+              data-testid="article-form-title"
+              required
+              className={inputCls}
+            />
+          </Field>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+            <Field label="Slug (URL)">
+              <input
+                value={form.slug}
+                onChange={(e) => setForm({ ...form, slug: e.target.value })}
+                data-testid="article-form-slug"
+                required
+                pattern="[a-z0-9-]+"
+                placeholder="cara-beli-rumah-pertama"
+                className={inputCls}
+              />
+            </Field>
+            <Field label="Kategori">
+              <select
+                value={form.category}
+                onChange={(e) => setForm({ ...form, category: e.target.value })}
+                className={inputCls}
+              >
+                {[
+                  "Panduan",
+                  "KPR",
+                  "Legal",
+                  "Tips",
+                  "Investasi",
+                  "Keuangan",
+                  "Subsidi",
+                  "Keamanan",
+                  "Interior",
+                ].map((c) => (
+                  <option key={c}>{c}</option>
+                ))}
+              </select>
+            </Field>
+          </div>
+          <Field label="Ringkasan (excerpt)">
+            <textarea
+              value={form.excerpt}
+              onChange={(e) => setForm({ ...form, excerpt: e.target.value })}
+              rows={2}
+              className="w-full rounded-2xl border border-slate-200 focus:border-[#001DF3] outline-none px-4 py-2 text-sm"
+            />
+          </Field>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+            <Field label="Tanggal">
+              <input
+                value={form.date}
+                onChange={(e) => setForm({ ...form, date: e.target.value })}
+                className={inputCls}
+              />
+            </Field>
+            <Field label="Waktu baca">
+              <input
+                value={form.read}
+                onChange={(e) => setForm({ ...form, read: e.target.value })}
+                placeholder="5 min"
+                className={inputCls}
+              />
+            </Field>
+            <Field label="Status">
+              <select
+                value={form.status}
+                onChange={(e) => setForm({ ...form, status: e.target.value })}
+                className={inputCls}
+              >
+                <option value="published">Tayang</option>
+                <option value="draft">Draft</option>
+              </select>
+            </Field>
+          </div>
+          <Field label="Cover Image">
+            <div className="flex items-center gap-3">
+              {form.image && (
+                <img
+                  src={form.image}
+                  alt=""
+                  className="w-16 h-16 rounded-xl object-cover"
+                />
+              )}
+              <label className="inline-flex items-center gap-2 bg-white border border-slate-200 hover:border-[#001DF3] rounded-full px-4 h-10 text-xs font-bold cursor-pointer transition">
+                <Upload className="w-4 h-4" />
+                {uploading ? "Uploading..." : form.image ? "Ganti" : "Upload"}
+                <input
+                  type="file"
+                  accept="image/*"
+                  onChange={uploadCover}
+                  className="hidden"
+                />
+              </label>
+              {form.image && (
+                <button
+                  type="button"
+                  onClick={() => setForm({ ...form, image: "" })}
+                  className="text-xs text-slate-500 hover:text-[#000066]"
+                >
+                  Hapus
+                </button>
+              )}
+            </div>
+          </Field>
+          <Field label="Tag (pisahkan koma)">
+            <input
+              value={form.tags}
+              onChange={(e) => setForm({ ...form, tags: e.target.value })}
+              placeholder="rumah pertama, kpr, tips"
+              className={inputCls}
+            />
+          </Field>
+          <Field label="Isi artikel (paragraf, akan disimpan sebagai konten)">
+            <textarea
+              value={
+                typeof form.content === "string"
+                  ? form.content
+                  : (form.content && form.content[0]?.text) || ""
+              }
+              onChange={(e) => setForm({ ...form, content: e.target.value })}
+              rows={6}
+              className="w-full rounded-2xl border border-slate-200 focus:border-[#001DF3] outline-none px-4 py-2 text-sm"
+              placeholder="Tulis isi artikel..."
+            />
+          </Field>
+          {error && (
+            <div className="text-xs text-[#001DF3] bg-[#001DF3]/8 border border-[#001DF3]/20 rounded-xl p-3 font-semibold">
+              {error}
+            </div>
+          )}
+          <div className="flex justify-end gap-2 pt-2">
+            <button
+              type="button"
+              onClick={onClose}
+              className="h-11 rounded-full px-5 text-sm font-bold text-slate-600 hover:bg-slate-50 transition"
+            >
+              Batal
+            </button>
+            <button
+              type="submit"
+              disabled={loading}
+              data-testid="article-form-submit"
+              className="h-11 rounded-full px-5 text-sm font-bold bg-[#001DF3] hover:bg-[#0017c2] text-white shadow-sm disabled:opacity-60 transition"
+            >
+              {loading ? "Menyimpan..." : isEdit ? "Simpan Perubahan" : "Publish"}
+            </button>
+          </div>
+        </form>
       </div>
     </div>
   );

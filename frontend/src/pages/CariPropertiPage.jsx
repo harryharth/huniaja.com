@@ -301,6 +301,9 @@ export default function CariPropertiPage() {
             <div className="lg:col-span-9">
               {/* Location tabs */}
               <div className="flex flex-wrap gap-2 mb-4 items-center">
+                <button className="shrink-0 flex items-center gap-1 text-xs font-medium bg-[#00B512] text-white border border-transparent px-3 py-1.5 rounded-full">
+                  <SlidersHorizontal className="w-3.5 h-3.5" /> Filter Lokasi
+                </button>
                 <div className="flex gap-2 overflow-x-auto flex-1 scrollbar-hide">
                   {locationTabs.map((t) => (
                     <button
@@ -319,9 +322,6 @@ export default function CariPropertiPage() {
                     </button>
                   ))}
                 </div>
-                <button className="shrink-0 flex items-center gap-1 text-xs font-medium bg-[#00B512] text-white border border-transparent px-3 py-1.5 rounded-full">
-                  <SlidersHorizontal className="w-3.5 h-3.5" /> Filter Lokasi
-                </button>
               </div>
 
               <p className="text-xs text-slate-500 mb-3">

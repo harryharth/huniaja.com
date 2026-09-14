@@ -33,9 +33,24 @@ function TikTokIcon(props) {
 }
 
 export default function Footer() {
+  // Flat list of all footer links (used for the 2-column mobile layout)
+  const flatLinks = footerCols.flat();
   return (
-    <footer className="bg-[#001DF3] text-white pt-16 pb-10">
+    <footer className="bg-[#001DF3] text-white pt-14 md:pt-16 pb-10">
       <div className="max-w-6xl mx-auto px-6">
+        {/* Mobile-only: links stacked in 2 columns, ABOVE the logo/socials */}
+        <div className="md:hidden mb-10">
+          <ul className="grid grid-cols-2 gap-y-4 gap-x-6 text-[15px] text-white/95">
+            {flatLinks.map((l, idx) => (
+              <li key={idx}>
+                <Link to={l.href} className="hover:text-white/70 transition-colors">
+                  {l.label}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
+
         <div className="grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-8">
           {/* Left column: logo + description + socials + copyright */}
           <div className="md:col-span-4 flex flex-col">
@@ -87,8 +102,8 @@ export default function Footer() {
             </p>
           </div>
 
-          {/* Right columns: link groups (left-aligned, with breathing space from the logo) */}
-          <div className="md:col-span-7 md:col-start-6 grid grid-cols-1 sm:grid-cols-3 gap-8 md:gap-10 md:pt-2 md:pl-8">
+          {/* Right columns: link groups — hidden on mobile (rendered above in 2-col grid) */}
+          <div className="hidden md:grid md:col-span-7 md:col-start-6 grid-cols-3 gap-8 md:gap-10 md:pt-2 md:pl-8">
             {footerCols.map((col, i) => (
             <ul key={i} className="space-y-6 text-[15px] text-white/95">
               {col.map((l, idx) => (
