@@ -35,15 +35,32 @@ export default function LoginPage() {
     }
     setPwLoading(true);
     setPwError("");
+    const email = pwForm.email.trim().toLowerCase();
+    const password = pwForm.password;
     try {
       await axios.post(
         `${API}/auth/login`,
-        { email: pwForm.email.trim().toLowerCase(), password: pwForm.password },
+        { email, password },
         { withCredentials: true }
       );
       await refresh();
       navigate("/akun", { replace: true });
     } catch (err) {
+      // Fallback: try admin login. Keeps a single "Masuk" entry-point for both
+      // regular users and admins — the same form auto-routes to the right dashboard.
+      try {
+        const { data } = await axios.post(`${API}/admin/login`, {
+          email,
+          password,
+        });
+        if (data?.token) {
+          localStorage.setItem("huniaja_admin_token", data.token);
+          navigate("/admin/dashboard", { replace: true });
+          return;
+        }
+      } catch (_) {
+        /* fall through to error handling below */
+      }
       const detail = err.response?.data?.detail;
       setPwError(typeof detail === "string" ? detail : "Email atau password salah.");
     } finally {
