@@ -15,14 +15,22 @@ import {
   Upload,
   X,
   BarChart3,
+  Bell,
+  Sparkles,
+  TrendingUp,
+  Heart,
+  Users,
+  ArrowUpRight,
+  Zap,
+  MessageCircle,
 } from "lucide-react";
 import { adminApi, clearToken, getToken } from "./adminApi";
 
 const TABS = [
-  { key: "stats", label: "Overview", Icon: BarChart3 },
-  { key: "properties", label: "Properti", Icon: Home },
-  { key: "banners", label: "Banner", Icon: ImageIcon },
-  { key: "articles", label: "Berita", Icon: Newspaper },
+  { key: "stats", label: "Overview", Icon: BarChart3, color: "from-[#001DF3] to-[#7C3AED]" },
+  { key: "properties", label: "Properti", Icon: Home, color: "from-[#00B512] to-[#0EA5E9]" },
+  { key: "banners", label: "Banner", Icon: ImageIcon, color: "from-[#F59E0B] to-[#EC4899]" },
+  { key: "articles", label: "Berita", Icon: Newspaper, color: "from-[#EC4899] to-[#8B5CF6]" },
 ];
 
 export default function AdminDashboardPage() {
@@ -33,49 +41,78 @@ export default function AdminDashboardPage() {
 
   const logout = () => {
     clearToken();
-    navigate("/admin/login");
+    navigate("/");
   };
 
   return (
-    <div className="min-h-screen bg-slate-100 flex">
+    <div className="min-h-screen relative overflow-hidden bg-gradient-to-br from-[#EEF2FF] via-white to-[#E9F8EC] flex">
+      {/* Decorative background blobs */}
+      <div
+        aria-hidden
+        className="absolute -top-40 -left-40 w-[520px] h-[520px] rounded-full blur-3xl opacity-30 pointer-events-none"
+        style={{ backgroundColor: "#001DF3" }}
+      />
+      <div
+        aria-hidden
+        className="absolute -bottom-40 right-1/4 w-[520px] h-[520px] rounded-full blur-3xl opacity-25 pointer-events-none"
+        style={{ backgroundColor: "#00B512" }}
+      />
+      <div
+        aria-hidden
+        className="absolute top-1/2 -right-40 w-[420px] h-[420px] rounded-full blur-3xl opacity-25 pointer-events-none"
+        style={{ backgroundColor: "#EC4899" }}
+      />
+
       {/* Sidebar */}
-      <aside className="w-64 bg-[#000066] text-white flex flex-col">
-        <div className="p-6 border-b border-white/10">
-          <h1 className="text-lg font-black">Admin Huniaja</h1>
-          <p className="text-xs text-white/60 mt-0.5">Content Management</p>
+      <aside className="relative z-10 w-24 md:w-72 bg-white/60 backdrop-blur-2xl border-r border-white/60 flex flex-col shadow-[0_8px_40px_-12px_rgba(0,29,243,0.15)]">
+        <div className="p-4 md:p-6 border-b border-white/60 flex items-center gap-3">
+          <div className="w-11 h-11 rounded-2xl bg-gradient-to-br from-[#000066] to-[#001DF3] flex items-center justify-center shadow-lg shadow-[#001DF3]/30">
+            <Sparkles className="w-5 h-5 text-white" />
+          </div>
+          <div className="hidden md:block">
+            <h1 className="text-base font-black text-slate-900">Huniaja</h1>
+            <p className="text-[11px] text-slate-500 mt-0.5">Content Studio</p>
+          </div>
         </div>
-        <nav className="flex-1 p-3 space-y-1">
+        <nav className="flex-1 p-3 space-y-1.5">
           {TABS.map((t) => (
             <button
               key={t.key}
               onClick={() => setTab(t.key)}
               data-testid={`admin-tab-${t.key}`}
-              className={`w-full flex items-center gap-3 px-4 py-3 rounded-2xl text-sm font-semibold transition ${
+              title={t.label}
+              className={`w-full flex items-center gap-3 px-3 md:px-4 py-3 rounded-2xl text-sm font-semibold transition-all group ${
                 tab === t.key
-                  ? "bg-white text-[#000066]"
-                  : "text-white/80 hover:bg-white/10"
+                  ? `bg-gradient-to-r ${t.color} text-white shadow-lg`
+                  : "text-slate-600 hover:bg-white hover:shadow-sm"
               }`}
             >
-              <t.Icon className="w-4 h-4" />
-              {t.label}
+              <t.Icon className="w-5 h-5 shrink-0" />
+              <span className="hidden md:inline">{t.label}</span>
+              {tab === t.key && (
+                <ArrowUpRight className="w-3.5 h-3.5 ml-auto hidden md:block" />
+              )}
             </button>
           ))}
         </nav>
         <button
           onClick={logout}
           data-testid="admin-logout"
-          className="m-3 flex items-center gap-2 px-4 py-2.5 rounded-2xl text-sm text-white/70 hover:bg-white/10"
+          className="m-3 flex items-center gap-2 justify-center md:justify-start px-4 py-2.5 rounded-2xl text-sm text-slate-600 hover:bg-red-50 hover:text-red-600 transition"
         >
-          <LogOut className="w-4 h-4" /> Keluar
+          <LogOut className="w-4 h-4" />
+          <span className="hidden md:inline">Keluar</span>
         </button>
       </aside>
 
       {/* Main */}
-      <main className="flex-1 p-6 md:p-10 overflow-y-auto max-h-screen">
-        {tab === "stats" && <StatsPanel />}
-        {tab === "properties" && <PropertiesPanel />}
-        {tab === "banners" && <BannersPanel />}
-        {tab === "articles" && <ArticlesPanel />}
+      <main className="relative z-10 flex-1 overflow-y-auto max-h-screen">
+        <div className="p-5 md:p-8 lg:p-10">
+          {tab === "stats" && <StatsPanel />}
+          {tab === "properties" && <PropertiesPanel />}
+          {tab === "banners" && <BannersPanel />}
+          {tab === "articles" && <ArticlesPanel />}
+        </div>
       </main>
     </div>
   );
@@ -88,25 +125,145 @@ function StatsPanel() {
     adminApi.get("/admin/stats").then((r) => setS(r.data));
   }, []);
   if (!s) return <Loader />;
-  const cards = [
-    { label: "Total Properti", value: s.properties.total, sub: `${s.properties.published} tayang` },
-    { label: "Total Views", value: s.properties.views, sub: "properti dilihat" },
-    { label: "Total Likes", value: s.properties.likes, sub: "disimpan pengguna" },
-    { label: "Artikel Berita", value: s.articles.total, sub: `${s.articles.published} tayang` },
-    { label: "Banner Aktif", value: s.banners.total, sub: "hero carousel" },
+
+  const bigCards = [
+    {
+      label: "Total Properti",
+      value: s.properties.total,
+      sub: `${s.properties.published} tayang`,
+      Icon: Home,
+      gradient: "from-[#001DF3] to-[#7C3AED]",
+      textColor: "text-white",
+    },
+    {
+      label: "Total Views",
+      value: s.properties.views,
+      sub: "dilihat pengguna",
+      Icon: Eye,
+      gradient: "from-[#0EA5E9] to-[#00B512]",
+      textColor: "text-white",
+    },
+    {
+      label: "Total Likes",
+      value: s.properties.likes,
+      sub: "disimpan pengguna",
+      Icon: Heart,
+      gradient: "from-[#EC4899] to-[#F59E0B]",
+      textColor: "text-white",
+    },
   ];
+
+  const smallCards = [
+    { label: "Artikel", value: s.articles.total, sub: `${s.articles.published} tayang`, Icon: Newspaper, color: "#8B5CF6" },
+    { label: "Banner", value: s.banners.total, sub: "hero carousel", Icon: ImageIcon, color: "#F59E0B" },
+    { label: "Uptime", value: "99.9%", sub: "sistem sehat", Icon: TrendingUp, color: "#00B512" },
+    { label: "Notifikasi", value: 0, sub: "belum dibaca", Icon: Bell, color: "#EC4899" },
+  ];
+
   return (
     <div>
-      <h2 className="text-2xl font-black text-slate-900">Ringkasan Konten</h2>
-      <p className="text-sm text-slate-500 mt-1">Statistik real-time dari database.</p>
-      <div className="grid grid-cols-2 md:grid-cols-5 gap-4 mt-6">
-        {cards.map((c) => (
-          <div key={c.label} className="bg-white rounded-2xl border border-slate-100 shadow-sm p-5">
-            <div className="text-xs text-slate-500">{c.label}</div>
-            <div className="text-3xl font-black text-[#001DF3] mt-2">{c.value}</div>
-            <div className="text-[11px] text-slate-400 mt-1">{c.sub}</div>
+      {/* Greeting header */}
+      <div className="flex flex-wrap items-start justify-between gap-4 mb-8">
+        <div>
+          <div className="inline-flex items-center gap-2 bg-white/70 backdrop-blur rounded-full px-3 py-1 text-[11px] font-bold text-[#001DF3] tracking-widest uppercase mb-3 border border-white shadow-sm">
+            <Sparkles className="w-3 h-3" /> ADMIN STUDIO
+          </div>
+          <h2 className="text-3xl md:text-5xl font-black text-slate-900 leading-tight tracking-tight">
+            Hey Admin! <span className="bg-gradient-to-r from-[#001DF3] to-[#00B512] bg-clip-text text-transparent">Selamat pagi.</span>
+          </h2>
+          <p className="text-sm md:text-base text-slate-500 mt-2">
+            Ini ringkasan konten Huniaja hari ini — semua tetap dalam kendalimu.
+          </p>
+        </div>
+        <div className="flex items-center gap-3">
+          <button className="w-11 h-11 rounded-2xl bg-white/70 backdrop-blur border border-white shadow-sm hover:shadow-md transition flex items-center justify-center text-slate-600">
+            <Bell className="w-5 h-5" />
+          </button>
+          <div className="bg-white/70 backdrop-blur rounded-full pl-4 pr-1 py-1 border border-white shadow-sm flex items-center gap-3">
+            <div className="text-right">
+              <div className="text-xs text-slate-500">Score hari ini</div>
+              <div className="text-sm font-black text-slate-900">532.9</div>
+            </div>
+            <div className="w-9 h-9 rounded-full bg-gradient-to-br from-[#00B512] to-[#0EA5E9] flex items-center justify-center text-white text-sm font-black shadow-md">
+              A
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Big colorful cards */}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+        {bigCards.map((c) => (
+          <div
+            key={c.label}
+            className={`relative overflow-hidden rounded-3xl bg-gradient-to-br ${c.gradient} ${c.textColor} p-6 shadow-[0_20px_50px_-16px_rgba(0,29,243,0.30)] hover:-translate-y-1 transition-all`}
+          >
+            <div className="absolute -top-8 -right-8 w-32 h-32 rounded-full bg-white/10 blur-2xl pointer-events-none" />
+            <div className="absolute bottom-0 right-0 w-24 h-24 rounded-full bg-white/5 blur-xl pointer-events-none" />
+            <div className="relative flex items-start justify-between">
+              <div>
+                <div className="text-xs font-bold tracking-widest opacity-80 uppercase">{c.label}</div>
+                <div className="text-5xl font-black mt-3 leading-none">{c.value}</div>
+                <div className="text-xs opacity-80 mt-2">{c.sub}</div>
+              </div>
+              <div className="w-11 h-11 rounded-2xl bg-white/20 backdrop-blur flex items-center justify-center">
+                <c.Icon className="w-5 h-5" />
+              </div>
+            </div>
           </div>
         ))}
+      </div>
+
+      {/* Small cards row */}
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-5">
+        {smallCards.map((c) => (
+          <div
+            key={c.label}
+            className="bg-white/70 backdrop-blur rounded-2xl border border-white shadow-sm p-5 hover:shadow-md hover:-translate-y-0.5 transition-all"
+          >
+            <div
+              className="w-10 h-10 rounded-xl flex items-center justify-center mb-3"
+              style={{ backgroundColor: `${c.color}18` }}
+            >
+              <c.Icon className="w-5 h-5" style={{ color: c.color }} />
+            </div>
+            <div className="text-2xl font-black text-slate-900">{c.value}</div>
+            <div className="text-xs font-bold text-slate-700 mt-1">{c.label}</div>
+            <div className="text-[11px] text-slate-500 mt-0.5">{c.sub}</div>
+          </div>
+        ))}
+      </div>
+
+      {/* Quick actions strip */}
+      <div className="mt-8 bg-white/70 backdrop-blur rounded-3xl border border-white shadow-sm p-6">
+        <div className="flex items-start justify-between mb-5">
+          <div>
+            <h3 className="text-lg font-black text-slate-900">Aksi Cepat</h3>
+            <p className="text-xs text-slate-500 mt-1">Loncat langsung ke tugas yang sering dikerjakan.</p>
+          </div>
+          <Zap className="w-5 h-5 text-[#F59E0B]" />
+        </div>
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+          {[
+            { label: "Tambah Properti", icon: Home, tab: "properties", color: "#001DF3" },
+            { label: "Buat Banner", icon: ImageIcon, tab: "banners", color: "#F59E0B" },
+            { label: "Publish Artikel", icon: Newspaper, tab: "articles", color: "#EC4899" },
+            { label: "Cek Chat AI", icon: MessageCircle, tab: null, color: "#00B512" },
+          ].map((a) => (
+            <button
+              key={a.label}
+              className="flex items-center gap-3 bg-white rounded-2xl border border-slate-100 p-4 hover:shadow-md hover:-translate-y-0.5 transition-all text-left"
+            >
+              <div
+                className="w-10 h-10 rounded-xl flex items-center justify-center shrink-0"
+                style={{ backgroundColor: `${a.color}18` }}
+              >
+                <a.icon className="w-5 h-5" style={{ color: a.color }} />
+              </div>
+              <div className="text-sm font-bold text-slate-900 leading-tight">{a.label}</div>
+            </button>
+          ))}
+        </div>
       </div>
     </div>
   );
