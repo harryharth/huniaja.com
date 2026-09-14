@@ -378,39 +378,39 @@ export default function TentangKamiPage() {
           className="absolute -bottom-24 -right-24 w-[420px] h-[420px] rounded-full bg-[#00B512]/10 blur-3xl pointer-events-none"
         />
 
-        <div className="relative max-w-6xl mx-auto px-4 md:px-6">
-          <div className="grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-14 items-center">
-            {/* Portrait */}
-            <div className="md:col-span-5">
-              <div className="relative mx-auto md:mx-0 max-w-sm">
+        <div className="relative max-w-5xl mx-auto px-4 md:px-6">
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 items-center">
+            {/* Portrait — compact */}
+            <div className="md:col-span-4">
+              <div className="relative mx-auto md:mx-0 w-52 md:w-60">
                 {/* Decorative offset frame */}
                 <div
                   aria-hidden
-                  className="absolute -top-4 -left-4 w-full h-full rounded-[36px] border-2 border-[#001DF3]"
+                  className="absolute -top-3 -left-3 w-full h-full rounded-[28px] border-2 border-[#001DF3]"
                 />
                 <div
                   aria-hidden
-                  className="absolute -bottom-4 -right-4 w-full h-full rounded-[36px] bg-[#00B512]/12"
+                  className="absolute -bottom-3 -right-3 w-full h-full rounded-[28px] bg-[#00B512]/12"
                 />
-                <div className="relative rounded-[36px] overflow-hidden shadow-2xl bg-slate-900">
+                <div className="relative rounded-[28px] overflow-hidden shadow-xl bg-slate-900">
                   <img
                     src={OWNER_IMG}
                     alt="Portrait pendiri Huniaja"
-                    className="w-full h-[420px] md:h-[500px] object-cover"
+                    className="w-full h-64 md:h-72 object-cover"
                     data-testid="owner-portrait"
                   />
                 </div>
 
                 {/* Floating badge */}
-                <div className="absolute -bottom-6 left-4 md:left-6 bg-white rounded-2xl shadow-xl border border-slate-100 px-4 py-3 flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-full bg-[#001DF3] flex items-center justify-center">
-                    <Heart className="w-5 h-5 text-white" strokeWidth={2.4} />
+                <div className="absolute -bottom-4 -right-2 md:-right-3 bg-white rounded-2xl shadow-xl border border-slate-100 px-3 py-2 flex items-center gap-2">
+                  <div className="w-8 h-8 rounded-full bg-[#001DF3] flex items-center justify-center">
+                    <Heart className="w-4 h-4 text-white" strokeWidth={2.4} />
                   </div>
                   <div>
-                    <div className="text-[10px] uppercase tracking-widest text-slate-400 font-bold">
+                    <div className="text-[9px] uppercase tracking-widest text-slate-400 font-bold">
                       Sejak 2019
                     </div>
-                    <div className="text-sm font-black text-slate-900">
+                    <div className="text-[11px] font-black text-slate-900">
                       Rumah untuk semua
                     </div>
                   </div>
@@ -419,38 +419,39 @@ export default function TentangKamiPage() {
             </div>
 
             {/* Text */}
-            <div className="md:col-span-7 md:pl-4">
+            <div className="md:col-span-8">
               <span className="inline-block bg-[#001DF3]/8 text-[#001DF3] text-[11px] font-bold rounded-full px-3 py-1 tracking-widest">
                 PESAN DARI PENDIRI
               </span>
               <h2 className="text-3xl md:text-5xl font-black text-slate-900 mt-4 leading-[1.1] tracking-tight">
-                "Rumah bukan sekadar bangunan.{" "}
+                "Rumah bukan hadiah untuk yang beruntung.{" "}
                 <span className="text-[#001DF3]">
-                  Ia adalah tempat mimpi mulai tumbuh.
+                  Ia adalah kemenangan untuk yang tidak pernah menyerah.
                 </span>
                 "
               </h2>
 
               <div className="mt-7 space-y-4 text-slate-600 text-[15px] md:text-base leading-relaxed">
                 <p>
-                  Saya percaya, setiap keluarga di Indonesia berhak punya
-                  rumah — bukan sebagai kemewahan, tapi sebagai fondasi masa
-                  depan mereka. Huniaja lahir dari keresahan sederhana: kenapa
-                  membeli rumah harus terasa rumit, menakutkan, dan penuh
-                  perangkap?
+                  Saya tahu rasanya menatap harga rumah lalu diam-diam bertanya
+                  ke diri sendiri, <em>"apa aku akan pernah sampai ke sana?"</em>
+                  Saya pernah di titik itu. Setiap orang yang saya cintai
+                  pernah di titik itu. Dan saya menolak untuk membiarkan
+                  perasaan itu jadi warisan bagi generasi berikutnya.
                 </p>
                 <p>
-                  Selama bertahun-tahun kami menyaksikan banyak orang — teman,
-                  saudara, tetangga — mundur dari mimpi mereka karena tidak
-                  tahu harus mulai dari mana. Dari sana kami memutuskan: kalau
-                  tidak ada yang benar-benar berpihak pada pembeli rumah, kami
-                  yang akan lakukan.
+                  Huniaja bukan sekadar platform properti. Ia adalah medan
+                  perjuangan — untuk keluarga muda yang menabung sambil menahan
+                  air mata, untuk anak rantau yang rindu punya alamat sendiri,
+                  untuk siapa saja yang pernah merasa mimpi mereka terlalu
+                  besar. Kami ada karena kalian layak mendapatkannya.
                 </p>
                 <p className="font-semibold text-slate-800">
-                  Hari ini, saat kamu membuka Huniaja, itu adalah bukti kecil
-                  bahwa mimpi kolektif bisa berubah jadi jalan yang bisa
-                  ditapaki bersama. Terima kasih sudah percaya. Mari kita
-                  bangun rumah, dan masa depan, bersama-sama.
+                  Jangan pernah berhenti bermimpi. Jangan biarkan siapapun
+                  bilang rumah adalah kemewahan yang tidak untukmu. Selama
+                  kamu berjalan, kami berdiri di sisimu. Karena kunci rumah itu
+                  bukan cuma milik yang mampu — ia milik yang berani terus
+                  berjuang.
                 </p>
               </div>
 
@@ -458,7 +459,7 @@ export default function TentangKamiPage() {
               <div className="mt-8 flex items-center gap-4 pt-6 border-t border-slate-100">
                 <div className="flex-1">
                   <div className="font-black text-slate-900 text-lg">
-                    Rifqi Ananda
+                    Harry Harth
                   </div>
                   <div className="text-xs text-slate-500 tracking-wide">
                     Founder &amp; CEO — Huniaja.com
