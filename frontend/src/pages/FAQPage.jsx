@@ -39,6 +39,26 @@ const CATEGORIES = [
         q: "Apakah Huniaja tersedia di seluruh Indonesia?",
         a: "Ya. Listing properti tersebar di Jabodetabek, Bandung, Surabaya, Semarang, Bali, dan kota-kota besar lain. Layanan tambahan (potong rumput, cleaning, dll.) saat ini fokus di Jabodetabek & Bogor Raya, dan terus meluas.",
       },
+      {
+        q: "Apa yang membedakan Huniaja dengan platform properti lain?",
+        a: "Huniaja bukan sekadar direktori listing. Kami menggabungkan pencarian properti, simulasi KPR realistis dari mitra bank, verifikasi legalitas, chat AI 24/7, dan layanan perawatan rumah pasca-akad dalam satu ekosistem. Setiap listing juga melewati proses moderasi manual sebelum tayang.",
+      },
+      {
+        q: "Bagaimana Huniaja menjaga kualitas dan keaslian listing?",
+        a: "Setiap listing baru wajib melewati verifikasi dokumen dasar (sertifikat & identitas pemasang) oleh tim moderasi kami. Listing bertanda 'Terverifikasi' berarti sudah lolos pengecekan legalitas dasar. Kami juga menerima laporan pengguna dan menindaklanjuti listing mencurigakan dalam 1×24 jam.",
+      },
+      {
+        q: "Apakah Huniaja bekerja sama dengan developer resmi?",
+        a: "Ya. Kami bermitra dengan puluhan developer resmi seperti Sinar Mas Land, Summarecon, Ciputra, Adhi Persada, dan developer regional. Semua unit developer partner sudah pre-verified sehingga kamu bisa transaksi dengan aman.",
+      },
+      {
+        q: "Apakah tersedia aplikasi mobile Huniaja?",
+        a: "Saat ini Huniaja hadir sebagai Progressive Web App (PWA) yang mendukung semua browser modern di HP maupun desktop. Kamu bisa 'Add to Home Screen' dari Chrome/Safari untuk pengalaman seperti aplikasi native. Versi Android & iOS resmi sedang dalam tahap final.",
+      },
+      {
+        q: "Bagaimana kalau saya menemukan listing yang mencurigakan?",
+        a: "Klik tombol Report di halaman detail listing atau chat WhatsApp tim kami dengan menyertakan link listing. Tim moderasi akan investigasi dalam 24 jam. Kami sangat serius dalam menjaga keamanan komunitas dan akan menurunkan listing bermasalah tanpa toleransi.",
+      },
     ],
   },
   {
@@ -66,6 +86,22 @@ const CATEGORIES = [
       {
         q: "Bisakah saya menawar harga lebih rendah?",
         a: "Bisa. Cukup chat WhatsApp dari halaman detail — sertakan angka penawaran & argumentasinya. Tim kami akan follow-up ke penjual dan bantu proses tawar-menawar hingga sepakat.",
+      },
+      {
+        q: "Apakah bisa beli properti dari luar kota tanpa datang langsung?",
+        a: "Bisa, dan cukup umum untuk investor. Kami menyediakan virtual tour (video call live tour), foto & video HD, laporan due-diligence tertulis, serta jasa penunjukan surveyor lokal. Notaris PPAT kemudian bisa mengatur akad jarak jauh dengan kuasa yang sah.",
+      },
+      {
+        q: "Apa itu badge 'HH Pro' dan 'Terverifikasi'?",
+        a: "Badge Terverifikasi berarti listing sudah lolos cek dokumen legalitas dasar. Badge HH Pro artinya pemasang adalah agen atau developer partner dengan track record verifikasi tingkat lanjut serta prioritas layanan dari tim Huniaja. Keduanya menandakan tingkat kepercayaan lebih tinggi.",
+      },
+      {
+        q: "Berapa lama biasanya proses beli sampai terima kunci?",
+        a: "Untuk rumah second cash: 2–4 minggu. Rumah second dengan KPR: 4–8 minggu. Rumah baru dari developer ready stock: 1–3 bulan. Rumah indent: 12–24 bulan sesuai jadwal serah terima developer. Tim Huniaja akan bantu memantau setiap milestone agar tidak molor.",
+      },
+      {
+        q: "Apakah ada properti dengan status lelang atau BTN?",
+        a: "Ya. Kami memiliki kategori khusus 'Properti Lelang' (dari bank/kurator kepailitan) dan 'Take-Over KPR' yang harganya bisa 20–40% di bawah pasar. Filter 'Kondisi: Lelang' di halaman Cari Properti — tim kami akan pandu proses bidding dan cek risiko sebelum kamu ikut lelang.",
       },
     ],
   },
@@ -95,6 +131,22 @@ const CATEGORIES = [
         q: "Bagaimana kalau ada pembeli yang menawar tapi harga rendah?",
         a: "Semua tawaran masuk lewat WhatsApp/dashboard, tercatat rapi. Kamu bisa terima, tolak, atau counter-offer. Tim Huniaja bantu strategikan agar tetap sesuai target harga tanpa kehilangan momentum.",
       },
+      {
+        q: "Foto seperti apa yang membuat listing cepat laku?",
+        a: "Foto siang hari dengan pencahayaan alami, semua lampu dinyalakan, ruangan rapi tanpa barang pribadi berlebihan, sudut lebar (wide-angle), dan minimal 8–10 foto per unit (fasad, ruang tamu, dapur, kamar utama, kamar mandi, halaman). Tim Huniaja menyediakan jasa foto profesional mulai Rp 300 rb.",
+      },
+      {
+        q: "Apakah saya bisa menyewakan (bukan menjual) properti lewat Huniaja?",
+        a: "Bisa. Saat pasang iklan, pilih tipe 'Disewakan' dan tentukan durasi (harian, bulanan, tahunan). Listing sewa berjalan di kanal khusus dan dapat dukungan tim untuk screening penyewa serta pembuatan kontrak digital.",
+      },
+      {
+        q: "Bagaimana kalau properti saya sedang dalam proses KPR (bukan SHM lunas)?",
+        a: "Tetap bisa dijual dengan skema Take-Over KPR — pembeli baru melanjutkan cicilan ke bank yang sama, atau over-kredit ke bank lain. Tim Huniaja bantu koordinasi dengan bank supaya proses balik nama & pergantian debitur berjalan lancar.",
+      },
+      {
+        q: "Apakah tim Huniaja bantu buatkan deskripsi listing?",
+        a: "Ya. Cukup upload foto & isi spesifikasi dasar, tim copywriter kami akan menulis deskripsi menarik yang SEO-friendly dalam 1×24 jam. Layanan ini gratis untuk pengguna HH Pro dan berbayar minimal (Rp 50 rb/listing) untuk pengguna reguler.",
+      },
     ],
   },
   {
@@ -123,6 +175,22 @@ const CATEGORIES = [
         q: "Bagaimana kalau pengajuan KPR ditolak?",
         a: "Kami akan bantu telusuri alasan penolakan (biasanya BI Checking, DSR terlalu tinggi, atau dokumen kurang) dan tawarkan alternatif: bank lain, KPR Syariah, atau skema Rent-to-Own dari developer partner.",
       },
+      {
+        q: "Bagaimana cara memakai simulasi KPR Huniaja?",
+        a: "Buka halaman KPR, masukkan harga rumah, tenor (5–30 tahun), DP, dan pilih jenis KPR. Sistem otomatis hitung cicilan bulanan, total bunga, dan skema angsuran per tahun. Simulasi ini mengacu suku bunga terkini mitra bank kami.",
+      },
+      {
+        q: "Apakah cicilan bisa fixed rate (tetap)?",
+        a: "Ya, sebagian besar bank menawarkan fixed rate 1–5 tahun pertama (biasanya 5,5%–7,5%). Setelah periode fixed, bunga berubah ke floating (mengikuti suku bunga acuan BI). KPR Syariah menawarkan margin flat sepanjang tenor.",
+      },
+      {
+        q: "Apa itu SP3K dan mengapa penting?",
+        a: "SP3K (Surat Persetujuan Pemberian Kredit) adalah surat resmi dari bank bahwa pengajuan KPR-mu disetujui dengan nominal dan tenor tertentu. SP3K adalah tiket masuk untuk lanjut ke akad KPR di hadapan notaris. Tanpa SP3K, kamu belum bisa AJB.",
+      },
+      {
+        q: "Kalau saya freelancer atau wirausaha tanpa slip gaji, apakah bisa KPR?",
+        a: "Bisa. Alternatifnya: mutasi rekening 6–12 bulan sebagai bukti penghasilan, laporan pajak (SPT Tahunan), dan surat keterangan usaha. Bank Mandiri, BCA Syariah, dan BSI cukup akomodatif untuk profil wirausaha — tim Huniaja bisa rekomendasikan bank paling cocok.",
+      },
     ],
   },
   {
@@ -146,6 +214,26 @@ const CATEGORIES = [
       {
         q: "Apa bedanya IMB dan PBG?",
         a: "IMB (Izin Mendirikan Bangunan) adalah istilah lama, kini diganti PBG (Persetujuan Bangunan Gedung) sejak 2021. Fungsinya sama: bukti bangunan legal & sesuai tata ruang. Pastikan sertifikat PBG tersedia sebelum beli.",
+      },
+      {
+        q: "Apa itu HPL dan bedanya dengan SHM?",
+        a: "HPL (Hak Pengelolaan) adalah hak yang dimiliki lembaga/pemerintah atas tanah tertentu, umumnya bandara, pelabuhan, atau kawasan industri. Properti di atas HPL biasanya berstatus HGB terbatas — cocok untuk investasi jangka pendek, kurang ideal untuk kepemilikan turun-temurun.",
+      },
+      {
+        q: "Bagaimana kalau sertifikat masih atas nama pihak sebelumnya (belum balik nama)?",
+        a: "Jangan tandatangan AJB sebelum balik nama selesai. Tim Huniaja bisa bantu koordinasi dengan penjual & PPAT untuk memproses balik nama terlebih dahulu (sekitar 2–4 minggu di BPN). Ini melindungi kamu dari risiko hukum di kemudian hari.",
+      },
+      {
+        q: "Berapa biaya BPHTB & PPh yang harus disiapkan pembeli?",
+        a: "BPHTB (pembeli): 5% dari NJOP atau nilai transaksi (mana yang lebih tinggi), dikurangi NJOP-TKP daerah masing-masing. PPh Final (penjual): 2,5% dari nilai transaksi. Total pajak transaksi biasanya 5–8% harga rumah. Tim kami bantu simulasikan sesuai lokasi.",
+      },
+      {
+        q: "Apakah rumah warisan bisa dibeli tanpa risiko?",
+        a: "Bisa, tapi wajib cek: (1) Surat Waris atau Fatwa Waris resmi, (2) Persetujuan tertulis semua ahli waris, (3) Sertifikat sudah balik nama ke ahli waris (bukan atas nama almarhum). Kalau salah satu belum, tunda transaksi — tim Huniaja bantu proses legal via PPAT rekanan.",
+      },
+      {
+        q: "Bagaimana kalau rumah masih dalam sengketa keluarga?",
+        a: "Hindari. Cek gugatan aktif di SIPP Mahkamah Agung dengan nama pemilik dan alamat properti. Kalau ada, batalkan pembelian atau tunggu putusan berkekuatan hukum tetap (inkracht). Tim Huniaja bisa bantu skrining awal gratis sebelum kamu bayar DP.",
       },
     ],
   },
@@ -171,6 +259,26 @@ const CATEGORIES = [
         q: "Bagaimana kalau setelah pindah ada masalah tersembunyi?",
         a: "Untuk rumah baru, klaim garansi ke developer sesuai buku garansi. Untuk rumah second, tim Huniaja bisa bantu mediasi dengan penjual — biasanya penjual bertanggung jawab untuk cacat tersembunyi yang tidak diinformasikan sebelumnya.",
       },
+      {
+        q: "Apakah furniture dan AC ikut serah terima?",
+        a: "Tergantung kesepakatan tertulis di PPJB/AJB. Kalau tidak disebutkan, semua barang bergerak (furniture, AC lepas, kulkas) tidak termasuk transaksi. Selalu buat inventory list detail sebelum tandatangan — tim Huniaja siapkan template gratis.",
+      },
+      {
+        q: "Bagaimana kalau developer menunda serah terima lebih dari jadwal?",
+        a: "Cek klausul denda keterlambatan di PPJB (biasanya 1‰ per hari maksimal 5% dari harga unit). Kalau delay >6 bulan tanpa alasan force majeure, kamu berhak minta pembatalan + pengembalian dana. Tim Huniaja bisa dampingi negosiasi/mediasi.",
+      },
+      {
+        q: "Apa itu masa retensi dan berapa lama?",
+        a: "Masa retensi adalah periode setelah serah terima (biasanya 3–6 bulan) di mana developer wajib memperbaiki defect minor tanpa biaya tambahan. Selama masa ini, laporkan setiap kerusakan ke customer service developer — jangan tunggu retensi habis.",
+      },
+      {
+        q: "Apakah rumah baru boleh direnovasi sebelum serah terima?",
+        a: "Umumnya tidak boleh, karena struktur & garansi milik developer sampai serah terima resmi. Beberapa developer memperbolehkan 'custom finishing' (mengganti keramik, cat, kitchen set) dengan biaya tambahan sebelum handover. Tanyakan ke marketing developer.",
+      },
+      {
+        q: "Bagaimana cara mengurus balik nama listrik & PDAM?",
+        a: "Setelah AJB, bawa fotokopi AJB, KTP, dan bukti pembayaran terakhir ke kantor PLN/PDAM setempat. Balik nama listrik biasanya gratis, PDAM ada biaya administrasi Rp 50–150 rb tergantung daerah. Prosesnya 3–7 hari kerja.",
+      },
     ],
   },
   {
@@ -195,6 +303,26 @@ const CATEGORIES = [
         q: "Apakah data pribadi saya aman?",
         a: "Ya. Kami pakai enkripsi HTTPS untuk semua data, password di-hash bcrypt, dan tidak pernah membagikan data ke pihak ketiga tanpa persetujuanmu. Baca detail di halaman Kebijakan Privasi.",
       },
+      {
+        q: "Bagaimana cara mengubah nomor WhatsApp atau email di akun?",
+        a: "Masuk ke halaman Akun → tab Profil → klik Edit di sebelah data yang ingin diubah. Untuk email, kami akan kirim link verifikasi ke email baru sebelum diaktifkan. Untuk WhatsApp, cukup update langsung — perubahan tersimpan otomatis.",
+      },
+      {
+        q: "Apakah saya bisa punya lebih dari satu akun?",
+        a: "Satu akun per email dan nomor WhatsApp untuk menjaga kualitas komunitas dan mencegah duplikasi listing. Kalau kamu agen dengan tim, gunakan paket HH Pro yang mendukung multi-user di bawah satu perusahaan.",
+      },
+      {
+        q: "Bagaimana cara menghapus akun secara permanen?",
+        a: "Kirim permintaan penghapusan via halaman Kontak atau WhatsApp resmi kami dengan menyertakan email akun. Sesuai UU PDP, kami menghapus data pribadi dalam 30 hari kerja. Riwayat transaksi tetap disimpan untuk keperluan audit hukum.",
+      },
+      {
+        q: "Apa saja tanda listing atau pembayaran yang berpotensi penipuan?",
+        a: "Waspada bila: (1) harga jauh di bawah pasar, (2) penjual menolak survey/video call, (3) diminta transfer ke rekening pribadi, (4) dokumen legalitas 'sedang diurus' tapi tidak diperlihatkan. Selalu konfirmasi lewat tim Huniaja sebelum bayar apapun.",
+      },
+      {
+        q: "Apakah pembayaran layanan (potong rumput, cleaning) bisa via transfer atau tunai?",
+        a: "Bisa keduanya. Sistem kami mendukung transfer via BCA, Mandiri, BRI, e-wallet (GoPay, OVO, DANA), dan tunai saat teknisi datang. Kamu dapat invoice resmi via email/WhatsApp setelah pembayaran diterima.",
+      },
     ],
   },
 ];
@@ -203,6 +331,7 @@ export default function FAQPage() {
   const [activeCat, setActiveCat] = useState("umum");
   const [q, setQ] = useState("");
   const [openIdx, setOpenIdx] = useState({});
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const current = CATEGORIES.find((c) => c.id === activeCat) || CATEGORIES[0];
   const filtered = q
@@ -232,159 +361,198 @@ export default function FAQPage() {
         </div>
       </section>
 
-      <section className="bg-white py-14 md:py-20">
-        <div className="max-w-6xl mx-auto px-4 md:px-6 grid grid-cols-1 md:grid-cols-4 gap-8">
-          {/* Sidebar */}
-          <aside className="md:col-span-1">
-            <div className="md:sticky md:top-32 space-y-2.5">
-              {CATEGORIES.map((c) => {
-                const active = activeCat === c.id;
-                return (
-                  <button
-                    key={c.id}
-                    onClick={() => {
-                      setActiveCat(c.id);
-                      setOpenIdx({});
-                      setQ("");
-                    }}
-                    data-testid={`faq-cat-${c.id}`}
-                    className={`w-full group flex items-center gap-3 rounded-2xl p-2 pr-3 shadow-sm hover:shadow-md transition-all ${
-                      active
-                        ? "bg-[#001DF3] text-white"
-                        : "bg-white border border-slate-200 text-slate-800 hover:border-slate-300"
-                    }`}
-                  >
-                    <span
-                      className="w-10 h-10 rounded-xl flex items-center justify-center shrink-0"
-                      style={{ backgroundColor: `${c.color}20` }}
+      <section className="bg-white py-10 md:py-20">
+        <div className="max-w-6xl mx-auto px-4 md:px-6">
+          {/* Mobile-only category dropdown trigger */}
+          <div className="md:hidden mb-4">
+            <button
+              onClick={() => setMobileMenuOpen((v) => !v)}
+              data-testid="faq-mobile-menu-toggle"
+              className="w-full flex items-center gap-3 rounded-2xl p-2 pr-3 shadow-sm bg-[#001DF3] text-white"
+            >
+              <span
+                className="w-10 h-10 rounded-xl flex items-center justify-center shrink-0 bg-white/15"
+              >
+                <current.Icon className="w-5 h-5 text-white" strokeWidth={2.4} />
+              </span>
+              <span className="flex-1 text-left">
+                <span className="block text-[10px] uppercase tracking-wider font-bold text-white/70">
+                  Kategori
+                </span>
+                <span className="text-sm font-bold">{current.label}</span>
+              </span>
+              <ChevronDown
+                className={`w-5 h-5 shrink-0 transition-transform ${
+                  mobileMenuOpen ? "rotate-180" : ""
+                }`}
+              />
+            </button>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+            {/* Sidebar */}
+            <aside className="md:col-span-1">
+              <div
+                className={`md:sticky md:top-32 space-y-2.5 ${
+                  mobileMenuOpen ? "block" : "hidden md:block"
+                }`}
+              >
+                {CATEGORIES.map((c) => {
+                  const active = activeCat === c.id;
+                  return (
+                    <button
+                      key={c.id}
+                      onClick={() => {
+                        setActiveCat(c.id);
+                        setOpenIdx({});
+                        setQ("");
+                        setMobileMenuOpen(false);
+                      }}
+                      data-testid={`faq-cat-${c.id}`}
+                      className={`w-full group flex items-center gap-3 rounded-2xl p-2 pr-3 shadow-sm hover:shadow-md transition-all ${
+                        active
+                          ? "bg-[#001DF3] text-white"
+                          : "bg-white border border-slate-200 text-slate-800 hover:border-slate-300"
+                      }`}
                     >
-                      <c.Icon
-                        className="w-5 h-5"
-                        style={{ color: c.color }}
-                        strokeWidth={2.4}
-                      />
-                    </span>
-                    <span className="flex-1 text-sm font-bold text-left">
-                      {c.label}
-                    </span>
-                    {active ? (
-                      <span className="w-7 h-7 rounded-full bg-[#00B512] flex items-center justify-center shrink-0">
-                        <Check className="w-4 h-4 text-white" strokeWidth={3} />
+                      <span
+                        className="w-10 h-10 rounded-xl flex items-center justify-center shrink-0"
+                        style={{ backgroundColor: `${c.color}20` }}
+                      >
+                        <c.Icon
+                          className="w-5 h-5"
+                          style={{ color: c.color }}
+                          strokeWidth={2.4}
+                        />
                       </span>
-                    ) : (
-                      <ChevronDown className="w-4 h-4 text-slate-400 shrink-0" />
+                      <span className="flex-1 text-sm font-bold text-left">
+                        {c.label}
+                      </span>
+                      {active ? (
+                        <span className="w-7 h-7 rounded-full bg-[#00B512] flex items-center justify-center shrink-0">
+                          <Check className="w-4 h-4 text-white" strokeWidth={3} />
+                        </span>
+                      ) : (
+                        <ChevronDown className="w-4 h-4 text-slate-400 shrink-0" />
+                      )}
+                    </button>
+                  );
+                })}
+
+                <div className="hidden md:block mt-6 bg-slate-50 rounded-2xl p-4">
+                  <p className="text-xs uppercase tracking-wider text-slate-500 font-bold mb-2">
+                    Butuh bantuan lain?
+                  </p>
+                  <Link
+                    to="/kontak"
+                    className="text-sm text-[#001DF3] font-bold hover:underline"
+                  >
+                    Chat tim kami →
+                  </Link>
+                  <p className="text-xs text-slate-500 mt-2">
+                    Respon rata-rata &lt; 15 menit di jam operasional.
+                  </p>
+                </div>
+              </div>
+            </aside>
+
+            {/* Content */}
+            <div className="md:col-span-3 space-y-4">
+              {/* Search + header */}
+              <div className="bg-white rounded-3xl border border-slate-100 shadow-sm p-6">
+                <div className="flex items-center gap-3">
+                  <div
+                    className="w-11 h-11 rounded-2xl flex items-center justify-center"
+                    style={{ backgroundColor: `${current.color}18` }}
+                  >
+                    <current.Icon
+                      className="w-5 h-5"
+                      style={{ color: current.color }}
+                    />
+                  </div>
+                  <h2 className="text-lg md:text-xl font-black text-slate-900">
+                    {current.label}
+                  </h2>
+                </div>
+                <div className="mt-4 relative">
+                  <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
+                  <input
+                    value={q}
+                    onChange={(e) => setQ(e.target.value)}
+                    placeholder={`Cari di ${current.label.toLowerCase()}...`}
+                    data-testid="faq-search"
+                    className="w-full h-11 rounded-2xl bg-slate-50 border border-slate-200 focus:border-[#001DF3] focus:ring-2 focus:ring-[#001DF3]/15 outline-none pl-11 pr-4 text-sm transition"
+                  />
+                </div>
+              </div>
+
+              {/* Q&A cards */}
+              {filtered.length === 0 && (
+                <div className="bg-white rounded-3xl border border-slate-100 shadow-sm p-8 text-center">
+                  <p className="text-slate-500 text-sm">
+                    Tidak ada hasil untuk "{q}". Coba kata kunci lain atau chat
+                    tim kami di WhatsApp.
+                  </p>
+                </div>
+              )}
+              {filtered.map((qa, i) => {
+                const open = !!openIdx[i];
+                return (
+                  <div
+                    key={i}
+                    className="bg-white rounded-3xl border border-slate-100 shadow-sm overflow-hidden"
+                    data-testid={`faq-item-${i}`}
+                  >
+                    <button
+                      onClick={() => toggle(i)}
+                      className="w-full flex items-start justify-between gap-4 text-left p-5 md:p-6 hover:bg-slate-50 transition"
+                    >
+                      <span className="text-base md:text-lg font-bold text-slate-900 leading-snug">
+                        {qa.q}
+                      </span>
+                      <ChevronDown
+                        className={`w-5 h-5 shrink-0 text-slate-400 transition-transform mt-1 ${
+                          open ? "rotate-180 text-[#001DF3]" : ""
+                        }`}
+                      />
+                    </button>
+                    {open && (
+                      <div className="px-5 md:px-6 pb-5 md:pb-6 text-sm md:text-[15px] text-slate-600 leading-relaxed">
+                        {qa.a}
+                      </div>
                     )}
-                  </button>
+                  </div>
                 );
               })}
 
-              <div className="hidden md:block mt-6 bg-slate-50 rounded-2xl p-4">
-                <p className="text-xs uppercase tracking-wider text-slate-500 font-bold mb-2">
-                  Butuh bantuan lain?
-                </p>
-                <Link
-                  to="/kontak"
-                  className="text-sm text-[#001DF3] font-bold hover:underline"
-                >
-                  Chat tim kami →
-                </Link>
-                <p className="text-xs text-slate-500 mt-2">
-                  Respon rata-rata &lt; 15 menit di jam operasional.
-                </p>
-              </div>
-            </div>
-          </aside>
-
-          {/* Content */}
-          <div className="md:col-span-3 space-y-4">
-            {/* Search + header */}
-            <div className="bg-white rounded-3xl border border-slate-100 shadow-sm p-6">
-              <div className="flex items-center gap-3">
-                <div className="w-11 h-11 rounded-2xl flex items-center justify-center" style={{ backgroundColor: `${current.color}18` }}>
-                  <current.Icon className="w-5 h-5" style={{ color: current.color }} />
-                </div>
-                <h2 className="text-lg md:text-xl font-black text-slate-900">
-                  {current.label}
-                </h2>
-              </div>
-              <div className="mt-4 relative">
-                <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
-                <input
-                  value={q}
-                  onChange={(e) => setQ(e.target.value)}
-                  placeholder={`Cari di ${current.label.toLowerCase()}...`}
-                  data-testid="faq-search"
-                  className="w-full h-11 rounded-2xl bg-slate-50 border border-slate-200 focus:border-[#001DF3] focus:ring-2 focus:ring-[#001DF3]/15 outline-none pl-11 pr-4 text-sm transition"
-                />
-              </div>
-            </div>
-
-            {/* Q&A cards */}
-            {filtered.length === 0 && (
-              <div className="bg-white rounded-3xl border border-slate-100 shadow-sm p-8 text-center">
-                <p className="text-slate-500 text-sm">
-                  Tidak ada hasil untuk "{q}". Coba kata kunci lain atau chat
-                  tim kami di WhatsApp.
-                </p>
-              </div>
-            )}
-            {filtered.map((qa, i) => {
-              const open = !!openIdx[i];
-              return (
-                <div
-                  key={i}
-                  className="bg-white rounded-3xl border border-slate-100 shadow-sm overflow-hidden"
-                  data-testid={`faq-item-${i}`}
-                >
-                  <button
-                    onClick={() => toggle(i)}
-                    className="w-full flex items-start justify-between gap-4 text-left p-5 md:p-6 hover:bg-slate-50 transition"
+              {/* Contact CTA */}
+              <div
+                className="rounded-3xl p-6 md:p-8 text-white mt-6"
+                style={{
+                  background: "linear-gradient(135deg, #000066 0%, #001DF3 100%)",
+                }}
+              >
+                <div className="flex flex-col md:flex-row items-start md:items-center gap-4">
+                  <div className="w-14 h-14 rounded-2xl bg-white/10 backdrop-blur border border-white/20 flex items-center justify-center shrink-0">
+                    <Lock className="w-6 h-6 text-white" />
+                  </div>
+                  <div className="flex-1">
+                    <h3 className="text-lg md:text-xl font-black">
+                      Pertanyaanmu belum terjawab?
+                    </h3>
+                    <p className="text-sm text-white/80 mt-1">
+                      Tim Huniaja siap bantu langsung via WhatsApp — respon di
+                      bawah 15 menit.
+                    </p>
+                  </div>
+                  <Link
+                    to="/kontak"
+                    className="bg-white text-[#001DF3] hover:bg-slate-100 font-bold rounded-full px-6 py-3 text-sm shadow-lg inline-flex items-center justify-center transition"
+                    data-testid="faq-contact-btn"
                   >
-                    <span className="text-base md:text-lg font-bold text-slate-900 leading-snug">
-                      {qa.q}
-                    </span>
-                    <ChevronDown
-                      className={`w-5 h-5 shrink-0 text-slate-400 transition-transform mt-1 ${
-                        open ? "rotate-180 text-[#001DF3]" : ""
-                      }`}
-                    />
-                  </button>
-                  {open && (
-                    <div className="px-5 md:px-6 pb-5 md:pb-6 text-sm md:text-[15px] text-slate-600 leading-relaxed">
-                      {qa.a}
-                    </div>
-                  )}
+                    Chat Tim Kami
+                  </Link>
                 </div>
-              );
-            })}
-
-            {/* Contact CTA */}
-            <div
-              className="rounded-3xl p-6 md:p-8 text-white mt-6"
-              style={{
-                background: "linear-gradient(135deg, #000066 0%, #001DF3 100%)",
-              }}
-            >
-              <div className="flex flex-col md:flex-row items-start md:items-center gap-4">
-                <div className="w-14 h-14 rounded-2xl bg-white/10 backdrop-blur border border-white/20 flex items-center justify-center shrink-0">
-                  <Lock className="w-6 h-6 text-white" />
-                </div>
-                <div className="flex-1">
-                  <h3 className="text-lg md:text-xl font-black">
-                    Pertanyaanmu belum terjawab?
-                  </h3>
-                  <p className="text-sm text-white/80 mt-1">
-                    Tim Huniaja siap bantu langsung via WhatsApp — respon di
-                    bawah 15 menit.
-                  </p>
-                </div>
-                <Link
-                  to="/kontak"
-                  className="bg-white text-[#001DF3] hover:bg-slate-100 font-bold rounded-full px-6 py-3 text-sm shadow-lg inline-flex items-center justify-center transition"
-                  data-testid="faq-contact-btn"
-                >
-                  Chat Tim Kami
-                </Link>
               </div>
             </div>
           </div>

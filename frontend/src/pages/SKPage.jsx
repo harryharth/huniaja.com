@@ -94,6 +94,9 @@ const sections = [
 
 export default function SKPage() {
   const [activeDoc, setActiveDoc] = useState("sk");
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  const currentDoc = legalDocs.find((d) => d.id === activeDoc) || legalDocs[0];
 
   return (
     <div className="min-h-screen bg-white">
@@ -112,11 +115,40 @@ export default function SKPage() {
         </div>
       </section>
 
-      <section className="bg-white py-14 md:py-20">
-        <div className="max-w-6xl mx-auto px-4 md:px-6 grid grid-cols-1 md:grid-cols-4 gap-8">
+      <section className="bg-white py-10 md:py-20">
+        <div className="max-w-6xl mx-auto px-4 md:px-6">
+          {/* Mobile-only dropdown trigger */}
+          <div className="md:hidden mb-4">
+            <button
+              onClick={() => setMobileMenuOpen((v) => !v)}
+              data-testid="sk-mobile-menu-toggle"
+              className="w-full flex items-center gap-3 rounded-2xl p-2 pr-3 shadow-sm bg-[#001DF3] text-white"
+            >
+              <span className="w-10 h-10 rounded-xl flex items-center justify-center shrink-0 bg-white/15">
+                <currentDoc.Icon className="w-5 h-5 text-white" strokeWidth={2.4} />
+              </span>
+              <span className="flex-1 text-left">
+                <span className="block text-[10px] uppercase tracking-wider font-bold text-white/70">
+                  Dokumen
+                </span>
+                <span className="text-sm font-bold">{currentDoc.label}</span>
+              </span>
+              <ChevronDown
+                className={`w-5 h-5 shrink-0 transition-transform ${
+                  mobileMenuOpen ? "rotate-180" : ""
+                }`}
+              />
+            </button>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           {/* Sidebar with pill buttons */}
           <aside className="md:col-span-1">
-            <div className="md:sticky md:top-32 space-y-3">
+            <div
+              className={`md:sticky md:top-32 space-y-3 ${
+                mobileMenuOpen ? "block" : "hidden md:block"
+              }`}
+            >
               {legalDocs.map((d) => {
                 const active = activeDoc === d.id;
                 if (d.id === "help") {
@@ -141,7 +173,10 @@ export default function SKPage() {
                 return (
                   <button
                     key={d.id}
-                    onClick={() => setActiveDoc(d.id)}
+                    onClick={() => {
+                      setActiveDoc(d.id);
+                      setMobileMenuOpen(false);
+                    }}
                     className={`w-full group flex items-center gap-3 rounded-2xl p-2 pr-3 shadow-sm hover:shadow-md transition-all ${
                       active
                         ? "bg-[#001DF3] text-white"
@@ -294,6 +329,7 @@ export default function SKPage() {
                 </div>
               </article>
             )}
+          </div>
           </div>
         </div>
       </section>
