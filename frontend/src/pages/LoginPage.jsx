@@ -223,7 +223,7 @@ export default function LoginPage() {
               </button>
 
               {error && (
-                <div className="bg-red-50 border border-red-100 text-red-600 text-sm rounded-2xl px-4 py-3">
+                <div className="bg-[#001DF3]/8 border border-[#001DF3]/20 text-[#001DF3] text-sm rounded-2xl px-4 py-3">
                   {error}
                 </div>
               )}

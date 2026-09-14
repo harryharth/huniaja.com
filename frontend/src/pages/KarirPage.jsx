@@ -55,7 +55,7 @@ const jobs = [
     location: "Bogor - Jawa Barat",
     type: "Full-time",
     Icon: Palette,
-    color: "#EC4899",
+    color: "#000066",
     desc: "Rancang visual campaign, konten sosial, dan aset produk yang konsisten dengan brand kami.",
   },
   {
@@ -64,7 +64,7 @@ const jobs = [
     location: "Bogor - Jawa Barat",
     type: "Full-time",
     Icon: Megaphone,
-    color: "#F59E0B",
+    color: "#00B512",
     desc: "Kelola kampanye performance & branding lintas kanal untuk mempercepat pertumbuhan pengguna.",
   },
   {
@@ -73,7 +73,7 @@ const jobs = [
     location: "Bogor - Jawa Barat",
     type: "Full-time",
     Icon: Video,
-    color: "#EF4444",
+    color: "#001DF3",
     desc: "Produksi konten video, foto, dan copy yang mengedukasi audiens seputar properti.",
   },
   {
@@ -91,7 +91,7 @@ const jobs = [
     location: "Bogor - Jawa Barat",
     type: "Full-time",
     Icon: Headphones,
-    color: "#0EA5E9",
+    color: "#001DF3",
     desc: "Layani pengguna dan bangun komunitas Huniaja yang saling mendukung dan aktif.",
   },
 ];
@@ -134,14 +134,14 @@ const chapters = [
     Icon: Rocket,
     title: "Berkarya",
     desc: "Ide gilamu didengar. Setiap fitur, setiap kampanye, setiap sapaan ke pelanggan - membawa nama kecilmu di dalamnya. Karyamu jadi warisan digital Huniaja.",
-    color: "#F59E0B",
+    color: "#00B512",
   },
   {
     step: "Bab 04",
     Icon: Trophy,
     title: "Berdampak",
     desc: "Suatu hari, seseorang di ujung Indonesia akhirnya punya rumah pertamanya - karena baris kode, desain, atau tulisanmu. Di sinilah karirmu berubah jadi misi.",
-    color: "#7C3AED",
+    color: "#000066",
   },
 ];
 
@@ -166,7 +166,7 @@ const stories = [
     name: "Kirana Ayu",
     role: "Content Creator - 1.5 tahun di Huniaja",
     initial: "K",
-    color: "#EC4899",
+    color: "#000066",
     quote:
       "Kata orang, kerja di startup properti itu kaku. Di Huniaja? Kita ketawa bareng, gagal bareng, sukses bareng. Tim ini seperti sahabat lama yang kebetulan satu kantor.",
   },
@@ -174,7 +174,7 @@ const stories = [
     name: "Bagas Wicaksana",
     role: "Sales & BD - 4 tahun di Huniaja",
     initial: "B",
-    color: "#F59E0B",
+    color: "#00B512",
     quote:
       "Setiap deal yang kututup bukan angka - itu keluarga yang akhirnya bisa pindah dari kontrakan ke rumah sendiri. Huniaja mengajarkanku bahwa jualan yang baik adalah jualan yang menolong.",
   },
@@ -212,13 +212,13 @@ const values = [
     Icon: Heart,
     title: "Empati Dulu",
     desc: "Kami mendengarkan sebelum membangun. Karena setiap listing adalah mimpi seseorang.",
-    color: "#EC4899",
+    color: "#000066",
   },
   {
     Icon: Sparkles,
     title: "Berani Berbeda",
     desc: "Kami bukan portal properti biasa. Kami menantang status quo dengan berani dan bertanggung jawab.",
-    color: "#F59E0B",
+    color: "#00B512",
   },
   {
     Icon: Handshake,
@@ -384,7 +384,7 @@ export default function KarirPage() {
 
           <div className="relative">
             {/* connecting line desktop */}
-            <div className="hidden md:block absolute top-14 left-0 right-0 h-0.5 bg-gradient-to-r from-[#001DF3]/20 via-[#00B512]/30 to-[#7C3AED]/20" />
+            <div className="hidden md:block absolute top-14 left-0 right-0 h-0.5 bg-gradient-to-r from-[#001DF3]/20 via-[#00B512]/30 to-[#000066]/20" />
             <div className="grid grid-cols-1 md:grid-cols-4 gap-5 md:gap-6 relative">
               {chapters.map((c, idx) => (
                 <div
@@ -794,7 +794,7 @@ function ApplyForm({ form, handle, submit, sent, loading, error, positionLabel }
         <Send className="w-4 h-4 mr-2" /> {loading ? "Mengirim..." : "Kirim Lamaran"}
       </Button>
       {error && (
-        <div className="text-sm text-red-600 font-semibold text-center">
+        <div className="text-sm text-[#001DF3] font-semibold text-center">
           {error}
         </div>
       )}

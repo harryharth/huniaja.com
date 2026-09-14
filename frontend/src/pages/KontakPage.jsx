@@ -35,14 +35,14 @@ const contactMethods = [
     label: "WhatsApp",
     value: "Chat Tim Huniaja",
     href: WA_URL(),
-    color: "#22C55E",
+    color: "#00B512",
   },
   {
     Icon: Clock,
     label: "Jam Operasional",
     value: "Senin - Jumat, 09:00 - 18:00",
     href: "#",
-    color: "#F59E0B",
+    color: "#00B512",
   },
 ];
 
@@ -182,7 +182,7 @@ export default function KontakPage() {
                   </Button>
                 </div>
                 {error && (
-                  <p className="text-sm text-red-600 font-semibold text-right">
+                  <p className="text-sm text-[#001DF3] font-semibold text-right">
                     {error}
                   </p>
                 )}

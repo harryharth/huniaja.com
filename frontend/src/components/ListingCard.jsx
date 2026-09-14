@@ -58,7 +58,7 @@ export default function ListingCard({ item, variant = "default" }) {
           >
             <Heart
               className={`w-4 h-4 ${
-                liked ? "fill-red-500 text-red-500" : "text-slate-500"
+                liked ? "fill-[#00B512] text-[#00B512]" : "text-slate-500"
               }`}
             />
           </button>

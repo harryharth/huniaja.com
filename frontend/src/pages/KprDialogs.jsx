@@ -150,7 +150,7 @@ export function KprSyariahDialog({ open, onOpenChange }) {
           </div>
         </div>
 
-        <div className="mt-5 bg-gradient-to-br from-[#001DF3] to-[#0033ff] text-white rounded-3xl p-5 md:p-6">
+        <div className="mt-5 bg-gradient-to-br from-[#001DF3] to-[#001DF3] text-white rounded-3xl p-5 md:p-6">
           <p className="text-xs uppercase tracking-widest text-white/70">
             Estimasi Cicilan Bulanan
           </p>
@@ -289,7 +289,7 @@ export function TakeOverDialog({ open, onOpenChange }) {
           </div>
         </div>
 
-        <div className="mt-5 bg-gradient-to-br from-[#001DF3] to-[#0033ff] text-white rounded-3xl p-5 md:p-6">
+        <div className="mt-5 bg-gradient-to-br from-[#001DF3] to-[#001DF3] text-white rounded-3xl p-5 md:p-6">
           <p className="text-xs uppercase tracking-widest text-white/70">
             Cicilan Baru per Bulan
           </p>
@@ -302,7 +302,7 @@ export function TakeOverDialog({ open, onOpenChange }) {
             <Stat
               label={result.savings >= 0 ? "Hemat / Bulan" : "Selisih / Bulan"}
               value={formatIDR(Math.abs(result.savings))}
-              highlight={result.savings >= 0 ? "#00B512" : "#FCA5A5"}
+              highlight={result.savings >= 0 ? "#00B512" : "#001DF3"}
             />
           </div>
         </div>

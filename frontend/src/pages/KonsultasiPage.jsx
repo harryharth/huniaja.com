@@ -50,7 +50,7 @@ const chapters = [
     body: "Sesi konsultasi kami tidak dirancang untuk menjual. Ia dirancang untuk mendengarkan. Kadang kami menyarankanmu untuk menunda pembelian setahun lagi bila datamu belum siap. Kami di sisimu.",
     image:
       "https://images.unsplash.com/photo-1573497019418-b400bb3ab074?w=1200&q=80",
-    accent: "#F59E0B",
+    accent: "#00B512",
     Icon: MessagesSquare,
   },
   {
@@ -60,7 +60,7 @@ const chapters = [
     body: "Ketika akad kredit selesai dan kunci rumah pertamamu ada di genggaman, kami tersenyum bersama. Itulah momen kenapa Huniaja ada. Setiap keluarga berhak atas hunian yang membuat mereka bertumbuh.",
     image:
       "https://images.unsplash.com/photo-1568992687947-868a62a9f521?w=1200&q=80",
-    accent: "#EC4899",
+    accent: "#000066",
     Icon: KeyRound,
   },
 ];
@@ -510,7 +510,7 @@ export default function KonsultasiPage() {
                 {loading ? "Mengirim..." : "Pesan Sesi Konsultasi"}
               </Button>
               {error && (
-                <p className="text-center text-sm text-red-600 font-semibold">
+                <p className="text-center text-sm text-[#001DF3] font-semibold">
                   {error}
                 </p>
               )}

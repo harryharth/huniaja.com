@@ -56,7 +56,7 @@ const sellerStories = [
     name: "PT Griya Sejahtera",
     role: "Developer Perumahan",
     initial: "G",
-    color: "#F59E0B",
+    color: "#00B512",
     time: "320 unit terjual",
     quote:
       "Sejak kerjasama sebagai developer partner, cluster kami di Cibinong terjual 80% dalam 6 bulan. Tim Huniaja bantu dari foto, campaign digital, sampai pre-screening pembeli. Kami tidak perlu pusing lagi urus marketing.",

@@ -37,9 +37,9 @@ const propertyTypes = [
 ];
 
 const conditions = [
-  { label: "Baru", Icon: Sparkles, color: "#EF4444", key: "Baru" },
-  { label: "Second", Icon: RotateCcw, color: "#F59E0B", key: "Second" },
-  { label: "Lelang", Icon: Gavel, color: "#0EA5E9", key: "Lelang" },
+  { label: "Baru", Icon: Sparkles, color: "#001DF3", key: "Baru" },
+  { label: "Second", Icon: RotateCcw, color: "#00B512", key: "Second" },
+  { label: "Lelang", Icon: Gavel, color: "#001DF3", key: "Lelang" },
 ];
 
 const locationTabs = [

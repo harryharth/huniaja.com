@@ -49,7 +49,7 @@ const features = [
 
 export default function WhyHuniaja() {
   return (
-    <section className="bg-white py-16 md:py-24">
+    <section className="bg-slate-100 py-16 md:py-24">
       <div className="max-w-6xl mx-auto px-4 md:px-6">
         <div className="text-center max-w-2xl mx-auto">
           <div className="inline-flex items-center gap-2">

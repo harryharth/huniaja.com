@@ -61,10 +61,10 @@ export const FACILITIES = {
 
 export const CATEGORY_META = {
   "Fasilitas Properti": { color: "#001DF3" },
-  "Utilitas": { color: "#F59E0B" },
+  "Utilitas": { color: "#00B512" },
   "Keamanan & Cluster": { color: "#00B512" },
-  "Interior": { color: "#8B5CF6" },
-  "Dekat Dengan": { color: "#EC4899" },
+  "Interior": { color: "#000066" },
+  "Dekat Dengan": { color: "#000066" },
 };
 
 /** Given an array of facility names, return { category: [names] } */

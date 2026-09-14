@@ -73,7 +73,7 @@ const CATEGORIES = [
     id: "jual",
     label: "Jual Properti",
     Icon: Tag,
-    color: "#EC4899",
+    color: "#000066",
     qas: [
       {
         q: "Bagaimana cara memasang iklan properti di Huniaja?",
@@ -101,7 +101,7 @@ const CATEGORIES = [
     id: "kpr",
     label: "KPR & Pembiayaan",
     Icon: DollarSign,
-    color: "#F59E0B",
+    color: "#00B512",
     qas: [
       {
         q: "Apa saja jenis KPR yang tersedia?",
@@ -129,7 +129,7 @@ const CATEGORIES = [
     id: "legal",
     label: "Legalitas & Dokumen",
     Icon: FileText,
-    color: "#8B5CF6",
+    color: "#000066",
     qas: [
       {
         q: "Sertifikat apa saja yang aman untuk dibeli?",
@@ -153,7 +153,7 @@ const CATEGORIES = [
     id: "serah-terima",
     label: "Serah Terima",
     Icon: Key,
-    color: "#0EA5E9",
+    color: "#001DF3",
     qas: [
       {
         q: "Kapan biasanya rumah bisa langsung ditempati?",
@@ -177,7 +177,7 @@ const CATEGORIES = [
     id: "akun",
     label: "Akun & Pembayaran",
     Icon: User,
-    color: "#EC4899",
+    color: "#000066",
     qas: [
       {
         q: "Bagaimana cara membuat akun Huniaja?",

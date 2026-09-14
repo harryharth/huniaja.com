@@ -180,7 +180,7 @@ export default function SKPage() {
                   Daftar Isi
                 </p>
                 {sections.map((s, i) => {
-                  const colors = ["#001DF3", "#00B512", "#F59E0B", "#8B5CF6", "#EC4899", "#0EA5E9"];
+                  const colors = ["#001DF3", "#00B512", "#00B512", "#000066", "#000066", "#001DF3"];
                   const color = colors[i % colors.length];
                   return (
                     <a
@@ -237,8 +237,8 @@ export default function SKPage() {
             {activeDoc === "privacy" && (
               <article className="bg-white rounded-3xl border border-slate-100 shadow-sm p-6 md:p-10">
                 <div className="flex items-center gap-3 mb-4">
-                  <div className="w-11 h-11 rounded-2xl bg-sky-50 flex items-center justify-center">
-                    <Lock className="w-5 h-5 text-sky-500" />
+                  <div className="w-11 h-11 rounded-2xl bg-[#001DF3]/10 flex items-center justify-center">
+                    <Lock className="w-5 h-5 text-[#001DF3]" />
                   </div>
                   <h2 className="text-lg md:text-xl font-bold text-slate-900">
                     Kebijakan Privasi

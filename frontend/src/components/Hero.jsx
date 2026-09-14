@@ -12,7 +12,7 @@ const ICON_MAP = { Ticket, Home, Percent, Sparkles };
 const FALLBACK_SLIDES = [
   { eyebrow: "PROMO SPESIAL", title: "Deal Hot", subtitle: "Dám Say!", tagline: "Voucher Belanja Rumah Hingga Rp 50 Juta", cta_label: "Klaim Voucher", cta_href: "/cari-properti", accent: "#00B512", icon_name: "Ticket", tag: "HUNIAJA VOUCHER", amount: "Rp50Jt", validity: "Berlaku s/d 31 Des", image: "" },
   { eyebrow: "KPR TERBAIK", title: "KPR Mudah", subtitle: "Disetujui!", tagline: "Bunga Ringan, Proses Cepat 3 Hari Kerja", cta_label: "Ajukan Sekarang", cta_href: "/kpr", accent: "#001DF3", icon_name: "Home", tag: "CICILAN MULAI", amount: "3jt/bln", validity: "Tenor s/d 20 Tahun", image: "" },
-  { eyebrow: "CASHBACK BESAR", title: "Cashback", subtitle: "Sampai 20%", tagline: "Ratusan Properti Pilihan, Stok Terbatas", cta_label: "Lihat Promo", cta_href: "/cari-properti", accent: "#0EA5E9", icon_name: "Percent", tag: "CASHBACK HINGGA", amount: "Rp100Jt", validity: "Untuk Rumah Terpilih", image: "" },
+  { eyebrow: "CASHBACK BESAR", title: "Cashback", subtitle: "Sampai 20%", tagline: "Ratusan Properti Pilihan, Stok Terbatas", cta_label: "Lihat Promo", cta_href: "/cari-properti", accent: "#001DF3", icon_name: "Percent", tag: "CASHBACK HINGGA", amount: "Rp100Jt", validity: "Untuk Rumah Terpilih", image: "" },
 ];
 
 export default function Hero() {

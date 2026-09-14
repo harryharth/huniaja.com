@@ -52,7 +52,7 @@ const timeline = [
     title: "Sebuah Percakapan di Warung Kopi",
     desc: "Empat sahabat gelisah melihat sepupu mereka gagal beli rumah karena tertipu agen. Malam itu, ide Huniaja lahir - sebuah janji bahwa siapapun berhak punya rumah dengan aman.",
     Icon: Lightbulb,
-    color: "#F59E0B",
+    color: "#00B512",
   },
   {
     year: "2020",
@@ -73,14 +73,14 @@ const timeline = [
     title: "AI-Powered Property Matching",
     desc: "Kami meluncurkan Dea - asisten AI yang membantu pencarian properti terasa seperti ngobrol dengan sahabat. 500 ribu percakapan di 6 bulan pertama. Teknologi akhirnya melayani manusia.",
     Icon: Sparkles,
-    color: "#7C3AED",
+    color: "#000066",
   },
   {
     year: "2026",
     title: "Rumah untuk Semua",
     desc: "Hari ini, 2,4 juta orang setiap bulan mempercayakan pencarian rumah mereka ke Huniaja. Tapi kami baru mulai. Target 2028: 10 juta keluarga Indonesia punya rumah pertama lewat platform kami.",
     Icon: Award,
-    color: "#EC4899",
+    color: "#000066",
   },
 ];
 
@@ -89,7 +89,7 @@ const values = [
     Icon: Heart,
     title: "Empati di Atas Segalanya",
     desc: "Setiap listing adalah mimpi seseorang. Setiap penolakan KPR adalah keluarga yang harus tetap kami temani. Empati bukan slogan - itu KPI kami.",
-    color: "#EC4899",
+    color: "#000066",
   },
   {
     Icon: ShieldCheck,
@@ -101,7 +101,7 @@ const values = [
     Icon: Sparkles,
     title: "Inovasi yang Melayani",
     desc: "Teknologi bukan tujuan - itu alat. Setiap fitur AI, setiap update aplikasi, harus membuat hidupmu lebih mudah, bukan lebih rumit.",
-    color: "#F59E0B",
+    color: "#00B512",
   },
   {
     Icon: Handshake,
@@ -141,7 +141,7 @@ const founders = [
     name: "Sinta Larasati",
     role: "COO & Co-Founder",
     initial: "S",
-    color: "#EC4899",
+    color: "#000066",
     quote: "Saya percaya operasional adalah cinta yang diterjemahkan ke sistem. Setiap SOP kami tulis dengan pertanyaan sederhana: apakah ini akan membuat pengguna kami merasa dihargai?",
   },
   {
@@ -155,7 +155,7 @@ const founders = [
     name: "Kirana Ayu",
     role: "CMO & Co-Founder",
     initial: "K",
-    color: "#F59E0B",
+    color: "#00B512",
     quote: "Marketing kami bukan tentang manipulasi. Ini tentang bercerita jujur - tentang keluarga muda, tentang rumah pertama, tentang harapan. Cerita jujur selalu menang di akhir.",
   },
 ];
@@ -320,7 +320,7 @@ export default function TentangKamiPage() {
           </div>
 
           <div className="relative">
-            <div className="hidden md:block absolute left-1/2 top-0 bottom-0 w-0.5 bg-gradient-to-b from-[#001DF3]/20 via-[#00B512]/30 to-[#EC4899]/20 -translate-x-1/2" />
+            <div className="hidden md:block absolute left-1/2 top-0 bottom-0 w-0.5 bg-gradient-to-b from-[#001DF3]/20 via-[#00B512]/30 to-[#000066]/20 -translate-x-1/2" />
 
             <div className="space-y-8 md:space-y-16">
               {timeline.map((t, idx) => (

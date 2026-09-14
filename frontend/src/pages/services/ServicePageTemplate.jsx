@@ -288,7 +288,7 @@ export default function ServicePageTemplate({ config }) {
                 className="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm"
                 data-testid={`testi-${i + 1}`}
               >
-                <div className="flex items-center gap-1 text-yellow-500">
+                <div className="flex items-center gap-1 text-[#00B512]">
                   {Array.from({ length: t.rating }).map((_, k) => (
                     <Star key={k} className="w-4 h-4 fill-current" />
                   ))}

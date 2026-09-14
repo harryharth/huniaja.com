@@ -36,7 +36,7 @@ const TOPICS = [
     id: "jual",
     label: "Bantuan Jual",
     Icon: Tag,
-    color: "#EC4899",
+    color: "#000066",
     items: [
       { q: "Bagaimana cara pasang iklan?", a: "Buka menu Pasang Iklan, isi form (foto, harga, spesifikasi, dokumen). Tim kami verifikasi 1×24 jam sebelum tayang." },
       { q: "Berapa lama iklan bisa aktif?", a: "Iklan gratis aktif 90 hari, bisa diperpanjang otomatis. Paket HH Pro punya durasi & prioritas lebih tinggi." },
@@ -48,7 +48,7 @@ const TOPICS = [
     id: "kpr",
     label: "Bantuan KPR",
     Icon: DollarSign,
-    color: "#F59E0B",
+    color: "#00B512",
     items: [
       { q: "Apa saja jenis KPR yang didukung?", a: "Konvensional, Syariah (murabahah/ijarah), Subsidi FLPP, dan Rent-to-Own. Simulasi cicilan tersedia di halaman KPR." },
       { q: "Berapa DP minimum?", a: "Bank umum 10–20%, Syariah 15–20%, Subsidi FLPP mulai 1%. Beberapa developer partner ada promo DP Rp0." },
@@ -60,7 +60,7 @@ const TOPICS = [
     id: "legal",
     label: "Legalitas",
     Icon: FileText,
-    color: "#8B5CF6",
+    color: "#000066",
     items: [
       { q: "Sertifikat apa yang paling aman?", a: "SHM (Sertifikat Hak Milik) paling kuat. HGB juga sah untuk apartemen/komersial. Hindari girik tanpa proses balik nama." },
       { q: "Bagaimana cek keaslian sertifikat?", a: "Bisa langsung di kantor BPN atau via aplikasi Sentuh Tanahku. Tim kami juga menyediakan jasa cek + due-diligence." },
@@ -71,7 +71,7 @@ const TOPICS = [
     id: "akun",
     label: "Akun & Pembayaran",
     Icon: User,
-    color: "#0EA5E9",
+    color: "#001DF3",
     items: [
       { q: "Cara membuat akun?", a: "Klik 'Masuk/Daftar' di header, pilih tab Daftar, isi data atau langsung pakai Google." },
       { q: "Lupa password?", a: "Klik 'Lupa password?' di halaman Masuk. Link reset dikirim ke email, valid 1×24 jam." },

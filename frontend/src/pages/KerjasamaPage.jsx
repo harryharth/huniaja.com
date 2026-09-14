@@ -39,14 +39,14 @@ const partnerships = [
     title: "Co-Branding",
     desc: "Bangun kampanye bersama Huniaja lewat konten kolaboratif, event, dan program eksklusif.",
     perks: ["Event bersama", "Konten kolaboratif", "Distribusi ke jaringan kami"],
-    color: "#EC4899",
+    color: "#000066",
   },
   {
     Icon: Building2,
     title: "Developer Partnership",
     desc: "Pasarkan proyek properti Anda langsung ke jutaan pencari properti aktif.",
     perks: ["Halaman proyek dedicated", "Leads berkualitas", "Priority listing"],
-    color: "#F59E0B",
+    color: "#00B512",
   },
   {
     Icon: Users,
@@ -72,7 +72,7 @@ const partnerStories = [
     name: "PT Sinar Hunian",
     role: "Developer Cluster",
     initial: "SH",
-    color: "#F59E0B",
+    color: "#00B512",
     stat: "12 proyek",
     statLabel: "Sold-out dalam 8 bulan",
     quote:
@@ -126,7 +126,7 @@ const timeline = [
     title: "Rancang Skema Bersama",
     desc: "Tim kami membuat proposal customized dalam 3 hari kerja. Kamu setuju, kami mulai. Tidak setuju, kami revisi.",
     Icon: Sparkles,
-    color: "#F59E0B",
+    color: "#00B512",
   },
   {
     step: "03",
@@ -140,7 +140,7 @@ const timeline = [
     title: "Evaluasi & Tumbuh",
     desc: "Setiap 3 bulan, kita duduk bersama, review hasil, dan rancang chapter berikutnya. Kolaborasi jangka panjang, bukan one-off.",
     Icon: TrendingUp,
-    color: "#EC4899",
+    color: "#000066",
   },
 ];
 
@@ -458,7 +458,7 @@ export default function KerjasamaPage() {
           </div>
 
           <div className="relative">
-            <div className="hidden md:block absolute top-14 left-[12.5%] right-[12.5%] h-0.5 bg-gradient-to-r from-[#001DF3]/20 via-[#00B512]/30 to-[#EC4899]/20" />
+            <div className="hidden md:block absolute top-14 left-[12.5%] right-[12.5%] h-0.5 bg-gradient-to-r from-[#001DF3]/20 via-[#00B512]/30 to-[#000066]/20" />
             <div className="grid grid-cols-1 md:grid-cols-4 gap-5 md:gap-6 relative">
               {timeline.map((t) => (
                 <div

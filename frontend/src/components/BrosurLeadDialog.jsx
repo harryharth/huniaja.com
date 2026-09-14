@@ -203,7 +203,7 @@ export default function BrosurLeadDialog({ open, onClose, property }) {
             </div>
 
             {error && (
-              <div className="bg-red-50 border border-red-100 text-red-600 text-xs rounded-2xl px-3 py-2">
+              <div className="bg-[#001DF3]/8 border border-[#001DF3]/20 text-[#001DF3] text-xs rounded-2xl px-3 py-2">
                 {error}
               </div>
             )}

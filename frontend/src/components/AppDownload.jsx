@@ -10,9 +10,9 @@ export default function AppDownload() {
           <div className="relative md:w-1/3 flex justify-center order-2 md:order-1">
             <div className="relative w-[220px] md:w-[240px]">
               <div className="aspect-[9/19] rounded-[36px] bg-slate-900 p-2 shadow-2xl mt-6 md:mt-8">
-                <div className="w-full h-full rounded-[30px] bg-gradient-to-br from-sky-400 via-blue-500 to-blue-700 overflow-hidden flex flex-col items-center justify-center p-4 text-center">
+                <div className="w-full h-full rounded-[30px] bg-gradient-to-br from-[#001DF3] via-[#001DF3] to-[#000066] overflow-hidden flex flex-col items-center justify-center p-4 text-center">
                   <div className="text-white text-3xl font-black italic drop-shadow">Deal</div>
-                  <div className="text-yellow-300 text-4xl font-black italic drop-shadow">hot</div>
+                  <div className="text-[#00B512] text-4xl font-black italic drop-shadow">hot</div>
                   <div className="mt-2 bg-white rounded-full px-3 py-1 text-[10px] font-bold text-blue-700">Mua sắm ngất ngây</div>
                 </div>
               </div>

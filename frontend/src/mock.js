@@ -25,7 +25,7 @@ export const searchTabs = ["Beli", "Sewa", "Baru"];
 
 export const quickCategories = [
   { label: "Beli Properti", icon: "Home", color: "bg-[#001DF3]" },
-  { label: "Kerjasama", icon: "House", color: "bg-[#22C55E]" },
+  { label: "Kerjasama", icon: "House", color: "bg-[#00B512]" },
 ];
 
 export const propertyTypes = [

@@ -87,10 +87,10 @@ const FACILITIES = {
 };
 
 const TABS = [
-  { key: "stats", label: "Overview", Icon: BarChart3, color: "from-[#001DF3] to-[#7C3AED]" },
-  { key: "properties", label: "Properti", Icon: Home, color: "from-[#00B512] to-[#0EA5E9]" },
-  { key: "banners", label: "Banner", Icon: ImageIcon, color: "from-[#F59E0B] to-[#EC4899]" },
-  { key: "articles", label: "Berita", Icon: Newspaper, color: "from-[#EC4899] to-[#8B5CF6]" },
+  { key: "stats", label: "Overview", Icon: BarChart3, color: "from-[#001DF3] to-[#000066]" },
+  { key: "properties", label: "Properti", Icon: Home, color: "from-[#00B512] to-[#001DF3]" },
+  { key: "banners", label: "Banner", Icon: ImageIcon, color: "from-[#00B512] to-[#000066]" },
+  { key: "articles", label: "Berita", Icon: Newspaper, color: "from-[#000066] to-[#000066]" },
 ];
 
 export default function AdminDashboardPage() {
@@ -120,7 +120,7 @@ export default function AdminDashboardPage() {
       <div
         aria-hidden
         className="absolute top-1/2 -right-40 w-[420px] h-[420px] rounded-full blur-3xl opacity-25 pointer-events-none"
-        style={{ backgroundColor: "#EC4899" }}
+        style={{ backgroundColor: "#000066" }}
       />
 
       {/* Sidebar */}
@@ -158,7 +158,7 @@ export default function AdminDashboardPage() {
         <button
           onClick={logout}
           data-testid="admin-logout"
-          className="m-3 flex items-center gap-2 justify-center md:justify-start px-4 py-2.5 rounded-2xl text-sm text-slate-600 hover:bg-red-50 hover:text-red-600 transition"
+          className="m-3 flex items-center gap-2 justify-center md:justify-start px-4 py-2.5 rounded-2xl text-sm text-slate-600 hover:bg-[#000066]/8 hover:text-[#000066] transition"
         >
           <LogOut className="w-4 h-4" />
           <span className="hidden md:inline">Keluar</span>
@@ -192,7 +192,7 @@ function StatsPanel() {
       value: s.properties.total,
       sub: `${s.properties.published} tayang`,
       Icon: Home,
-      gradient: "from-[#001DF3] to-[#7C3AED]",
+      gradient: "from-[#001DF3] to-[#000066]",
       textColor: "text-white",
     },
     {
@@ -200,7 +200,7 @@ function StatsPanel() {
       value: s.properties.views,
       sub: "dilihat pengguna",
       Icon: Eye,
-      gradient: "from-[#0EA5E9] to-[#00B512]",
+      gradient: "from-[#001DF3] to-[#00B512]",
       textColor: "text-white",
     },
     {
@@ -208,16 +208,16 @@ function StatsPanel() {
       value: s.properties.likes,
       sub: "disimpan pengguna",
       Icon: Heart,
-      gradient: "from-[#EC4899] to-[#F59E0B]",
+      gradient: "from-[#000066] to-[#00B512]",
       textColor: "text-white",
     },
   ];
 
   const smallCards = [
-    { label: "Artikel", value: s.articles.total, sub: `${s.articles.published} tayang`, Icon: Newspaper, color: "#8B5CF6" },
-    { label: "Banner", value: s.banners.total, sub: "hero carousel", Icon: ImageIcon, color: "#F59E0B" },
+    { label: "Artikel", value: s.articles.total, sub: `${s.articles.published} tayang`, Icon: Newspaper, color: "#000066" },
+    { label: "Banner", value: s.banners.total, sub: "hero carousel", Icon: ImageIcon, color: "#00B512" },
     { label: "Uptime", value: "99.9%", sub: "sistem sehat", Icon: TrendingUp, color: "#00B512" },
-    { label: "Notifikasi", value: 0, sub: "belum dibaca", Icon: Bell, color: "#EC4899" },
+    { label: "Notifikasi", value: 0, sub: "belum dibaca", Icon: Bell, color: "#000066" },
   ];
 
   return (
@@ -244,7 +244,7 @@ function StatsPanel() {
               <div className="text-xs text-slate-500">Score hari ini</div>
               <div className="text-sm font-black text-slate-900">532.9</div>
             </div>
-            <div className="w-9 h-9 rounded-full bg-gradient-to-br from-[#00B512] to-[#0EA5E9] flex items-center justify-center text-white text-sm font-black shadow-md">
+            <div className="w-9 h-9 rounded-full bg-gradient-to-br from-[#00B512] to-[#001DF3] flex items-center justify-center text-white text-sm font-black shadow-md">
               A
             </div>
           </div>
@@ -301,13 +301,13 @@ function StatsPanel() {
             <h3 className="text-lg font-black text-slate-900">Aksi Cepat</h3>
             <p className="text-xs text-slate-500 mt-1">Loncat langsung ke tugas yang sering dikerjakan.</p>
           </div>
-          <Zap className="w-5 h-5 text-[#F59E0B]" />
+          <Zap className="w-5 h-5 text-[#00B512]" />
         </div>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
           {[
             { label: "Tambah Properti", icon: Home, tab: "properties", color: "#001DF3" },
-            { label: "Buat Banner", icon: ImageIcon, tab: "banners", color: "#F59E0B" },
-            { label: "Publish Artikel", icon: Newspaper, tab: "articles", color: "#EC4899" },
+            { label: "Buat Banner", icon: ImageIcon, tab: "banners", color: "#00B512" },
+            { label: "Publish Artikel", icon: Newspaper, tab: "articles", color: "#000066" },
             { label: "Cek Chat AI", icon: MessageCircle, tab: null, color: "#00B512" },
           ].map((a) => (
             <button
@@ -626,9 +626,9 @@ function PropertyFormModal({ item, onChange, onClose, onSave }) {
           <Field label="Kondisi">
             <div className="flex flex-wrap gap-2" data-testid="prop-form-condition">
               {[
-                { key: "Baru", color: "#EC4899" },
-                { key: "Second", color: "#F59E0B" },
-                { key: "Lelang", color: "#0EA5E9" },
+                { key: "Baru", color: "#000066" },
+                { key: "Second", color: "#00B512" },
+                { key: "Lelang", color: "#001DF3" },
               ].map((c) => {
                 const active = item.condition === c.key;
                 return (
@@ -712,7 +712,7 @@ function PropertyFormModal({ item, onChange, onClose, onSave }) {
                     <button
                       type="button"
                       onClick={() => removeGallery(idx)}
-                      className="absolute top-1 right-1 w-6 h-6 rounded-full bg-black/60 hover:bg-red-600 text-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition"
+                      className="absolute top-1 right-1 w-6 h-6 rounded-full bg-black/60 hover:bg-[#000066] text-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition"
                       aria-label="Hapus foto"
                     >
                       <X className="w-3.5 h-3.5" />
@@ -918,7 +918,7 @@ function BannersPanel() {
               </div>
               <div className="mt-2 flex gap-2">
                 <button onClick={() => setEdit(b)} data-testid={`admin-edit-banner-${b.id}`} className="text-xs px-3 py-1.5 bg-slate-100 hover:bg-slate-200 rounded-full font-bold">Edit</button>
-                <button onClick={async () => { if(confirm("Hapus banner ini?")) { await adminApi.delete(`/admin/banners/${b.id}`); load(); }}} className="text-xs px-3 py-1.5 bg-red-50 text-red-600 hover:bg-red-100 rounded-full font-bold">Hapus</button>
+                <button onClick={async () => { if(confirm("Hapus banner ini?")) { await adminApi.delete(`/admin/banners/${b.id}`); load(); }}} className="text-xs px-3 py-1.5 bg-[#000066]/8 text-[#000066] hover:bg-[#000066]/15 rounded-full font-bold">Hapus</button>
               </div>
             </div>
           </div>
@@ -952,7 +952,7 @@ function BannersPanel() {
                       <button
                         type="button"
                         onClick={() => setEdit({ ...edit, image: "" })}
-                        className="text-xs text-red-600 hover:underline"
+                        className="text-xs text-[#000066] hover:underline"
                       >
                         Hapus gambar
                       </button>
@@ -1080,7 +1080,7 @@ function IconBtn({ children, onClick, red, title, testid }) {
       title={title}
       data-testid={testid}
       className={`w-8 h-8 rounded-lg flex items-center justify-center transition ${
-        red ? "hover:bg-red-50 text-red-500" : "hover:bg-slate-100 text-slate-600"
+        red ? "hover:bg-[#000066]/8 text-[#000066]" : "hover:bg-slate-100 text-slate-600"
       }`}
     >
       {children}

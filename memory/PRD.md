@@ -15,10 +15,23 @@ Buatkan website persis seperti gambar contoh (Indonesian property marketplace "H
 5. Storytelling premium di halaman Karir & Tentang Kami
 6. Berita: 30 artikel edukasi untuk pembeli pemula, semua dapat dibaca via halaman detail
 
-## Design System
-- Primary: `#0025F5` (biru Huniaja)
-- Green Accent: `#00B512` (dark green, sudah standardized)
-- Hover Green: `#009e0f`
+## Design System (STRICT — user enforced Feb 14, 2026)
+- Navy: `#000066`
+- Primary Blue: `#001DF3`
+- Green: `#00B512`
+- White: `#FFFFFF`
+- Hover Blue: `#0017C2`, Hover Green: `#009e0f`
+- **NO OTHER COLORS** across the site (public + admin). Off-brand hex swept in bulk:
+  - Amber `#F59E0B` → `#00B512`
+  - Pink `#EC4899` → `#000066`
+  - Sky `#0EA5E9` → `#001DF3`
+  - Purple `#8B5CF6`/`#7C3AED` → `#000066`
+  - Green variant `#22C55E` → `#00B512`
+  - Red `#EF4444`/`#FCA5A5` → `#001DF3` (semantic form errors also use brand blue)
+  - Blue variant `#0033FF` → `#001DF3`
+  - Orange `#F97316` → `#00B512`
+- Tailwind color classes (text-red-*, bg-red-*, text-yellow-*, bg-sky-*, from-sky-*, ring-red-*) swept to brand equivalents.
+- Google G icon SVG on `LoginPage` keeps official Google colors (brand-compliance requirement).
 - WhatsApp CTA: **+62 851-1983-3362** (WAJIB tidak diubah)
 
 ## Tech Stack

@@ -18,12 +18,12 @@ import { articles, articleCategories } from "../data/articles";
 const CAT_COLORS = {
   Semua: "#001DF3",
   Panduan: "#00B512",
-  KPR: "#F59E0B",
-  Legalitas: "#8B5CF6",
-  Investasi: "#EC4899",
-  Tren: "#0EA5E9",
-  Tips: "#22C55E",
-  Interior: "#F97316",
+  KPR: "#00B512",
+  Legalitas: "#000066",
+  Investasi: "#000066",
+  Tren: "#001DF3",
+  Tips: "#00B512",
+  Interior: "#00B512",
 };
 
 export default function BeritaPage() {
