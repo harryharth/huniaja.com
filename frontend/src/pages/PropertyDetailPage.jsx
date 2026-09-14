@@ -12,6 +12,7 @@ import {
   MessageCircle,
   Phone,
   Calculator,
+  Download,
   Home,
   Zap,
   Shield,
@@ -27,6 +28,7 @@ import { Button } from "../components/ui/button";
 import { allListings } from "../mock";
 import { WA_URL } from "../components/ChatWidget";
 import { KprSyariahDialog } from "./KprDialogs";
+import BrosurLeadDialog from "../components/BrosurLeadDialog";
 import { fetchProperties, fetchProperty } from "../lib/publicApi";
 
 export default function PropertyDetailPage() {
@@ -37,6 +39,7 @@ export default function PropertyDetailPage() {
   const [liked, setLiked] = useState(false);
   const [activeImg, setActiveImg] = useState(0);
   const [kprOpen, setKprOpen] = useState(false);
+  const [brosurOpen, setBrosurOpen] = useState(false);
 
   // Fetch live data from backend
   useEffect(() => {
@@ -321,12 +324,19 @@ export default function PropertyDetailPage() {
                   <Calculator className="w-4 h-4 mr-2" /> Simulasi KPR
                 </Button>
                 <Button
-                  variant="outline"
-                  className="w-full h-12 rounded-full font-bold text-sm border-slate-200 hover:bg-slate-50"
+                  onClick={() => setBrosurOpen(true)}
+                  data-testid="prop-brosur-btn"
+                  className="w-full h-12 rounded-full font-bold text-sm bg-white border border-slate-200 text-slate-800 hover:bg-[#00B512] hover:border-[#00B512] hover:text-white transition"
                 >
-                  <Phone className="w-4 h-4 mr-2" /> Jadwalkan Survey
+                  <Download className="w-4 h-4 mr-2" /> Download Brosur
                 </Button>
               </div>
+
+              <BrosurLeadDialog
+                open={brosurOpen}
+                onClose={() => setBrosurOpen(false)}
+                property={item}
+              />
 
               {/* Agent card */}
               <div className="mt-6 pt-6 border-t border-slate-100">
