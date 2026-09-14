@@ -95,6 +95,12 @@ Buatkan website persis seperti gambar contoh (Indonesian property marketplace "H
 - ✅ **CariPropertiPage**: tombol "Filter Lokasi" dipindah ke KIRI dari location tab pills
 - ✅ **Footer mobile**: menu disusun 2 kolom di atas logo Huniaja; desktop tetap 3 kolom
 
+### Admin Dashboard Playful Redesign (Feb 14, 2026)
+- ✅ **Home panel** dibangun ulang mengikuti mockup edukasi playful: 3-column grid berisi Progres Konten (2 mini bar cards), Properti Populer (3 kartu tint pastel + rating), Pengguna Terdaftar (avatar row + stats)
+- ✅ **Middle column**: "Rencana Kelola / Rekomendasi AI" dengan tabs (Hari Ini/Minggu/Bulan) + Prioritas & Backlog card ala Floe subject cards + Pengajuan Terbaru list
+- ✅ **Right column**: kartu kuning playful "Huniaja Craft" dengan illustrasi Home + #1 badge + Property Play stats (Views/Likes)
+- ✅ **Top bar** disederhanakan: Hello Admin + tanggal + badge pengajuan hari ini + Refresh/Export/tombol +
+
 ### Admin Dashboard Floe-Style Redesign (Feb 14, 2026)
 - ✅ Shell dibangun ulang mengikuti referensi Floe: sidebar putih dengan icon nav collapsible, section Favourites, badge notifikasi live dari `submissions.new`
 - ✅ Top bar unified: search global (⌘F hint) + "Credits remaining" + avatar admin

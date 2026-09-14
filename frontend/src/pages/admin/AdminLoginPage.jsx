@@ -23,11 +23,28 @@ export default function AdminLoginPage() {
     setError("");
     setLoading(true);
     try {
-      const { data } = await axios.post(`${API}/admin/login`, { email, password });
+      const { data } = await axios.post(
+        `${API}/admin/login`,
+        { email: email.trim().toLowerCase(), password }
+      );
+      if (!data?.token) {
+        setError("Login gagal — server tidak mengembalikan token.");
+        return;
+      }
       localStorage.setItem("huniaja_admin_token", data.token);
-      navigate("/admin/dashboard");
+      navigate("/admin/dashboard", { replace: true });
     } catch (err) {
-      setError("Email atau password salah. Coba lagi.");
+      const status = err.response?.status;
+      const detail = err.response?.data?.detail;
+      if (status === 401) {
+        setError("Email atau password salah. Coba lagi.");
+      } else if (status === 502 || err.code === "ERR_NETWORK") {
+        setError("Server tidak dapat dihubungi. Coba refresh atau tunggu sebentar.");
+      } else if (detail) {
+        setError(typeof detail === "string" ? detail : "Login gagal.");
+      } else {
+        setError(`Login gagal (${status || "unknown"}). Silakan hubungi tim teknis.`);
+      }
     } finally {
       setLoading(false);
     }
@@ -153,7 +170,7 @@ export default function AdminLoginPage() {
 
               <button
                 type="submit"
-                disabled={loading || !password}
+                disabled={loading || !password || !email}
                 data-testid="admin-login-submit"
                 className="w-full h-12 disabled:opacity-60 text-white rounded-2xl font-bold text-sm shadow-lg shadow-[#001DF3]/20 hover:shadow-xl hover:shadow-[#001DF3]/30 hover:-translate-y-0.5 transition-all mt-2 flex items-center justify-center gap-2"
                 style={{

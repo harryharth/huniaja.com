@@ -37,6 +37,8 @@ import {
   ChevronDown,
   ExternalLink,
   Folder,
+  RefreshCw,
+  Download,
 } from "lucide-react";
 import { adminApi, clearToken, getToken } from "./adminApi";
 
@@ -282,195 +284,403 @@ function TopBar({ globalSearch, setGlobalSearch }) {
 function HomePanel({ goTo, search }) {
   const [stats, setStats] = useState(null);
   const [properties, setProperties] = useState([]);
+  const [submissions, setSubmissions] = useState([]);
+  const [users, setUsers] = useState([]);
+  const [filter, setFilter] = useState("Semua");
+  const [grade, setGrade] = useState("Minggu");
 
   useEffect(() => {
     adminApi.get("/admin/stats").then((r) => setStats(r.data)).catch(() => {});
-    adminApi
-      .get("/admin/properties")
-      .then((r) => setProperties(r.data || []))
-      .catch(() => {});
+    adminApi.get("/admin/properties").then((r) => setProperties(r.data || [])).catch(() => {});
+    adminApi.get("/admin/submissions").then((r) => setSubmissions((r.data || []).slice(0, 5))).catch(() => {});
+    adminApi.get("/admin/users").then((r) => setUsers(r.data || [])).catch(() => {});
   }, []);
 
-  const folderCount = (key) => {
-    if (!stats) return "—";
-    if (key === "properties") return `${stats.properties?.total || 0} items`;
-    if (key === "banners") return `${stats.banners?.total || 0} items`;
-    if (key === "articles") return `${stats.articles?.total || 0} items`;
-    if (key === "submissions") return `${stats.submissions?.total || 0} items`;
-    return "—";
-  };
+  const filterPills = ["Semua", "Rumah", "Apartemen", "Tanah", "List"];
 
-  const workflows = useMemo(() => {
+  const totalProps = stats?.properties?.total || 0;
+  const publishedProps = stats?.properties?.published || 0;
+  const publishedPct = totalProps ? Math.round((publishedProps / totalProps) * 100) : 0;
+  const viewsPct = Math.min(100, Math.round(((stats?.properties?.views || 0) / Math.max(50, totalProps * 10)) * 100));
+
+  // Filter properties by tab
+  const filteredProps = useMemo(() => {
+    let list = properties;
+    if (filter !== "Semua" && filter !== "List") {
+      list = list.filter((p) => (p.type || "").toLowerCase() === filter.toLowerCase());
+    }
     const q = search.trim().toLowerCase();
-    const filt = properties.filter((p) =>
-      !q ? true : (p.title || "").toLowerCase().includes(q) || (p.location || "").toLowerCase().includes(q)
-    );
-    return filt.slice(0, 9);
-  }, [properties, search]);
+    if (q) {
+      list = list.filter((p) =>
+        (p.title || "").toLowerCase().includes(q) ||
+        (p.location || "").toLowerCase().includes(q)
+      );
+    }
+    return list;
+  }, [properties, filter, search]);
+
+  const popularProps = filteredProps.slice(0, 3);
 
   return (
     <div>
-      {/* Title + filters */}
-      <div className="flex flex-wrap items-center justify-between gap-4 mb-8">
-        <h1 className="text-2xl md:text-3xl font-black text-slate-900">
-          Dashboard
-        </h1>
-        <div className="flex flex-wrap items-center gap-2">
-          {[
-            { label: "Status", value: "All" },
-            { label: "Tipe", value: "Any" },
-            { label: "Tanggal", value: "Any" },
-            { label: "Tag", value: "All" },
-          ].map((c) => (
-            <button
-              key={c.label}
-              className="inline-flex items-center gap-1.5 h-9 px-3 rounded-full bg-white border border-slate-200 text-xs text-slate-600 hover:border-slate-300 transition"
-            >
-              <span className="text-slate-400 font-semibold">{c.label}:</span>
-              <span className="text-slate-800 font-bold">{c.value}</span>
-              <ChevronDown className="w-3 h-3 text-slate-400" />
-            </button>
-          ))}
+      {/* Greeting row */}
+      <div className="flex flex-wrap items-center justify-between gap-4 mb-5">
+        <div className="flex items-center gap-3">
+          <div className="w-11 h-11 rounded-2xl bg-slate-900 flex items-center justify-center text-white">
+            <Sparkles className="w-5 h-5" />
+          </div>
+          <div>
+            <div className="text-base md:text-lg font-black text-slate-900">Hello, Admin</div>
+            <div className="text-xs text-slate-500">
+              {new Date().toLocaleDateString("id-ID", { day: "numeric", month: "long" })},{" "}
+              <span className="text-[#001DF3] font-semibold">
+                {stats?.submissions?.new || 0} pengajuan hari ini
+              </span>
+            </div>
+          </div>
+        </div>
+        <div className="flex items-center gap-2">
           <button
-            className="w-9 h-9 rounded-full bg-white border border-slate-200 flex items-center justify-center text-slate-500 hover:border-slate-300 transition"
-            title="Filter lanjut"
+            onClick={() => window.location.reload()}
+            data-testid="home-refresh"
+            className="inline-flex items-center gap-1.5 h-9 px-3 rounded-full bg-white border border-slate-200 text-xs font-bold text-slate-700 hover:border-slate-300 transition"
           >
-            <Filter className="w-4 h-4" />
+            <RefreshCw className="w-3.5 h-3.5" /> Refresh
+          </button>
+          <button className="inline-flex items-center gap-1.5 h-9 px-3 rounded-full bg-white border border-slate-200 text-xs font-bold text-slate-700 hover:border-slate-300 transition">
+            <Download className="w-3.5 h-3.5" /> Export
+          </button>
+          <button
+            onClick={() => goTo("properties")}
+            className="w-9 h-9 rounded-full bg-slate-900 hover:bg-black text-white flex items-center justify-center transition"
+            title="Tambah properti"
+          >
+            <Plus className="w-4 h-4" />
           </button>
         </div>
       </div>
 
-      {/* Folders */}
-      <section className="mb-10">
-        <div className="flex items-center gap-2 mb-4">
-          <h2 className="text-base font-black text-slate-900">Folders</h2>
-          <span className="text-xs text-slate-400 font-semibold">
-            {FOLDER_THEMES.length}
-          </span>
-        </div>
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-          {FOLDER_THEMES.map((f) => (
-            <button
-              key={f.key}
-              onClick={() => goTo(f.key)}
-              data-testid={`folder-${f.key}`}
-              className="group text-left relative"
-            >
-              {/* Folder tab */}
-              <div
-                className="w-16 h-4 rounded-t-xl ml-4"
-                style={{ backgroundColor: f.tint }}
-              />
-              <div
-                className="rounded-2xl rounded-tl-none p-5 h-32 flex flex-col justify-between shadow-sm border border-white group-hover:shadow-md group-hover:-translate-y-0.5 transition-all relative overflow-hidden"
-                style={{ backgroundColor: f.tint }}
+      {/* Title + filter chips */}
+      <div className="flex flex-wrap items-center justify-between gap-3 mb-6">
+        <h1 className="text-2xl md:text-3xl font-black text-slate-900">Dashboard</h1>
+        <div className="flex flex-wrap items-center gap-2">
+          {filterPills.map((f) => {
+            const active = filter === f;
+            return (
+              <button
+                key={f}
+                onClick={() => setFilter(f)}
+                className={`inline-flex items-center gap-1.5 h-9 px-3.5 rounded-full text-xs font-bold border transition ${
+                  active
+                    ? "bg-[#001DF3]/10 text-[#001DF3] border-[#001DF3]/20"
+                    : "bg-white text-slate-600 border-slate-200 hover:border-slate-300"
+                }`}
               >
-                <div className="absolute top-3 right-3 opacity-0 group-hover:opacity-100 transition">
-                  <MoreHorizontal className="w-4 h-4 text-slate-400" />
+                {f}
+              </button>
+            );
+          })}
+        </div>
+      </div>
+
+      {/* 3-column grid */}
+      <div className="grid grid-cols-1 xl:grid-cols-12 gap-4 md:gap-5">
+        {/* LEFT COL — Learning progress, Popular, Friends */}
+        <div className="xl:col-span-5 space-y-5">
+          {/* Learning progress */}
+          <div className="bg-white rounded-3xl border border-slate-200 p-5">
+            <div className="flex items-center justify-between mb-4">
+              <div className="flex items-center gap-2">
+                <span className="w-8 h-8 rounded-xl bg-[#001DF3]/10 flex items-center justify-center">
+                  <BarChart3 className="w-4 h-4 text-[#001DF3]" />
+                </span>
+                <span className="font-bold text-slate-900 text-sm">Progres Konten</span>
+              </div>
+              <ArrowUpRight className="w-4 h-4 text-slate-400" />
+            </div>
+            <div className="grid grid-cols-2 gap-3">
+              <StatMiniCard
+                label="Properti Tayang"
+                sub={`${publishedProps}/${totalProps}`}
+                pct={publishedPct}
+                color="#001DF3"
+              />
+              <StatMiniCard
+                label="Engagement"
+                sub={`${stats?.properties?.views || 0} views`}
+                pct={viewsPct}
+                color="#00B512"
+              />
+            </div>
+          </div>
+
+          {/* Popular courses / properties */}
+          <div className="bg-white rounded-3xl border border-slate-200 p-5">
+            <div className="flex items-center justify-between mb-4">
+              <h3 className="font-bold text-slate-900 text-sm">Properti Populer</h3>
+              <button
+                onClick={() => goTo("properties")}
+                className="text-[11px] text-[#001DF3] font-bold hover:underline"
+              >
+                Lihat semua
+              </button>
+            </div>
+            <div className="grid grid-cols-3 gap-3">
+              {popularProps.length === 0 ? (
+                <div className="col-span-3 text-center py-8 text-sm text-slate-400">
+                  Belum ada data.
                 </div>
-                <h3 className="font-black text-slate-900 text-lg">
-                  {f.label}
-                </h3>
-                <div className="flex items-end justify-between">
-                  <div className="flex -space-x-2">
-                    <span
-                      className="w-7 h-7 rounded-full border-2 border-white flex items-center justify-center text-white text-[10px] font-black shadow-sm"
-                      style={{ backgroundColor: f.from }}
-                    >
-                      A
-                    </span>
-                  </div>
-                  <span className="text-xs text-slate-500 font-semibold">
-                    {folderCount(f.key)}
+              ) : (
+                popularProps.map((p, idx) => (
+                  <PopularCard key={p.id} item={p} tone={idx} onOpen={() => goTo("properties")} />
+                ))
+              )}
+            </div>
+          </div>
+
+          {/* Friends / Users stat card */}
+          <div className="bg-white rounded-3xl border border-slate-200 p-5 flex items-center gap-6">
+            <div>
+              <div className="text-xs font-bold text-slate-500 mb-2">Pengguna Terdaftar</div>
+              <div className="flex -space-x-2">
+                {users.slice(0, 5).map((u, i) => (
+                  <span
+                    key={u.user_id || i}
+                    title={u.name || u.email}
+                    className="w-9 h-9 rounded-full border-2 border-white overflow-hidden bg-slate-200 flex items-center justify-center text-xs font-black text-slate-700"
+                  >
+                    {u.picture ? (
+                      <img src={u.picture} alt="" className="w-full h-full object-cover" />
+                    ) : (
+                      (u.name || u.email || "?").charAt(0).toUpperCase()
+                    )}
                   </span>
+                ))}
+                {users.length === 0 && (
+                  <span className="text-xs text-slate-400">Belum ada</span>
+                )}
+              </div>
+            </div>
+            <div className="ml-auto grid grid-cols-2 gap-6 text-center">
+              <div>
+                <div className="text-xs text-slate-500 font-semibold">Total</div>
+                <div className="text-lg font-black text-slate-900">{stats?.users?.total || 0}</div>
+              </div>
+              <div>
+                <div className="text-xs text-slate-500 font-semibold">Pengajuan</div>
+                <div className="text-lg font-black text-slate-900">{stats?.submissions?.total || 0}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* MIDDLE COL — AI Plan + Schedule */}
+        <div className="xl:col-span-4 space-y-5">
+          <div className="bg-white rounded-3xl border border-slate-200 p-5">
+            <div className="mb-3">
+              <h3 className="font-black text-slate-900">Rencana Kelola</h3>
+              <span className="inline-block bg-[#001DF3] text-white text-[10px] font-black rounded-full px-2.5 py-0.5 mt-1 tracking-wider">
+                Rekomendasi AI
+              </span>
+            </div>
+            <div className="flex gap-2 mb-4">
+              {["Hari Ini", "Minggu", "Bulan"].map((g) => (
+                <button
+                  key={g}
+                  onClick={() => setGrade(g)}
+                  className={`text-[11px] font-bold rounded-full px-3 py-1 transition ${
+                    grade === g
+                      ? "bg-slate-900 text-white"
+                      : "bg-slate-100 text-slate-600 hover:bg-slate-200"
+                  }`}
+                >
+                  {g}
+                </button>
+              ))}
+            </div>
+            <MiniSubjectCard
+              title="Prioritas"
+              subjects={[
+                { name: "Update Banner", meta: `${stats?.banners?.total || 0} aktif`, tint: "bg-[#EEF2FF]", Icon: ImageIcon },
+                { name: "Berita Baru", meta: `${stats?.articles?.total || 0} artikel`, tint: "bg-[#E9F8EC]", Icon: BookOpenText },
+                { name: "Tambah", meta: "Konten baru", tint: "bg-slate-100", Icon: Plus, onClick: () => goTo("articles") },
+              ]}
+            />
+            <div className="h-3" />
+            <MiniSubjectCard
+              title="Backlog"
+              subjects={[
+                { name: "Pengajuan", meta: `${stats?.submissions?.new || 0} baru`, tint: "bg-[#EEF2FF]", Icon: ClipboardList, onClick: () => goTo("submissions") },
+                { name: "Pengguna", meta: `${stats?.users?.total || 0} akun`, tint: "bg-[#E9F8EC]", Icon: Users, onClick: () => goTo("users") },
+                { name: "Properti", meta: `${totalProps} listing`, tint: "bg-[#E8ECFA]", Icon: LayoutGrid, onClick: () => goTo("properties") },
+              ]}
+            />
+          </div>
+
+          {/* Schedule */}
+          <div className="bg-white rounded-3xl border border-slate-200 p-5">
+            <div className="flex items-center justify-between mb-3">
+              <h3 className="font-bold text-slate-900 text-sm">Pengajuan Terbaru</h3>
+              <button
+                onClick={() => goTo("submissions")}
+                className="w-6 h-6 rounded-full bg-slate-100 hover:bg-slate-200 flex items-center justify-center transition"
+              >
+                <Plus className="w-3 h-3 text-slate-600" />
+              </button>
+            </div>
+            <ul className="space-y-2">
+              {submissions.length === 0 ? (
+                <li className="text-xs text-slate-400 py-4 text-center">Belum ada pengajuan.</li>
+              ) : (
+                submissions.map((s) => {
+                  const p = s.payload || {};
+                  const time = s.created_at
+                    ? new Date(s.created_at).toLocaleTimeString("id-ID", { hour: "2-digit", minute: "2-digit" })
+                    : "--:--";
+                  return (
+                    <li
+                      key={s.id}
+                      className="flex items-center gap-3 bg-slate-50 hover:bg-slate-100 rounded-2xl p-2.5 cursor-pointer transition"
+                      onClick={() => goTo("submissions")}
+                    >
+                      <span className="w-2 h-2 rounded-full bg-[#001DF3] shrink-0" />
+                      <span className="flex-1 text-xs font-bold text-slate-900 truncate">
+                        {SUB_TYPE_LABEL[s.type] || s.type} — {p.name || p.email || "Tanpa nama"}
+                      </span>
+                      <span className="text-[11px] text-slate-500 font-semibold shrink-0">{time}</span>
+                    </li>
+                  );
+                })
+              )}
+            </ul>
+          </div>
+        </div>
+
+        {/* RIGHT COL — Feature card (playful, yellow) */}
+        <div className="xl:col-span-3">
+          <div className="bg-gradient-to-br from-[#FFF9C4] via-[#FFF3A0] to-[#FFE58A] rounded-3xl border border-yellow-200/50 p-5 h-full flex flex-col relative overflow-hidden">
+            <div className="flex items-start justify-between">
+              <h3 className="font-black text-slate-900">Huniaja Craft</h3>
+              <button className="w-8 h-8 rounded-full bg-white/70 flex items-center justify-center">
+                <MoreHorizontal className="w-4 h-4 text-slate-600" />
+              </button>
+            </div>
+            <span className="mt-2 inline-flex self-start items-center gap-1 bg-white/70 rounded-full px-2.5 py-0.5 text-[10px] font-black text-slate-700">
+              <Star className="w-2.5 h-2.5 text-[#00B512] fill-[#00B512]" /> #1 Property CMS
+            </span>
+
+            {/* Hero visual — house emoji style */}
+            <div className="flex-1 flex items-center justify-center py-6 relative">
+              <div className="w-32 h-32 rounded-3xl bg-gradient-to-br from-[#001DF3] to-[#000066] flex items-center justify-center shadow-xl rotate-[-6deg]">
+                <Home className="w-14 h-14 text-white" strokeWidth={2.2} />
+              </div>
+              <span className="absolute top-2 right-2 text-lg">✨</span>
+              <span className="absolute bottom-8 left-4 text-sm">🏡</span>
+              <span className="absolute top-8 left-8 text-xs">📊</span>
+            </div>
+
+            <div className="mt-2">
+              <div className="flex items-center gap-2 mb-2">
+                <h4 className="font-black text-slate-900 text-lg">Property Play</h4>
+                <span className="ml-auto inline-flex items-center gap-1 bg-white/80 rounded-full px-2 py-0.5 text-[10px] font-black text-slate-700">
+                  <Star className="w-3 h-3 text-[#00B512] fill-[#00B512]" /> 5.0
+                </span>
+              </div>
+              <p className="text-xs text-slate-600 leading-relaxed">
+                Kelola properti seperti main game — cepat, menyenangkan, dan hasilnya keren.
+              </p>
+
+              <div className="grid grid-cols-2 gap-2 mt-4">
+                <div className="bg-white/70 rounded-2xl p-3 text-center">
+                  <div className="text-[10px] text-slate-500 font-bold uppercase">Views</div>
+                  <div className="text-lg font-black text-slate-900">{stats?.properties?.views || 0}</div>
+                </div>
+                <div className="bg-white/70 rounded-2xl p-3 text-center">
+                  <div className="text-[10px] text-slate-500 font-bold uppercase">Likes</div>
+                  <div className="text-lg font-black text-slate-900">{stats?.properties?.likes || 0}</div>
                 </div>
               </div>
-            </button>
-          ))}
-        </div>
-      </section>
-
-      {/* Workflows / recent properties */}
-      <section>
-        <div className="flex items-center gap-2 mb-4">
-          <h2 className="text-base font-black text-slate-900">Listing Aktif</h2>
-          <span className="text-xs text-slate-400 font-semibold">
-            {workflows.length}
-          </span>
-          <button
-            onClick={() => goTo("properties")}
-            className="ml-auto text-xs font-bold text-[#001DF3] hover:underline inline-flex items-center gap-1"
-          >
-            Kelola semua <ExternalLink className="w-3 h-3" />
-          </button>
-        </div>
-        {workflows.length === 0 ? (
-          <div className="rounded-3xl bg-white border border-slate-200 p-10 text-center">
-            <Folder className="w-8 h-8 text-slate-300 mx-auto" />
-            <p className="text-sm text-slate-500 mt-3">
-              {search
-                ? "Tidak ada properti yang cocok."
-                : "Belum ada properti. Tambahkan dari tab Properti."}
-            </p>
+            </div>
           </div>
-        ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-            {workflows.map((p) => (
-              <WorkflowCard key={p.id} item={p} onOpen={() => goTo("properties")} />
-            ))}
-          </div>
-        )}
-      </section>
+        </div>
+      </div>
     </div>
   );
 }
 
-function WorkflowCard({ item, onOpen }) {
+function StatMiniCard({ label, sub, pct, color }) {
+  return (
+    <div className="bg-slate-50 rounded-2xl p-4">
+      <div className="flex items-baseline justify-between">
+        <span className="text-[10px] font-bold text-slate-500 uppercase tracking-wide">{label}</span>
+        <span className="text-[10px] font-black text-slate-400">{sub}</span>
+      </div>
+      <div className="text-2xl font-black mt-1" style={{ color }}>
+        {pct}%
+      </div>
+      <div className="mt-2 h-1.5 rounded-full bg-white overflow-hidden">
+        <div
+          className="h-full rounded-full transition-all"
+          style={{ width: `${pct}%`, backgroundColor: color }}
+        />
+      </div>
+    </div>
+  );
+}
+
+function PopularCard({ item, tone, onOpen }) {
+  const tints = ["bg-[#FFE0EE]", "bg-[#FFF3C4]", "bg-[#DDEBFF]"];
   const img = item.image || (item.gallery && item.gallery[0]);
-  const status = item.status === "published" ? "Aktif" : (item.status || "Draft");
-  const ago = timeAgo(item.updated_at || item.created_at);
   return (
     <button
       onClick={onOpen}
-      className="group text-left bg-white rounded-3xl border border-slate-200 overflow-hidden hover:shadow-lg hover:-translate-y-0.5 transition-all"
+      className={`group text-left rounded-2xl overflow-hidden hover:-translate-y-0.5 transition-all ${tints[tone % 3]}`}
     >
-      <div className="relative h-32 bg-slate-100 overflow-hidden">
+      <div className="aspect-[4/3] flex items-center justify-center p-3">
         {img ? (
-          <img src={img} alt={item.title} className="w-full h-full object-cover" />
+          <img src={img} alt={item.title} className="w-full h-full object-cover rounded-xl" />
         ) : (
-          <div className="w-full h-full bg-gradient-to-br from-[#001DF3] to-[#000066]" />
+          <Home className="w-8 h-8 text-slate-500" />
         )}
-        <button
-          type="button"
-          onClick={(e) => e.preventDefault()}
-          className="absolute top-2 right-2 w-8 h-8 rounded-full bg-white/95 flex items-center justify-center shadow-sm hover:scale-110 transition"
-        >
-          <MoreHorizontal className="w-4 h-4 text-slate-600" />
-        </button>
-        {/* white notch overlay to match Floe style */}
-        <div className="absolute bottom-0 left-0 h-6 w-24 bg-white rounded-tr-2xl" />
       </div>
-      <div className="p-4 pt-2">
-        <div className="flex items-center gap-1.5 text-[11px] text-slate-500 font-semibold">
-          <span>{ago}</span>
-          <span className="text-slate-300">•</span>
-          <span className={status === "Aktif" ? "text-[#00B512]" : "text-slate-500"}>
-            {status}
+      <div className="px-3 pb-3">
+        <div className="text-[11px] font-bold text-slate-900 truncate">{item.title}</div>
+        <div className="flex items-center gap-1 mt-1">
+          <Star className="w-3 h-3 text-[#00B512] fill-[#00B512]" />
+          <span className="text-[10px] font-black text-slate-700">
+            {(4 + Math.random() * 0.9).toFixed(1)}
           </span>
-        </div>
-        <h3 className="font-bold text-slate-900 mt-1 truncate">{item.title}</h3>
-        <div className="flex items-center gap-2 mt-3">
-          <span className="w-6 h-6 rounded-full bg-[#001DF3] text-white text-[10px] font-black flex items-center justify-center border-2 border-white">
-            A
-          </span>
-          {item.verified && (
-            <span className="ml-auto inline-flex items-center gap-1 bg-[#00B512]/10 text-[#00B512] text-[10px] font-black rounded-full px-2 py-0.5">
-              <BadgeCheck className="w-3 h-3" /> Terverifikasi
-            </span>
-          )}
         </div>
       </div>
     </button>
+  );
+}
+
+function MiniSubjectCard({ title, subjects }) {
+  return (
+    <div className="bg-slate-50 rounded-2xl p-3">
+      <div className="flex items-center justify-between mb-2">
+        <span className="text-[10px] font-black text-slate-500 uppercase tracking-wide">
+          {title}
+        </span>
+        <span className="text-[10px] text-slate-400 font-bold">{subjects.length} item</span>
+      </div>
+      <div className="grid grid-cols-3 gap-2">
+        {subjects.map((s, i) => (
+          <button
+            key={i}
+            onClick={s.onClick}
+            className={`${s.tint} rounded-xl p-3 text-center hover:shadow-md transition`}
+          >
+            <div className="w-8 h-8 rounded-xl bg-white/70 flex items-center justify-center mx-auto mb-2">
+              <s.Icon className="w-4 h-4 text-slate-700" />
+            </div>
+            <div className="text-[10px] font-black text-slate-900 truncate">{s.name}</div>
+            <div className="text-[9px] text-slate-500 mt-0.5 truncate">{s.meta}</div>
+          </button>
+        ))}
+      </div>
+    </div>
   );
 }
 
