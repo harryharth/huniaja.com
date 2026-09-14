@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import ListingCard from "./ListingCard";
 import { popularListings, ICON_POPULER } from "../mock";
 
@@ -18,9 +19,13 @@ export function PopulerSection() {
                 Properti yang paling banyak Diskonya
               </span>
             </div>
-            <button className="bg-[#00B512] hover:bg-[#009e0f] text-white text-xs font-bold px-5 py-2 rounded-full transition shadow-sm self-start md:self-auto">
+            <Link
+              to="/cari-properti"
+              data-testid="populer-lihat-semua"
+              className="bg-[#00B512] hover:bg-[#009e0f] text-white text-xs font-bold px-5 py-2 rounded-full transition shadow-sm self-start md:self-auto inline-flex items-center"
+            >
               LIHAT SEMUA
-            </button>
+            </Link>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5">
             {popularListings.map((item, i) => (
