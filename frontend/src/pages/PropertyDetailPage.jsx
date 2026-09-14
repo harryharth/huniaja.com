@@ -303,7 +303,7 @@ export default function PropertyDetailPage() {
               <div className="mt-5 space-y-2">
                 <Button
                   asChild
-                  className="w-full h-12 bg-[#00B512] hover:bg-[#009e0f] text-white rounded-full font-bold text-sm"
+                  className="w-full h-12 bg-white border border-slate-200 text-slate-800 hover:bg-[#001DF3] hover:border-[#001DF3] hover:text-white active:bg-[#00B512] active:border-[#00B512] active:text-white rounded-full font-bold text-sm transition"
                 >
                   <a
                     href={WA_URL(
@@ -319,14 +319,14 @@ export default function PropertyDetailPage() {
                 <Button
                   onClick={() => setKprOpen(true)}
                   data-testid="prop-kpr-btn"
-                  className="w-full h-12 bg-[#001DF3] hover:bg-[#0017c2] text-white rounded-full font-bold text-sm"
+                  className="w-full h-12 bg-white border border-slate-200 text-slate-800 hover:bg-[#001DF3] hover:border-[#001DF3] hover:text-white active:bg-[#00B512] active:border-[#00B512] active:text-white rounded-full font-bold text-sm transition"
                 >
                   <Calculator className="w-4 h-4 mr-2" /> Simulasi KPR
                 </Button>
                 <Button
                   onClick={() => setBrosurOpen(true)}
                   data-testid="prop-brosur-btn"
-                  className="w-full h-12 rounded-full font-bold text-sm bg-white border border-slate-200 text-slate-800 hover:bg-[#00B512] hover:border-[#00B512] hover:text-white transition"
+                  className="w-full h-12 bg-white border border-slate-200 text-slate-800 hover:bg-[#001DF3] hover:border-[#001DF3] hover:text-white active:bg-[#00B512] active:border-[#00B512] active:text-white rounded-full font-bold text-sm transition"
                 >
                   <Download className="w-4 h-4 mr-2" /> Download Brosur
                 </Button>
