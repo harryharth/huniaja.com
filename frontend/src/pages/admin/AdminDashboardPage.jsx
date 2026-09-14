@@ -541,6 +541,31 @@ function PropertyFormModal({ item, onChange, onClose, onSave }) {
     set("image", url);
   };
 
+  const uploadGallery = async (e) => {
+    const files = Array.from(e.target.files || []);
+    if (!files.length) return;
+    const existing = item.gallery || [];
+    const remaining = Math.max(0, 15 - existing.length);
+    const toUpload = files.slice(0, remaining);
+    const urls = [];
+    for (const file of toUpload) {
+      const fd = new FormData();
+      fd.append("file", file);
+      const { data } = await adminApi.post("/admin/upload", fd, {
+        headers: { "Content-Type": "multipart/form-data" },
+      });
+      urls.push(`${process.env.REACT_APP_BACKEND_URL}${data.url}`);
+    }
+    set("gallery", [...existing, ...urls]);
+    e.target.value = "";
+  };
+
+  const removeGallery = (idx) => {
+    const arr = [...(item.gallery || [])];
+    arr.splice(idx, 1);
+    set("gallery", arr);
+  };
+
   const uploadBrosur = async (e) => {
     const file = e.target.files?.[0];
     if (!file) return;
@@ -655,6 +680,44 @@ function PropertyFormModal({ item, onChange, onClose, onSave }) {
                 </label>
                 <input value={item.image} onChange={(e) => set("image", e.target.value)} placeholder="atau paste URL gambar" className={inputCls + " flex-1"} />
               </div>
+            </Field>
+          </div>
+
+          {/* Foto Pendukung / Gallery (max 15) */}
+          <div className="md:col-span-2">
+            <Field label={`Foto Pendukung (${(item.gallery || []).length}/15)`}>
+              <div className="flex flex-wrap gap-2" data-testid="prop-form-gallery">
+                {(item.gallery || []).map((src, idx) => (
+                  <div key={idx} className="relative w-20 h-20 rounded-xl overflow-hidden group shrink-0">
+                    <img src={src} alt="" className="w-full h-full object-cover" />
+                    <button
+                      type="button"
+                      onClick={() => removeGallery(idx)}
+                      className="absolute top-1 right-1 w-6 h-6 rounded-full bg-black/60 hover:bg-red-600 text-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition"
+                      aria-label="Hapus foto"
+                    >
+                      <X className="w-3.5 h-3.5" />
+                    </button>
+                  </div>
+                ))}
+                {(item.gallery || []).length < 15 && (
+                  <label className="w-20 h-20 rounded-xl border-2 border-dashed border-slate-300 hover:border-[#001DF3] hover:bg-blue-50/40 flex flex-col items-center justify-center text-slate-500 hover:text-[#001DF3] text-[10px] font-semibold cursor-pointer transition shrink-0">
+                    <Upload className="w-4 h-4 mb-0.5" />
+                    Tambah
+                    <input
+                      type="file"
+                      accept="image/*"
+                      multiple
+                      onChange={uploadGallery}
+                      className="hidden"
+                      data-testid="prop-form-gallery-upload"
+                    />
+                  </label>
+                )}
+              </div>
+              <p className="text-[11px] text-slate-500 mt-1.5">
+                Foto pendukung akan tampil di galeri halaman detail. Maksimal 15 foto — bisa upload sekaligus.
+              </p>
             </Field>
           </div>
 
