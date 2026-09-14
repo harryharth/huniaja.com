@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { LOGO_WHITE } from "../mock";
-import { Instagram, Youtube, ChevronDown } from "lucide-react";
+import { Instagram, Youtube, ChevronDown, Layers, Building2, LifeBuoy } from "lucide-react";
 import { useT } from "../lib/i18n";
 
 // Footer nav link with hover pill (navy) + active bold state.
@@ -22,6 +22,7 @@ function FooterLink({ href, label, current }) {
 const footerCols = [
   {
     title: "Layanan",
+    Icon: Layers,
     links: [
       { label: "Beli", href: "/cari-properti" },
       { label: "Konsultasi", href: "/konsultasi" },
@@ -32,6 +33,7 @@ const footerCols = [
   },
   {
     title: "Perusahaan",
+    Icon: Building2,
     links: [
       { label: "Karir", href: "/karir" },
       { label: "Tentang Kami", href: "/tentang-kami" },
@@ -41,6 +43,7 @@ const footerCols = [
   },
   {
     title: "Bantuan",
+    Icon: LifeBuoy,
     links: [
       { label: "Artikel", href: "/berita" },
       { label: "Pusat Bantuan", href: "/pusat-bantuan" },
@@ -103,9 +106,9 @@ export default function Footer() {
           })}
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-6">
           {/* Left column: logo + description + socials + copyright */}
-          <div className="md:col-span-4 flex flex-col">
+          <div className="md:col-span-5 flex flex-col md:pr-6 md:border-r md:border-white/15">
             <img
               src={LOGO_WHITE}
               alt="Huniaja"
@@ -157,21 +160,30 @@ export default function Footer() {
           </div>
 
           {/* Right columns: link groups — hidden on mobile (rendered above as accordion) */}
-          <div className="hidden md:grid md:col-span-7 md:col-start-6 grid-cols-3 gap-8 md:gap-10 md:pt-2 md:pl-8">
-            {footerCols.map((col, i) => (
-              <div key={i}>
-                <div className="text-[11px] font-black tracking-widest text-white/70 uppercase mb-3">
-                  {t(col.title)}
+          <div className="hidden md:grid md:col-span-7 grid-cols-3 gap-6 lg:gap-8 md:pl-2 lg:pl-6">
+            {footerCols.map((col, i) => {
+              const ColIcon = col.Icon;
+              return (
+                <div key={i} className="flex flex-col">
+                  <div className="flex items-center gap-2 mb-4">
+                    <span className="w-8 h-8 rounded-xl bg-white/10 flex items-center justify-center shrink-0">
+                      {ColIcon ? <ColIcon className="w-4 h-4 text-white" strokeWidth={2.4} /> : null}
+                    </span>
+                    <span className="text-[11px] font-black tracking-widest text-white uppercase">
+                      {t(col.title)}
+                    </span>
+                  </div>
+                  <span className="block h-px w-8 bg-[#00B512] mb-3" />
+                  <ul className="space-y-2.5 text-[14px]">
+                    {col.links.map((l, idx) => (
+                      <li key={idx}>
+                        <FooterLink href={l.href} label={t(l.label)} current={pathname} />
+                      </li>
+                    ))}
+                  </ul>
                 </div>
-                <ul className="space-y-2 text-[15px]">
-                  {col.links.map((l, idx) => (
-                    <li key={idx}>
-                      <FooterLink href={l.href} label={t(l.label)} current={pathname} />
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
       </div>
