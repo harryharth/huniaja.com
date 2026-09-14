@@ -509,38 +509,54 @@ function FacilitiesAccordion({ facilities }) {
           <div
             key={category}
             data-testid={`facility-cat-${category}`}
-            className="rounded-2xl border border-slate-100 overflow-hidden bg-white"
+            className={`rounded-2xl border overflow-hidden transition-colors ${
+              isOpen ? "border-[#00B512] bg-[#00B512]" : "border-slate-100 bg-white"
+            }`}
           >
             <button
               type="button"
               onClick={() => toggle(category)}
               aria-expanded={isOpen}
-              className="w-full flex items-center justify-between gap-3 px-4 md:px-5 py-3.5 md:py-4 hover:bg-slate-50 transition text-left"
+              className={`w-full flex items-center justify-between gap-3 px-4 md:px-5 py-3.5 md:py-4 transition text-left ${
+                isOpen ? "hover:bg-[#009e0f]" : "hover:bg-slate-50"
+              }`}
             >
               <div className="flex items-center gap-3 min-w-0">
-                <span className="w-8 h-8 rounded-xl bg-[#00B512]/12 flex items-center justify-center shrink-0">
+                <span
+                  className={`w-8 h-8 rounded-xl flex items-center justify-center shrink-0 ${
+                    isOpen ? "bg-white/20" : "bg-[#00B512]/12"
+                  }`}
+                >
                   <CheckCircle2
-                    className="w-4 h-4 text-[#00B512]"
+                    className={`w-4 h-4 ${isOpen ? "text-white" : "text-[#00B512]"}`}
                     strokeWidth={2.4}
                   />
                 </span>
                 <div className="flex items-baseline gap-2 min-w-0">
-                  <span className="text-sm md:text-[15px] font-black uppercase tracking-wide truncate text-slate-900">
+                  <span
+                    className={`text-sm md:text-[15px] font-black uppercase tracking-wide truncate ${
+                      isOpen ? "text-white" : "text-slate-900"
+                    }`}
+                  >
                     {category}
                   </span>
-                  <span className="text-[11px] text-slate-400 font-semibold shrink-0">
+                  <span
+                    className={`text-[11px] font-semibold shrink-0 ${
+                      isOpen ? "text-white/70" : "text-slate-400"
+                    }`}
+                  >
                     ({items.length})
                   </span>
                 </div>
               </div>
               <ChevronDown
                 className={`w-5 h-5 shrink-0 transition-transform ${
-                  isOpen ? "rotate-180 text-[#001DF3]" : "text-slate-400"
+                  isOpen ? "rotate-180 text-white" : "text-slate-400"
                 }`}
               />
             </button>
             {isOpen && (
-              <div className="px-4 md:px-5 pb-4 md:pb-5 pt-1 border-t border-slate-100">
+              <div className="px-4 md:px-5 pb-4 md:pb-5 pt-1 bg-white border-t border-[#00B512]/20">
                 <div className="grid grid-cols-2 md:grid-cols-3 gap-2.5 mt-3">
                   {items.map((name) => (
                     <div
