@@ -1,7 +1,7 @@
 // Mock data for Huniaja website
 
-export const LOGO_BLUE = "https://customer-assets-m6fa6gv7.emergentagent.net/job_4eed1f12-2d88-44f4-9aaa-62ae00ad5a06/artifacts/mpyq92af_LOGO%20HUNIAJA%20blue.png";
-export const LOGO_WHITE = "https://customer-assets-m6fa6gv7.emergentagent.net/job_4eed1f12-2d88-44f4-9aaa-62ae00ad5a06/artifacts/nqqtamij_LOGO%20HUNIAJA%20white.png";
+export const LOGO_BLUE = "https://customer-assets-m6fa6gv7.emergentagent.net/job_4eed1f12-2d88-44f4-9aaa-62ae00ad5a06/artifacts/jousiv9l_LOGO%20HUNIAJA.png";
+export const LOGO_WHITE = "https://customer-assets-m6fa6gv7.emergentagent.net/job_4eed1f12-2d88-44f4-9aaa-62ae00ad5a06/artifacts/jousiv9l_LOGO%20HUNIAJA.png";
 export const LOGO_MAIN = "https://customer-assets-m6fa6gv7.emergentagent.net/job_4eed1f12-2d88-44f4-9aaa-62ae00ad5a06/artifacts/jousiv9l_LOGO%20HUNIAJA.png";
 export const HERO_BANNER = "https://customer-assets-m6fa6gv7.emergentagent.net/job_4eed1f12-2d88-44f4-9aaa-62ae00ad5a06/artifacts/wle75380_Huniaja%201.webp";
 

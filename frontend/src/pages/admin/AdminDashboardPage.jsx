@@ -152,9 +152,12 @@ export default function AdminDashboardPage() {
       >
         <div className="p-4 flex items-center justify-between">
           <div className="flex items-center gap-2 min-w-0">
-            <div className="w-9 h-9 rounded-2xl bg-[#001DF3] flex items-center justify-center shrink-0">
-              <Sparkles className="w-5 h-5 text-white" />
-            </div>
+            <img
+              src="https://customer-assets-m6fa6gv7.emergentagent.net/job_4eed1f12-2d88-44f4-9aaa-62ae00ad5a06/artifacts/jousiv9l_LOGO%20HUNIAJA.png"
+              alt="Huniaja"
+              className="w-9 h-9 rounded-2xl shrink-0 object-contain"
+              data-testid="admin-sidebar-logo"
+            />
             {!collapsed && (
               <span className="font-black text-slate-900 truncate">Huniaja</span>
             )}
