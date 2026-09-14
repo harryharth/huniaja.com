@@ -858,6 +858,25 @@ function BannersPanel() {
     setEdit(null); load();
   };
 
+  const uploadBannerImage = async (e) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    const fd = new FormData();
+    fd.append("file", file);
+    const { data } = await adminApi.post("/admin/upload", fd, {
+      headers: { "Content-Type": "multipart/form-data" },
+    });
+    setEdit({ ...edit, image: `${process.env.REACT_APP_BACKEND_URL}${data.url}` });
+  };
+
+  const emptyBanner = {
+    title: "", subtitle: "", accent: "#001DF3", image: "",
+    tagline: "", eyebrow: "PROMO SPESIAL", tag: "HUNIAJA VOUCHER",
+    amount: "", validity: "", icon_name: "Sparkles",
+    cta_label: "Klaim Sekarang", cta_href: "/cari-properti",
+    bg: "bg-[#001DF3]", status: "published", sort_order: list.length,
+  };
+
   return (
     <div>
       <div className="flex justify-between items-center">
@@ -866,7 +885,8 @@ function BannersPanel() {
           <p className="text-sm text-slate-500 mt-1">Kelola banner promo di homepage</p>
         </div>
         <button
-          onClick={() => setEdit({ title: "", subtitle: "", accent: "", cta_label: "", cta_href: "", bg: "bg-[#001DF3]", status: "published", sort_order: list.length })}
+          onClick={() => setEdit(emptyBanner)}
+          data-testid="admin-new-banner"
           className="bg-[#00B512] hover:bg-[#009e0f] text-white rounded-full px-5 py-2.5 text-sm font-bold shadow-lg inline-flex items-center gap-2"
         >
           <Plus className="w-4 h-4" /> Tambah Banner
@@ -874,46 +894,132 @@ function BannersPanel() {
       </div>
       <div className="mt-6 grid grid-cols-1 md:grid-cols-2 gap-4">
         {list.map((b) => (
-          <div key={b.id} className="bg-white rounded-2xl border border-slate-100 shadow-sm p-5">
-            <div className="flex justify-between items-start">
-              <div>
-                <h3 className="font-black text-slate-900">{b.title}</h3>
-                <p className="text-sm text-slate-500 mt-1">{b.subtitle}</p>
+          <div key={b.id} className="bg-white rounded-2xl border border-slate-100 shadow-sm p-5 flex gap-4">
+            {b.image ? (
+              <img src={b.image} alt="" className="w-20 h-20 rounded-xl object-cover shrink-0" />
+            ) : (
+              <div
+                className="w-20 h-20 rounded-xl flex items-center justify-center text-white font-black text-xs shrink-0"
+                style={{ backgroundColor: b.accent || "#001DF3" }}
+              >
+                {b.amount || "TXT"}
               </div>
-              <span className={`px-2 py-1 rounded-full text-[10px] font-bold ${b.status === "published" ? "bg-green-50 text-[#00B512]" : "bg-slate-100 text-slate-500"}`}>
-                {b.status === "published" ? "Tayang" : "Draft"}
-              </span>
-            </div>
-            <div className="mt-3 flex gap-2">
-              <button onClick={() => setEdit(b)} className="text-xs px-3 py-1.5 bg-slate-100 hover:bg-slate-200 rounded-full font-bold">Edit</button>
-              <button onClick={async () => { await adminApi.delete(`/admin/banners/${b.id}`); load(); }} className="text-xs px-3 py-1.5 bg-red-50 text-red-600 hover:bg-red-100 rounded-full font-bold">Hapus</button>
+            )}
+            <div className="flex-1 min-w-0">
+              <div className="flex justify-between items-start gap-2">
+                <div className="min-w-0">
+                  <div className="text-[10px] font-bold tracking-widest text-slate-500 truncate">{b.eyebrow}</div>
+                  <h3 className="font-black text-slate-900 truncate">{b.title} {b.subtitle}</h3>
+                  <p className="text-xs text-slate-500 mt-0.5 truncate">{b.tagline}</p>
+                </div>
+                <span className={`px-2 py-1 rounded-full text-[10px] font-bold shrink-0 ${b.status === "published" ? "bg-green-50 text-[#00B512]" : "bg-slate-100 text-slate-500"}`}>
+                  {b.status === "published" ? "Tayang" : "Draft"}
+                </span>
+              </div>
+              <div className="mt-2 flex gap-2">
+                <button onClick={() => setEdit(b)} data-testid={`admin-edit-banner-${b.id}`} className="text-xs px-3 py-1.5 bg-slate-100 hover:bg-slate-200 rounded-full font-bold">Edit</button>
+                <button onClick={async () => { if(confirm("Hapus banner ini?")) { await adminApi.delete(`/admin/banners/${b.id}`); load(); }}} className="text-xs px-3 py-1.5 bg-red-50 text-red-600 hover:bg-red-100 rounded-full font-bold">Hapus</button>
+              </div>
             </div>
           </div>
         ))}
       </div>
 
       {edit && (
-        <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4">
-          <div className="bg-white rounded-3xl w-full max-w-lg shadow-2xl">
-            <div className="p-6 border-b border-slate-100 flex justify-between items-center">
-              <h3 className="font-black">{edit.id ? "Edit Banner" : "Banner Baru"}</h3>
+        <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4 overflow-y-auto">
+          <div className="bg-white rounded-3xl w-full max-w-2xl shadow-2xl max-h-[92vh] overflow-y-auto" data-testid="banner-form">
+            <div className="sticky top-0 bg-white p-6 border-b border-slate-100 flex justify-between items-center z-10">
+              <h3 className="font-black text-lg">{edit.id ? "Edit Banner" : "Banner Baru"}</h3>
               <button onClick={() => setEdit(null)} className="w-8 h-8 rounded-full hover:bg-slate-100 flex items-center justify-center"><X className="w-4 h-4" /></button>
             </div>
-            <div className="p-6 space-y-3">
-              <Field label="Judul"><input value={edit.title} onChange={(e) => setEdit({ ...edit, title: e.target.value })} className={inputCls} /></Field>
-              <Field label="Subtitle"><input value={edit.subtitle} onChange={(e) => setEdit({ ...edit, subtitle: e.target.value })} className={inputCls} /></Field>
-              <Field label="Accent Text"><input value={edit.accent} onChange={(e) => setEdit({ ...edit, accent: e.target.value })} className={inputCls} /></Field>
-              <Field label="CTA Label"><input value={edit.cta_label} onChange={(e) => setEdit({ ...edit, cta_label: e.target.value })} className={inputCls} /></Field>
-              <Field label="CTA Link"><input value={edit.cta_href} onChange={(e) => setEdit({ ...edit, cta_href: e.target.value })} className={inputCls} /></Field>
+            <div className="p-6 grid grid-cols-1 md:grid-cols-2 gap-4">
+              {/* Image upload */}
+              <div className="md:col-span-2">
+                <Field label="Gambar Banner (opsional)">
+                  <div className="flex items-center gap-3 flex-wrap">
+                    {edit.image ? (
+                      <img src={edit.image} alt="" className="w-24 h-24 rounded-xl object-cover" />
+                    ) : (
+                      <div className="w-24 h-24 rounded-xl bg-slate-100 flex items-center justify-center text-slate-400 text-[10px] font-semibold text-center px-2">
+                        Text Slide
+                      </div>
+                    )}
+                    <label className="inline-flex items-center gap-2 bg-slate-100 hover:bg-slate-200 rounded-full px-4 py-2 text-sm font-semibold cursor-pointer">
+                      <Upload className="w-4 h-4" /> {edit.image ? "Ganti Gambar" : "Upload Gambar"}
+                      <input type="file" accept="image/*" onChange={uploadBannerImage} className="hidden" data-testid="banner-image-upload" />
+                    </label>
+                    {edit.image && (
+                      <button
+                        type="button"
+                        onClick={() => setEdit({ ...edit, image: "" })}
+                        className="text-xs text-red-600 hover:underline"
+                      >
+                        Hapus gambar
+                      </button>
+                    )}
+                  </div>
+                  <p className="text-[11px] text-slate-500 mt-1.5">Jika kosong, banner akan tampil sebagai slide text-based dengan komposisi tiket khas Huniaja.</p>
+                </Field>
+              </div>
+
+              <Field label="Eyebrow (label kecil di atas)">
+                <input value={edit.eyebrow || ""} onChange={(e) => setEdit({ ...edit, eyebrow: e.target.value })} placeholder="PROMO SPESIAL" className={inputCls} />
+              </Field>
+              <Field label="Icon (untuk slide text)">
+                <select value={edit.icon_name || "Sparkles"} onChange={(e) => setEdit({ ...edit, icon_name: e.target.value })} className={inputCls}>
+                  {["Sparkles", "Ticket", "Home", "Percent"].map((i) => <option key={i} value={i}>{i}</option>)}
+                </select>
+              </Field>
+
+              <Field label="Judul Utama">
+                <input value={edit.title} onChange={(e) => setEdit({ ...edit, title: e.target.value })} placeholder="Deal Hot" className={inputCls} />
+              </Field>
+              <Field label="Sub-Judul (italic)">
+                <input value={edit.subtitle} onChange={(e) => setEdit({ ...edit, subtitle: e.target.value })} placeholder="Dám Say!" className={inputCls} />
+              </Field>
+
+              <div className="md:col-span-2">
+                <Field label="Tagline (kalimat pendek)">
+                  <input value={edit.tagline || ""} onChange={(e) => setEdit({ ...edit, tagline: e.target.value })} placeholder="Voucher Belanja Rumah Hingga Rp 50 Juta" className={inputCls} />
+                </Field>
+              </div>
+
+              <Field label="Warna Aksen (HEX)">
+                <div className="flex gap-2">
+                  <input type="color" value={edit.accent || "#001DF3"} onChange={(e) => setEdit({ ...edit, accent: e.target.value })} className="w-12 h-11 rounded-2xl border border-slate-200 cursor-pointer" />
+                  <input value={edit.accent || ""} onChange={(e) => setEdit({ ...edit, accent: e.target.value })} placeholder="#00B512" className={inputCls} />
+                </div>
+              </Field>
+              <Field label="Tag (di kartu tiket)">
+                <input value={edit.tag || ""} onChange={(e) => setEdit({ ...edit, tag: e.target.value })} placeholder="HUNIAJA VOUCHER" className={inputCls} />
+              </Field>
+
+              <Field label="Amount (angka besar tiket)">
+                <input value={edit.amount || ""} onChange={(e) => setEdit({ ...edit, amount: e.target.value })} placeholder="Rp50Jt" className={inputCls} />
+              </Field>
+              <Field label="Validity (masa berlaku)">
+                <input value={edit.validity || ""} onChange={(e) => setEdit({ ...edit, validity: e.target.value })} placeholder="Berlaku s/d 31 Des" className={inputCls} />
+              </Field>
+
+              <Field label="CTA Label">
+                <input value={edit.cta_label} onChange={(e) => setEdit({ ...edit, cta_label: e.target.value })} placeholder="Klaim Voucher" className={inputCls} />
+              </Field>
+              <Field label="CTA Link">
+                <input value={edit.cta_href} onChange={(e) => setEdit({ ...edit, cta_href: e.target.value })} placeholder="/cari-properti" className={inputCls} />
+              </Field>
+
               <Field label="Status">
                 <select value={edit.status} onChange={(e) => setEdit({ ...edit, status: e.target.value })} className={inputCls}>
                   <option value="published">Tayang</option><option value="draft">Draft</option>
                 </select>
               </Field>
+              <Field label="Urutan Tampilan">
+                <input type="number" value={edit.sort_order || 0} onChange={(e) => setEdit({ ...edit, sort_order: parseInt(e.target.value || 0) })} className={inputCls} />
+              </Field>
             </div>
-            <div className="p-6 border-t flex justify-end gap-3">
+            <div className="sticky bottom-0 bg-white p-6 border-t border-slate-100 flex justify-end gap-3">
               <button onClick={() => setEdit(null)} className="px-5 py-2 rounded-full text-sm font-bold hover:bg-slate-100">Batal</button>
-              <button onClick={save} className="bg-[#001DF3] text-white px-5 py-2 rounded-full text-sm font-bold">Simpan</button>
+              <button onClick={save} data-testid="banner-save" className="bg-[#001DF3] text-white px-5 py-2 rounded-full text-sm font-bold shadow-lg">Simpan</button>
             </div>
           </div>
         </div>
