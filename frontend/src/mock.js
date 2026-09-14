@@ -207,7 +207,7 @@ export const whyFeatures = [
 export const footerCols = [
   {
     title: "Tentang Kami",
-    links: ["Karir", "Afiliasi", "Edukasi Agen", "Acara", "Berita"],
+    links: ["Karir", "Afiliasi", "Edukasi Agen", "Acara", "Artikel"],
   },
   {
     title: "Transaksi",

@@ -62,6 +62,7 @@ export default function BeritaPage() {
   const [active, setActive] = useState("Semua");
   const [query, setQuery] = useState("");
   const [articles, setArticles] = useState(fallbackArticles);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   useEffect(() => {
     let cancelled = false;
@@ -99,7 +100,7 @@ export default function BeritaPage() {
       <section className="bg-[#001DF3] text-white pt-12 md:pt-16 pb-12 md:pb-16">
         <div className="max-w-6xl mx-auto px-4 md:px-6">
           <h1 className="text-3xl md:text-5xl font-black tracking-tight">
-            Berita &amp; Insight Properti
+            Artikel &amp; Insight Properti
           </h1>
           <p className="mt-3 text-sm md:text-base text-white/90 max-w-2xl">
             {articles.length} artikel pilihan tim editorial Huniaja — cara beli
@@ -108,11 +109,43 @@ export default function BeritaPage() {
         </div>
       </section>
 
-      <section className="bg-white py-14 md:py-20">
-        <div className="max-w-6xl mx-auto px-4 md:px-6 grid grid-cols-1 md:grid-cols-4 gap-8">
+      <section className="bg-white py-10 md:py-20">
+        <div className="max-w-6xl mx-auto px-4 md:px-6">
+          {/* Mobile-only category dropdown trigger */}
+          <div className="md:hidden mb-4">
+            <button
+              onClick={() => setMobileMenuOpen((v) => !v)}
+              data-testid="berita-mobile-menu-toggle"
+              className="w-full flex items-center gap-3 rounded-2xl p-2 pr-3 shadow-sm bg-[#001DF3] text-white"
+            >
+              <span className="w-10 h-10 rounded-xl flex items-center justify-center shrink-0 bg-white/15">
+                {(() => {
+                  const CatIcon = CAT_ICONS[active] || BookOpen;
+                  return <CatIcon className="w-5 h-5 text-white" strokeWidth={2.4} />;
+                })()}
+              </span>
+              <span className="flex-1 text-left">
+                <span className="block text-[10px] uppercase tracking-wider font-bold text-white/70">
+                  Kategori
+                </span>
+                <span className="text-sm font-bold">{active}</span>
+              </span>
+              <ChevronDown
+                className={`w-5 h-5 shrink-0 transition-transform ${
+                  mobileMenuOpen ? "rotate-180" : ""
+                }`}
+              />
+            </button>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           {/* Sidebar categories */}
           <aside className="md:col-span-1">
-            <div className="md:sticky md:top-32 space-y-2.5">
+            <div
+              className={`md:sticky md:top-32 space-y-2.5 ${
+                mobileMenuOpen ? "block" : "hidden md:block"
+              }`}
+            >
               {articleCategories.map((c) => {
                 const isActive = active === c;
                 const color = CAT_COLORS[c] || "#001DF3";
@@ -120,7 +153,10 @@ export default function BeritaPage() {
                 return (
                   <button
                     key={c}
-                    onClick={() => setActive(c)}
+                    onClick={() => {
+                      setActive(c);
+                      setMobileMenuOpen(false);
+                    }}
                     data-testid={`berita-cat-${c}`}
                     className={`w-full group flex items-center gap-3 rounded-2xl p-2 pr-3 shadow-sm hover:shadow-md transition-all ${
                       isActive
@@ -280,6 +316,7 @@ export default function BeritaPage() {
                 </Link>
               </div>
             </div>
+          </div>
           </div>
         </div>
       </section>

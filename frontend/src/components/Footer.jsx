@@ -33,7 +33,7 @@ const footerCols = [
     { label: "Pasang Iklan", href: "/pasang-iklan" },
   ],
   [
-    { label: "Berita", href: "/berita" },
+    { label: "Artikel", href: "/berita" },
     { label: "Pusat Bantuan", href: "/pusat-bantuan" },
     { label: "S&K", href: "/syarat-ketentuan" },
     { label: "FAQ", href: "/faq" },
