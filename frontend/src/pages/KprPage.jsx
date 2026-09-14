@@ -319,14 +319,28 @@ export default function KprPage() {
       {/* Simulation */}
       <section className="bg-slate-50 py-14 md:py-20">
         <div className="max-w-6xl mx-auto px-4 md:px-6 grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
-          <div className="flex justify-center">
-            <PhoneMockup>
+          <div className="relative">
+            <div className="absolute -inset-4 rounded-[36px] bg-gradient-to-br from-[#001DF3]/10 via-white to-[#00B512]/10 blur-2xl -z-10" />
+            <div className="rounded-[32px] overflow-hidden shadow-xl border border-slate-100">
               <img
-                src={MOCKUP_SIMULATOR}
-                alt="Simulasi KPR - kalkulator finansial"
-                className="w-full h-full object-cover"
+                src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=1200&q=80"
+                alt="Simulasi KPR — hitung cicilan bulananmu"
+                className="w-full h-72 md:h-96 object-cover"
               />
-            </PhoneMockup>
+            </div>
+            <div className="absolute -bottom-5 -left-3 md:-bottom-6 md:-left-6 bg-white rounded-2xl shadow-lg px-4 py-3 flex items-center gap-3 border border-slate-100">
+              <div className="w-10 h-10 rounded-xl bg-[#001DF3]/10 flex items-center justify-center">
+                <Calculator className="w-5 h-5 text-[#001DF3]" />
+              </div>
+              <div>
+                <div className="text-[10px] text-slate-500 uppercase tracking-widest font-bold">
+                  Cicilan mulai
+                </div>
+                <div className="text-sm font-black text-slate-900">
+                  Rp 2,4 jt/bulan
+                </div>
+              </div>
+            </div>
           </div>
           <div>
             <h2 className="text-xl md:text-2xl font-bold text-slate-900 mb-6">
@@ -408,15 +422,27 @@ export default function KprPage() {
               ))}
             </Accordion>
           </div>
-          <div className="flex justify-center">
-            <div className="bg-white rounded-[44px] p-4 md:p-6 shadow-sm">
-              <PhoneMockup>
-                <img
-                  src={MOCKUP_STEPS}
-                  alt="Kunci rumah - serah terima KPR"
-                  className="w-full h-full object-cover"
-                />
-              </PhoneMockup>
+          <div className="relative">
+            <div className="absolute -inset-4 rounded-[36px] bg-gradient-to-br from-[#00B512]/12 via-white to-[#001DF3]/10 blur-2xl -z-10" />
+            <div className="rounded-[32px] overflow-hidden shadow-xl border border-slate-100">
+              <img
+                src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=1200&q=80"
+                alt="Serah terima kunci rumah baru"
+                className="w-full h-72 md:h-96 object-cover"
+              />
+            </div>
+            <div className="absolute -bottom-5 -right-3 md:-bottom-6 md:-right-6 bg-white rounded-2xl shadow-lg px-4 py-3 flex items-center gap-3 border border-slate-100">
+              <div className="w-10 h-10 rounded-xl bg-[#00B512]/12 flex items-center justify-center">
+                <BadgeCheck className="w-5 h-5 text-[#00B512]" />
+              </div>
+              <div>
+                <div className="text-[10px] text-slate-500 uppercase tracking-widest font-bold">
+                  Approval rate
+                </div>
+                <div className="text-sm font-black text-slate-900">
+                  92% disetujui
+                </div>
+              </div>
             </div>
           </div>
         </div>

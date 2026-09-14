@@ -504,7 +504,6 @@ function FacilitiesAccordion({ facilities }) {
   return (
     <div className="mt-5 space-y-3">
       {entries.map(([category, items]) => {
-        const color = (CATEGORY_META[category] || { color: "#001DF3" }).color;
         const isOpen = !!openMap[category];
         return (
           <div
@@ -519,21 +518,14 @@ function FacilitiesAccordion({ facilities }) {
               className="w-full flex items-center justify-between gap-3 px-4 md:px-5 py-3.5 md:py-4 hover:bg-slate-50 transition text-left"
             >
               <div className="flex items-center gap-3 min-w-0">
-                <span
-                  className="w-8 h-8 rounded-xl flex items-center justify-center shrink-0"
-                  style={{ backgroundColor: `${color}18` }}
-                >
+                <span className="w-8 h-8 rounded-xl bg-[#00B512]/12 flex items-center justify-center shrink-0">
                   <CheckCircle2
-                    className="w-4 h-4"
-                    style={{ color }}
+                    className="w-4 h-4 text-[#00B512]"
                     strokeWidth={2.4}
                   />
                 </span>
                 <div className="flex items-baseline gap-2 min-w-0">
-                  <span
-                    className="text-sm md:text-[15px] font-black uppercase tracking-wide truncate"
-                    style={{ color }}
-                  >
+                  <span className="text-sm md:text-[15px] font-black uppercase tracking-wide truncate text-slate-900">
                     {category}
                   </span>
                   <span className="text-[11px] text-slate-400 font-semibold shrink-0">
@@ -542,10 +534,9 @@ function FacilitiesAccordion({ facilities }) {
                 </div>
               </div>
               <ChevronDown
-                className={`w-5 h-5 shrink-0 text-slate-400 transition-transform ${
-                  isOpen ? "rotate-180" : ""
+                className={`w-5 h-5 shrink-0 transition-transform ${
+                  isOpen ? "rotate-180 text-[#001DF3]" : "text-slate-400"
                 }`}
-                style={isOpen ? { color } : undefined}
               />
             </button>
             {isOpen && (
@@ -557,17 +548,13 @@ function FacilitiesAccordion({ facilities }) {
                       data-testid={`facility-${name}`}
                       className="flex items-center gap-2.5 bg-slate-50 rounded-2xl px-3 py-2.5"
                     >
-                      <span
-                        className="w-7 h-7 rounded-lg flex items-center justify-center shrink-0"
-                        style={{ backgroundColor: `${color}18` }}
-                      >
+                      <span className="w-7 h-7 rounded-lg bg-[#00B512]/12 flex items-center justify-center shrink-0">
                         <CheckCircle2
-                          className="w-4 h-4"
-                          style={{ color }}
+                          className="w-4 h-4 text-[#00B512]"
                           strokeWidth={2.2}
                         />
                       </span>
-                      <span className="text-sm text-slate-700 font-medium leading-tight">
+                      <span className="text-sm text-slate-900 font-medium leading-tight">
                         {name}
                       </span>
                     </div>
