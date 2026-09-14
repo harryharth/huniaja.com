@@ -1,9 +1,30 @@
 import React, { useState } from "react";
-import { Calendar, Clock, ArrowRight, Search, BookOpen } from "lucide-react";
+import {
+  Calendar,
+  Clock,
+  ArrowRight,
+  Search,
+  BookOpen,
+  ChevronDown,
+  Check,
+  Newspaper,
+} from "lucide-react";
 import { Link } from "react-router-dom";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import { articles, articleCategories } from "../data/articles";
+
+// Small color palette per category
+const CAT_COLORS = {
+  Semua: "#001DF3",
+  Panduan: "#00B512",
+  KPR: "#F59E0B",
+  Legalitas: "#8B5CF6",
+  Investasi: "#EC4899",
+  Tren: "#0EA5E9",
+  Tips: "#22C55E",
+  Interior: "#F97316",
+};
 
 export default function BeritaPage() {
   const [active, setActive] = useState("Semua");
@@ -16,147 +37,193 @@ export default function BeritaPage() {
         a.excerpt.toLowerCase().includes(query.toLowerCase()))
   );
 
-  const featured = filtered[0];
-  const rest = filtered.slice(1);
-
   return (
     <div className="min-h-screen bg-white">
       <Header />
 
       {/* Hero */}
-      <section className="bg-[#001DF3] text-white pt-12 md:pt-16 pb-14 md:pb-16">
+      <section className="bg-[#001DF3] text-white pt-12 md:pt-16 pb-12 md:pb-16">
         <div className="max-w-6xl mx-auto px-4 md:px-6">
-          <div className="inline-flex items-center gap-2 bg-white/10 border border-white/20 rounded-full px-3 py-1 text-[11px] font-bold tracking-widest">
-            <BookOpen className="w-3.5 h-3.5" /> PUSAT EDUKASI PROPERTI
-          </div>
-          <h1 className="text-3xl md:text-5xl font-black tracking-tight mt-3">
-            Berita & Insight Properti
+          <h1 className="text-3xl md:text-5xl font-black tracking-tight">
+            Berita &amp; Insight Properti
           </h1>
-          <p className="mt-3 text-sm md:text-base text-white/85 max-w-2xl">
-            {articles.length} artikel pilihan untuk pembeli pemula - dari cara
-            beli rumah pertama, KPR, legalitas, hingga investasi properti.
+          <p className="mt-3 text-sm md:text-base text-white/90 max-w-2xl">
+            {articles.length} artikel pilihan tim editorial Huniaja — cara beli
+            rumah pertama, KPR, legalitas, hingga investasi properti.
           </p>
-          <div className="mt-6 flex items-center bg-white rounded-full pl-4 pr-1 py-1 shadow-lg max-w-xl">
-            <Search className="w-4 h-4 text-slate-400" />
-            <input
-              value={query}
-              onChange={(e) => setQuery(e.target.value)}
-              placeholder="Cari artikel..."
-              data-testid="berita-search-input"
-              className="flex-1 min-w-0 bg-transparent outline-none px-3 py-2.5 text-sm text-slate-800 placeholder:text-slate-400"
-            />
-          </div>
         </div>
       </section>
 
-      {/* Category filter */}
-      <section className="bg-white pt-8 sticky top-0 z-20">
-        <div className="max-w-6xl mx-auto px-4 md:px-6">
-          <div className="flex gap-2 overflow-x-auto pb-2 scrollbar-hide">
-            {articleCategories.map((c) => (
-              <button
-                key={c}
-                onClick={() => setActive(c)}
-                data-testid={`berita-category-${c}`}
-                className={`shrink-0 text-xs md:text-sm font-semibold px-4 py-2 rounded-full border transition ${
-                  active === c
-                    ? "bg-[#001DF3] text-white border-[#001DF3]"
-                    : "bg-white text-slate-700 border-slate-200 hover:border-slate-300"
-                }`}
-              >
-                {c}
-              </button>
-            ))}
-          </div>
-        </div>
-      </section>
+      <section className="bg-white py-14 md:py-20">
+        <div className="max-w-6xl mx-auto px-4 md:px-6 grid grid-cols-1 md:grid-cols-4 gap-8">
+          {/* Sidebar categories */}
+          <aside className="md:col-span-1">
+            <div className="md:sticky md:top-32 space-y-2.5">
+              {articleCategories.map((c) => {
+                const isActive = active === c;
+                const color = CAT_COLORS[c] || "#001DF3";
+                return (
+                  <button
+                    key={c}
+                    onClick={() => setActive(c)}
+                    data-testid={`berita-cat-${c}`}
+                    className={`w-full group flex items-center gap-3 rounded-2xl p-2 pr-3 shadow-sm hover:shadow-md transition-all ${
+                      isActive
+                        ? "bg-[#001DF3] text-white"
+                        : "bg-white border border-slate-200 text-slate-800 hover:border-slate-300"
+                    }`}
+                  >
+                    <span
+                      className="w-10 h-10 rounded-xl flex items-center justify-center shrink-0"
+                      style={{ backgroundColor: `${color}20` }}
+                    >
+                      <BookOpen
+                        className="w-5 h-5"
+                        style={{ color }}
+                        strokeWidth={2.4}
+                      />
+                    </span>
+                    <span className="flex-1 text-sm font-bold text-left">
+                      {c}
+                    </span>
+                    {isActive ? (
+                      <span className="w-7 h-7 rounded-full bg-[#00B512] flex items-center justify-center shrink-0">
+                        <Check className="w-4 h-4 text-white" strokeWidth={3} />
+                      </span>
+                    ) : (
+                      <ChevronDown className="w-4 h-4 text-slate-400 shrink-0" />
+                    )}
+                  </button>
+                );
+              })}
 
-      {/* Featured + list */}
-      <section className="bg-white py-10 md:py-14">
-        <div className="max-w-6xl mx-auto px-4 md:px-6">
-          {featured && (
-            <Link
-              to={`/berita/${featured.slug}`}
-              data-testid="berita-featured-card"
-              className="grid grid-cols-1 md:grid-cols-2 gap-6 items-center bg-slate-50 rounded-[32px] p-4 md:p-6 hover:shadow-md transition-shadow group"
-            >
-              <div className="rounded-[24px] overflow-hidden">
-                <img
-                  src={featured.image}
-                  alt={featured.title}
-                  className="w-full h-56 md:h-72 object-cover group-hover:scale-[1.02] transition-transform duration-500"
+              <div className="hidden md:block mt-6 bg-slate-50 rounded-2xl p-4">
+                <p className="text-xs uppercase tracking-wider text-slate-500 font-bold mb-2">
+                  Total Artikel
+                </p>
+                <p className="text-2xl font-black text-slate-900">
+                  {articles.length}
+                </p>
+                <p className="text-xs text-slate-500 mt-1">
+                  Update rutin dari tim editorial.
+                </p>
+              </div>
+            </div>
+          </aside>
+
+          {/* Content */}
+          <div className="md:col-span-3 space-y-4">
+            {/* Search bar */}
+            <div className="bg-white rounded-3xl border border-slate-100 shadow-sm p-6">
+              <div className="flex items-center gap-3">
+                <div className="w-11 h-11 rounded-2xl flex items-center justify-center bg-[#001DF3]/12">
+                  <Newspaper className="w-5 h-5 text-[#001DF3]" />
+                </div>
+                <h2 className="text-lg md:text-xl font-black text-slate-900">
+                  {active === "Semua" ? "Semua Artikel" : active}
+                </h2>
+                <span className="ml-auto text-xs text-slate-500 font-semibold">
+                  {filtered.length} artikel
+                </span>
+              </div>
+              <div className="mt-4 relative">
+                <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
+                <input
+                  value={query}
+                  onChange={(e) => setQuery(e.target.value)}
+                  placeholder="Cari artikel..."
+                  data-testid="berita-search-input"
+                  className="w-full h-11 rounded-2xl bg-slate-50 border border-slate-200 focus:border-[#001DF3] focus:ring-2 focus:ring-[#001DF3]/15 outline-none pl-11 pr-4 text-sm transition"
                 />
               </div>
-              <div>
-                <span className="inline-block bg-[#001DF3] text-white text-[11px] font-bold rounded-full px-3 py-1 tracking-widest">
-                  {featured.category}
-                </span>
-                <h2 className="text-xl md:text-2xl font-bold text-slate-900 mt-3 leading-snug">
-                  {featured.title}
-                </h2>
-                <p className="text-sm text-slate-600 mt-3 leading-relaxed">
-                  {featured.excerpt}
-                </p>
-                <div className="flex items-center gap-4 text-xs text-slate-500 mt-4">
-                  <span className="flex items-center gap-1">
-                    <Calendar className="w-3.5 h-3.5" /> {featured.date}
-                  </span>
-                  <span className="flex items-center gap-1">
-                    <Clock className="w-3.5 h-3.5" /> {featured.read} baca
-                  </span>
-                </div>
-                <span className="inline-flex items-center gap-1 text-[#001DF3] font-bold text-sm mt-4">
-                  Baca Selengkapnya <ArrowRight className="w-4 h-4" />
-                </span>
-              </div>
-            </Link>
-          )}
-
-          {rest.length > 0 && (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6 mt-10">
-              {rest.map((a) => (
-                <Link
-                  key={a.id}
-                  to={`/berita/${a.slug}`}
-                  data-testid={`berita-card-${a.id}`}
-                  className="bg-white rounded-3xl border border-slate-100 shadow-sm hover:shadow-md hover:-translate-y-0.5 overflow-hidden group transition-all flex flex-col"
-                >
-                  <div className="aspect-[16/10] overflow-hidden">
-                    <img
-                      src={a.image}
-                      alt={a.title}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                    />
-                  </div>
-                  <div className="p-5 flex-1 flex flex-col">
-                    <span className="inline-block bg-blue-50 text-[#001DF3] text-[10px] font-bold rounded-full px-2 py-1 tracking-wider self-start">
-                      {a.category}
-                    </span>
-                    <h3 className="font-bold text-slate-900 mt-3 leading-snug line-clamp-2">
-                      {a.title}
-                    </h3>
-                    <p className="text-xs text-slate-500 mt-2 line-clamp-2 flex-1">
-                      {a.excerpt}
-                    </p>
-                    <div className="flex items-center gap-3 text-[11px] text-slate-500 mt-3 pt-3 border-t border-slate-100">
-                      <span className="flex items-center gap-1">
-                        <Calendar className="w-3 h-3" /> {a.date}
-                      </span>
-                      <span className="flex items-center gap-1">
-                        <Clock className="w-3 h-3" /> {a.read}
-                      </span>
-                    </div>
-                  </div>
-                </Link>
-              ))}
             </div>
-          )}
 
-          {filtered.length === 0 && (
-            <p className="text-center text-slate-500 py-16">
-              Tidak ada artikel yang cocok dengan pencarian Anda.
-            </p>
-          )}
+            {filtered.length === 0 && (
+              <div className="bg-white rounded-3xl border border-slate-100 shadow-sm p-8 text-center">
+                <p className="text-slate-500 text-sm">
+                  Tidak ada artikel yang cocok dengan pencarianmu.
+                </p>
+              </div>
+            )}
+
+            {filtered.length > 0 && (
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-5">
+                {filtered.map((a) => (
+                  <Link
+                    key={a.id}
+                    to={`/berita/${a.slug}`}
+                    data-testid={`berita-card-${a.id}`}
+                    className="bg-white rounded-3xl border border-slate-100 shadow-sm hover:shadow-md hover:-translate-y-0.5 overflow-hidden group transition-all flex flex-col"
+                  >
+                    <div className="aspect-[16/10] overflow-hidden">
+                      <img
+                        src={a.image}
+                        alt={a.title}
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                      />
+                    </div>
+                    <div className="p-5 flex-1 flex flex-col">
+                      <span
+                        className="inline-block text-white text-[10px] font-bold rounded-full px-2 py-1 tracking-wider self-start"
+                        style={{
+                          backgroundColor: CAT_COLORS[a.category] || "#001DF3",
+                        }}
+                      >
+                        {a.category}
+                      </span>
+                      <h3 className="font-bold text-slate-900 mt-3 leading-snug line-clamp-2">
+                        {a.title}
+                      </h3>
+                      <p className="text-xs text-slate-500 mt-2 line-clamp-2 flex-1">
+                        {a.excerpt}
+                      </p>
+                      <div className="flex items-center gap-3 text-[11px] text-slate-500 mt-3 pt-3 border-t border-slate-100">
+                        <span className="flex items-center gap-1">
+                          <Calendar className="w-3 h-3" /> {a.date}
+                        </span>
+                        <span className="flex items-center gap-1">
+                          <Clock className="w-3 h-3" /> {a.read}
+                        </span>
+                        <span className="ml-auto text-[#001DF3] font-bold inline-flex items-center gap-1">
+                          Baca <ArrowRight className="w-3 h-3" />
+                        </span>
+                      </div>
+                    </div>
+                  </Link>
+                ))}
+              </div>
+            )}
+
+            {/* CTA */}
+            <div
+              className="rounded-3xl p-6 md:p-8 text-white mt-6"
+              style={{
+                background: "linear-gradient(135deg, #000066 0%, #001DF3 100%)",
+              }}
+            >
+              <div className="flex flex-col md:flex-row items-start md:items-center gap-4">
+                <div className="w-14 h-14 rounded-2xl bg-white/10 backdrop-blur border border-white/20 flex items-center justify-center shrink-0">
+                  <BookOpen className="w-6 h-6 text-white" />
+                </div>
+                <div className="flex-1">
+                  <h3 className="text-lg md:text-xl font-black">
+                    Butuh insight khusus untuk keputusanmu?
+                  </h3>
+                  <p className="text-sm text-white/80 mt-1">
+                    Tim editorial Huniaja siap bantu carikan artikel dan
+                    referensi sesuai kondisimu — chat kami!
+                  </p>
+                </div>
+                <Link
+                  to="/kontak"
+                  className="bg-white text-[#001DF3] hover:bg-slate-100 font-bold rounded-full px-6 py-3 text-sm shadow-lg inline-flex items-center justify-center transition"
+                  data-testid="berita-cta-btn"
+                >
+                  Chat Tim Kami
+                </Link>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
