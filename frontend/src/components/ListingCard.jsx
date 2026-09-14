@@ -91,9 +91,9 @@ export default function ListingCard({ item, variant = "default" }) {
           />
           {/* Tier badge - only when property is verified */}
           {item.verified !== false && (
-            <div className="absolute top-3 left-3 inline-flex items-center gap-1 bg-white/95 backdrop-blur text-[#001DF3] text-[10px] font-bold px-2 py-1 rounded-full shadow-sm">
-              <BadgeCheck className="w-3 h-3" />
-              Terverifikasi
+            <div className="absolute top-3 left-3 inline-flex items-center gap-1 bg-gradient-to-r from-[#00B512] to-[#009e0f] text-white text-[10px] font-black px-2.5 py-1 rounded-full shadow-md ring-1 ring-white/30">
+              <BadgeCheck className="w-3.5 h-3.5" strokeWidth={2.8} />
+              <span className="tracking-wide">Terverifikasi</span>
             </div>
           )}
           {/* Heart */}
