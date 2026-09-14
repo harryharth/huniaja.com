@@ -1,8 +1,9 @@
 """
-Public user routes (Emergent Google Auth).
+Public user routes (Emergent Google Auth + email/password login).
 
 - POST /api/auth/session       Exchange session_id (from URL fragment) for a session_token
                                cookie via Emergent Auth's /oauth/session-data endpoint.
+- POST /api/auth/login         Email + password login (for accounts created by admin).
 - GET  /api/auth/me            Return current user (from cookie or Bearer token).
 - POST /api/auth/logout        Clear session cookie & delete server-side session.
 
@@ -11,12 +12,14 @@ Public user routes (Emergent Google Auth).
 - GET  /api/user/submissions             List submissions (konsultasi/karir/kontak/brosur)
                                          previously submitted from the user's email.
 """
+import secrets
 from datetime import datetime, timezone, timedelta
 from fastapi import APIRouter, HTTPException, Request, Response, Header, Depends
-from pydantic import BaseModel
+from pydantic import BaseModel, EmailStr
 from typing import Optional
 import uuid
 import httpx
+import bcrypt
 
 
 EMERGENT_SESSION_URL = (
@@ -67,9 +70,63 @@ def create_user_router(db):
             raise HTTPException(status_code=401, detail="User not found")
         return user
 
+    class LoginBody(BaseModel):
+        email: EmailStr
+        password: str
+
+    def _set_session_cookie(response: Response, token: str):
+        response.set_cookie(
+            key=SESSION_COOKIE_NAME,
+            value=token,
+            httponly=True,
+            secure=True,
+            samesite="none",
+            path="/",
+            max_age=SESSION_TTL_DAYS * 24 * 60 * 60,
+        )
+
+    @router.post("/auth/login")
+    async def auth_login(body: LoginBody, response: Response):
+        """Email + password login for admin-created accounts."""
+        email = body.email.lower().strip()
+        user = await db.users.find_one({"email": email}, {"_id": 0})
+        if not user or not user.get("password_hash"):
+            raise HTTPException(status_code=401, detail="Email atau password salah")
+        try:
+            ok = bcrypt.checkpw(
+                body.password.encode("utf-8"),
+                user["password_hash"].encode("utf-8"),
+            )
+        except Exception:
+            ok = False
+        if not ok:
+            raise HTTPException(status_code=401, detail="Email atau password salah")
+
+        token = secrets.token_urlsafe(32)
+        await db.user_sessions.insert_one({
+            "user_id": user["user_id"],
+            "session_token": token,
+            "expires_at": now_utc() + timedelta(days=SESSION_TTL_DAYS),
+            "created_at": now_utc(),
+        })
+        await db.users.update_one(
+            {"user_id": user["user_id"]},
+            {"$set": {"last_login_at": now_utc().isoformat()}},
+        )
+        _set_session_cookie(response, token)
+        return {
+            "ok": True,
+            "user": {
+                "user_id": user["user_id"],
+                "email": user["email"],
+                "name": user.get("name", ""),
+                "picture": user.get("picture", ""),
+                "role": user.get("role", "user"),
+            },
+        }
+
     @router.post("/auth/session")
     async def auth_session(body: SessionExchangeBody, response: Response):
-        """Exchange Emergent session_id → session_token cookie & upsert user."""
         try:
             async with httpx.AsyncClient(timeout=15) as ac:
                 r = await ac.get(

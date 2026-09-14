@@ -561,7 +561,7 @@ function FacilitiesAccordion({ facilities }) {
                 </span>
                 <div className="flex items-baseline gap-2 min-w-0">
                   <span
-                    className={`text-sm md:text-[15px] font-black uppercase tracking-wide truncate ${
+                    className={`text-sm md:text-[15px] font-semibold tracking-wide truncate ${
                       isOpen ? "text-white" : "text-slate-900"
                     }`}
                   >

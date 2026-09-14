@@ -399,6 +399,64 @@ def create_admin_router(db) -> APIRouter:
         await db.submissions.delete_one({"id": sid})
         return {"ok": True}
 
+    # --- USERS (created by admin, incl. email+password accounts) ------------
+    import bcrypt as _bcrypt
+
+    class CreateUserBody(BaseModel):
+        email: str
+        password: str
+        name: Optional[str] = ""
+        role: str = "user"  # 'user' | 'admin'
+
+    @router.get("/users")
+    async def list_users(q: str = "", role: str = "", _: str = Depends(require_admin)):
+        query = {}
+        if role:
+            query["role"] = role
+        if q:
+            query["$or"] = [
+                {"email": {"$regex": q, "$options": "i"}},
+                {"name": {"$regex": q, "$options": "i"}},
+            ]
+        docs = await db.users.find(query, {"_id": 0, "password_hash": 0}).sort("created_at", -1).to_list(500)
+        return docs
+
+    @router.post("/users")
+    async def create_user(body: CreateUserBody, _: str = Depends(require_admin)):
+        email = (body.email or "").strip().lower()
+        if "@" not in email or "." not in email:
+            raise HTTPException(400, "Email tidak valid")
+        if len(body.password or "") < 6:
+            raise HTTPException(400, "Password minimal 6 karakter")
+        if body.role not in ("user", "admin"):
+            raise HTTPException(400, "Role tidak valid")
+        exists = await db.users.find_one({"email": email}, {"_id": 0, "email": 1})
+        if exists:
+            raise HTTPException(409, "Email sudah terdaftar")
+        pw_hash = _bcrypt.hashpw(body.password.encode("utf-8"), _bcrypt.gensalt()).decode("utf-8")
+        user_id = f"user_{uuid.uuid4().hex[:12]}"
+        doc = {
+            "user_id": user_id,
+            "email": email,
+            "name": body.name or email.split("@")[0],
+            "picture": "",
+            "role": body.role,
+            "password_hash": pw_hash,
+            "auth_type": "password",
+            "created_at": now_iso(),
+        }
+        await db.users.insert_one(doc.copy())
+        return {"ok": True, "user_id": user_id, "email": email}
+
+    @router.delete("/users/{user_id}")
+    async def delete_user(user_id: str, _: str = Depends(require_admin)):
+        result = await db.users.delete_one({"user_id": user_id})
+        if result.deleted_count == 0:
+            raise HTTPException(404, "User tidak ditemukan")
+        # Revoke any active sessions
+        await db.user_sessions.delete_many({"user_id": user_id})
+        return {"ok": True}
+
     return router
 
 

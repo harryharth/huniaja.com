@@ -89,12 +89,18 @@ Buatkan website persis seperti gambar contoh (Indonesian property marketplace "H
 - ✅ 3 partner cards (Pemilik/Agen/Developer) sekarang rata dengan `flex flex-col h-full` + `flex-1` pada ul → tombol sejajar di bawah
 
 ### Admin Dashboard Floe-Style Redesign (Feb 14, 2026)
-- ✅ Shell dibangun ulang mengikuti referensi Floe: sidebar putih dengan icon nav collapsible (data-testid `admin-sidebar-toggle`), section Favourites (properti verified), badge notifikasi live dari `submissions.new`
+- ✅ Shell dibangun ulang mengikuti referensi Floe: sidebar putih dengan icon nav collapsible, section Favourites, badge notifikasi live dari `submissions.new`
 - ✅ Top bar unified: search global (⌘F hint) + "Credits remaining" + avatar admin
-- ✅ Home panel: filter chips (Status/Tipe/Tanggal/Tag) + section **Folders** (4 kartu bertab pastel: Properti/Banner/Berita/Pengajuan yang link ke tab masing-masing) + section **Listing Aktif** (kartu image-header dengan metadata timeAgo + status Aktif)
-- ✅ Section baru **Pengajuan** (data-testid `admin-tab-submissions`) — list semua submissions (konsultasi/karir/kontak/brosur) dengan filter tipe/status, dropdown status per item, tombol hapus. Persis wire ke semua form public
-- ✅ Section baru **Pengguna** (placeholder) — akan dilengkapi manajemen user Google Auth
-- ✅ Backend `/admin/stats` diperluas: sekarang return `submissions.{total,new}` + `users.total`
+- ✅ Home panel: filter chips + section **Folders** (4 kartu bertab pastel) + section **Listing Aktif** (kartu image-header)
+- ✅ Section **Pengajuan** (`admin-tab-submissions`) — list + filter tipe/status; **tombol Review** buka modal detail dengan payload lengkap + action bar (status, WhatsApp reply, Email, Delete)
+- ✅ Section **Pengguna** (`admin-tab-users`) — daftar akun (Google + manual), badge role/auth_type, tombol delete, **modal Tambah Pengguna** (email + password bcrypt + role user/admin)
+- ✅ Backend baru:
+  - `GET/POST/DELETE /api/admin/users` — CRUD user manual (bcrypt-hashed password)
+  - `POST /api/auth/login` — email+password login → set httpOnly session_token cookie (coexist dengan Google Auth di collection `users`/`user_sessions` yang sama)
+  - `/admin/stats` diperluas: `submissions.{total,new}` + `users.total`
+
+### PropertyDetailPage — Font Weight (Feb 14, 2026)
+- ✅ Nama kategori Fasilitas dari `font-black uppercase` → `font-semibold tracking-wide` supaya lebih ringan & rapi
 
 ### ChatWidget
 - ✅ Kembali sebagai chat AI (dipertahankan) dengan tombol handoff "Chat WhatsApp" (tanpa nomor panjang)

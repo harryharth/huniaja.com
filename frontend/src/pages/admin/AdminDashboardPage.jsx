@@ -541,6 +541,7 @@ function SubmissionsPanel() {
   const [type, setType] = useState("");
   const [status, setStatus] = useState("");
   const [loading, setLoading] = useState(false);
+  const [selected, setSelected] = useState(null);
 
   const load = async () => {
     setLoading(true);
@@ -626,7 +627,8 @@ function SubmissionsPanel() {
                 <li
                   key={s.id}
                   data-testid={`sub-item-${s.id}`}
-                  className="p-4 md:p-5 hover:bg-slate-50 flex flex-wrap items-start gap-4"
+                  onClick={() => setSelected(s)}
+                  className="p-4 md:p-5 hover:bg-slate-50 flex flex-wrap items-start gap-4 cursor-pointer"
                 >
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center gap-2">
@@ -656,7 +658,17 @@ function SubmissionsPanel() {
                       {timeAgo(s.created_at)}
                     </p>
                   </div>
-                  <div className="flex items-center gap-2 shrink-0">
+                  <div
+                    className="flex items-center gap-2 shrink-0"
+                    onClick={(e) => e.stopPropagation()}
+                  >
+                    <button
+                      onClick={() => setSelected(s)}
+                      data-testid={`sub-review-${s.id}`}
+                      className="h-8 rounded-full px-3 text-xs font-bold bg-[#001DF3]/8 text-[#001DF3] hover:bg-[#001DF3] hover:text-white transition"
+                    >
+                      Review
+                    </button>
                     <select
                       value={s.status}
                       onChange={(e) => mark(s.id, e.target.value)}
@@ -682,26 +694,420 @@ function SubmissionsPanel() {
           </ul>
         </div>
       )}
+
+      {selected && (
+        <SubmissionReviewModal
+          item={selected}
+          onClose={() => setSelected(null)}
+          onStatusChange={async (next) => {
+            await mark(selected.id, next);
+            setSelected({ ...selected, status: next });
+          }}
+          onDelete={async () => {
+            if (!window.confirm("Hapus pengajuan ini?")) return;
+            await adminApi.delete(`/admin/submissions/${selected.id}`);
+            setSelected(null);
+            load();
+          }}
+        />
+      )}
+    </div>
+  );
+}
+
+function SubmissionReviewModal({ item, onClose, onStatusChange, onDelete }) {
+  const p = item.payload || {};
+  const label = SUB_TYPE_LABEL[item.type] || item.type;
+  const dt = item.created_at
+    ? new Date(item.created_at).toLocaleString("id-ID", {
+        day: "numeric",
+        month: "long",
+        year: "numeric",
+        hour: "2-digit",
+        minute: "2-digit",
+      })
+    : "-";
+
+  // Only show meaningful payload fields (skip empty)
+  const entries = Object.entries(p).filter(
+    ([, v]) => v !== null && v !== undefined && String(v).trim() !== ""
+  );
+
+  const waMsg = encodeURIComponent(
+    `Halo${p.name ? " " + p.name : ""}, terima kasih sudah menghubungi Huniaja.\n\nKami menerima pengajuan ${label} dari kamu — tim kami akan segera membantu.`
+  );
+  const waPhone = (p.phone || "").replace(/[^0-9]/g, "").replace(/^0/, "62");
+
+  return (
+    <div
+      className="fixed inset-0 z-50 bg-slate-900/40 backdrop-blur-sm flex items-center justify-center p-4"
+      onClick={onClose}
+      data-testid="sub-review-modal"
+    >
+      <div
+        className="bg-white rounded-3xl max-w-2xl w-full max-h-[90vh] overflow-hidden flex flex-col shadow-2xl"
+        onClick={(e) => e.stopPropagation()}
+      >
+        {/* Header */}
+        <div className="p-6 border-b border-slate-100 flex items-start justify-between gap-3">
+          <div>
+            <div className="flex items-center gap-2">
+              <span className="text-[10px] font-black uppercase tracking-widest text-[#001DF3]">
+                {label}
+              </span>
+              <span
+                className={`text-[10px] font-black uppercase rounded-full px-2 py-0.5 ${
+                  item.status === "done"
+                    ? "bg-[#00B512]/10 text-[#00B512]"
+                    : item.status === "in_progress"
+                    ? "bg-[#001DF3]/10 text-[#001DF3]"
+                    : "bg-slate-100 text-slate-600"
+                }`}
+              >
+                {item.status}
+              </span>
+            </div>
+            <h2 className="text-xl md:text-2xl font-black text-slate-900 mt-1">
+              {p.name || p.email || "Tanpa Nama"}
+            </h2>
+            <p className="text-xs text-slate-500 mt-1">Diterima {dt}</p>
+          </div>
+          <button
+            onClick={onClose}
+            className="w-9 h-9 rounded-full text-slate-400 hover:bg-slate-100 hover:text-slate-700 flex items-center justify-center transition"
+          >
+            <X className="w-4 h-4" />
+          </button>
+        </div>
+
+        {/* Body */}
+        <div className="p-6 overflow-y-auto space-y-4 flex-1">
+          {entries.length === 0 ? (
+            <p className="text-sm text-slate-500">Payload kosong.</p>
+          ) : (
+            <dl className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              {entries.map(([k, v]) => (
+                <div key={k} className="md:col-span-1">
+                  <dt className="text-[10px] font-black uppercase tracking-widest text-slate-400">
+                    {k.replace(/_/g, " ")}
+                  </dt>
+                  <dd className="text-sm text-slate-900 font-medium mt-1 break-words whitespace-pre-wrap">
+                    {String(v)}
+                  </dd>
+                </div>
+              ))}
+            </dl>
+          )}
+          {item.user_id && (
+            <div className="mt-4 pt-4 border-t border-slate-100">
+              <span className="text-[10px] font-black uppercase tracking-widest text-slate-400">
+                User ID
+              </span>
+              <div className="text-xs font-mono text-slate-700 mt-1">
+                {item.user_id}
+              </div>
+            </div>
+          )}
+        </div>
+
+        {/* Footer actions */}
+        <div className="p-4 md:p-6 border-t border-slate-100 flex flex-wrap items-center justify-between gap-3 bg-slate-50">
+          <div className="flex items-center gap-2">
+            <span className="text-xs text-slate-500 font-semibold">Status:</span>
+            <select
+              value={item.status}
+              onChange={(e) => onStatusChange(e.target.value)}
+              data-testid="sub-review-status"
+              className="h-9 rounded-full bg-white border border-slate-200 px-3 text-xs text-slate-700"
+            >
+              <option value="new">Baru</option>
+              <option value="in_progress">Diproses</option>
+              <option value="done">Selesai</option>
+            </select>
+          </div>
+          <div className="flex items-center gap-2 ml-auto">
+            {waPhone && (
+              <a
+                href={`https://wa.me/${waPhone}?text=${waMsg}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                data-testid="sub-review-wa"
+                className="inline-flex items-center gap-2 h-10 px-4 rounded-full bg-[#00B512] hover:bg-[#009e0f] text-white font-bold text-sm shadow-sm transition"
+              >
+                <MessageCircle className="w-4 h-4" /> Balas via WhatsApp
+              </a>
+            )}
+            {p.email && (
+              <a
+                href={`mailto:${p.email}`}
+                className="inline-flex items-center gap-2 h-10 px-4 rounded-full bg-white border border-slate-200 hover:border-[#001DF3] hover:text-[#001DF3] text-slate-700 font-bold text-sm transition"
+              >
+                Email
+              </a>
+            )}
+            <button
+              onClick={onDelete}
+              data-testid="sub-review-delete"
+              className="w-10 h-10 rounded-full text-slate-400 hover:bg-[#000066]/8 hover:text-[#000066] flex items-center justify-center transition"
+              title="Hapus"
+            >
+              <Trash2 className="w-4 h-4" />
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
 
 // ============================ USERS ============================
 function UsersPanel() {
+  const [list, setList] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [q, setQ] = useState("");
+  const [showAdd, setShowAdd] = useState(false);
+
+  const load = async () => {
+    setLoading(true);
+    try {
+      const { data } = await adminApi.get(
+        `/admin/users${q ? `?q=${encodeURIComponent(q)}` : ""}`
+      );
+      setList(data || []);
+    } finally {
+      setLoading(false);
+    }
+  };
+  useEffect(() => {
+    load();
+  }, []);
+  useEffect(() => {
+    const t = setTimeout(load, 300);
+    return () => clearTimeout(t);
+  }, [q]);
+
+  const remove = async (uid) => {
+    if (!window.confirm("Hapus akun pengguna ini?")) return;
+    await adminApi.delete(`/admin/users/${uid}`);
+    load();
+  };
+
   return (
     <div>
-      <h1 className="text-2xl md:text-3xl font-black text-slate-900 mb-2">
-        Pengguna
-      </h1>
-      <p className="text-sm text-slate-500 mb-8">
-        Daftar pengguna terdaftar (Google Auth). Fitur kelola mendetail akan
-        segera hadir.
-      </p>
-      <div className="rounded-3xl bg-white border border-slate-200 p-10 text-center">
-        <Users className="w-8 h-8 text-slate-300 mx-auto" />
-        <p className="text-sm text-slate-500 mt-3">
-          Manajemen pengguna sedang disiapkan.
-        </p>
+      <div className="flex flex-wrap items-center justify-between gap-4 mb-6">
+        <div>
+          <h1 className="text-2xl md:text-3xl font-black text-slate-900">Pengguna</h1>
+          <p className="text-sm text-slate-500 mt-1">
+            Daftar akun terdaftar. Bisa dibuat via Google atau ditambahkan manual.
+          </p>
+        </div>
+        <button
+          onClick={() => setShowAdd(true)}
+          data-testid="add-user-btn"
+          className="inline-flex items-center gap-2 bg-[#001DF3] hover:bg-[#0017c2] text-white rounded-full font-bold px-5 h-10 text-sm shadow-sm transition"
+        >
+          <Plus className="w-4 h-4" /> Tambah Pengguna
+        </button>
+      </div>
+
+      <div className="relative max-w-sm mb-4">
+        <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400 pointer-events-none" />
+        <input
+          value={q}
+          onChange={(e) => setQ(e.target.value)}
+          data-testid="user-search"
+          placeholder="Cari email atau nama..."
+          className="w-full h-10 pl-10 pr-4 rounded-full bg-white border border-slate-200 focus:border-[#001DF3] outline-none text-sm text-slate-700 placeholder:text-slate-400"
+        />
+      </div>
+
+      {loading ? (
+        <Loader />
+      ) : list.length === 0 ? (
+        <div className="rounded-3xl bg-white border border-slate-200 p-14 text-center">
+          <Users className="w-8 h-8 text-slate-300 mx-auto" />
+          <p className="text-sm text-slate-500 mt-3">Belum ada pengguna.</p>
+        </div>
+      ) : (
+        <div className="bg-white rounded-3xl border border-slate-200 overflow-hidden">
+          <ul className="divide-y divide-slate-100">
+            {list.map((u) => (
+              <li
+                key={u.user_id}
+                data-testid={`user-item-${u.user_id}`}
+                className="p-4 md:p-5 hover:bg-slate-50 flex items-center gap-4"
+              >
+                {u.picture ? (
+                  <img
+                    src={u.picture}
+                    alt=""
+                    className="w-10 h-10 rounded-full object-cover shrink-0"
+                    referrerPolicy="no-referrer"
+                  />
+                ) : (
+                  <span className="w-10 h-10 rounded-full bg-[#001DF3]/10 text-[#001DF3] font-black flex items-center justify-center shrink-0">
+                    {(u.name || u.email).charAt(0).toUpperCase()}
+                  </span>
+                )}
+                <div className="flex-1 min-w-0">
+                  <div className="flex items-center gap-2">
+                    <span className="font-bold text-slate-900 truncate">{u.name || u.email}</span>
+                    <span
+                      className={`text-[10px] font-black uppercase tracking-wide rounded-full px-2 py-0.5 ${
+                        u.role === "admin"
+                          ? "bg-[#00B512]/10 text-[#00B512]"
+                          : "bg-[#001DF3]/10 text-[#001DF3]"
+                      }`}
+                    >
+                      {u.role || "user"}
+                    </span>
+                    <span className="text-[10px] text-slate-400 font-semibold uppercase">
+                      {u.auth_type === "password" ? "Manual" : "Google"}
+                    </span>
+                  </div>
+                  <div className="text-xs text-slate-500 truncate">{u.email}</div>
+                </div>
+                <button
+                  onClick={() => remove(u.user_id)}
+                  data-testid={`user-delete-${u.user_id}`}
+                  className="w-8 h-8 rounded-full text-slate-400 hover:bg-[#000066]/8 hover:text-[#000066] flex items-center justify-center transition shrink-0"
+                  title="Hapus"
+                >
+                  <Trash2 className="w-4 h-4" />
+                </button>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+
+      {showAdd && (
+        <AddUserModal
+          onClose={() => setShowAdd(false)}
+          onCreated={() => {
+            setShowAdd(false);
+            load();
+          }}
+        />
+      )}
+    </div>
+  );
+}
+
+function AddUserModal({ onClose, onCreated }) {
+  const [form, setForm] = useState({
+    email: "",
+    password: "",
+    name: "",
+    role: "user",
+  });
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  const submit = async (e) => {
+    e.preventDefault();
+    if (!form.email.trim() || form.password.length < 6) {
+      setError("Email + password minimal 6 karakter wajib diisi.");
+      return;
+    }
+    setError("");
+    setLoading(true);
+    try {
+      await adminApi.post("/admin/users", form);
+      onCreated();
+    } catch (err) {
+      const detail = err.response?.data?.detail;
+      setError(typeof detail === "string" ? detail : "Gagal membuat pengguna.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return (
+    <div
+      className="fixed inset-0 z-50 bg-slate-900/40 backdrop-blur-sm flex items-center justify-center p-4"
+      onClick={onClose}
+    >
+      <div
+        className="bg-white rounded-3xl max-w-md w-full p-6 shadow-2xl"
+        onClick={(e) => e.stopPropagation()}
+      >
+        <div className="flex items-center justify-between mb-4">
+          <h3 className="text-lg font-black text-slate-900">Tambah Pengguna</h3>
+          <button
+            onClick={onClose}
+            className="w-8 h-8 rounded-lg text-slate-400 hover:bg-slate-100 hover:text-slate-700 flex items-center justify-center transition"
+          >
+            <X className="w-4 h-4" />
+          </button>
+        </div>
+        <form onSubmit={submit} className="space-y-3">
+          <Field label="Nama Lengkap">
+            <input
+              value={form.name}
+              onChange={(e) => setForm({ ...form, name: e.target.value })}
+              data-testid="user-form-name"
+              className="w-full h-11 rounded-xl border border-slate-200 focus:border-[#001DF3] outline-none px-3 text-sm"
+              placeholder="Opsional"
+            />
+          </Field>
+          <Field label="Email">
+            <input
+              type="email"
+              value={form.email}
+              onChange={(e) => setForm({ ...form, email: e.target.value })}
+              data-testid="user-form-email"
+              required
+              className="w-full h-11 rounded-xl border border-slate-200 focus:border-[#001DF3] outline-none px-3 text-sm"
+              placeholder="nama@example.com"
+            />
+          </Field>
+          <Field label="Password (min. 6 karakter)">
+            <input
+              type="password"
+              value={form.password}
+              onChange={(e) => setForm({ ...form, password: e.target.value })}
+              data-testid="user-form-password"
+              required
+              minLength={6}
+              className="w-full h-11 rounded-xl border border-slate-200 focus:border-[#001DF3] outline-none px-3 text-sm"
+              placeholder="••••••••"
+            />
+          </Field>
+          <Field label="Role">
+            <select
+              value={form.role}
+              onChange={(e) => setForm({ ...form, role: e.target.value })}
+              data-testid="user-form-role"
+              className="w-full h-11 rounded-xl border border-slate-200 focus:border-[#001DF3] outline-none px-3 text-sm"
+            >
+              <option value="user">User (pengguna biasa)</option>
+              <option value="admin">Admin (bisa kelola konten)</option>
+            </select>
+          </Field>
+          {error && (
+            <div className="text-xs text-[#001DF3] bg-[#001DF3]/8 border border-[#001DF3]/20 rounded-xl p-3 font-semibold">
+              {error}
+            </div>
+          )}
+          <div className="flex justify-end gap-2 pt-2">
+            <button
+              type="button"
+              onClick={onClose}
+              className="h-11 rounded-full px-5 text-sm font-bold text-slate-600 hover:bg-slate-50 transition"
+            >
+              Batal
+            </button>
+            <button
+              type="submit"
+              disabled={loading}
+              data-testid="user-form-submit"
+              className="h-11 rounded-full px-5 text-sm font-bold bg-[#001DF3] hover:bg-[#0017c2] text-white shadow-sm disabled:opacity-60 transition"
+            >
+              {loading ? "Menyimpan..." : "Buat Akun"}
+            </button>
+          </div>
+        </form>
       </div>
     </div>
   );
