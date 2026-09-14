@@ -70,7 +70,15 @@ export default function BeritaPage() {
       .get(`${API}/articles`)
       .then((r) => {
         if (cancelled) return;
-        if (Array.isArray(r.data) && r.data.length > 0) setArticles(r.data);
+        if (Array.isArray(r.data) && r.data.length > 0) {
+          // Merge backend articles with fallback library (backend takes priority
+          // on same slug). Ensures the full 60-article library always readable
+          // even when backend only seeded a handful.
+          const bySlug = new Map();
+          fallbackArticles.forEach((a) => bySlug.set(a.slug, a));
+          r.data.forEach((a) => a.slug && bySlug.set(a.slug, a));
+          setArticles([...bySlug.values()]);
+        }
       })
       .catch(() => {});
     return () => {

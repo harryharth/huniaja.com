@@ -18,6 +18,7 @@ import {
   CreditCard,
   Trees,
   Landmark,
+  MapPin,
 } from "lucide-react";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
@@ -92,6 +93,7 @@ export default function CariPropertiPage() {
   const [installmentOnly, setInstallmentOnly] = useState(false);
   const [query, setQuery] = useState("");
   const [page, setPage] = useState(1);
+  const [mobileFilterOpen, setMobileFilterOpen] = useState(false);
 
   // Fetch live listings from backend
   useEffect(() => {
@@ -161,9 +163,40 @@ export default function CariPropertiPage() {
 
       <section className="bg-white pt-8 md:pt-10 pb-14">
         <div className="max-w-6xl mx-auto px-4 md:px-6">
+          {/* Mobile-only filter dropdown trigger */}
+          <div className="lg:hidden mb-4">
+            <button
+              onClick={() => setMobileFilterOpen((v) => !v)}
+              data-testid="cari-mobile-filter-toggle"
+              className="w-full flex items-center gap-3 rounded-2xl p-2 pr-3 shadow-sm bg-[#001DF3] text-white"
+            >
+              <span className="w-10 h-10 rounded-xl flex items-center justify-center shrink-0 bg-white/15">
+                <SlidersHorizontal className="w-5 h-5 text-white" strokeWidth={2.4} />
+              </span>
+              <span className="flex-1 text-left">
+                <span className="block text-[10px] uppercase tracking-wider font-bold text-white/70">
+                  Filter
+                </span>
+                <span className="text-sm font-bold">
+                  {filtered.length} properti
+                  {city !== "Semua" ? ` · ${city}` : ""}
+                </span>
+              </span>
+              <ChevronDown
+                className={`w-5 h-5 shrink-0 transition-transform ${
+                  mobileFilterOpen ? "rotate-180" : ""
+                }`}
+              />
+            </button>
+          </div>
+
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
             {/* Sidebar */}
-            <aside className="lg:col-span-3 space-y-3">
+            <aside
+              className={`lg:col-span-3 space-y-3 ${
+                mobileFilterOpen ? "block" : "hidden lg:block"
+              }`}
+            >
               <FilterAccordion title="Properti" Icon={Home} defaultOpen>
                 <div className="grid grid-cols-3 gap-2">
                   {propertyTypes.map((t) => {
@@ -289,6 +322,31 @@ export default function CariPropertiPage() {
                 />
               </FilterAccordion>
 
+              <FilterAccordion title="Lokasi" Icon={MapPin} defaultOpen>
+                <div className="flex flex-wrap gap-2">
+                  {locationTabs.map((t) => {
+                    const active = city === t;
+                    return (
+                      <button
+                        key={t}
+                        onClick={() => {
+                          setCity(t);
+                          setPage(1);
+                        }}
+                        data-testid={`filter-location-${t}`}
+                        className={`text-[11px] font-semibold px-3 py-1.5 rounded-full border transition ${
+                          active
+                            ? "bg-[#001DF3] text-white border-[#001DF3]"
+                            : "bg-white text-slate-700 border-slate-200 hover:border-[#001DF3] hover:text-[#001DF3]"
+                        }`}
+                      >
+                        {t}
+                      </button>
+                    );
+                  })}
+                </div>
+              </FilterAccordion>
+
               <button
                 onClick={resetFilters}
                 className="w-full mt-2 border border-slate-200 rounded-full py-2 text-xs font-semibold text-slate-700 hover:border-[#001DF3] hover:text-[#001DF3] transition"
@@ -299,37 +357,17 @@ export default function CariPropertiPage() {
 
             {/* Right side */}
             <div className="lg:col-span-9">
-              {/* Location tabs */}
-              <div className="flex flex-wrap gap-2 mb-4 items-center">
-                <button className="shrink-0 flex items-center gap-1 text-xs font-medium bg-[#00B512] text-white border border-transparent px-3 py-1.5 rounded-full">
-                  <SlidersHorizontal className="w-3.5 h-3.5" /> Filter Lokasi
-                </button>
-                <div className="flex gap-2 overflow-x-auto flex-1 scrollbar-hide">
-                  {locationTabs.map((t) => (
-                    <button
-                      key={t}
-                      onClick={() => {
-                        setCity(t);
-                        setPage(1);
-                      }}
-                      className={`shrink-0 text-xs font-medium px-3 py-1.5 rounded-full border transition ${
-                        city === t
-                          ? "bg-[#001DF3] text-white border-[#001DF3]"
-                          : "bg-white text-slate-700 border-slate-200 hover:border-slate-300"
-                      }`}
-                    >
-                      {t}
-                    </button>
-                  ))}
-                </div>
-              </div>
-
               <p className="text-xs text-slate-500 mb-3">
                 Menampilkan{" "}
                 <span className="font-bold text-slate-900">
                   {filtered.length}
                 </span>{" "}
                 properti
+                {city && city !== "Semua" && (
+                  <span className="ml-1 inline-flex items-center gap-1 text-slate-600">
+                    · <MapPin className="w-3 h-3" /> {city}
+                  </span>
+                )}
               </p>
 
               {paged.length ? (
