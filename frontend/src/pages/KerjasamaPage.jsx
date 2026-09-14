@@ -491,6 +491,8 @@ export default function KerjasamaPage() {
         </div>
       </section>
 
+      <WhyHuniaja />
+
       {/* Form */}
       <section id="form" className="bg-slate-50 py-16 md:py-24">
         <div className="max-w-4xl mx-auto px-4 md:px-6">
@@ -620,8 +622,6 @@ export default function KerjasamaPage() {
           </div>
         </div>
       </section>
-
-      <WhyHuniaja />
 
       <Footer />
     </div>
