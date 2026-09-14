@@ -31,6 +31,7 @@ import Footer from "../components/Footer";
 import { Button } from "../components/ui/button";
 import { WA_URL } from "../components/ChatWidget";
 import { submitLead } from "../lib/publicApi";
+import { useT } from "../lib/i18n";
 import {
   Dialog,
   DialogContent,
@@ -235,6 +236,7 @@ const values = [
 ];
 
 export default function KarirPage() {
+  const t = useT();
   const [openJob, setOpenJob] = useState(null);
   const [talentOpen, setTalentOpen] = useState(false);
   const [sent, setSent] = useState(false);
@@ -250,7 +252,7 @@ export default function KarirPage() {
   const submit = async (e) => {
     e.preventDefault();
     if (!form.name.trim() || !form.phone.trim() || !form.email.trim()) {
-      setError("Nama, email & nomor WhatsApp wajib diisi.");
+      setError(t("Nama, email & nomor WhatsApp wajib diisi."));
       return;
     }
     setError("");
@@ -279,7 +281,7 @@ export default function KarirPage() {
         setTalentOpen(false);
       }, 3000);
     } catch (err) {
-      setError("Gagal mengirim lamaran. Coba lagi ya.");
+      setError(t("Gagal mengirim lamaran. Coba lagi ya."));
     } finally {
       setLoading(false);
     }
@@ -316,7 +318,7 @@ export default function KarirPage() {
               onClick={() => setTalentOpen(true)}
               className="bg-white/10 hover:bg-white/20 text-white border border-white/25 font-bold rounded-full px-6 py-3 text-sm transition"
             >
-              Daftar Talent Pool
+              {t("Daftar Talent Pool")}
             </button>
           </div>
         </div>
@@ -627,7 +629,7 @@ export default function KarirPage() {
                   onClick={() => setOpenJob(j)}
                   className="w-full mt-5 bg-[#00B512] hover:bg-[#009e0f] text-white rounded-full font-bold h-11 text-sm"
                 >
-                  Lamar Sekarang
+                  {t("Lamar Sekarang")}
                 </Button>
               </div>
             ))}

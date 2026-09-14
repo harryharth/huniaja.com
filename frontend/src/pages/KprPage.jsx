@@ -17,6 +17,7 @@ import {
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import { HERO_BANNER } from "../mock";
+import { useT } from "../lib/i18n";
 import {
   Accordion,
   AccordionContent,
@@ -134,6 +135,7 @@ function PhoneMockup({ children }) {
 export default function KprPage() {
   const [kprOpen, setKprOpen] = useState(false);
   const [takeoverOpen, setTakeoverOpen] = useState(false);
+  const t = useT();
 
   return (
     <div className="min-h-screen bg-white">
@@ -146,12 +148,12 @@ export default function KprPage() {
         <div className="relative max-w-6xl mx-auto px-4 md:px-6 grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-10 items-center">
           <div>
             <span className="inline-flex items-center gap-2 bg-white/10 backdrop-blur border border-white/20 rounded-full px-3 py-1 text-[11px] font-bold tracking-widest mb-4">
-              <Moon className="w-3.5 h-3.5" /> KPR SYARIAH · BEBAS RIBA
+              <Moon className="w-3.5 h-3.5" /> {t("KPR SYARIAH · BEBAS RIBA")}
             </span>
             <h1 className="text-3xl md:text-5xl font-black leading-tight">
-              Cicilan tetap.<br />
-              Hati tenang.<br />
-              <span className="text-[#00B512]">Rumah jadi milikmu.</span>
+              {t("Cicilan tetap.")}<br />
+              {t("Hati tenang.")}<br />
+              <span className="text-[#00B512]">{t("Rumah jadi milikmu.")}</span>
             </h1>
             <p className="mt-5 text-sm md:text-lg text-white/90 max-w-lg leading-relaxed">
               Tidak semua orang harus mengerti akad Murabahah atau Musyarakah
@@ -164,27 +166,27 @@ export default function KprPage() {
                 data-testid="kpr-hero-simulate"
                 className="bg-[#00B512] hover:bg-[#009e0f] text-white font-bold rounded-full px-7 py-3 text-sm shadow-lg transition"
               >
-                Simulasi Cicilan Gratis
+                {t("Simulasi Cicilan Gratis")}
               </a>
               <a
                 href="#cerita"
                 className="bg-white/10 hover:bg-white/20 backdrop-blur border border-white/20 text-white font-bold rounded-full px-6 py-3 text-sm transition"
               >
-                Lihat Cerita Mereka
+                {t("Lihat Cerita Mereka")}
               </a>
             </div>
             <div className="mt-6 flex flex-wrap items-center gap-6 text-xs text-white/70">
               <div className="flex items-center gap-1.5">
                 <ShieldCheck className="w-4 h-4 text-[#00B512]" />
-                Fatwa DSN-MUI
+                {t("Fatwa DSN-MUI")}
               </div>
               <div className="flex items-center gap-1.5">
                 <BadgeCheck className="w-4 h-4 text-[#00B512]" />
-                10+ Bank Rekanan
+                {t("10+ Bank Rekanan")}
               </div>
               <div className="flex items-center gap-1.5">
                 <Heart className="w-4 h-4 text-[#00B512]" />
-                12.500+ Keluarga
+                {t("12.500+ Keluarga")}
               </div>
             </div>
           </div>
@@ -226,7 +228,7 @@ export default function KprPage() {
         <div className="max-w-6xl mx-auto px-4 md:px-6">
           <div className="text-center mb-12">
             <span className="inline-block bg-white text-[#001DF3] text-[11px] font-bold rounded-full px-3 py-1 tracking-widest border border-blue-100">
-              CERITA MEREKA
+              {t("CERITA MEREKA")}
             </span>
             <h2 className="text-2xl md:text-4xl font-black text-slate-900 mt-4 leading-tight">
               Dari cicilan yang menghantui,<br className="hidden md:block" />
@@ -284,7 +286,7 @@ export default function KprPage() {
       <section className="bg-white py-14 md:py-20">
         <div className="max-w-6xl mx-auto px-4 md:px-6">
           <h2 className="text-center text-xl md:text-2xl font-bold text-slate-900 mb-10 md:mb-12">
-            Kenapa harus KPR syariah di Huniaja
+            {t("Kenapa harus KPR syariah di Huniaja")}
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
             {reasons.map((r, idx) => (
@@ -344,26 +346,26 @@ export default function KprPage() {
           </div>
           <div>
             <h2 className="text-xl md:text-2xl font-bold text-slate-900 mb-6">
-              Simulasi Cicilan KPR
+              {t("Simulasi Cicilan KPR")}
               <br />
-              dan Take Over Syariah
+              {t("dan Take Over Syariah")}
             </h2>
 
             <SimCard
               num={1}
               Icon={Calculator}
-              title="KPR Syariah"
+              title={t("KPR Syariah")}
               desc="Hitung estimasi cicilan KPR Syariah per bulan dari berbagai program bank yang tersedia."
-              cta="Simulasikan Cicilan KPR Syariah"
+              cta={t("Simulasikan Cicilan KPR Syariah")}
               onClick={() => setKprOpen(true)}
             />
             <div className="h-4" />
             <SimCard
               num={2}
               Icon={RefreshCw}
-              title="KPR Take Over Syariah"
+              title={t("KPR Take Over Syariah")}
               desc="Hitung estimasi cicilan KPR Take Over Syariah dari KPR yang sedang berjalan saat ini."
-              cta="Simulasikan Take Over Syariah"
+              cta={t("Simulasikan Take Over Syariah")}
               onClick={() => setTakeoverOpen(true)}
             />
           </div>
@@ -374,7 +376,7 @@ export default function KprPage() {
       <section className="bg-white py-14 md:py-20">
         <div className="max-w-6xl mx-auto px-4 md:px-6">
           <h2 className="text-center text-lg md:text-2xl font-bold text-slate-900 mb-10 md:mb-12">
-            Bank yang bekerjasama dengan{" "}
+            {t("Bank yang bekerjasama dengan")}{" "}
             <span className="text-[#001DF3]">Huniaja</span>
           </h2>
 
@@ -393,9 +395,9 @@ export default function KprPage() {
         <div className="max-w-6xl mx-auto px-4 md:px-6 grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-12 items-center">
           <div>
             <h2 className="text-xl md:text-2xl font-bold text-slate-900 mb-6 md:mb-8">
-              Langkah Mudah Mengajukan
+              {t("Langkah Mudah Mengajukan")}
               <br />
-              KPR Syariah di{" "}
+              {t("KPR Syariah di")}{" "}
               <span className="text-[#001DF3]">Huniaja</span>
             </h2>
             <Accordion type="single" collapsible defaultValue="step-0" className="space-y-3">

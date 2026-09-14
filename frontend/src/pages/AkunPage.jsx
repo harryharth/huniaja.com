@@ -15,6 +15,7 @@ import {
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import { useAuth } from "../context/AuthContext";
+import { useT } from "../lib/i18n";
 import { Button } from "../components/ui/button";
 
 const API = `${process.env.REACT_APP_BACKEND_URL}/api`;
@@ -50,6 +51,7 @@ function fmtDate(iso) {
 
 export default function AkunPage() {
   const { user, loading, logout } = useAuth();
+  const t = useT();
   const [tab, setTab] = useState("profil");
   const [favorites, setFavorites] = useState([]);
   const [submissions, setSubmissions] = useState([]);
@@ -137,21 +139,21 @@ export default function AkunPage() {
       <section className="max-w-5xl mx-auto px-4 md:px-6 -mt-16 md:-mt-20 relative z-10 pb-16">
         <div className="bg-white rounded-[32px] shadow-xl border border-slate-100 overflow-hidden">
           <div className="flex border-b border-slate-100 overflow-x-auto">
-            {TABS.map((t) => {
-              const active = tab === t.key;
+            {TABS.map((tabItem) => {
+              const active = tab === tabItem.key;
               return (
                 <button
-                  key={t.key}
-                  onClick={() => setTab(t.key)}
-                  data-testid={`akun-tab-${t.key}`}
+                  key={tabItem.key}
+                  onClick={() => setTab(tabItem.key)}
+                  data-testid={`akun-tab-${tabItem.key}`}
                   className={`flex-1 min-w-[140px] flex items-center justify-center gap-2 py-4 md:py-5 text-sm font-bold transition ${
                     active
                       ? "text-[#001DF3] border-b-2 border-[#001DF3] bg-[#001DF3]/5"
                       : "text-slate-500 hover:text-slate-900 hover:bg-slate-50"
                   }`}
                 >
-                  <t.Icon className="w-4 h-4" />
-                  {t.label}
+                  <tabItem.Icon className="w-4 h-4" />
+                  {t(tabItem.label)}
                 </button>
               );
             })}

@@ -21,6 +21,7 @@ import Footer from "../components/Footer";
 import { Button } from "../components/ui/button";
 import { WA_URL, WA_DISPLAY } from "../components/ChatWidget";
 import { submitLead } from "../lib/publicApi";
+import { useT } from "../lib/i18n";
 
 const chapters = [
   {
@@ -132,6 +133,7 @@ const testimonials = [
 ];
 
 export default function KonsultasiPage() {
+  const t = useT();
   const [form, setForm] = useState({
     name: "",
     phone: "",
@@ -148,7 +150,7 @@ export default function KonsultasiPage() {
   const submit = async (e) => {
     e.preventDefault();
     if (!form.name.trim() || !form.phone.trim()) {
-      setError("Nama & nomor WhatsApp wajib diisi.");
+      setError(t("Nama & nomor WhatsApp wajib diisi."));
       return;
     }
     setError("");
@@ -176,7 +178,7 @@ export default function KonsultasiPage() {
       });
       setTimeout(() => setSent(false), 5000);
     } catch (err) {
-      setError("Gagal mengirim data. Coba lagi ya.");
+      setError(t("Gagal mengirim data. Coba lagi ya."));
     } finally {
       setLoading(false);
     }
@@ -441,13 +443,13 @@ export default function KonsultasiPage() {
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <Field
                   name="name"
-                  placeholder="Nama Lengkap"
+                  placeholder={t("Nama Lengkap")}
                   value={form.name}
                   onChange={handle}
                 />
                 <Field
                   name="phone"
-                  placeholder="Nomor WhatsApp"
+                  placeholder={t("Nomor WhatsApp")}
                   value={form.phone}
                   onChange={handle}
                 />
@@ -507,7 +509,7 @@ export default function KonsultasiPage() {
                 className="w-full bg-[#001DF3] hover:bg-[#0017c2] text-white rounded-full font-bold h-12 text-sm shadow-md disabled:opacity-60"
               >
                 <Send className="w-4 h-4 mr-2" />{" "}
-                {loading ? "Mengirim..." : "Pesan Sesi Konsultasi"}
+                {loading ? t("Mengirim...") : t("Pesan Sesi Konsultasi")}
               </Button>
               {error && (
                 <p className="text-center text-sm text-[#001DF3] font-semibold">

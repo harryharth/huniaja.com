@@ -33,6 +33,7 @@ import BrosurLeadDialog from "../components/BrosurLeadDialog";
 import { fetchProperties, fetchProperty } from "../lib/publicApi";
 import { groupFacilities, CATEGORY_META } from "../lib/facilities";
 import { useAuth } from "../context/AuthContext";
+import { useT } from "../lib/i18n";
 import axios from "axios";
 
 const USER_API = `${process.env.REACT_APP_BACKEND_URL}/api`;
@@ -41,6 +42,7 @@ export default function PropertyDetailPage() {
   const { id } = useParams();
   const navigate = useNavigate();
   const { user } = useAuth();
+  const t = useT();
   const [item, setItem] = useState(() => allListings.find((l) => l.id === id));
   const [allItems, setAllItems] = useState(allListings);
   const [notFound, setNotFound] = useState(false);
@@ -274,7 +276,7 @@ export default function PropertyDetailPage() {
             {/* Facilities — grouped by category, synced with admin dashboard checklist */}
             <div className="bg-white rounded-3xl p-6 md:p-8 border border-slate-100 shadow-sm">
               <h2 className="text-lg md:text-xl font-black text-slate-900">
-                Fasilitas &amp; Lingkungan
+                {t("Fasilitas & Lingkungan")}
               </h2>
               <FacilitiesAccordion facilities={item.facilities || []} />
             </div>
@@ -506,6 +508,7 @@ function PropertyHeader({ item }) {
 
 
 function FacilitiesAccordion({ facilities }) {
+  const t = useT();
   const grouped = groupFacilities(facilities);
   const entries = Object.entries(grouped);
   // Default: first category expanded, rest collapsed (nicer FTUE than all closed)
@@ -520,7 +523,7 @@ function FacilitiesAccordion({ facilities }) {
   if (entries.length === 0) {
     return (
       <p className="text-sm text-slate-500 mt-4">
-        Belum ada fasilitas yang ditandai untuk properti ini.
+        {t("Belum ada fasilitas yang ditandai untuk properti ini.")}
       </p>
     );
   }
@@ -565,7 +568,7 @@ function FacilitiesAccordion({ facilities }) {
                       isOpen ? "text-white" : "text-slate-900"
                     }`}
                   >
-                    {category}
+                    {t(category)}
                   </span>
                   <span
                     className={`text-[11px] font-semibold shrink-0 ${
