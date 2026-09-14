@@ -34,21 +34,21 @@ export default function Header() {
 
   return (
     <header className="bg-[#001DF3] text-white sticky top-0 z-50 border-b border-white/25">
-      {/* Mobile top row: logo + hamburger */}
+      {/* Mobile top row: hamburger (left) + logo (centered) — with spacer for balance */}
       <div className="lg:hidden max-w-7xl mx-auto px-4 pt-4 pb-3 flex items-center justify-between">
-        <Link to="/" className="flex items-center shrink-0">
+        <button
+          className="w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center shrink-0"
+          onClick={() => setMobileOpen((v) => !v)}
+          aria-label="menu"
+          data-testid="header-mobile-menu-toggle"
+        >
+          {mobileOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+        </button>
+        <Link to="/" className="flex items-center shrink-0" aria-label="Huniaja">
           <img src={LOGO_WHITE} alt="Huniaja" className="h-7 w-auto" />
         </Link>
-        <div className="flex items-center gap-2">
-          <button
-            className="w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center"
-            onClick={() => setMobileOpen((v) => !v)}
-            aria-label="menu"
-            data-testid="header-mobile-menu-toggle"
-          >
-            {mobileOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
-          </button>
-        </div>
+        {/* Spacer keeps logo optically centered against the hamburger */}
+        <div className="w-10 h-10 shrink-0" aria-hidden />
       </div>
 
       {/* Desktop row (>= lg) */}

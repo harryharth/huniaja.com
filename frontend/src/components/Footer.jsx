@@ -1,7 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { LOGO_WHITE } from "../mock";
-import { Instagram, Youtube } from "lucide-react";
+import { Instagram, Youtube, ChevronDown } from "lucide-react";
 import { useT } from "../lib/i18n";
 
 // Footer nav link with hover pill (navy) + active bold state.
@@ -20,24 +20,33 @@ function FooterLink({ href, label, current }) {
 }
 
 const footerCols = [
-  [
-    { label: "Beli", href: "/cari-properti" },
-    { label: "Konsultasi", href: "/konsultasi" },
-    { label: "KPR", href: "/kpr" },
-    { label: "Kerjasama", href: "/kerjasama" },
-  ],
-  [
-    { label: "Karir", href: "/karir" },
-    { label: "Tentang Kami", href: "/tentang-kami" },
-    { label: "Kontak", href: "/kontak" },
-    { label: "Pasang Iklan", href: "/pasang-iklan" },
-  ],
-  [
-    { label: "Artikel", href: "/berita" },
-    { label: "Pusat Bantuan", href: "/pusat-bantuan" },
-    { label: "S&K", href: "/syarat-ketentuan" },
-    { label: "FAQ", href: "/faq" },
-  ],
+  {
+    title: "Layanan",
+    links: [
+      { label: "Beli", href: "/cari-properti" },
+      { label: "Konsultasi", href: "/konsultasi" },
+      { label: "KPR", href: "/kpr" },
+      { label: "Kerjasama", href: "/kerjasama" },
+      { label: "Pasang Iklan", href: "/pasang-iklan" },
+    ],
+  },
+  {
+    title: "Perusahaan",
+    links: [
+      { label: "Karir", href: "/karir" },
+      { label: "Tentang Kami", href: "/tentang-kami" },
+      { label: "Kontak", href: "/kontak" },
+    ],
+  },
+  {
+    title: "Bantuan",
+    links: [
+      { label: "Artikel", href: "/berita" },
+      { label: "Pusat Bantuan", href: "/pusat-bantuan" },
+      { label: "S&K", href: "/syarat-ketentuan" },
+      { label: "FAQ", href: "/faq" },
+    ],
+  },
 ];
 
 function TikTokIcon(props) {
@@ -49,22 +58,48 @@ function TikTokIcon(props) {
 }
 
 export default function Footer() {
-  // Flat list of all footer links (used for the 2-column mobile layout)
-  const flatLinks = footerCols.flat();
   const t = useT();
   const { pathname } = useLocation();
+  const [openIdx, setOpenIdx] = useState(null);
   return (
     <footer className="bg-[#001DF3] text-white pt-14 md:pt-16 pb-10">
       <div className="max-w-6xl mx-auto px-6">
-        {/* Mobile-only: links stacked in 2 columns, ABOVE the logo/socials */}
-        <div className="md:hidden mb-10">
-          <ul className="grid grid-cols-2 gap-y-2 gap-x-2 text-[15px]">
-            {flatLinks.map((l, idx) => (
-              <li key={idx}>
-                <FooterLink href={l.href} label={t(l.label)} current={pathname} />
-              </li>
-            ))}
-          </ul>
+        {/* Mobile-only: accordion groups (Layanan / Perusahaan / Bantuan) */}
+        <div className="md:hidden mb-8 border-t border-white/15">
+          {footerCols.map((col, i) => {
+            const open = openIdx === i;
+            return (
+              <div key={col.title} className="border-b border-white/15">
+                <button
+                  type="button"
+                  onClick={() => setOpenIdx(open ? null : i)}
+                  data-testid={`footer-group-${col.title.toLowerCase()}`}
+                  className="w-full flex items-center justify-between py-4 text-[15px] font-bold text-white"
+                >
+                  <span>{t(col.title)}</span>
+                  <ChevronDown
+                    className={`w-4 h-4 transition-transform ${
+                      open ? "rotate-180" : ""
+                    }`}
+                  />
+                </button>
+                {open && (
+                  <ul className="pb-4 space-y-1 text-[14px]">
+                    {col.links.map((l, idx) => (
+                      <li key={idx}>
+                        <Link
+                          to={l.href}
+                          className="block py-1.5 pl-1 text-white/90 hover:text-white"
+                        >
+                          {t(l.label)}
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </div>
+            );
+          })}
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-8">
@@ -120,17 +155,22 @@ export default function Footer() {
             </p>
           </div>
 
-          {/* Right columns: link groups — hidden on mobile (rendered above in 2-col grid) */}
+          {/* Right columns: link groups — hidden on mobile (rendered above as accordion) */}
           <div className="hidden md:grid md:col-span-7 md:col-start-6 grid-cols-3 gap-8 md:gap-10 md:pt-2 md:pl-8">
             {footerCols.map((col, i) => (
-            <ul key={i} className="space-y-2 text-[15px]">
-              {col.map((l, idx) => (
-                <li key={idx}>
-                  <FooterLink href={l.href} label={t(l.label)} current={pathname} />
-                </li>
-              ))}
-            </ul>
-          ))}
+              <div key={i}>
+                <div className="text-[11px] font-black tracking-widest text-white/70 uppercase mb-3">
+                  {t(col.title)}
+                </div>
+                <ul className="space-y-2 text-[15px]">
+                  {col.links.map((l, idx) => (
+                    <li key={idx}>
+                      <FooterLink href={l.href} label={t(l.label)} current={pathname} />
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
           </div>
         </div>
       </div>
