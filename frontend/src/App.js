@@ -54,7 +54,6 @@ const Home = () => (
     <KerjaSama />
     <HomeStories />
     <WhyHuniaja />
-    <HomeFinalCta />
     <Footer />
   </div>
 );
