@@ -324,7 +324,39 @@ export default function KprPage() {
 
       {/* Simulation */}
       <section className="bg-slate-50 py-14 md:py-20">
-        <div className="max-w-6xl mx-auto px-4 md:px-6 grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
+        <div className="max-w-6xl mx-auto px-4 md:px-6">
+          {/* KPR type pill toggle — centered above the grid */}
+          <div className="flex justify-center mb-8 md:mb-12">
+            <div
+              className="inline-flex items-center gap-2 bg-white rounded-full p-1.5 shadow-sm border border-slate-200"
+              data-testid="kpr-type-toggle"
+            >
+              {[
+                { id: "konvensional", label: "KPR Konvensional", Icon: Building2 },
+                { id: "syariah", label: "KPR Syariah", Icon: Moon },
+              ].map(({ id, label, Icon }) => {
+                const active = kprType === id;
+                return (
+                  <button
+                    key={id}
+                    type="button"
+                    onClick={() => setKprType(id)}
+                    data-testid={`kpr-type-${id}`}
+                    className={`inline-flex items-center gap-2 rounded-full px-4 md:px-5 py-2 md:py-2.5 text-xs md:text-sm font-bold transition-all ${
+                      active
+                        ? "bg-white text-[#001DF3] border-2 border-[#001DF3] shadow-sm"
+                        : "text-slate-500 hover:text-slate-800 border-2 border-transparent"
+                    }`}
+                  >
+                    <Icon className="w-4 h-4" />
+                    {label}
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
           <div className="relative">
             <div className="absolute -inset-4 rounded-[36px] bg-gradient-to-br from-[#001DF3]/10 via-white to-[#00B512]/10 blur-2xl -z-10" />
             <div className="rounded-[32px] overflow-hidden shadow-xl border border-slate-100">
@@ -356,35 +388,6 @@ export default function KprPage() {
                 ? t("dan Take Over Syariah")
                 : "dan Take Over Konvensional"}
             </h2>
-
-            {/* KPR type pill toggle */}
-            <div
-              className="inline-flex items-center gap-2 bg-white rounded-full p-1.5 shadow-sm border border-slate-200 mb-6"
-              data-testid="kpr-type-toggle"
-            >
-              {[
-                { id: "konvensional", label: "KPR Konvensional", Icon: Building2 },
-                { id: "syariah", label: "KPR Syariah", Icon: Moon },
-              ].map(({ id, label, Icon }) => {
-                const active = kprType === id;
-                return (
-                  <button
-                    key={id}
-                    type="button"
-                    onClick={() => setKprType(id)}
-                    data-testid={`kpr-type-${id}`}
-                    className={`inline-flex items-center gap-2 rounded-full px-4 py-2 text-xs md:text-sm font-bold transition-all ${
-                      active
-                        ? "bg-white text-[#001DF3] border-2 border-[#001DF3] shadow-sm"
-                        : "text-slate-500 hover:text-slate-800 border-2 border-transparent"
-                    }`}
-                  >
-                    <Icon className="w-4 h-4" />
-                    {label}
-                  </button>
-                );
-              })}
-            </div>
 
             <SimCard
               num={1}
@@ -423,6 +426,7 @@ export default function KprPage() {
               }
               onClick={() => setTakeoverOpen(true)}
             />
+          </div>
           </div>
         </div>
       </section>
