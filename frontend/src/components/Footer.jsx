@@ -35,6 +35,7 @@ const footerCols = [
     links: [
       { label: "Karir", href: "/karir" },
       { label: "Tentang Kami", href: "/tentang-kami" },
+      { label: "CSR", href: "/csr" },
       { label: "Kontak", href: "/kontak" },
     ],
   },
