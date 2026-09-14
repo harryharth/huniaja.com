@@ -23,9 +23,9 @@ export function PopulerSection() {
   }, []);
 
   return (
-    <section className="bg-white pt-8 md:pt-10">
-      <div className="max-w-6xl mx-auto px-4 md:px-6">
-        <div className="bg-[#EEF6EE] rounded-2xl md:rounded-3xl p-4 md:p-5">
+    <section className="pt-8 md:pt-10">
+      <div className="bg-slate-100 py-4 md:py-6">
+        <div className="max-w-6xl mx-auto px-4 md:px-6">
           <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-4 gap-3">
             <div className="flex items-center gap-2 md:gap-3">
               <img
