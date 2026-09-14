@@ -26,6 +26,65 @@ import {
 } from "lucide-react";
 import { adminApi, clearToken, getToken } from "./adminApi";
 
+// Preset facilities (checklist) — grouped by category so admin can pick per listing
+const FACILITIES = {
+  "Fasilitas Properti": [
+    "Carport 1 Mobil",
+    "Carport 2 Mobil",
+    "Garasi",
+    "Taman Depan",
+    "Taman Belakang",
+    "Rooftop",
+    "Balkon",
+    "Kolam Renang",
+    "Kolam Ikan",
+    "Ruang Jemur",
+    "Gudang",
+  ],
+  "Utilitas": [
+    "Listrik 1300 VA",
+    "Listrik 2200 VA",
+    "Listrik 3500 VA",
+    "WiFi Ready",
+    "PDAM",
+    "Air Sumur Bor",
+    "Water Heater",
+    "AC Kamar Utama",
+    "AC Semua Kamar",
+  ],
+  "Keamanan & Cluster": [
+    "Keamanan 24 Jam",
+    "One Gate System",
+    "CCTV Kawasan",
+    "Rumah Cluster",
+    "Bebas Banjir",
+    "Sertifikat SHM",
+    "Sertifikat HGB",
+  ],
+  "Interior": [
+    "Furnished",
+    "Semi Furnished",
+    "Unfurnished",
+    "Dapur Bersih",
+    "Dapur Kotor",
+    "Ruang Kerja",
+    "Ruang Keluarga",
+  ],
+  "Dekat Dengan": [
+    "Dekat Sekolah",
+    "Dekat Universitas",
+    "Dekat Rumah Sakit",
+    "Dekat Mall",
+    "Dekat Pasar",
+    "Dekat Tempat Ibadah",
+    "Dekat Transportasi Umum",
+    "Dekat Tol",
+    "Dekat Bandara",
+    "Dekat Pusat Kota",
+    "Dekat Kantor",
+  ],
+};
+
 const TABS = [
   { key: "stats", label: "Overview", Icon: BarChart3, color: "from-[#001DF3] to-[#7C3AED]" },
   { key: "properties", label: "Properti", Icon: Home, color: "from-[#00B512] to-[#0EA5E9]" },
@@ -304,7 +363,7 @@ function PropertiesPanel() {
       gallery: [],
       specs: { lt: "110 m²", lb: "90 m²", kt: 3, km: 2 },
       description: "",
-      facilities: ["Carport", "Taman", "Keamanan 24 Jam"],
+      facilities: ["Carport 2 Mobil", "Taman Depan", "Keamanan 24 Jam", "Rumah Cluster"],
       tier: "HH Pro",
       status: "published",
       sort_order: list.length,
@@ -551,6 +610,49 @@ function PropertyFormModal({ item, onChange, onClose, onSave }) {
               </div>
             </Field>
           </div>
+
+          {/* Facilities checklist */}
+          <div className="md:col-span-2">
+            <div className="flex items-center justify-between mb-2">
+              <span className="text-xs font-bold text-slate-600 tracking-wide">FASILITAS &amp; LINGKUNGAN</span>
+              <span className="text-[11px] text-slate-500">{(item.facilities || []).length} dipilih</span>
+            </div>
+            <div className="bg-slate-50 rounded-2xl p-4 space-y-4 max-h-72 overflow-y-auto" data-testid="prop-form-facilities">
+              {Object.entries(FACILITIES).map(([group, options]) => (
+                <div key={group}>
+                  <div className="text-[11px] font-black uppercase tracking-widest text-slate-500 mb-2">
+                    {group}
+                  </div>
+                  <div className="flex flex-wrap gap-2">
+                    {options.map((opt) => {
+                      const checked = (item.facilities || []).includes(opt);
+                      return (
+                        <button
+                          type="button"
+                          key={opt}
+                          onClick={() => {
+                            const list = new Set(item.facilities || []);
+                            if (checked) list.delete(opt);
+                            else list.add(opt);
+                            set("facilities", Array.from(list));
+                          }}
+                          className={`text-xs font-semibold px-3 py-1.5 rounded-full border transition ${
+                            checked
+                              ? "bg-[#001DF3] text-white border-[#001DF3]"
+                              : "bg-white text-slate-700 border-slate-200 hover:border-[#001DF3]"
+                          }`}
+                        >
+                          {checked && <span className="mr-1">✓</span>}
+                          {opt}
+                        </button>
+                      );
+                    })}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
           <Field label="Status">
             <select value={item.status} onChange={(e) => set("status", e.target.value)} className={inputCls}>
               <option value="published">Tayang</option>
