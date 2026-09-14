@@ -72,15 +72,32 @@ export default function Footer() {
         <div className="md:hidden mb-8 border-t border-white/15">
           {footerCols.map((col, i) => {
             const open = openIdx === i;
+            const ColIcon = col.Icon;
             return (
               <div key={col.title} className="border-b border-white/15">
                 <button
                   type="button"
                   onClick={() => setOpenIdx(open ? null : i)}
                   data-testid={`footer-group-${col.title.toLowerCase()}`}
-                  className="w-full flex items-center justify-between py-4 text-[15px] font-bold text-white"
+                  className="w-full flex items-center justify-between gap-3 py-4 text-[15px] font-bold text-white"
                 >
-                  <span>{t(col.title)}</span>
+                  <span className="flex items-center gap-3">
+                    <span className="w-8 h-8 rounded-xl bg-white/10 flex items-center justify-center shrink-0">
+                      {ColIcon ? (
+                        <ColIcon className="w-4 h-4 text-white" strokeWidth={2.4} />
+                      ) : null}
+                    </span>
+                    <span className="flex flex-col items-start">
+                      <span className="text-[11px] font-black tracking-widest text-white uppercase leading-none">
+                        {t(col.title)}
+                      </span>
+                      <span
+                        className={`mt-1 block h-px bg-[#00B512] transition-all ${
+                          open ? "w-14" : "w-8"
+                        }`}
+                      />
+                    </span>
+                  </span>
                   <ChevronDown
                     className={`w-4 h-4 transition-transform ${
                       open ? "rotate-180" : ""
@@ -88,12 +105,12 @@ export default function Footer() {
                   />
                 </button>
                 {open && (
-                  <ul className="pb-4 space-y-1 text-[14px]">
+                  <ul className="pb-4 pl-11 space-y-1 text-[14px]">
                     {col.links.map((l, idx) => (
                       <li key={idx}>
                         <Link
                           to={l.href}
-                          className="block py-1.5 pl-1 text-white/90 hover:text-white"
+                          className="block py-1.5 text-white/90 hover:text-white"
                         >
                           {t(l.label)}
                         </Link>
