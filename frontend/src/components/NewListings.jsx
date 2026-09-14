@@ -23,7 +23,7 @@ export default function NewListings() {
         <div className="mb-4">
           <img
             src={ICON_CARIYUK}
-            alt="Cari Yuk"
+            alt="Listing Baru"
             className="h-7 md:h-9 w-auto"
           />
         </div>
