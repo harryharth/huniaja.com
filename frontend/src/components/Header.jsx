@@ -170,12 +170,12 @@ export default function Header() {
 
       {/* Mobile nav dropdown */}
       {mobileOpen && (
-        <div className="lg:hidden border-t border-white/15 bg-[#001DF3]">
+        <div className="lg:hidden border-t border-slate-200 bg-slate-50">
           <nav className="px-4 py-3 flex flex-col">
             {/* Mobile search — placed above nav links */}
             <form
               onSubmit={submitSearch}
-              className="flex items-center bg-white rounded-full pl-1 pr-1 py-1 shadow-sm mb-3"
+              className="flex items-center bg-white rounded-full pl-1 pr-1 py-1 shadow-sm mb-3 border border-slate-200"
               data-testid="header-search-form-mobile"
             >
               <DropdownMenu>
@@ -218,17 +218,17 @@ export default function Header() {
               <Link
                 key={l.label}
                 to={l.href}
-                className="py-2.5 text-[15px] font-medium text-white/90 hover:text-white border-b border-white/10"
+                className="py-2.5 text-[15px] font-semibold text-slate-800 hover:text-[#001DF3] border-b border-slate-200"
                 onClick={() => setMobileOpen(false)}
               >
                 {t(l.label)}
               </Link>
             ))}
             <div className="pt-3 flex items-center justify-between gap-2">
-              <span className="text-xs text-white/70 font-semibold uppercase tracking-widest">
+              <span className="text-xs text-slate-500 font-semibold uppercase tracking-widest">
                 {t("Bahasa")}
               </span>
-              <LangSwitcher />
+              <LangSwitcher variant="light" />
             </div>
             <div className="pt-3 flex flex-col gap-2">
               {user ? (
@@ -236,7 +236,7 @@ export default function Header() {
                   <Link
                     to="/akun"
                     onClick={() => setMobileOpen(false)}
-                    className="w-full bg-white text-[#001DF3] rounded-full font-bold h-11 flex items-center justify-center gap-2 shadow-sm transition"
+                    className="w-full bg-[#001DF3] text-white rounded-full font-bold h-11 flex items-center justify-center gap-2 shadow-sm transition"
                   >
                     <User className="w-4 h-4" /> {t("Akunku")}
                   </Link>
@@ -246,7 +246,7 @@ export default function Header() {
                       await logout();
                       navigate("/");
                     }}
-                    className="w-full bg-white/10 text-white rounded-full font-bold h-11 flex items-center justify-center gap-2 transition"
+                    className="w-full bg-white text-slate-700 border border-slate-200 rounded-full font-bold h-11 flex items-center justify-center gap-2 transition"
                   >
                     <LogOut className="w-4 h-4" /> {t("Keluar")}
                   </button>
