@@ -1,7 +1,7 @@
 import React from "react";
 import { Link, useLocation } from "react-router-dom";
 import { LOGO_WHITE } from "../mock";
-import { Facebook, Instagram, Youtube } from "lucide-react";
+import { Instagram, Youtube } from "lucide-react";
 import { useT } from "../lib/i18n";
 
 // Footer nav link with hover pill (green) + active bold state.
@@ -84,29 +84,31 @@ export default function Footer() {
 
             <div className="flex gap-3 mt-8">
               <a
-                href="#"
-                aria-label="Facebook"
-                className="w-9 h-9 rounded-full bg-white/10 hover:bg-white/25 flex items-center justify-center transition"
-              >
-                <Facebook className="w-4 h-4" />
-              </a>
-              <a
-                href="#"
+                href="https://www.instagram.com/huniajadotcom/"
+                target="_blank"
+                rel="noopener noreferrer"
                 aria-label="Instagram"
+                data-testid="social-instagram"
                 className="w-9 h-9 rounded-full bg-white/10 hover:bg-white/25 flex items-center justify-center transition"
               >
                 <Instagram className="w-4 h-4" />
               </a>
               <a
-                href="#"
-                aria-label="Youtube"
+                href="https://www.youtube.com/@Huniaja"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="YouTube"
+                data-testid="social-youtube"
                 className="w-9 h-9 rounded-full bg-white/10 hover:bg-white/25 flex items-center justify-center transition"
               >
                 <Youtube className="w-4 h-4" />
               </a>
               <a
-                href="#"
+                href="https://www.tiktok.com/@huniajacom"
+                target="_blank"
+                rel="noopener noreferrer"
                 aria-label="TikTok"
+                data-testid="social-tiktok"
                 className="w-9 h-9 rounded-full bg-white/10 hover:bg-white/25 flex items-center justify-center transition"
               >
                 <TikTokIcon className="w-4 h-4" />
