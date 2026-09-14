@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { Navigate, useNavigate } from "react-router-dom";
 import {
   Home,
@@ -24,6 +24,19 @@ import {
   Zap,
   MessageCircle,
   BadgeCheck,
+  MoreHorizontal,
+  PanelLeftClose,
+  PanelLeftOpen,
+  Star,
+  LayoutGrid,
+  ClipboardList,
+  Store,
+  BookOpenText,
+  Filter,
+  Command,
+  ChevronDown,
+  ExternalLink,
+  Folder,
 } from "lucide-react";
 import { adminApi, clearToken, getToken } from "./adminApi";
 
@@ -86,18 +99,41 @@ const FACILITIES = {
   ],
 };
 
-const TABS = [
-  { key: "stats", label: "Overview", Icon: BarChart3, color: "from-[#001DF3] to-[#000066]" },
-  { key: "properties", label: "Properti", Icon: Home, color: "from-[#00B512] to-[#001DF3]" },
-  { key: "banners", label: "Banner", Icon: ImageIcon, color: "from-[#00B512] to-[#000066]" },
-  { key: "articles", label: "Berita", Icon: Newspaper, color: "from-[#000066] to-[#000066]" },
+// Sidebar sections — mapped from the Floe reference to Huniaja context.
+const NAV_SECTIONS = [
+  { key: "home", label: "Home", Icon: Home },
+  { key: "properties", label: "Properti", Icon: LayoutGrid },
+  { key: "banners", label: "Banner Promo", Icon: ImageIcon },
+  { key: "articles", label: "Berita", Icon: BookOpenText },
+  { key: "submissions", label: "Pengajuan", Icon: ClipboardList },
+  { key: "users", label: "Pengguna", Icon: Store },
+];
+
+// Folder color themes — soft pastels tinted with our brand palette
+const FOLDER_THEMES = [
+  { key: "properties", label: "Properti", from: "#001DF3", tint: "#EEF2FF" },
+  { key: "banners", label: "Banner Promo", from: "#00B512", tint: "#E9F8EC" },
+  { key: "articles", label: "Berita", from: "#000066", tint: "#E8ECFA" },
+  { key: "submissions", label: "Pengajuan", from: "#001DF3", tint: "#EEF2FF" },
 ];
 
 export default function AdminDashboardPage() {
-  const [tab, setTab] = useState("stats");
+  const [tab, setTab] = useState("home");
+  const [collapsed, setCollapsed] = useState(false);
+  const [globalSearch, setGlobalSearch] = useState("");
+  const [notif, setNotif] = useState(0);
   const navigate = useNavigate();
+  const hasToken = !!getToken();
 
-  if (!getToken()) return <Navigate to="/admin/login" replace />;
+  useEffect(() => {
+    if (!hasToken) return;
+    adminApi
+      .get("/admin/stats")
+      .then((r) => setNotif(r.data?.submissions?.new || 0))
+      .catch(() => {});
+  }, [tab, hasToken]);
+
+  if (!hasToken) return <Navigate to="/admin/login" replace />;
 
   const logout = () => {
     clearToken();
@@ -105,225 +141,567 @@ export default function AdminDashboardPage() {
   };
 
   return (
-    <div className="min-h-screen relative overflow-hidden bg-gradient-to-br from-[#EEF2FF] via-white to-[#E9F8EC] flex">
-      {/* Decorative background blobs */}
-      <div
-        aria-hidden
-        className="absolute -top-40 -left-40 w-[520px] h-[520px] rounded-full blur-3xl opacity-30 pointer-events-none"
-        style={{ backgroundColor: "#001DF3" }}
-      />
-      <div
-        aria-hidden
-        className="absolute -bottom-40 right-1/4 w-[520px] h-[520px] rounded-full blur-3xl opacity-25 pointer-events-none"
-        style={{ backgroundColor: "#00B512" }}
-      />
-      <div
-        aria-hidden
-        className="absolute top-1/2 -right-40 w-[420px] h-[420px] rounded-full blur-3xl opacity-25 pointer-events-none"
-        style={{ backgroundColor: "#000066" }}
-      />
-
+    <div className="min-h-screen bg-slate-100 flex">
       {/* Sidebar */}
-      <aside className="relative z-10 w-24 md:w-72 bg-white/60 backdrop-blur-2xl border-r border-white/60 flex flex-col shadow-[0_8px_40px_-12px_rgba(0,29,243,0.15)]">
-        <div className="p-4 md:p-6 border-b border-white/60 flex items-center gap-3">
-          <div className="w-11 h-11 rounded-2xl bg-gradient-to-br from-[#000066] to-[#001DF3] flex items-center justify-center shadow-lg shadow-[#001DF3]/30">
-            <Sparkles className="w-5 h-5 text-white" />
+      <aside
+        className={`sticky top-0 self-start h-screen bg-white border-r border-slate-200 flex flex-col transition-all ${
+          collapsed ? "w-20" : "w-64"
+        }`}
+      >
+        <div className="p-4 flex items-center justify-between">
+          <div className="flex items-center gap-2 min-w-0">
+            <div className="w-9 h-9 rounded-2xl bg-[#001DF3] flex items-center justify-center shrink-0">
+              <Sparkles className="w-5 h-5 text-white" />
+            </div>
+            {!collapsed && (
+              <span className="font-black text-slate-900 truncate">Huniaja</span>
+            )}
           </div>
-          <div className="hidden md:block">
-            <h1 className="text-base font-black text-slate-900">Huniaja</h1>
-            <p className="text-[11px] text-slate-500 mt-0.5">Content Studio</p>
-          </div>
+          <button
+            onClick={() => setCollapsed((v) => !v)}
+            data-testid="admin-sidebar-toggle"
+            className="w-8 h-8 rounded-lg text-slate-400 hover:bg-slate-100 hover:text-slate-700 flex items-center justify-center transition"
+            title={collapsed ? "Buka sidebar" : "Ciutkan"}
+          >
+            {collapsed ? <PanelLeftOpen className="w-4 h-4" /> : <PanelLeftClose className="w-4 h-4" />}
+          </button>
         </div>
-        <nav className="flex-1 p-3 space-y-1.5">
-          {TABS.map((t) => (
+
+        <nav className="flex-1 px-2 py-2 space-y-1 overflow-y-auto">
+          {NAV_SECTIONS.map((s) => {
+            const active = tab === s.key;
+            return (
+              <button
+                key={s.key}
+                onClick={() => setTab(s.key)}
+                data-testid={`admin-tab-${s.key}`}
+                title={s.label}
+                className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition ${
+                  active
+                    ? "bg-slate-100 text-slate-900"
+                    : "text-slate-500 hover:bg-slate-50 hover:text-slate-900"
+                }`}
+              >
+                <s.Icon className={`w-5 h-5 shrink-0 ${active ? "text-[#001DF3]" : "text-slate-400"}`} />
+                {!collapsed && <span className="truncate">{s.label}</span>}
+                {!collapsed && active && (
+                  <span className="ml-auto w-1.5 h-1.5 rounded-full bg-[#001DF3]" />
+                )}
+              </button>
+            );
+          })}
+
+          <div className="mt-4 border-t border-slate-100 pt-3">
             <button
-              key={t.key}
-              onClick={() => setTab(t.key)}
-              data-testid={`admin-tab-${t.key}`}
-              title={t.label}
-              className={`w-full flex items-center gap-3 px-3 md:px-4 py-3 rounded-2xl text-sm font-semibold transition-all group ${
-                tab === t.key
-                  ? `bg-gradient-to-r ${t.color} text-white shadow-lg`
-                  : "text-slate-600 hover:bg-white hover:shadow-sm"
-              }`}
+              onClick={() => setTab("submissions")}
+              className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium text-slate-500 hover:bg-slate-50 hover:text-slate-900 transition relative"
+              data-testid="admin-tab-notif"
             >
-              <t.Icon className="w-5 h-5 shrink-0" />
-              <span className="hidden md:inline">{t.label}</span>
-              {tab === t.key && (
-                <ArrowUpRight className="w-3.5 h-3.5 ml-auto hidden md:block" />
+              <Bell className="w-5 h-5 text-slate-400 shrink-0" />
+              {!collapsed && <span>Notifikasi</span>}
+              {notif > 0 && (
+                <span
+                  className={`${
+                    collapsed ? "absolute top-1 right-1" : "ml-auto"
+                  } bg-[#001DF3] text-white text-[10px] font-black rounded-full min-w-[22px] h-[22px] px-1.5 flex items-center justify-center`}
+                >
+                  {notif}
+                </span>
               )}
             </button>
-          ))}
+          </div>
+
+          {!collapsed && (
+            <div className="mt-4">
+              <div className="px-3 text-[11px] font-bold uppercase tracking-widest text-slate-400 mb-2">
+                Favourites
+              </div>
+              <FavouritesList />
+            </div>
+          )}
         </nav>
+
         <button
           onClick={logout}
           data-testid="admin-logout"
-          className="m-3 flex items-center gap-2 justify-center md:justify-start px-4 py-2.5 rounded-2xl text-sm text-slate-600 hover:bg-[#000066]/8 hover:text-[#000066] transition"
+          className="m-3 flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium text-slate-500 hover:bg-slate-50 hover:text-slate-900 transition"
         >
-          <LogOut className="w-4 h-4" />
-          <span className="hidden md:inline">Keluar</span>
+          <LogOut className="w-4 h-4 shrink-0" />
+          {!collapsed && <span>Keluar</span>}
         </button>
       </aside>
 
-      {/* Main */}
-      <main className="relative z-10 flex-1 overflow-y-auto max-h-screen">
-        <div className="p-5 md:p-8 lg:p-10">
-          {tab === "stats" && <StatsPanel />}
+      {/* Main area */}
+      <main className="flex-1 min-w-0 max-h-screen overflow-y-auto">
+        <TopBar globalSearch={globalSearch} setGlobalSearch={setGlobalSearch} />
+        <div className="p-6 md:p-8">
+          {tab === "home" && (
+            <HomePanel goTo={setTab} search={globalSearch} />
+          )}
           {tab === "properties" && <PropertiesPanel />}
           {tab === "banners" && <BannersPanel />}
           {tab === "articles" && <ArticlesPanel />}
+          {tab === "submissions" && <SubmissionsPanel />}
+          {tab === "users" && <UsersPanel />}
         </div>
       </main>
     </div>
   );
 }
 
-// ============================ STATS ============================
-function StatsPanel() {
-  const [s, setS] = useState(null);
+// ============================ TOP BAR ============================
+function TopBar({ globalSearch, setGlobalSearch }) {
+  return (
+    <div className="sticky top-0 z-20 bg-white/80 backdrop-blur border-b border-slate-200 px-6 md:px-8 py-3.5 flex items-center gap-4">
+      <div className="flex-1 max-w-lg relative">
+        <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400 pointer-events-none" />
+        <input
+          value={globalSearch}
+          onChange={(e) => setGlobalSearch(e.target.value)}
+          data-testid="admin-global-search"
+          placeholder="Search..."
+          className="w-full h-10 pl-10 pr-16 rounded-full bg-slate-100 focus:bg-white border border-transparent focus:border-slate-200 outline-none text-sm text-slate-700 placeholder:text-slate-400 transition"
+        />
+        <kbd className="absolute right-2 top-1/2 -translate-y-1/2 hidden sm:inline-flex items-center gap-1 text-[10px] font-bold text-slate-400 bg-white border border-slate-200 rounded px-1.5 h-6">
+          <Command className="w-3 h-3" /> F
+        </kbd>
+      </div>
+      <div className="ml-auto flex items-center gap-3">
+        <div className="hidden md:block text-xs text-slate-500">
+          Credits remaining
+        </div>
+        <div className="w-9 h-9 rounded-full bg-[#001DF3] text-white flex items-center justify-center text-sm font-black shadow-sm">
+          A
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// ============================ HOME ============================
+function HomePanel({ goTo, search }) {
+  const [stats, setStats] = useState(null);
+  const [properties, setProperties] = useState([]);
+
   useEffect(() => {
-    adminApi.get("/admin/stats").then((r) => setS(r.data));
+    adminApi.get("/admin/stats").then((r) => setStats(r.data)).catch(() => {});
+    adminApi
+      .get("/admin/properties")
+      .then((r) => setProperties(r.data || []))
+      .catch(() => {});
   }, []);
-  if (!s) return <Loader />;
 
-  const bigCards = [
-    {
-      label: "Total Properti",
-      value: s.properties.total,
-      sub: `${s.properties.published} tayang`,
-      Icon: Home,
-      gradient: "from-[#001DF3] to-[#000066]",
-      textColor: "text-white",
-    },
-    {
-      label: "Total Views",
-      value: s.properties.views,
-      sub: "dilihat pengguna",
-      Icon: Eye,
-      gradient: "from-[#001DF3] to-[#00B512]",
-      textColor: "text-white",
-    },
-    {
-      label: "Total Likes",
-      value: s.properties.likes,
-      sub: "disimpan pengguna",
-      Icon: Heart,
-      gradient: "from-[#000066] to-[#00B512]",
-      textColor: "text-white",
-    },
-  ];
+  const folderCount = (key) => {
+    if (!stats) return "—";
+    if (key === "properties") return `${stats.properties?.total || 0} items`;
+    if (key === "banners") return `${stats.banners?.total || 0} items`;
+    if (key === "articles") return `${stats.articles?.total || 0} items`;
+    if (key === "submissions") return `${stats.submissions?.total || 0} items`;
+    return "—";
+  };
 
-  const smallCards = [
-    { label: "Artikel", value: s.articles.total, sub: `${s.articles.published} tayang`, Icon: Newspaper, color: "#000066" },
-    { label: "Banner", value: s.banners.total, sub: "hero carousel", Icon: ImageIcon, color: "#00B512" },
-    { label: "Uptime", value: "99.9%", sub: "sistem sehat", Icon: TrendingUp, color: "#00B512" },
-    { label: "Notifikasi", value: 0, sub: "belum dibaca", Icon: Bell, color: "#000066" },
-  ];
+  const workflows = useMemo(() => {
+    const q = search.trim().toLowerCase();
+    const filt = properties.filter((p) =>
+      !q ? true : (p.title || "").toLowerCase().includes(q) || (p.location || "").toLowerCase().includes(q)
+    );
+    return filt.slice(0, 9);
+  }, [properties, search]);
 
   return (
     <div>
-      {/* Greeting header */}
-      <div className="flex flex-wrap items-start justify-between gap-4 mb-8">
-        <div>
-          <div className="inline-flex items-center gap-2 bg-white/70 backdrop-blur rounded-full px-3 py-1 text-[11px] font-bold text-[#001DF3] tracking-widest uppercase mb-3 border border-white shadow-sm">
-            <Sparkles className="w-3 h-3" /> ADMIN STUDIO
-          </div>
-          <h2 className="text-3xl md:text-5xl font-black text-slate-900 leading-tight tracking-tight">
-            Hey Admin! <span className="bg-gradient-to-r from-[#001DF3] to-[#00B512] bg-clip-text text-transparent">Selamat pagi.</span>
-          </h2>
-          <p className="text-sm md:text-base text-slate-500 mt-2">
-            Ini ringkasan konten Huniaja hari ini — semua tetap dalam kendalimu.
-          </p>
-        </div>
-        <div className="flex items-center gap-3">
-          <button className="w-11 h-11 rounded-2xl bg-white/70 backdrop-blur border border-white shadow-sm hover:shadow-md transition flex items-center justify-center text-slate-600">
-            <Bell className="w-5 h-5" />
-          </button>
-          <div className="bg-white/70 backdrop-blur rounded-full pl-4 pr-1 py-1 border border-white shadow-sm flex items-center gap-3">
-            <div className="text-right">
-              <div className="text-xs text-slate-500">Score hari ini</div>
-              <div className="text-sm font-black text-slate-900">532.9</div>
-            </div>
-            <div className="w-9 h-9 rounded-full bg-gradient-to-br from-[#00B512] to-[#001DF3] flex items-center justify-center text-white text-sm font-black shadow-md">
-              A
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* Big colorful cards */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-        {bigCards.map((c) => (
-          <div
-            key={c.label}
-            className={`relative overflow-hidden rounded-3xl bg-gradient-to-br ${c.gradient} ${c.textColor} p-6 shadow-[0_20px_50px_-16px_rgba(0,29,243,0.30)] hover:-translate-y-1 transition-all`}
-          >
-            <div className="absolute -top-8 -right-8 w-32 h-32 rounded-full bg-white/10 blur-2xl pointer-events-none" />
-            <div className="absolute bottom-0 right-0 w-24 h-24 rounded-full bg-white/5 blur-xl pointer-events-none" />
-            <div className="relative flex items-start justify-between">
-              <div>
-                <div className="text-xs font-bold tracking-widest opacity-80 uppercase">{c.label}</div>
-                <div className="text-5xl font-black mt-3 leading-none">{c.value}</div>
-                <div className="text-xs opacity-80 mt-2">{c.sub}</div>
-              </div>
-              <div className="w-11 h-11 rounded-2xl bg-white/20 backdrop-blur flex items-center justify-center">
-                <c.Icon className="w-5 h-5" />
-              </div>
-            </div>
-          </div>
-        ))}
-      </div>
-
-      {/* Small cards row */}
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-5">
-        {smallCards.map((c) => (
-          <div
-            key={c.label}
-            className="bg-white/70 backdrop-blur rounded-2xl border border-white shadow-sm p-5 hover:shadow-md hover:-translate-y-0.5 transition-all"
-          >
-            <div
-              className="w-10 h-10 rounded-xl flex items-center justify-center mb-3"
-              style={{ backgroundColor: `${c.color}18` }}
-            >
-              <c.Icon className="w-5 h-5" style={{ color: c.color }} />
-            </div>
-            <div className="text-2xl font-black text-slate-900">{c.value}</div>
-            <div className="text-xs font-bold text-slate-700 mt-1">{c.label}</div>
-            <div className="text-[11px] text-slate-500 mt-0.5">{c.sub}</div>
-          </div>
-        ))}
-      </div>
-
-      {/* Quick actions strip */}
-      <div className="mt-8 bg-white/70 backdrop-blur rounded-3xl border border-white shadow-sm p-6">
-        <div className="flex items-start justify-between mb-5">
-          <div>
-            <h3 className="text-lg font-black text-slate-900">Aksi Cepat</h3>
-            <p className="text-xs text-slate-500 mt-1">Loncat langsung ke tugas yang sering dikerjakan.</p>
-          </div>
-          <Zap className="w-5 h-5 text-[#00B512]" />
-        </div>
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+      {/* Title + filters */}
+      <div className="flex flex-wrap items-center justify-between gap-4 mb-8">
+        <h1 className="text-2xl md:text-3xl font-black text-slate-900">
+          Dashboard
+        </h1>
+        <div className="flex flex-wrap items-center gap-2">
           {[
-            { label: "Tambah Properti", icon: Home, tab: "properties", color: "#001DF3" },
-            { label: "Buat Banner", icon: ImageIcon, tab: "banners", color: "#00B512" },
-            { label: "Publish Artikel", icon: Newspaper, tab: "articles", color: "#000066" },
-            { label: "Cek Chat AI", icon: MessageCircle, tab: null, color: "#00B512" },
-          ].map((a) => (
+            { label: "Status", value: "All" },
+            { label: "Tipe", value: "Any" },
+            { label: "Tanggal", value: "Any" },
+            { label: "Tag", value: "All" },
+          ].map((c) => (
             <button
-              key={a.label}
-              className="flex items-center gap-3 bg-white rounded-2xl border border-slate-100 p-4 hover:shadow-md hover:-translate-y-0.5 transition-all text-left"
+              key={c.label}
+              className="inline-flex items-center gap-1.5 h-9 px-3 rounded-full bg-white border border-slate-200 text-xs text-slate-600 hover:border-slate-300 transition"
             >
+              <span className="text-slate-400 font-semibold">{c.label}:</span>
+              <span className="text-slate-800 font-bold">{c.value}</span>
+              <ChevronDown className="w-3 h-3 text-slate-400" />
+            </button>
+          ))}
+          <button
+            className="w-9 h-9 rounded-full bg-white border border-slate-200 flex items-center justify-center text-slate-500 hover:border-slate-300 transition"
+            title="Filter lanjut"
+          >
+            <Filter className="w-4 h-4" />
+          </button>
+        </div>
+      </div>
+
+      {/* Folders */}
+      <section className="mb-10">
+        <div className="flex items-center gap-2 mb-4">
+          <h2 className="text-base font-black text-slate-900">Folders</h2>
+          <span className="text-xs text-slate-400 font-semibold">
+            {FOLDER_THEMES.length}
+          </span>
+        </div>
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+          {FOLDER_THEMES.map((f) => (
+            <button
+              key={f.key}
+              onClick={() => goTo(f.key)}
+              data-testid={`folder-${f.key}`}
+              className="group text-left relative"
+            >
+              {/* Folder tab */}
               <div
-                className="w-10 h-10 rounded-xl flex items-center justify-center shrink-0"
-                style={{ backgroundColor: `${a.color}18` }}
+                className="w-16 h-4 rounded-t-xl ml-4"
+                style={{ backgroundColor: f.tint }}
+              />
+              <div
+                className="rounded-2xl rounded-tl-none p-5 h-32 flex flex-col justify-between shadow-sm border border-white group-hover:shadow-md group-hover:-translate-y-0.5 transition-all relative overflow-hidden"
+                style={{ backgroundColor: f.tint }}
               >
-                <a.icon className="w-5 h-5" style={{ color: a.color }} />
+                <div className="absolute top-3 right-3 opacity-0 group-hover:opacity-100 transition">
+                  <MoreHorizontal className="w-4 h-4 text-slate-400" />
+                </div>
+                <h3 className="font-black text-slate-900 text-lg">
+                  {f.label}
+                </h3>
+                <div className="flex items-end justify-between">
+                  <div className="flex -space-x-2">
+                    <span
+                      className="w-7 h-7 rounded-full border-2 border-white flex items-center justify-center text-white text-[10px] font-black shadow-sm"
+                      style={{ backgroundColor: f.from }}
+                    >
+                      A
+                    </span>
+                  </div>
+                  <span className="text-xs text-slate-500 font-semibold">
+                    {folderCount(f.key)}
+                  </span>
+                </div>
               </div>
-              <div className="text-sm font-bold text-slate-900 leading-tight">{a.label}</div>
             </button>
           ))}
         </div>
+      </section>
+
+      {/* Workflows / recent properties */}
+      <section>
+        <div className="flex items-center gap-2 mb-4">
+          <h2 className="text-base font-black text-slate-900">Listing Aktif</h2>
+          <span className="text-xs text-slate-400 font-semibold">
+            {workflows.length}
+          </span>
+          <button
+            onClick={() => goTo("properties")}
+            className="ml-auto text-xs font-bold text-[#001DF3] hover:underline inline-flex items-center gap-1"
+          >
+            Kelola semua <ExternalLink className="w-3 h-3" />
+          </button>
+        </div>
+        {workflows.length === 0 ? (
+          <div className="rounded-3xl bg-white border border-slate-200 p-10 text-center">
+            <Folder className="w-8 h-8 text-slate-300 mx-auto" />
+            <p className="text-sm text-slate-500 mt-3">
+              {search
+                ? "Tidak ada properti yang cocok."
+                : "Belum ada properti. Tambahkan dari tab Properti."}
+            </p>
+          </div>
+        ) : (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            {workflows.map((p) => (
+              <WorkflowCard key={p.id} item={p} onOpen={() => goTo("properties")} />
+            ))}
+          </div>
+        )}
+      </section>
+    </div>
+  );
+}
+
+function WorkflowCard({ item, onOpen }) {
+  const img = item.image || (item.gallery && item.gallery[0]);
+  const status = item.status === "published" ? "Aktif" : (item.status || "Draft");
+  const ago = timeAgo(item.updated_at || item.created_at);
+  return (
+    <button
+      onClick={onOpen}
+      className="group text-left bg-white rounded-3xl border border-slate-200 overflow-hidden hover:shadow-lg hover:-translate-y-0.5 transition-all"
+    >
+      <div className="relative h-32 bg-slate-100 overflow-hidden">
+        {img ? (
+          <img src={img} alt={item.title} className="w-full h-full object-cover" />
+        ) : (
+          <div className="w-full h-full bg-gradient-to-br from-[#001DF3] to-[#000066]" />
+        )}
+        <button
+          type="button"
+          onClick={(e) => e.preventDefault()}
+          className="absolute top-2 right-2 w-8 h-8 rounded-full bg-white/95 flex items-center justify-center shadow-sm hover:scale-110 transition"
+        >
+          <MoreHorizontal className="w-4 h-4 text-slate-600" />
+        </button>
+        {/* white notch overlay to match Floe style */}
+        <div className="absolute bottom-0 left-0 h-6 w-24 bg-white rounded-tr-2xl" />
+      </div>
+      <div className="p-4 pt-2">
+        <div className="flex items-center gap-1.5 text-[11px] text-slate-500 font-semibold">
+          <span>{ago}</span>
+          <span className="text-slate-300">•</span>
+          <span className={status === "Aktif" ? "text-[#00B512]" : "text-slate-500"}>
+            {status}
+          </span>
+        </div>
+        <h3 className="font-bold text-slate-900 mt-1 truncate">{item.title}</h3>
+        <div className="flex items-center gap-2 mt-3">
+          <span className="w-6 h-6 rounded-full bg-[#001DF3] text-white text-[10px] font-black flex items-center justify-center border-2 border-white">
+            A
+          </span>
+          {item.verified && (
+            <span className="ml-auto inline-flex items-center gap-1 bg-[#00B512]/10 text-[#00B512] text-[10px] font-black rounded-full px-2 py-0.5">
+              <BadgeCheck className="w-3 h-3" /> Terverifikasi
+            </span>
+          )}
+        </div>
+      </div>
+    </button>
+  );
+}
+
+function timeAgo(iso) {
+  if (!iso) return "baru";
+  const then = new Date(iso).getTime();
+  if (Number.isNaN(then)) return "baru";
+  const diff = Date.now() - then;
+  const d = Math.floor(diff / 86400000);
+  if (d <= 0) {
+    const h = Math.floor(diff / 3600000);
+    if (h <= 0) return "baru saja";
+    return `${h} jam lalu`;
+  }
+  if (d === 1) return "1 hari lalu";
+  return `${d} hari lalu`;
+}
+
+function FavouritesList() {
+  const [list, setList] = useState([]);
+  useEffect(() => {
+    adminApi
+      .get("/admin/properties")
+      .then((r) => setList((r.data || []).filter((p) => p.verified).slice(0, 4)))
+      .catch(() => {});
+  }, []);
+  if (list.length === 0) {
+    return (
+      <div className="px-3 text-xs text-slate-400">
+        Properti verified akan muncul di sini.
+      </div>
+    );
+  }
+  return (
+    <ul className="space-y-1">
+      {list.map((p) => (
+        <li key={p.id}>
+          <button
+            className="w-full flex items-center gap-3 px-3 py-2 rounded-xl hover:bg-slate-50 text-left"
+            title={p.title}
+          >
+            <span className="w-7 h-7 rounded-lg bg-slate-100 overflow-hidden shrink-0">
+              {p.image && (
+                <img src={p.image} alt="" className="w-full h-full object-cover" />
+              )}
+            </span>
+            <span className="flex-1 text-xs font-semibold text-slate-700 truncate">
+              {p.title}
+            </span>
+            <Star className="w-3.5 h-3.5 text-[#00B512] fill-[#00B512]" />
+          </button>
+        </li>
+      ))}
+    </ul>
+  );
+}
+
+// ============================ SUBMISSIONS ============================
+const SUB_TYPE_LABEL = {
+  konsultasi: "Konsultasi",
+  karir: "Karir",
+  kontak: "Kontak",
+  brosur: "Brosur",
+};
+
+function SubmissionsPanel() {
+  const [list, setList] = useState([]);
+  const [type, setType] = useState("");
+  const [status, setStatus] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  const load = async () => {
+    setLoading(true);
+    try {
+      const params = [];
+      if (type) params.push(`type=${type}`);
+      if (status) params.push(`status=${status}`);
+      const { data } = await adminApi.get(
+        `/admin/submissions${params.length ? "?" + params.join("&") : ""}`
+      );
+      setList(data || []);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    load();
+  }, [type, status]);
+
+  const mark = async (sid, next) => {
+    await adminApi.patch(`/admin/submissions/${sid}`, { status: next });
+    load();
+  };
+  const remove = async (sid) => {
+    if (!window.confirm("Hapus pengajuan ini?")) return;
+    await adminApi.delete(`/admin/submissions/${sid}`);
+    load();
+  };
+
+  return (
+    <div>
+      <div className="flex flex-wrap items-center justify-between gap-4 mb-8">
+        <h1 className="text-2xl md:text-3xl font-black text-slate-900">
+          Pengajuan
+        </h1>
+        <div className="flex flex-wrap items-center gap-2">
+          <select
+            value={type}
+            onChange={(e) => setType(e.target.value)}
+            data-testid="sub-filter-type"
+            className="h-9 rounded-full bg-white border border-slate-200 px-3 text-xs text-slate-700"
+          >
+            <option value="">Semua Tipe</option>
+            <option value="konsultasi">Konsultasi</option>
+            <option value="karir">Karir</option>
+            <option value="kontak">Kontak</option>
+            <option value="brosur">Brosur</option>
+          </select>
+          <select
+            value={status}
+            onChange={(e) => setStatus(e.target.value)}
+            data-testid="sub-filter-status"
+            className="h-9 rounded-full bg-white border border-slate-200 px-3 text-xs text-slate-700"
+          >
+            <option value="">Semua Status</option>
+            <option value="new">Baru</option>
+            <option value="in_progress">Diproses</option>
+            <option value="done">Selesai</option>
+          </select>
+        </div>
+      </div>
+
+      {loading ? (
+        <Loader />
+      ) : list.length === 0 ? (
+        <div className="rounded-3xl bg-white border border-slate-200 p-14 text-center">
+          <ClipboardList className="w-8 h-8 text-slate-300 mx-auto" />
+          <p className="text-sm text-slate-500 mt-3">Belum ada pengajuan.</p>
+        </div>
+      ) : (
+        <div className="bg-white rounded-3xl border border-slate-200 overflow-hidden">
+          <ul className="divide-y divide-slate-100">
+            {list.map((s) => {
+              const p = s.payload || {};
+              const badgeColor =
+                s.status === "done"
+                  ? "bg-[#00B512]/10 text-[#00B512]"
+                  : s.status === "in_progress"
+                  ? "bg-[#001DF3]/10 text-[#001DF3]"
+                  : "bg-slate-100 text-slate-600";
+              return (
+                <li
+                  key={s.id}
+                  data-testid={`sub-item-${s.id}`}
+                  className="p-4 md:p-5 hover:bg-slate-50 flex flex-wrap items-start gap-4"
+                >
+                  <div className="flex-1 min-w-0">
+                    <div className="flex items-center gap-2">
+                      <span className="inline-block text-[10px] font-black uppercase tracking-widest text-[#001DF3]">
+                        {SUB_TYPE_LABEL[s.type] || s.type}
+                      </span>
+                      <span
+                        className={`inline-block text-[10px] font-black uppercase rounded-full px-2 py-0.5 ${badgeColor}`}
+                      >
+                        {s.status}
+                      </span>
+                    </div>
+                    <h3 className="font-bold text-slate-900 mt-1 truncate">
+                      {p.name || p.email || "Tanpa Nama"}
+                      {p.position && ` — ${p.position}`}
+                      {p.property_title && ` — ${p.property_title}`}
+                    </h3>
+                    <p className="text-xs text-slate-500 mt-1">
+                      {p.email || "-"} • {p.phone || "-"}
+                    </p>
+                    {p.message && (
+                      <p className="text-xs text-slate-500 mt-1 line-clamp-2">
+                        {p.message}
+                      </p>
+                    )}
+                    <p className="text-[10px] text-slate-400 mt-2">
+                      {timeAgo(s.created_at)}
+                    </p>
+                  </div>
+                  <div className="flex items-center gap-2 shrink-0">
+                    <select
+                      value={s.status}
+                      onChange={(e) => mark(s.id, e.target.value)}
+                      data-testid={`sub-status-${s.id}`}
+                      className="h-8 rounded-full bg-white border border-slate-200 px-2 text-xs text-slate-700"
+                    >
+                      <option value="new">Baru</option>
+                      <option value="in_progress">Diproses</option>
+                      <option value="done">Selesai</option>
+                    </select>
+                    <button
+                      onClick={() => remove(s.id)}
+                      data-testid={`sub-delete-${s.id}`}
+                      className="w-8 h-8 rounded-full text-slate-400 hover:bg-[#000066]/8 hover:text-[#000066] flex items-center justify-center transition"
+                      title="Hapus"
+                    >
+                      <Trash2 className="w-4 h-4" />
+                    </button>
+                  </div>
+                </li>
+              );
+            })}
+          </ul>
+        </div>
+      )}
+    </div>
+  );
+}
+
+// ============================ USERS ============================
+function UsersPanel() {
+  return (
+    <div>
+      <h1 className="text-2xl md:text-3xl font-black text-slate-900 mb-2">
+        Pengguna
+      </h1>
+      <p className="text-sm text-slate-500 mb-8">
+        Daftar pengguna terdaftar (Google Auth). Fitur kelola mendetail akan
+        segera hadir.
+      </p>
+      <div className="rounded-3xl bg-white border border-slate-200 p-10 text-center">
+        <Users className="w-8 h-8 text-slate-300 mx-auto" />
+        <p className="text-sm text-slate-500 mt-3">
+          Manajemen pengguna sedang disiapkan.
+        </p>
       </div>
     </div>
   );

@@ -234,10 +234,15 @@ def create_admin_router(db) -> APIRouter:
         views_agg = await db.properties.aggregate([{"$group": {"_id": None, "v": {"$sum": "$views"}, "l": {"$sum": "$likes"}}}]).to_list(1)
         total_views = views_agg[0]["v"] if views_agg else 0
         total_likes = views_agg[0]["l"] if views_agg else 0
+        sub_total = await db.submissions.count_documents({})
+        sub_new = await db.submissions.count_documents({"status": "new"})
+        user_total = await db.users.count_documents({})
         return {
             "properties": {"total": prop_total, "published": prop_pub, "views": total_views, "likes": total_likes},
             "articles": {"total": art_total, "published": art_pub},
             "banners": {"total": banner_total},
+            "submissions": {"total": sub_total, "new": sub_new},
+            "users": {"total": user_total},
         }
 
     # --- PROPERTIES CRUD

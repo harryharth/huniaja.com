@@ -88,6 +88,14 @@ Buatkan website persis seperti gambar contoh (Indonesian property marketplace "H
 ### PasangIklanPage
 - ✅ 3 partner cards (Pemilik/Agen/Developer) sekarang rata dengan `flex flex-col h-full` + `flex-1` pada ul → tombol sejajar di bawah
 
+### Admin Dashboard Floe-Style Redesign (Feb 14, 2026)
+- ✅ Shell dibangun ulang mengikuti referensi Floe: sidebar putih dengan icon nav collapsible (data-testid `admin-sidebar-toggle`), section Favourites (properti verified), badge notifikasi live dari `submissions.new`
+- ✅ Top bar unified: search global (⌘F hint) + "Credits remaining" + avatar admin
+- ✅ Home panel: filter chips (Status/Tipe/Tanggal/Tag) + section **Folders** (4 kartu bertab pastel: Properti/Banner/Berita/Pengajuan yang link ke tab masing-masing) + section **Listing Aktif** (kartu image-header dengan metadata timeAgo + status Aktif)
+- ✅ Section baru **Pengajuan** (data-testid `admin-tab-submissions`) — list semua submissions (konsultasi/karir/kontak/brosur) dengan filter tipe/status, dropdown status per item, tombol hapus. Persis wire ke semua form public
+- ✅ Section baru **Pengguna** (placeholder) — akan dilengkapi manajemen user Google Auth
+- ✅ Backend `/admin/stats` diperluas: sekarang return `submissions.{total,new}` + `users.total`
+
 ### ChatWidget
 - ✅ Kembali sebagai chat AI (dipertahankan) dengan tombol handoff "Chat WhatsApp" (tanpa nomor panjang)
 - ✅ FAB hover: bg berubah hijau → biru `#001DF3` + ring notification dot ikut biru (Feb 14, 2026)
