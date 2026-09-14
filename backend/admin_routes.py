@@ -112,6 +112,7 @@ class PropertyIn(BaseModel):
     specs: PropertySpecs = Field(default_factory=PropertySpecs)
     description: str = ""
     facilities: List[str] = []
+    brosur_url: str = ""
     tier: str = "HH Pro"
     status: str = "published"  # draft | published
     sort_order: int = 0

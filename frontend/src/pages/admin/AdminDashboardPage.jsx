@@ -541,6 +541,18 @@ function PropertyFormModal({ item, onChange, onClose, onSave }) {
     set("image", url);
   };
 
+  const uploadBrosur = async (e) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    const fd = new FormData();
+    fd.append("file", file);
+    const { data } = await adminApi.post("/admin/upload", fd, {
+      headers: { "Content-Type": "multipart/form-data" },
+    });
+    const url = `${process.env.REACT_APP_BACKEND_URL}${data.url}`;
+    set("brosur_url", url);
+  };
+
   return (
     <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4 overflow-y-auto">
       <div className="bg-white rounded-3xl w-full max-w-3xl shadow-2xl max-h-[90vh] overflow-y-auto" data-testid="admin-property-form">
@@ -568,9 +580,33 @@ function PropertyFormModal({ item, onChange, onClose, onSave }) {
             </select>
           </Field>
           <Field label="Kondisi">
-            <select value={item.condition} onChange={(e) => set("condition", e.target.value)} className={inputCls}>
-              {["Baru", "Second", "Lelang"].map(c => <option key={c}>{c}</option>)}
-            </select>
+            <div className="flex flex-wrap gap-2" data-testid="prop-form-condition">
+              {[
+                { key: "Baru", color: "#EC4899" },
+                { key: "Second", color: "#F59E0B" },
+                { key: "Lelang", color: "#0EA5E9" },
+              ].map((c) => {
+                const active = item.condition === c.key;
+                return (
+                  <button
+                    key={c.key}
+                    type="button"
+                    onClick={() => set("condition", c.key)}
+                    className={`flex-1 min-w-[90px] flex items-center justify-center gap-2 rounded-2xl border-2 py-2.5 text-sm font-semibold transition ${
+                      active
+                        ? "border-[#001DF3] bg-[#001DF3]/8 text-[#001DF3]"
+                        : "border-slate-200 bg-white text-slate-600 hover:border-slate-300"
+                    }`}
+                  >
+                    <span
+                      className="w-2 h-2 rounded-full"
+                      style={{ backgroundColor: c.color }}
+                    />
+                    {c.key}
+                  </button>
+                );
+              })}
+            </div>
           </Field>
           <Field label="Harga (Rupiah)">
             <input type="number" value={item.price_value} onChange={(e) => set("price_value", parseInt(e.target.value || 0))} className={inputCls} />
@@ -608,6 +644,43 @@ function PropertyFormModal({ item, onChange, onClose, onSave }) {
                 </label>
                 <input value={item.image} onChange={(e) => set("image", e.target.value)} placeholder="atau paste URL gambar" className={inputCls + " flex-1"} />
               </div>
+            </Field>
+          </div>
+
+          {/* Brosur PDF */}
+          <div className="md:col-span-2">
+            <Field label="Brosur (PDF)">
+              <div className="flex items-center gap-3 flex-wrap">
+                {item.brosur_url && (
+                  <a
+                    href={item.brosur_url}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="inline-flex items-center gap-2 text-sm text-[#001DF3] font-semibold underline break-all"
+                  >
+                    Preview brosur saat ini
+                  </a>
+                )}
+                <label className="inline-flex items-center gap-2 bg-slate-100 hover:bg-slate-200 rounded-full px-4 py-2 text-sm font-semibold cursor-pointer">
+                  <Upload className="w-4 h-4" /> {item.brosur_url ? "Ganti Brosur" : "Upload Brosur"}
+                  <input
+                    type="file"
+                    accept="application/pdf,image/*"
+                    onChange={uploadBrosur}
+                    className="hidden"
+                    data-testid="prop-form-brosur-upload"
+                  />
+                </label>
+                <input
+                  value={item.brosur_url || ""}
+                  onChange={(e) => set("brosur_url", e.target.value)}
+                  placeholder="atau paste URL brosur"
+                  className={inputCls + " flex-1"}
+                />
+              </div>
+              <p className="text-[11px] text-slate-500 mt-1.5">
+                File brosur akan bisa diunduh calon pembeli di halaman detail setelah mereka mengisi data (Hot Buyer capture).
+              </p>
             </Field>
           </div>
 
