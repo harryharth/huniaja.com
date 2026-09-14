@@ -11,7 +11,7 @@ import {
   Quote,
   MapPin,
   Users,
-  ShieldCheck,
+  UtensilsCrossed,
 } from "lucide-react";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
@@ -75,12 +75,12 @@ const programs = [
     tag: "12+ workshop/tahun",
   },
   {
-    Icon: ShieldCheck,
+    Icon: UtensilsCrossed,
     color: "#000066",
-    title: "Advokasi Konsumen Properti",
+    title: "Makan & Sembako Gratis",
     desc:
-      "Kami mendampingi korban penipuan developer nakal — mulai konsultasi hukum sampai mediasi. Sudah 68 kasus rampung tanpa biaya bagi korban.",
-    tag: "68 kasus tuntas",
+      "Setiap Jumat pagi, tim relawan Huniaja Peduli membagikan 200 paket nasi kotak & sembako untuk warga kurang mampu di sekitar kantor pusat dan desa binaan.",
+    tag: "200 paket / minggu",
   },
 ];
 
@@ -99,17 +99,17 @@ const stories = [
   },
   {
     name: "Pak Sarno (61)",
-    place: "Korban penipuan developer, Depok",
+    place: "Warga penerima sembako, Depok",
     text:
-      "Uang tabungan hasil kerja 30 tahun hilang sekejap. Saya kira semua sudah tamat. Tim advokasi Huniaja mendampingi 8 bulan sampai developer dipaksa refund 100%. Tanpa biaya.",
+      "Umur segini sudah tidak kuat kerja berat. Setiap Jumat, mas dan mbak Huniaja datang bawa nasi kotak dan sembako. Bukan cuma makan — kami dianggap manusia. Itu yang paling bikin haru.",
   },
 ];
 
 const timeline = [
-  { year: "2019", event: "Huniaja Peduli lahir sebagai divisi CSR — modal awal 0,5% net revenue." },
+  { year: "2019", event: "Huniaja Peduli lahir sebagai divisi CSR — modal awal 9% net revenue." },
   { year: "2021", event: "Program Rumah Layak Huni pertama di Kampung Muara, Bogor." },
   { year: "2022", event: "Beasiswa anak konstruksi meluas ke 4 provinsi." },
-  { year: "2024", event: "Advokasi konsumen properti tuntas kasus pertama, refund Rp 480 juta." },
+  { year: "2024", event: "Program Makan Gratis Jumat Berkah pertama, 200 paket ke warga sekitar kantor pusat." },
   { year: "2026", event: "Target: 500 rumah, 5.000 anak, dan 30.000 pohon tertanam." },
 ];
 
@@ -138,7 +138,7 @@ export default function CsrPage() {
             Kami hanya bantu memulangkan yang tercecer.
           </h1>
           <p className="mt-6 text-base md:text-lg text-white/85 max-w-2xl leading-relaxed">
-            Sejak 2019, 0,5% dari pendapatan bersih Huniaja disisihkan untuk
+            Sejak 2019, 9% dari pendapatan bersih Huniaja disisihkan untuk
             program sosial — bukan sebagai kewajiban, tapi sebagai janji. Karena
             di balik setiap rumah yang kami bantu jual, ada rumah lain yang belum
             punya kesempatan.
