@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { LOGO_WHITE } from "../mock";
 import { Facebook, Instagram, Youtube } from "lucide-react";
+import { useT } from "../lib/i18n";
 
 const footerCols = [
   [
@@ -35,6 +36,7 @@ function TikTokIcon(props) {
 export default function Footer() {
   // Flat list of all footer links (used for the 2-column mobile layout)
   const flatLinks = footerCols.flat();
+  const t = useT();
   return (
     <footer className="bg-[#001DF3] text-white pt-14 md:pt-16 pb-10">
       <div className="max-w-6xl mx-auto px-6">
@@ -44,7 +46,7 @@ export default function Footer() {
             {flatLinks.map((l, idx) => (
               <li key={idx}>
                 <Link to={l.href} className="hover:text-white/70 transition-colors">
-                  {l.label}
+                  {t(l.label)}
                 </Link>
               </li>
             ))}
@@ -112,7 +114,7 @@ export default function Footer() {
                     to={l.href}
                     className="hover:text-white/70 transition-colors"
                   >
-                    {l.label}
+                    {t(l.label)}
                   </Link>
                 </li>
               ))}

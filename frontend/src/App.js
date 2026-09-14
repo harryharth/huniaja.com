@@ -21,6 +21,7 @@ import { Toaster } from "./components/ui/toaster";
 import ScrollToTop from "./components/ScrollToTop";
 import ChatWidget from "./components/ChatWidget";
 import { AuthProvider } from "./context/AuthContext";
+import { LangProvider } from "./lib/i18n";
 
 import KarirPage from "./pages/KarirPage";
 import KprPage from "./pages/KprPage";
@@ -64,10 +65,12 @@ function App() {
   return (
     <div className="App">
       <BrowserRouter>
-        <AuthProvider>
-          <ScrollToTop />
-          <AppRoutes />
-        </AuthProvider>
+        <LangProvider>
+          <AuthProvider>
+            <ScrollToTop />
+            <AppRoutes />
+          </AuthProvider>
+        </LangProvider>
       </BrowserRouter>
       <ConditionalChat />
       <Toaster />
