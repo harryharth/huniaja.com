@@ -1,8 +1,23 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { LOGO_WHITE } from "../mock";
 import { Facebook, Instagram, Youtube } from "lucide-react";
 import { useT } from "../lib/i18n";
+
+// Footer nav link with hover pill (green) + active bold state.
+function FooterLink({ href, label, current }) {
+  const isActive = current === href;
+  return (
+    <Link
+      to={href}
+      className={`inline-flex items-center rounded-full px-3 py-1.5 -mx-3 transition-colors hover:bg-[#00B512] hover:text-white ${
+        isActive ? "font-black text-white" : "font-medium text-white/95"
+      }`}
+    >
+      {label}
+    </Link>
+  );
+}
 
 const footerCols = [
   [
@@ -37,17 +52,16 @@ export default function Footer() {
   // Flat list of all footer links (used for the 2-column mobile layout)
   const flatLinks = footerCols.flat();
   const t = useT();
+  const { pathname } = useLocation();
   return (
     <footer className="bg-[#001DF3] text-white pt-14 md:pt-16 pb-10">
       <div className="max-w-6xl mx-auto px-6">
         {/* Mobile-only: links stacked in 2 columns, ABOVE the logo/socials */}
         <div className="md:hidden mb-10">
-          <ul className="grid grid-cols-2 gap-y-4 gap-x-6 text-[15px] text-white/95">
+          <ul className="grid grid-cols-2 gap-y-2 gap-x-2 text-[15px]">
             {flatLinks.map((l, idx) => (
               <li key={idx}>
-                <Link to={l.href} className="hover:text-white/70 transition-colors">
-                  {t(l.label)}
-                </Link>
+                <FooterLink href={l.href} label={t(l.label)} current={pathname} />
               </li>
             ))}
           </ul>
@@ -107,15 +121,10 @@ export default function Footer() {
           {/* Right columns: link groups — hidden on mobile (rendered above in 2-col grid) */}
           <div className="hidden md:grid md:col-span-7 md:col-start-6 grid-cols-3 gap-8 md:gap-10 md:pt-2 md:pl-8">
             {footerCols.map((col, i) => (
-            <ul key={i} className="space-y-6 text-[15px] text-white/95">
+            <ul key={i} className="space-y-2 text-[15px]">
               {col.map((l, idx) => (
                 <li key={idx}>
-                  <Link
-                    to={l.href}
-                    className="hover:text-white/70 transition-colors"
-                  >
-                    {t(l.label)}
-                  </Link>
+                  <FooterLink href={l.href} label={t(l.label)} current={pathname} />
                 </li>
               ))}
             </ul>
