@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
-import { ArrowLeft, ShieldCheck, Sparkles, Heart, ClipboardList, Mail, Lock, Eye, EyeOff } from "lucide-react";
+import { ArrowLeft, Mail, Lock, Eye, EyeOff } from "lucide-react";
 import { LOGO_BLUE } from "../mock";
 import { useAuth } from "../context/AuthContext";
 
@@ -14,24 +14,6 @@ function startGoogleLogin() {
     redirectUrl
   )}`;
 }
-
-const benefits = [
-  {
-    Icon: Heart,
-    title: "Simpan Properti Favorit",
-    desc: "Tandai rumah impian dan akses kembali kapan saja dari akunmu.",
-  },
-  {
-    Icon: ClipboardList,
-    title: "Riwayat Pengajuan Tersimpan",
-    desc: "Semua form konsultasi, brosur & lamaran karir tersimpan rapi di satu tempat.",
-  },
-  {
-    Icon: ShieldCheck,
-    title: "Login Aman & Cepat",
-    desc: "Masuk dalam satu klik dengan akun Google — tanpa password baru.",
-  },
-];
 
 export default function LoginPage() {
   const navigate = useNavigate();
@@ -93,45 +75,11 @@ export default function LoginPage() {
         </Link>
       </header>
 
-      <main className="relative z-10 flex-1 flex items-center">
-        <div className="max-w-6xl w-full mx-auto grid grid-cols-1 lg:grid-cols-2 gap-10 md:gap-14 px-4 md:px-6 py-10 md:py-14 items-center">
-          {/* Left — story / value prop */}
-          <div className="order-2 lg:order-1">
-            <span className="inline-flex items-center gap-2 bg-[#001DF3]/8 text-[#001DF3] rounded-full px-3 py-1 text-[11px] font-black tracking-widest">
-              <Sparkles className="w-3.5 h-3.5" /> AKUN HUNIAJA
-            </span>
-            <h1 className="text-3xl md:text-5xl font-black text-slate-900 mt-4 leading-tight">
-              Rumahmu, <span className="text-[#001DF3]">tersimpan</span>
-              <br className="hidden md:block" /> di satu tempat.
-            </h1>
-            <p className="mt-4 text-sm md:text-base text-slate-600 max-w-md leading-relaxed">
-              Masuk dengan akun Google-mu untuk menyimpan properti favorit,
-              melacak pengajuan konsultasi, dan mendapatkan rekomendasi yang
-              lebih personal.
-            </p>
-
-            <div className="mt-8 space-y-4">
-              {benefits.map((b) => (
-                <div key={b.title} className="flex items-start gap-3">
-                  <span className="w-10 h-10 rounded-2xl bg-[#00B512]/12 flex items-center justify-center shrink-0">
-                    <b.Icon className="w-5 h-5 text-[#00B512]" strokeWidth={2.2} />
-                  </span>
-                  <div>
-                    <div className="font-bold text-slate-900 text-sm md:text-base">
-                      {b.title}
-                    </div>
-                    <div className="text-xs md:text-sm text-slate-500 leading-relaxed">
-                      {b.desc}
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Right — login card */}
-          <div className="order-1 lg:order-2">
-            <div className="bg-white rounded-[36px] shadow-2xl border border-slate-100 p-8 md:p-10 max-w-md mx-auto">
+      <main className="relative z-10 flex-1 flex items-center justify-center">
+        <div className="w-full mx-auto px-4 md:px-6 py-10 md:py-14 flex justify-center">
+          {/* Login card — centered */}
+          <div className="w-full max-w-md">
+            <div className="bg-white rounded-[36px] shadow-2xl border border-slate-100 p-8 md:p-10">
               <h2 className="text-xl md:text-2xl font-black text-slate-900">
                 Masuk / Daftar
               </h2>
