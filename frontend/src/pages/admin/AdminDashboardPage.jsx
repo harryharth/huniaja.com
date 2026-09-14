@@ -612,7 +612,18 @@ function PropertyFormModal({ item, onChange, onClose, onSave }) {
             <input type="number" value={item.price_value} onChange={(e) => set("price_value", parseInt(e.target.value || 0))} className={inputCls} />
           </Field>
           <Field label="Info Cicilan">
-            <input value={item.installment} onChange={(e) => set("installment", e.target.value)} className={inputCls} />
+            <select
+              value={item.installment}
+              onChange={(e) => set("installment", e.target.value)}
+              className={inputCls}
+              data-testid="prop-form-installment"
+            >
+              {Array.from({ length: 20 }, (_, i) => i + 1).map((n) => (
+                <option key={n} value={`Angsuran mulai ${n} Jutaan/bln`}>
+                  Angsuran mulai {n} Jutaan/bln
+                </option>
+              ))}
+            </select>
           </Field>
           <Field label="Urutan Tampilan">
             <input type="number" value={item.sort_order} onChange={(e) => set("sort_order", parseInt(e.target.value || 0))} className={inputCls} />
