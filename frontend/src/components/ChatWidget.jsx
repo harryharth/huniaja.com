@@ -26,7 +26,7 @@ export default function ChatWidget() {
     {
       role: "assistant",
       content:
-        "Halo! Saya Dea, admin Huniaja.com. Ada yang bisa saya bantu seputar properti, KPR Syariah, atau pasang iklan?",
+        "Halo! Saya Dea, admin Huniaja. 👋\nUntuk sementara saya bantu menjawab FAQ seputar layanan Huniaja — beli/jual properti, KPR, legalitas, serah terima, akun & pembayaran, atau layanan rumah. Silakan tanya!",
     },
   ]);
   const scrollRef = useRef(null);
@@ -58,12 +58,15 @@ export default function ChatWidget() {
         { role: "assistant", content: data.reply || "..." },
       ]);
     } catch (e) {
+      // Backend already returns a friendly FAQ fallback on 200. Only reach here
+      // on true network failure — keep a helpful FAQ-style reply instead of "offline".
       setMessages((prev) => [
         ...prev,
         {
           role: "assistant",
           content:
-            "Maaf, koneksi sedang bermasalah. Silakan hubungi kami via WhatsApp untuk respons cepat.",
+            "Untuk sementara saya bantu FAQ seputar Huniaja (beli/jual, KPR, legalitas, akun, layanan rumah). " +
+            "Untuk pertanyaan spesifik atau bantuan real-time, silakan chat tim kami di WhatsApp +62 851-1983-3362.",
         },
       ]);
     } finally {
@@ -72,9 +75,10 @@ export default function ChatWidget() {
   };
 
   const suggestions = [
+    "Jenis KPR yang tersedia?",
     "Cara pasang iklan gratis",
-    "Simulasi KPR Syariah",
-    "Cara ajukan kerjasama",
+    "Dokumen serah terima",
+    "Cara reset password",
   ];
 
   return (
