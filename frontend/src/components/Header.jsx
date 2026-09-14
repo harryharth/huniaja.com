@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Search, ChevronDown, Menu, X } from "lucide-react";
+import { Search, ChevronDown, Menu, X, User, LogOut, Heart, ClipboardList } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
 import { LOGO_WHITE, navLinks, searchTabs } from "../mock";
 import { Button } from "./ui/button";
@@ -9,12 +9,14 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "./ui/dropdown-menu";
+import { useAuth } from "../context/AuthContext";
 
 export default function Header() {
   const [tab, setTab] = useState("Beli");
   const [query, setQuery] = useState("");
   const [mobileOpen, setMobileOpen] = useState(false);
   const navigate = useNavigate();
+  const { user, logout } = useAuth();
 
   const submitSearch = (e) => {
     if (e) e.preventDefault();
@@ -132,13 +134,67 @@ export default function Header() {
               {l.label}
             </Link>
           ))}
-          <Link
-            to="/login"
-            data-testid="header-login-btn"
-            className="bg-[#00B512] hover:bg-[#009e0f] text-white font-bold rounded-full px-5 h-10 flex items-center shadow-sm transition"
-          >
-            Masuk/Daftar
-          </Link>
+          {user ? (
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <button
+                  data-testid="header-account-btn"
+                  className="flex items-center gap-2 bg-white/10 hover:bg-white/20 rounded-full pl-1 pr-3 h-10 transition"
+                >
+                  {user.picture ? (
+                    <img
+                      src={user.picture}
+                      alt={user.name}
+                      className="w-8 h-8 rounded-full object-cover"
+                      referrerPolicy="no-referrer"
+                    />
+                  ) : (
+                    <span className="w-8 h-8 rounded-full bg-white text-[#001DF3] flex items-center justify-center font-black text-sm">
+                      {(user.name || user.email || "?").charAt(0).toUpperCase()}
+                    </span>
+                  )}
+                  <span className="text-sm font-bold max-w-[110px] truncate">
+                    {(user.name || user.email).split(" ")[0]}
+                  </span>
+                </button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end" className="w-56 rounded-2xl">
+                <DropdownMenuItem asChild>
+                  <Link to="/akun" data-testid="menu-akun-profil" className="flex items-center gap-2 cursor-pointer">
+                    <User className="w-4 h-4" /> Akunku
+                  </Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem asChild>
+                  <Link to="/akun" className="flex items-center gap-2 cursor-pointer">
+                    <Heart className="w-4 h-4" /> Favorit
+                  </Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem asChild>
+                  <Link to="/akun" className="flex items-center gap-2 cursor-pointer">
+                    <ClipboardList className="w-4 h-4" /> Riwayat Pengajuan
+                  </Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem
+                  onClick={async () => {
+                    await logout();
+                    navigate("/");
+                  }}
+                  data-testid="header-logout-btn"
+                  className="flex items-center gap-2 cursor-pointer text-slate-700"
+                >
+                  <LogOut className="w-4 h-4" /> Keluar
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          ) : (
+            <Link
+              to="/login"
+              data-testid="header-login-btn"
+              className="bg-[#00B512] hover:bg-[#009e0f] text-white font-bold rounded-full px-5 h-10 flex items-center shadow-sm transition"
+            >
+              Masuk/Daftar
+            </Link>
+          )}
         </nav>
       </div>
 
@@ -157,13 +213,35 @@ export default function Header() {
               </Link>
             ))}
             <div className="pt-3 flex flex-col gap-2">
-              <Link
-                to="/login"
-                onClick={() => setMobileOpen(false)}
-                className="w-full bg-[#00B512] hover:bg-[#009e0f] text-white rounded-full font-bold h-11 flex items-center justify-center shadow-sm transition"
-              >
-                Masuk / Daftar
-              </Link>
+              {user ? (
+                <>
+                  <Link
+                    to="/akun"
+                    onClick={() => setMobileOpen(false)}
+                    className="w-full bg-white text-[#001DF3] rounded-full font-bold h-11 flex items-center justify-center gap-2 shadow-sm transition"
+                  >
+                    <User className="w-4 h-4" /> Akunku
+                  </Link>
+                  <button
+                    onClick={async () => {
+                      setMobileOpen(false);
+                      await logout();
+                      navigate("/");
+                    }}
+                    className="w-full bg-white/10 text-white rounded-full font-bold h-11 flex items-center justify-center gap-2 transition"
+                  >
+                    <LogOut className="w-4 h-4" /> Keluar
+                  </button>
+                </>
+              ) : (
+                <Link
+                  to="/login"
+                  onClick={() => setMobileOpen(false)}
+                  className="w-full bg-[#00B512] hover:bg-[#009e0f] text-white rounded-full font-bold h-11 flex items-center justify-center shadow-sm transition"
+                >
+                  Masuk / Daftar
+                </Link>
+              )}
             </div>
           </nav>
         </div>

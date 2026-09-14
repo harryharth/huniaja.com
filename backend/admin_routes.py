@@ -6,7 +6,7 @@ from datetime import datetime, timezone
 from typing import List, Optional
 
 import requests
-from fastapi import APIRouter, Depends, File, HTTPException, Header, UploadFile
+from fastapi import APIRouter, Depends, File, HTTPException, Header, Request, UploadFile
 from pydantic import BaseModel, Field
 
 logger = logging.getLogger(__name__)
@@ -463,15 +463,26 @@ def create_public_router(db) -> APIRouter:
         doc.pop("is_deleted", None)
         return doc
 
-    # Public submissions (form) - no auth
+    # Public submissions (form) - no auth, but stamp user_id if session cookie present
     @router.post("/submissions/{type}")
-    async def create_submission(type: str, body: dict):
+    async def create_submission(type: str, body: dict, request: Request):
         if type not in ("konsultasi", "karir", "kontak", "brosur"):
             raise HTTPException(400, "Invalid submission type")
+        # Best-effort user linkage via session_token cookie
+        user_id = None
+        token = request.cookies.get("session_token")
+        if token:
+            try:
+                sess = await db.user_sessions.find_one({"session_token": token}, {"_id": 0})
+                if sess:
+                    user_id = sess.get("user_id")
+            except Exception:
+                pass
         rec = {
             "id": str(uuid.uuid4()),
             "type": type,
             "payload": body,
+            "user_id": user_id,
             "status": "new",
             "notes": "",
             "created_at": now_iso(),

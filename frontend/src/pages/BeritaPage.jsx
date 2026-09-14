@@ -8,6 +8,15 @@ import {
   ChevronDown,
   Check,
   Newspaper,
+  LayoutGrid,
+  Compass,
+  Wallet,
+  Scale,
+  Lightbulb,
+  TrendingUp,
+  PiggyBank,
+  BadgePercent,
+  ShieldCheck,
 } from "lucide-react";
 import { Link } from "react-router-dom";
 import Header from "../components/Header";
@@ -19,11 +28,31 @@ const CAT_COLORS = {
   Semua: "#001DF3",
   Panduan: "#00B512",
   KPR: "#00B512",
+  Legal: "#000066",
   Legalitas: "#000066",
   Investasi: "#000066",
   Tren: "#001DF3",
   Tips: "#00B512",
   Interior: "#00B512",
+  Keuangan: "#001DF3",
+  Subsidi: "#00B512",
+  Keamanan: "#000066",
+};
+
+// Icon per category — makes the sidebar scannable at a glance
+const CAT_ICONS = {
+  Semua: LayoutGrid,
+  Panduan: Compass,
+  KPR: Wallet,
+  Legal: Scale,
+  Legalitas: Scale,
+  Tips: Lightbulb,
+  Investasi: TrendingUp,
+  Keuangan: PiggyBank,
+  Subsidi: BadgePercent,
+  Keamanan: ShieldCheck,
+  Tren: TrendingUp,
+  Interior: BookOpen,
 };
 
 export default function BeritaPage() {
@@ -62,6 +91,7 @@ export default function BeritaPage() {
               {articleCategories.map((c) => {
                 const isActive = active === c;
                 const color = CAT_COLORS[c] || "#001DF3";
+                const CatIcon = CAT_ICONS[c] || BookOpen;
                 return (
                   <button
                     key={c}
@@ -75,12 +105,14 @@ export default function BeritaPage() {
                   >
                     <span
                       className="w-10 h-10 rounded-xl flex items-center justify-center shrink-0"
-                      style={{ backgroundColor: `${color}20` }}
+                      style={{
+                        backgroundColor: isActive ? "rgba(255,255,255,0.18)" : `${color}20`,
+                      }}
                     >
-                      <BookOpen
+                      <CatIcon
                         className="w-5 h-5"
-                        style={{ color }}
-                        strokeWidth={2.4}
+                        style={{ color: isActive ? "#ffffff" : color }}
+                        strokeWidth={2.2}
                       />
                     </span>
                     <span className="flex-1 text-sm font-bold text-left">

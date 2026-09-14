@@ -1,5 +1,6 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
 import {
   Heart,
   BedDouble,
@@ -12,11 +13,60 @@ import {
 } from "lucide-react";
 import { Button } from "./ui/button";
 import { WA_URL } from "./ChatWidget";
+import { useAuth } from "../context/AuthContext";
+
+const API = `${process.env.REACT_APP_BACKEND_URL}/api`;
 
 export default function ListingCard({ item, variant = "default" }) {
+  const { user } = useAuth();
+  const navigate = useNavigate();
   const [liked, setLiked] = useState(
     item.liked || variant === "featured-whatsapp" || variant === "featured-download"
   );
+  const [busy, setBusy] = useState(false);
+
+  // Hydrate liked state from server when user is logged in
+  useEffect(() => {
+    let cancelled = false;
+    if (!user) return;
+    (async () => {
+      try {
+        const { data } = await axios.get(`${API}/user/favorites`, {
+          withCredentials: true,
+        });
+        if (cancelled) return;
+        const ids = new Set((data || []).map((p) => p.id));
+        setLiked(ids.has(item.id));
+      } catch {}
+    })();
+    return () => {
+      cancelled = true;
+    };
+  }, [user, item.id]);
+
+  const toggleLike = async (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    if (!user) {
+      navigate("/login");
+      return;
+    }
+    if (busy) return;
+    setBusy(true);
+    const next = !liked;
+    setLiked(next); // optimistic
+    try {
+      await axios.post(
+        `${API}/user/favorites/${item.id}`,
+        {},
+        { withCredentials: true }
+      );
+    } catch {
+      setLiked(!next); // rollback
+    } finally {
+      setBusy(false);
+    }
+  };
 
   const detailClasses =
     "bg-white border border-slate-200 text-slate-800 hover:bg-[#001DF3] hover:border-[#001DF3] hover:text-white";
@@ -48,11 +98,8 @@ export default function ListingCard({ item, variant = "default" }) {
           )}
           {/* Heart */}
           <button
-            onClick={(e) => {
-              e.preventDefault();
-              e.stopPropagation();
-              setLiked(!liked);
-            }}
+            onClick={toggleLike}
+            data-testid={`listing-like-${item.id}`}
             className="absolute top-3 right-3 w-8 h-8 rounded-full bg-white/95 backdrop-blur flex items-center justify-center shadow-sm hover:scale-110 transition-transform"
             aria-label="Simpan"
           >

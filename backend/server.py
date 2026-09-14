@@ -123,11 +123,14 @@ app.include_router(api_router)
 
 # --- Admin & public content routes -------------------------------------------
 from admin_routes import create_admin_router, create_public_router, init_storage as _init_storage
+from user_routes import create_user_router
 
 api_router_admin = create_admin_router(db)
 api_router_public = create_public_router(db)
+api_router_user = create_user_router(db)
 app.include_router(api_router_admin, prefix="/api")
 app.include_router(api_router_public, prefix="/api")
+app.include_router(api_router_user, prefix="/api")
 
 
 @app.on_event("startup")

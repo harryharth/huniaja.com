@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams, Link, Navigate } from "react-router-dom";
+import { useParams, Link, Navigate, useNavigate } from "react-router-dom";
 import {
   ArrowLeft,
   MapPin,
@@ -32,13 +32,20 @@ import { KprSyariahDialog } from "./KprDialogs";
 import BrosurLeadDialog from "../components/BrosurLeadDialog";
 import { fetchProperties, fetchProperty } from "../lib/publicApi";
 import { groupFacilities, CATEGORY_META } from "../lib/facilities";
+import { useAuth } from "../context/AuthContext";
+import axios from "axios";
+
+const USER_API = `${process.env.REACT_APP_BACKEND_URL}/api`;
 
 export default function PropertyDetailPage() {
   const { id } = useParams();
+  const navigate = useNavigate();
+  const { user } = useAuth();
   const [item, setItem] = useState(() => allListings.find((l) => l.id === id));
   const [allItems, setAllItems] = useState(allListings);
   const [notFound, setNotFound] = useState(false);
   const [liked, setLiked] = useState(false);
+  const [likeBusy, setLikeBusy] = useState(false);
   const [activeImg, setActiveImg] = useState(0);
   const [kprOpen, setKprOpen] = useState(false);
   const [brosurOpen, setBrosurOpen] = useState(false);
@@ -159,7 +166,27 @@ export default function PropertyDetailPage() {
                 </div>
                 <div className="absolute top-4 right-4 flex gap-2">
                   <button
-                    onClick={() => setLiked(!liked)}
+                    onClick={async () => {
+                      if (!user) {
+                        navigate("/login");
+                        return;
+                      }
+                      if (likeBusy) return;
+                      setLikeBusy(true);
+                      const next = !liked;
+                      setLiked(next);
+                      try {
+                        await axios.post(
+                          `${USER_API}/user/favorites/${id}`,
+                          {},
+                          { withCredentials: true }
+                        );
+                      } catch {
+                        setLiked(!next);
+                      } finally {
+                        setLikeBusy(false);
+                      }
+                    }}
                     data-testid="prop-like-btn"
                     className="w-10 h-10 rounded-full bg-white/95 backdrop-blur flex items-center justify-center shadow-sm hover:scale-110 transition"
                     aria-label="Simpan"
