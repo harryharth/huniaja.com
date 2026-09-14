@@ -10,8 +10,11 @@ export default function NewListings() {
     let mounted = true;
     fetchProperties().then((data) => {
       if (mounted && data && data.length) {
-        // Latest 6 listings (by sort_order asc = newest first in our seed)
-        setItems(data.slice(0, 6));
+        // Sort by created_at desc so newest admin-listed properties appear first
+        const sorted = [...data].sort((a, b) =>
+          (b.created_at || "").localeCompare(a.created_at || "")
+        );
+        setItems(sorted.slice(0, 6));
       }
     });
     return () => (mounted = false);
