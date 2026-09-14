@@ -90,14 +90,38 @@ Buatkan website persis seperti gambar contoh (Indonesian property marketplace "H
 
 ### ChatWidget
 - ✅ Kembali sebagai chat AI (dipertahankan) dengan tombol handoff "Chat WhatsApp" (tanpa nomor panjang)
+- ✅ FAB hover: bg berubah hijau → biru `#001DF3` + ring notification dot ikut biru (Feb 14, 2026)
+
+### Halaman Akun + Emergent Google Auth (Feb 14, 2026)
+- ✅ **Backend** (`/app/backend/user_routes.py`):
+  - `POST /api/auth/session` — exchange session_id (URL fragment) → session_token via `demobackend.emergentagent.com/auth/v1/env/oauth/session-data`; upsert user; set httpOnly cookie
+  - `GET /api/auth/me` — verify cookie/Bearer, return user
+  - `POST /api/auth/logout` — clear cookie + delete session
+  - `GET /api/user/favorites` — hydrated with property snapshots
+  - `POST /api/user/favorites/{id}` — toggle
+  - `GET /api/user/submissions` — riwayat by user_id atau payload.email
+  - Public `POST /api/submissions/{type}` sekarang stamp `user_id` bila session cookie ada
+- ✅ **Frontend**:
+  - `context/AuthContext.jsx` — global provider, skip `/auth/me` bila URL fragment memuat `session_id=`
+  - `pages/AuthCallback.jsx` — synchronous session_id exchange
+  - `pages/LoginPage.jsx` — full redesign: tombol "Lanjutkan dengan Google" (data-testid `google-login-button`), redirect ke `window.location.origin + '/auth/callback'`
+  - `pages/AkunPage.jsx` — 3 tabs (Profil, Favorit, Riwayat Pengajuan) dengan data-testid
+  - `App.js` — AppRoutes cek `location.hash` untuk `session_id` sebelum routing normal
+  - `Header.jsx` — DropdownMenu user avatar saat login (Akunku/Favorit/Riwayat/Keluar)
+  - `ListingCard.jsx` + `PropertyDetailPage.jsx` — heart button persist ke backend, redirect ke `/login` kalau belum login
+- ✅ Testing agent iteration_7: 9/9 backend pass + full frontend flow pass
+
+### BeritaPage Category Icons (Feb 14, 2026)
+- ✅ 9 kategori sidebar (Semua, Panduan, KPR, Legal, Tips, Investasi, Keuangan, Subsidi, Keamanan) sekarang punya icon berbeda-beda (LayoutGrid, Compass, Wallet, Scale, Lightbulb, TrendingUp, PiggyBank, BadgePercent, ShieldCheck), warna tetap on-brand
 
 ### Global Color Standardization
 - ✅ `#12B815`, `#DAFF3D`, `#12FF3D` → `#00B512`
 - ✅ `#0fa112`, `#c8ee1c` → `#009e0f`
+- ✅ Feb 14, 2026 sweep: semua hex off-brand (amber/pink/sky/purple/red/orange) diganti ke palet resmi (`#000066`/`#001DF3`/`#00B512`/`#FFFFFF`); Tailwind classes `text-red-*`, `bg-sky-*`, `text-yellow-*`, dll juga diganti
 
 ## Backlog (P1/P2)
 - P1: QuickCategories — user request untuk menambahkan/mengganti kategori "Cat Rumah" (pending konfirmasi user apakah tambah kategori ke-7 atau replace existing)
 - P1: Admin CRUD untuk Articles/Berita + wiring `BeritaPage` ke `/api/articles` (30 artikel sudah ter-seed di Mongo, tinggal CMS)
-- P2: User authentication publik ("Daftar / Masuk" untuk buyer/agent, terpisah dari admin flow)
-- P2: Favorites system (simpan properti favorit ke akun user)
+- P2: Notifikasi email/WA saat submission baru masuk (via backend hook)
+- P2: My KPR Simulations — simpan hasil kalkulator KPR ke akun user
 
