@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Search, ChevronDown, Menu, X } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { LOGO_WHITE, navLinks, searchTabs } from "../mock";
 import { Button } from "./ui/button";
 import {
@@ -14,6 +14,18 @@ export default function Header() {
   const [tab, setTab] = useState("Beli");
   const [query, setQuery] = useState("");
   const [mobileOpen, setMobileOpen] = useState(false);
+  const navigate = useNavigate();
+
+  const submitSearch = (e) => {
+    if (e) e.preventDefault();
+    const q = query.trim();
+    const params = new URLSearchParams();
+    if (q) params.set("q", q);
+    if (tab && tab !== "Beli") params.set("tab", tab.toLowerCase());
+    const qs = params.toString();
+    navigate(`/cari-properti${qs ? `?${qs}` : ""}`);
+    setMobileOpen(false);
+  };
 
   return (
     <header className="bg-[#001DF3] text-white sticky top-0 z-50 border-b border-white/25">
@@ -33,10 +45,10 @@ export default function Header() {
 
       {/* Mobile search row */}
       <div className="lg:hidden max-w-7xl mx-auto px-4 pb-4">
-        <div className="flex items-center bg-white rounded-full pl-1 pr-1 py-1 shadow-sm">
+        <form onSubmit={submitSearch} className="flex items-center bg-white rounded-full pl-1 pr-1 py-1 shadow-sm" data-testid="header-search-form-mobile">
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <button className="flex items-center gap-1 text-[#001DF3] text-sm font-bold px-3 py-1.5 rounded-full hover:bg-blue-50 transition">
+              <button type="button" className="flex items-center gap-1 text-[#001DF3] text-sm font-bold px-3 py-1.5 rounded-full hover:bg-blue-50 transition">
                 {tab}
                 <ChevronDown className="w-3.5 h-3.5" />
               </button>
@@ -54,15 +66,18 @@ export default function Header() {
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             placeholder="Cari properti..."
+            data-testid="header-search-input-mobile"
             className="flex-1 min-w-0 bg-transparent outline-none px-2 py-1.5 text-sm text-slate-800 placeholder:text-slate-400"
           />
           <button
+            type="submit"
             aria-label="Search"
+            data-testid="header-search-submit-mobile"
             className="text-[#001DF3] hover:bg-blue-50 transition p-1.5 rounded-full"
           >
             <Search className="w-4 h-4" strokeWidth={2.5} />
           </button>
-        </div>
+        </form>
       </div>
 
       {/* Desktop row (>= lg) */}
@@ -72,10 +87,10 @@ export default function Header() {
         </Link>
 
         <div className="flex-1 max-w-3xl">
-          <div className="flex items-center bg-white rounded-full pl-1 pr-1 py-1 shadow-sm">
+          <form onSubmit={submitSearch} className="flex items-center bg-white rounded-full pl-1 pr-1 py-1 shadow-sm" data-testid="header-search-form">
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <button className="flex items-center gap-1 text-[#001DF3] text-sm font-bold px-4 py-2 rounded-full hover:bg-blue-50 transition">
+                <button type="button" className="flex items-center gap-1 text-[#001DF3] text-sm font-bold px-4 py-2 rounded-full hover:bg-blue-50 transition">
                   {tab}
                   <ChevronDown className="w-4 h-4" />
                 </button>
@@ -93,15 +108,18 @@ export default function Header() {
               value={query}
               onChange={(e) => setQuery(e.target.value)}
               placeholder='Cari " Rumah Subsidi Dibogor"'
+              data-testid="header-search-input"
               className="flex-1 min-w-0 bg-transparent outline-none px-3 py-2 text-sm text-slate-800 placeholder:text-slate-400"
             />
             <button
+              type="submit"
               aria-label="Search"
+              data-testid="header-search-submit"
               className="text-[#001DF3] hover:bg-blue-50 transition p-2 rounded-full"
             >
               <Search className="w-5 h-5" strokeWidth={2.5} />
             </button>
-          </div>
+          </form>
         </div>
 
         <nav className="flex items-center gap-6 text-[15px] font-medium shrink-0">

@@ -1,4 +1,5 @@
-import React, { useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
+import { useSearchParams } from "react-router-dom";
 import {
   Search,
   ChevronDown,
@@ -22,6 +23,7 @@ import Header from "../components/Header";
 import Footer from "../components/Footer";
 import ListingCard from "../components/ListingCard";
 import { allListings } from "../mock";
+import { fetchProperties } from "../lib/publicApi";
 import {
   Accordion,
   AccordionContent,
@@ -77,6 +79,8 @@ const tipsFaq = [
 ];
 
 export default function CariPropertiPage() {
+  const [searchParams] = useSearchParams();
+  const [listings, setListings] = useState(allListings);
   const [type, setType] = useState(null);
   const [condition, setCondition] = useState(null);
   const [city, setCity] = useState("Semua");
@@ -89,25 +93,45 @@ export default function CariPropertiPage() {
   const [query, setQuery] = useState("");
   const [page, setPage] = useState(1);
 
+  // Fetch live listings from backend
+  useEffect(() => {
+    let mounted = true;
+    fetchProperties().then((data) => {
+      if (mounted && data && data.length) setListings(data);
+    });
+    return () => (mounted = false);
+  }, []);
+
+  // Sync `?q=` and `?tab=` from URL to local state
+  useEffect(() => {
+    const q = searchParams.get("q") || "";
+    const tab = (searchParams.get("tab") || "").toLowerCase();
+    setQuery(q);
+    if (tab === "sewa") setCondition("Second");
+    else if (tab === "baru") setCondition("Baru");
+    setPage(1);
+  }, [searchParams]);
+
   const filtered = useMemo(() => {
-    return allListings.filter((it) => {
+    return listings.filter((it) => {
       if (type && it.type !== type) return false;
       if (condition && it.condition !== condition) return false;
       if (city !== "Semua" && it.city !== city) return false;
-      const priceInMillions = it.priceValue / 1000000;
+      const rawPrice = it.priceValue ?? it.price_value ?? 0;
+      const priceInMillions = rawPrice / 1000000;
       if (priceInMillions < priceRange[0] || priceInMillions > priceRange[1])
         return false;
       if (
         query &&
         !(
-          it.title.toLowerCase().includes(query.toLowerCase()) ||
-          it.location.toLowerCase().includes(query.toLowerCase())
+          (it.title || "").toLowerCase().includes(query.toLowerCase()) ||
+          (it.location || "").toLowerCase().includes(query.toLowerCase())
         )
       )
         return false;
       return true;
     });
-  }, [type, condition, city, priceRange, query]);
+  }, [listings, type, condition, city, priceRange, query]);
 
   const perPage = 12;
   const totalPages = Math.max(1, Math.ceil(filtered.length / perPage));

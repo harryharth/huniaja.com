@@ -56,6 +56,7 @@ async def seed_properties(db):
             "description": f"{TITLES[idx]} berlokasi di {LOCATIONS[idx]}. Cluster modern dengan keamanan 24 jam.",
             "facilities": ["Carport 2 Mobil", "Taman Depan", "WiFi Ready", "Keamanan 24 Jam", "Rumah Cluster", "Listrik 2200 VA"],
             "tier": "HH Pro",
+            "verified": (i % 3 != 2),  # ~2/3 verified for demo
             "status": "published",
             "sort_order": i,
             "views": 0,

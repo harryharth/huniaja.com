@@ -113,6 +113,7 @@ class PropertyIn(BaseModel):
     description: str = ""
     facilities: List[str] = []
     brosur_url: str = ""
+    verified: bool = False
     tier: str = "HH Pro"
     status: str = "published"  # draft | published
     sort_order: int = 0
@@ -259,6 +260,8 @@ def create_admin_router(db) -> APIRouter:
     async def create_property(item: PropertyIn, _: str = Depends(require_admin)):
         rec = item.dict()
         rec["id"] = str(uuid.uuid4())
+        # auto-format price string for public consumption
+        rec["price"] = f"Rp {rec['price_value']:,}".replace(",", ".")
         rec["views"] = 0
         rec["likes"] = 0
         rec["is_deleted"] = False
@@ -270,6 +273,7 @@ def create_admin_router(db) -> APIRouter:
     @router.put("/properties/{pid}")
     async def update_property(pid: str, item: PropertyIn, _: str = Depends(require_admin)):
         upd = item.dict()
+        upd["price"] = f"Rp {upd['price_value']:,}".replace(",", ".")
         upd["updated_at"] = now_iso()
         r = await db.properties.update_one({"id": pid}, {"$set": upd})
         if r.matched_count == 0:

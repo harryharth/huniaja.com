@@ -1,9 +1,22 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import ListingCard from "./ListingCard";
 import { popularListings, ICON_POPULER } from "../mock";
+import { fetchProperties } from "../lib/publicApi";
 
 export function PopulerSection() {
+  const [items, setItems] = useState(popularListings);
+  useEffect(() => {
+    let mounted = true;
+    fetchProperties().then((data) => {
+      if (mounted && data && data.length) {
+        // Take next 6 after the first 6 for variety
+        setItems(data.slice(6, 12).length ? data.slice(6, 12) : data.slice(0, 6));
+      }
+    });
+    return () => (mounted = false);
+  }, []);
+
   return (
     <section className="bg-white pt-8 md:pt-10">
       <div className="max-w-6xl mx-auto px-4 md:px-6">
@@ -28,7 +41,7 @@ export function PopulerSection() {
             </Link>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5">
-            {popularListings.map((item, i) => (
+            {items.map((item, i) => (
               <ListingCard
                 key={item.id + i}
                 item={item}

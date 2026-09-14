@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useParams, Link, Navigate } from "react-router-dom";
 import {
   ArrowLeft,
@@ -27,27 +27,60 @@ import { Button } from "../components/ui/button";
 import { allListings } from "../mock";
 import { WA_URL } from "../components/ChatWidget";
 import { KprSyariahDialog } from "./KprDialogs";
+import { fetchProperties, fetchProperty } from "../lib/publicApi";
 
 export default function PropertyDetailPage() {
   const { id } = useParams();
-  const item = allListings.find((l) => l.id === id);
-  const [liked, setLiked] = useState(item?.liked || false);
+  const [item, setItem] = useState(() => allListings.find((l) => l.id === id));
+  const [allItems, setAllItems] = useState(allListings);
+  const [notFound, setNotFound] = useState(false);
+  const [liked, setLiked] = useState(false);
   const [activeImg, setActiveImg] = useState(0);
   const [kprOpen, setKprOpen] = useState(false);
 
-  if (!item) {
-    return <Navigate to="/cari-properti" replace />;
+  // Fetch live data from backend
+  useEffect(() => {
+    let mounted = true;
+    (async () => {
+      const [live, single] = await Promise.all([
+        fetchProperties(),
+        fetchProperty(id),
+      ]);
+      if (!mounted) return;
+      if (single) {
+        setItem(single);
+        setLiked(single.liked || false);
+      }
+      if (live && live.length) {
+        setAllItems(live);
+        if (!single) {
+          const found = live.find((l) => l.id === id);
+          if (found) setItem(found);
+          else if (!allListings.find((l) => l.id === id)) setNotFound(true);
+        }
+      } else if (!single && !allListings.find((l) => l.id === id)) {
+        setNotFound(true);
+      }
+    })();
+    return () => (mounted = false);
+  }, [id]);
+
+  if (notFound || !item) {
+    if (notFound) return <Navigate to="/cari-properti" replace />;
+    return null;
   }
 
-  const gallery = [
-    item.image,
-    "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=1200&q=80",
-    "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1200&q=80",
-    "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=1200&q=80",
-    "https://images.unsplash.com/photo-1600607687644-c7171b42498f?w=1200&q=80",
-  ];
+  const gallery = (item.gallery && item.gallery.length)
+    ? [item.image, ...item.gallery.filter((g) => g && g !== item.image)]
+    : [
+        item.image,
+        "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=1200&q=80",
+        "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1200&q=80",
+        "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=1200&q=80",
+        "https://images.unsplash.com/photo-1600607687644-c7171b42498f?w=1200&q=80",
+      ];
 
-  const related = allListings
+  const related = allItems
     .filter((l) => l.id !== item.id && l.city === item.city)
     .slice(0, 3);
 

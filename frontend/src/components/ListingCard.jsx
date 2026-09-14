@@ -39,11 +39,13 @@ export default function ListingCard({ item, variant = "default" }) {
             alt={item.title}
             className="w-full aspect-[4/3] object-cover group-hover:scale-[1.03] transition-transform duration-500"
           />
-          {/* Tier badge */}
-          <div className="absolute top-3 left-3 inline-flex items-center gap-1 bg-white/95 backdrop-blur text-[#001DF3] text-[10px] font-bold px-2 py-1 rounded-full shadow-sm">
-            <BadgeCheck className="w-3 h-3" />
-            Terverifikasi
-          </div>
+          {/* Tier badge - only when property is verified */}
+          {item.verified !== false && (
+            <div className="absolute top-3 left-3 inline-flex items-center gap-1 bg-white/95 backdrop-blur text-[#001DF3] text-[10px] font-bold px-2 py-1 rounded-full shadow-sm">
+              <BadgeCheck className="w-3 h-3" />
+              Terverifikasi
+            </div>
+          )}
           {/* Heart */}
           <button
             onClick={(e) => {

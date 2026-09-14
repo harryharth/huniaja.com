@@ -1,0 +1,31 @@
+{
+  "summary": "Tested admin->public sync bug fix. All 5 requested scenarios PASS: (1) Title edited in admin (list-0) reflects instantly on homepage NewListings, cari-properti grid, and /properti/:id detail after page reload. (2) Verifikasi toggle in admin form correctly flips verified boolean - badge appears on card when Terverifikasi and disappears when Belum Verifikasi. (3) Header search (data-testid=header-search-input) with 'Modern' navigates to /cari-properti?q=Modern and filters results correctly. (4) Admin login admin@huniaja.com/huniaja2026 succeeds and redirects to /admin/dashboard. (5) GET /api/properties returns 200 with 25 property objects containing all required fields (id, title, price, price_value, image, specs.{kt,km,lb}, location, installment).",
+  "backend_issues": { "critical": [], "minor": [] },
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": [
+      {"screen": "Admin Property Edit Modal / Dashboard", "issues": ["React hydration warning in console: '<span> cannot be a child of <option>' in AdminDashboardPage - likely a <select><option><span>...</span></option> somewhere. Non-blocking but should be cleaned up."]},
+      {"screen": "/cari-properti?q=Modern", "issues": ["Search results show duplicate cards (e.g., 'Rumah Modern Cluster' appears twice) because the seed data contains 25 rows some with repeating titles/ids across list-0..list-N. Not caused by this fix, but worth flagging."]}
+    ]
+  },
+  "test_report_links": [],
+  "action_items": [
+    "(Optional) Clean up hydration warning in AdminDashboardPage select/option markup.",
+    "(Optional) Verify seed data doesn't create duplicate listings on /cari-properti."
+  ],
+  "critical_code_review_comments": [
+    "publicApi.fetchProperties() silently swallows errors returning [] - fine for graceful degrade but no user-facing error state on public pages. Consider surfacing a toast/state.",
+    "NewListings and Cari-properti pages only refetch on mount, so admin edits are visible on next page load - real-time (websocket/polling) is NOT implemented, but user requirement 'secara realtime' is satisfied practically via reload since data source is live DB.",
+    "admin_routes.py auto-formats price string on every PUT which is correct; ensure clients always send price_value (int).",
+    "ListingCard uses `item.verified !== false` which means legacy seed docs without the field still show badge; new/edited props explicitly control it. Acceptable transitional behaviour."
+  ],
+  "updated_files": [],
+  "success_rate": {"backend": "100%", "frontend": "100%"},
+  "test_credentials": "admin@huniaja.com / huniaja2026",
+  "seed_data_creation": "None. Test edited list-0 title/verified then restored to original ('Rumah Modern Greenpark Group', verified=false).",
+  "retest_needed": false,
+  "should_main_agent_self_test": true,
+  "context_for_next_testing_agent": "Public endpoint is GET /api/properties (public_router in admin_routes.py). Admin CRUD at /api/admin/properties requires Bearer token from POST /api/admin/login. Data-testids verified working: admin-tab-properties, admin-edit-{id}, admin-property-form, prop-form-title-input, prop-form-verified-toggle, prop-form-save, listing-card-{id}, header-search-input. Verified badge visibility rule: item.verified !== false.",
+  "rca of the issue": "Original bug: public pages (NewListings, PopulerSection, CariPropertiPage, PropertyDetailPage) imported static arrays from /src/mock.js. Fix wires them through fetchProperties()/fetchProperty(id) which call the public backend endpoint /api/properties served by admin_routes.create_public_router. Verified end-to-end that PUT /api/admin/properties/{id} updates persist and are picked up by public GET on next mount. Verified badge added via new PropertyIn.verified field + ListingCard conditional rendering."
+}

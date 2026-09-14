@@ -23,6 +23,7 @@ import {
   ArrowUpRight,
   Zap,
   MessageCircle,
+  BadgeCheck,
 } from "lucide-react";
 import { adminApi, clearToken, getToken } from "./adminApi";
 
@@ -364,6 +365,8 @@ function PropertiesPanel() {
       specs: { lt: "110 m²", lb: "90 m²", kt: 3, km: 2 },
       description: "",
       facilities: ["Carport 2 Mobil", "Taman Depan", "Keamanan 24 Jam", "Rumah Cluster"],
+      brosur_url: "",
+      verified: false,
       tier: "HH Pro",
       status: "published",
       sort_order: list.length,
@@ -581,11 +584,27 @@ function PropertyFormModal({ item, onChange, onClose, onSave }) {
   return (
     <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4 overflow-y-auto">
       <div className="bg-white rounded-3xl w-full max-w-3xl shadow-2xl max-h-[90vh] overflow-y-auto" data-testid="admin-property-form">
-        <div className="sticky top-0 bg-white border-b border-slate-100 px-6 py-4 flex items-center justify-between">
+        <div className="sticky top-0 bg-white border-b border-slate-100 px-6 py-4 flex items-center justify-between gap-3 z-10">
           <h3 className="text-lg font-black">{item.id ? "Edit Properti" : "Tambah Properti"}</h3>
-          <button onClick={onClose} className="w-8 h-8 rounded-full hover:bg-slate-100 flex items-center justify-center">
-            <X className="w-4 h-4" />
-          </button>
+          <div className="flex items-center gap-3">
+            <button
+              type="button"
+              onClick={() => set("verified", !item.verified)}
+              data-testid="prop-form-verified-toggle"
+              className={`inline-flex items-center gap-2 text-xs font-bold px-3 py-2 rounded-full border-2 transition ${
+                item.verified
+                  ? "bg-[#001DF3] text-white border-[#001DF3] shadow-sm"
+                  : "bg-white text-slate-500 border-slate-200 hover:border-slate-300"
+              }`}
+              title="Tandai listing sebagai Terverifikasi"
+            >
+              <BadgeCheck className="w-4 h-4" />
+              {item.verified ? "Terverifikasi" : "Belum Verifikasi"}
+            </button>
+            <button onClick={onClose} className="w-8 h-8 rounded-full hover:bg-slate-100 flex items-center justify-center">
+              <X className="w-4 h-4" />
+            </button>
+          </div>
         </div>
         <div className="p-6 grid grid-cols-1 md:grid-cols-2 gap-4">
           <Field label="Judul" testid="prop-form-title">
