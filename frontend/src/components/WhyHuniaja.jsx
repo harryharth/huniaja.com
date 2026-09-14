@@ -63,7 +63,7 @@ export default function WhyHuniaja() {
             </span>
             <span className="w-8 h-px bg-[#001DF3]" />
           </div>
-          <h2 className="mt-4 text-3xl md:text-4xl lg:text-5xl font-black leading-tight text-slate-900">
+          <h2 className="mt-4 text-2xl md:text-4xl font-black leading-tight text-slate-900 whitespace-nowrap">
             Kenapa harus Huniaja.com?
           </h2>
           <p className="mt-4 text-sm md:text-base text-slate-500 leading-relaxed">
