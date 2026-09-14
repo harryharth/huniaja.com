@@ -175,23 +175,36 @@ export default function SKPage() {
                 );
               })}
 
-              <div className="hidden md:block mt-6 bg-slate-50 rounded-2xl p-4">
-                <p className="text-xs uppercase tracking-wider text-slate-500 font-bold mb-3">
+              <div className="hidden md:block mt-6 space-y-2.5">
+                <p className="text-xs uppercase tracking-wider text-slate-500 font-bold px-1 mb-2">
                   Daftar Isi
                 </p>
-                <ul className="space-y-1">
-                  {sections.map((s) => (
-                    <li key={s.id}>
-                      <a
-                        href={`#${s.id}`}
-                        className="flex items-center gap-2 text-sm rounded-lg px-2 py-2 text-slate-700 hover:bg-white hover:text-[#001DF3] transition"
+                {sections.map((s, i) => {
+                  const colors = ["#001DF3", "#00B512", "#F59E0B", "#8B5CF6", "#EC4899", "#0EA5E9"];
+                  const color = colors[i % colors.length];
+                  return (
+                    <a
+                      key={s.id}
+                      href={`#${s.id}`}
+                      className="w-full group flex items-center gap-3 rounded-2xl p-2 pr-3 bg-white border border-slate-200 text-slate-800 shadow-sm hover:border-slate-300 hover:shadow-md transition-all"
+                    >
+                      <span
+                        className="w-10 h-10 rounded-xl flex items-center justify-center shrink-0"
+                        style={{ backgroundColor: `${color}20` }}
                       >
-                        <s.Icon className="w-4 h-4 shrink-0" />
-                        <span className="truncate">{s.title}</span>
-                      </a>
-                    </li>
-                  ))}
-                </ul>
+                        <s.Icon
+                          className="w-5 h-5"
+                          style={{ color }}
+                          strokeWidth={2.4}
+                        />
+                      </span>
+                      <span className="flex-1 text-sm font-bold text-left truncate">
+                        {s.title}
+                      </span>
+                      <ChevronDown className="w-4 h-4 text-slate-400 shrink-0 -rotate-90" />
+                    </a>
+                  );
+                })}
               </div>
             </div>
           </aside>
