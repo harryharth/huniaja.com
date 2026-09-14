@@ -30,6 +30,7 @@ import { WA_URL } from "../components/ChatWidget";
 import { KprSyariahDialog } from "./KprDialogs";
 import BrosurLeadDialog from "../components/BrosurLeadDialog";
 import { fetchProperties, fetchProperty } from "../lib/publicApi";
+import { groupFacilities, CATEGORY_META } from "../lib/facilities";
 
 export default function PropertyDetailPage() {
   const { id } = useParams();
@@ -242,29 +243,71 @@ export default function PropertyDetailPage() {
               </div>
             </div>
 
-            {/* Facilities */}
+            {/* Facilities — grouped by category, synced with admin dashboard checklist */}
             <div className="bg-white rounded-3xl p-6 md:p-8 border border-slate-100 shadow-sm">
               <h2 className="text-lg md:text-xl font-black text-slate-900">
-                Fasilitas
+                Fasilitas &amp; Lingkungan
               </h2>
-              <div className="grid grid-cols-2 md:grid-cols-3 gap-3 mt-5">
-                {facilities.map((f) => (
-                  <div
-                    key={f.label}
-                    className="flex items-center gap-3 bg-slate-50 rounded-2xl px-4 py-3"
-                  >
-                    <div className="w-9 h-9 rounded-xl bg-white flex items-center justify-center border border-slate-100">
-                      <f.Icon
-                        className="w-4 h-4 text-[#001DF3]"
-                        strokeWidth={2}
-                      />
-                    </div>
-                    <span className="text-sm text-slate-700 font-medium">
-                      {f.label}
-                    </span>
+              {(() => {
+                const grouped = groupFacilities(item.facilities || []);
+                const entries = Object.entries(grouped);
+                if (entries.length === 0) {
+                  return (
+                    <p className="text-sm text-slate-500 mt-4">
+                      Belum ada fasilitas yang ditandai untuk properti ini.
+                    </p>
+                  );
+                }
+                return (
+                  <div className="mt-5 space-y-5">
+                    {entries.map(([category, items]) => {
+                      const color = (CATEGORY_META[category] || { color: "#001DF3" }).color;
+                      return (
+                        <div key={category}>
+                          <div className="flex items-center gap-2 mb-3">
+                            <span
+                              className="w-2 h-2 rounded-full"
+                              style={{ backgroundColor: color }}
+                            />
+                            <span
+                              className="text-[11px] font-black uppercase tracking-widest"
+                              style={{ color }}
+                            >
+                              {category}
+                            </span>
+                            <span className="text-[11px] text-slate-400 font-semibold">
+                              ({items.length})
+                            </span>
+                          </div>
+                          <div className="grid grid-cols-2 md:grid-cols-3 gap-2.5">
+                            {items.map((name) => (
+                              <div
+                                key={name}
+                                data-testid={`facility-${name}`}
+                                className="flex items-center gap-2.5 bg-slate-50 rounded-2xl px-3 py-2.5"
+                              >
+                                <span
+                                  className="w-7 h-7 rounded-lg flex items-center justify-center shrink-0"
+                                  style={{ backgroundColor: `${color}18` }}
+                                >
+                                  <CheckCircle2
+                                    className="w-4 h-4"
+                                    style={{ color }}
+                                    strokeWidth={2.2}
+                                  />
+                                </span>
+                                <span className="text-sm text-slate-700 font-medium leading-tight">
+                                  {name}
+                                </span>
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      );
+                    })}
                   </div>
-                ))}
-              </div>
+                );
+              })()}
             </div>
 
             {/* Location */}
