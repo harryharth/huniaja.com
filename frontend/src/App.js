@@ -28,7 +28,7 @@ import TentangKamiPage from "./pages/TentangKamiPage";
 import KontakPage from "./pages/KontakPage";
 import SKPage from "./pages/SKPage";
 import PusatBantuanPage from "./pages/PusatBantuanPage";
-import KebijakanPrivasiPage from "./pages/KebijakanPrivasiPage";
+import FAQPage from "./pages/FAQPage";
 import BeritaPage from "./pages/BeritaPage";
 import BeritaDetailPage from "./pages/BeritaDetailPage";
 import KerjasamaPage from "./pages/KerjasamaPage";
@@ -72,7 +72,7 @@ function App() {
           <Route path="/kontak" element={<KontakPage />} />
           <Route path="/syarat-ketentuan" element={<SKPage />} />
           <Route path="/pusat-bantuan" element={<PusatBantuanPage />} />
-          <Route path="/kebijakan-privasi" element={<KebijakanPrivasiPage />} />
+          <Route path="/faq" element={<FAQPage />} />
           <Route path="/berita" element={<BeritaPage />} />
           <Route path="/berita/:slug" element={<BeritaDetailPage />} />
           <Route path="/kerjasama" element={<KerjasamaPage />} />
