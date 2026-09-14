@@ -4,13 +4,13 @@ import { LOGO_WHITE } from "../mock";
 import { Instagram, Youtube } from "lucide-react";
 import { useT } from "../lib/i18n";
 
-// Footer nav link with hover pill (green) + active bold state.
+// Footer nav link with hover pill (navy) + active bold state.
 function FooterLink({ href, label, current }) {
   const isActive = current === href;
   return (
     <Link
       to={href}
-      className={`inline-flex items-center rounded-full px-3 py-1.5 -mx-3 transition-colors hover:bg-[#00B512] hover:text-white ${
+      className={`inline-flex items-center rounded-full px-3 py-1.5 -mx-3 transition-colors hover:bg-[#000066] hover:text-white ${
         isActive ? "font-black text-white" : "font-medium text-white/95"
       }`}
     >
