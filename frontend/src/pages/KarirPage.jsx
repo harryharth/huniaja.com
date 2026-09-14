@@ -652,7 +652,7 @@ export default function KarirPage() {
             <div className="flex md:justify-end">
               <button
                 onClick={() => setTalentOpen(true)}
-                className="bg-[#00B512] hover:bg-[#009e0f] text-[#001DF3] font-bold rounded-full px-6 py-3 text-sm shadow-lg transition"
+                className="bg-[#00B512] hover:bg-[#009e0f] text-white font-bold rounded-full px-6 py-3 text-sm shadow-lg transition"
               >
                 Daftar Talent Pool
               </button>
