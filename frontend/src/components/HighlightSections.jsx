@@ -10,8 +10,13 @@ export function PopulerSection() {
     let mounted = true;
     fetchProperties().then((data) => {
       if (mounted && data && data.length) {
-        // Take next 6 after the first 6 for variety
-        setItems(data.slice(6, 12).length ? data.slice(6, 12) : data.slice(0, 6));
+        // Sort by (views + likes) desc so the most-engaged properties bubble up
+        const sorted = [...data].sort((a, b) => {
+          const scoreA = (a.views || 0) + (a.likes || 0) * 3;
+          const scoreB = (b.views || 0) + (b.likes || 0) * 3;
+          return scoreB - scoreA;
+        });
+        setItems(sorted.slice(0, 6));
       }
     });
     return () => (mounted = false);
