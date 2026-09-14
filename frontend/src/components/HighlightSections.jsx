@@ -16,7 +16,7 @@ export function PopulerSection() {
           const scoreB = (b.views || 0) + (b.likes || 0) * 3;
           return scoreB - scoreA;
         });
-        setItems(sorted.slice(0, 6));
+        setItems(sorted.slice(0, 9));
       }
     });
     return () => (mounted = false);

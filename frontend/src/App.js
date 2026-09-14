@@ -8,7 +8,6 @@ import QuickCategories from "./components/QuickCategories";
 import NewListings from "./components/NewListings";
 import { PopulerSection } from "./components/HighlightSections";
 import KerjaSama from "./components/KerjaSama";
-import WhyHuniaja from "./components/WhyHuniaja";
 import {
   HomeTrustStrip,
   HomeHowItWorks,
@@ -56,7 +55,6 @@ const Home = () => (
     <PopulerSection />
     <KerjaSama />
     <HomeStories />
-    <WhyHuniaja />
     <Footer />
   </div>
 );

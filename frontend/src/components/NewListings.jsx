@@ -14,7 +14,7 @@ export default function NewListings() {
         const sorted = [...data].sort((a, b) =>
           (b.created_at || "").localeCompare(a.created_at || "")
         );
-        setItems(sorted.slice(0, 6));
+        setItems(sorted.slice(0, 9));
       }
     });
     return () => (mounted = false);

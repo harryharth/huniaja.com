@@ -20,6 +20,7 @@ import {
 } from "lucide-react";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
+import WhyHuniaja from "../components/WhyHuniaja";
 import { Button } from "../components/ui/button";
 import { WA_URL } from "../components/ChatWidget";
 
@@ -619,6 +620,8 @@ export default function KerjasamaPage() {
           </div>
         </div>
       </section>
+
+      <WhyHuniaja />
 
       <Footer />
     </div>

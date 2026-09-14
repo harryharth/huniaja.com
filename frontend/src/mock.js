@@ -125,6 +125,12 @@ export const newListings = [
   makeListing(0),
   makeListing(1),
   makeListing(2),
+  makeListing(11),
+  makeListing(12),
+  makeListing(13),
+  makeListing(14),
+  makeListing(15),
+  makeListing(16),
 ];
 
 export const allListings = Array.from({ length: 24 }, (_, i) => makeListing(i));
@@ -140,6 +146,12 @@ export const popularListings = [
   makeListing(8, "HH Pro"),
   makeListing(9, "HH Pro"),
   makeListing(10, "HH Pro"),
+  makeListing(17, "HH Pro"),
+  makeListing(18, "HH Pro"),
+  makeListing(19, "HH Pro"),
+  makeListing(20, "HH Pro"),
+  makeListing(21, "HH Pro"),
+  makeListing(22, "HH Pro"),
 ];
 
 export const favoriteLocations = [
