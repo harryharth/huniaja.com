@@ -140,12 +140,8 @@ export default function CariPropertiPage() {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
             {/* Sidebar */}
             <aside className="lg:col-span-3 space-y-3">
-              <div className="bg-white rounded-2xl border border-slate-200 shadow-sm p-3">
-                <div className="flex items-center gap-2 bg-slate-50 rounded-full px-3 py-2">
-                  <Home className="w-4 h-4 text-[#001DF3]" />
-                  <span className="text-sm text-slate-500 font-semibold">Properti</span>
-                </div>
-                <div className="grid grid-cols-3 gap-2 mt-3">
+              <FilterAccordion title="Properti" Icon={Home} defaultOpen>
+                <div className="grid grid-cols-3 gap-2">
                   {propertyTypes.map((t) => {
                     const active = type === t.key;
                     return (
@@ -177,7 +173,7 @@ export default function CariPropertiPage() {
                     );
                   })}
                 </div>
-              </div>
+              </FilterAccordion>
 
               <FilterAccordion title="Kondisi" Icon={Sparkles} defaultOpen>
                 <div className="grid grid-cols-3 gap-2">
