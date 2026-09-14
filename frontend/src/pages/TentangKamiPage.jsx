@@ -424,34 +424,33 @@ export default function TentangKamiPage() {
                 PESAN DARI PENDIRI
               </span>
               <h2 className="text-3xl md:text-5xl font-black text-slate-900 mt-4 leading-[1.1] tracking-tight">
-                "Rumah bukan hadiah untuk yang beruntung.{" "}
+                "Rumah adalah aset paling personal —{" "}
                 <span className="text-[#001DF3]">
-                  Ia adalah kemenangan untuk yang tidak pernah menyerah.
+                  keputusannya seharusnya diambil dengan tenang, bukan tergesa.
                 </span>
                 "
               </h2>
 
               <div className="mt-7 space-y-4 text-slate-600 text-[15px] md:text-base leading-relaxed">
                 <p>
-                  Saya tahu rasanya menatap harga rumah lalu diam-diam bertanya
-                  ke diri sendiri, <em>"apa aku akan pernah sampai ke sana?"</em>
-                  Saya pernah di titik itu. Setiap orang yang saya cintai
-                  pernah di titik itu. Dan saya menolak untuk membiarkan
-                  perasaan itu jadi warisan bagi generasi berikutnya.
+                  Membeli rumah adalah salah satu keputusan finansial terbesar
+                  dalam hidup seseorang. Tapi di Indonesia, prosesnya sering
+                  terasa seperti tebak-tebakan — harga tidak transparan,
+                  legalitas rumit, dan tidak ada satu tempat yang benar-benar
+                  berpihak pada pembeli.
                 </p>
                 <p>
-                  Huniaja bukan sekadar platform properti. Ia adalah medan
-                  perjuangan — untuk keluarga muda yang menabung sambil menahan
-                  air mata, untuk anak rantau yang rindu punya alamat sendiri,
-                  untuk siapa saja yang pernah merasa mimpi mereka terlalu
-                  besar. Kami ada karena kalian layak mendapatkannya.
+                  Kami membangun Huniaja untuk menutup jarak itu. Dengan data
+                  properti yang diverifikasi, simulasi KPR yang jujur, dan
+                  pendampingan dari tim yang memang paham hukumnya — supaya
+                  setiap keluarga bisa membaca pilihan mereka dengan jelas,
+                  bukan diarahkan oleh siapa yang komisinya paling besar.
                 </p>
                 <p className="font-semibold text-slate-800">
-                  Jangan pernah berhenti bermimpi. Jangan biarkan siapapun
-                  bilang rumah adalah kemewahan yang tidak untukmu. Selama
-                  kamu berjalan, kami berdiri di sisimu. Karena kunci rumah itu
-                  bukan cuma milik yang mampu — ia milik yang berani terus
-                  berjuang.
+                  Prinsip kami sederhana: informasi yang benar akan
+                  menghasilkan keputusan yang benar. Dan keputusan yang benar
+                  hari ini adalah investasi terbaik untuk keluarga esok. Terima
+                  kasih sudah memberi Huniaja kesempatan menemani perjalananmu.
                 </p>
               </div>
 
