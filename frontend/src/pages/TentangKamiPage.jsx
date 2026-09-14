@@ -486,20 +486,20 @@ export default function TentangKamiPage() {
       </section>
 
       {/* Founders Speak */}
-      <section className="bg-gradient-to-b from-slate-900 to-[#000066] text-white py-16 md:py-24 relative overflow-hidden">
-        <div className="absolute -top-32 -right-24 w-96 h-96 rounded-full bg-[#001DF3]/30 blur-3xl pointer-events-none" />
-        <div className="absolute -bottom-32 -left-24 w-96 h-96 rounded-full bg-[#00B512]/20 blur-3xl pointer-events-none" />
+      <section className="bg-gradient-to-b from-[#00B512] to-[#009e0f] text-white py-16 md:py-24 relative overflow-hidden">
+        <div className="absolute -top-32 -right-24 w-96 h-96 rounded-full bg-white/15 blur-3xl pointer-events-none" />
+        <div className="absolute -bottom-32 -left-24 w-96 h-96 rounded-full bg-[#000066]/20 blur-3xl pointer-events-none" />
 
         <div className="relative max-w-6xl mx-auto px-4 md:px-6">
           <div className="text-center mb-14">
-            <span className="inline-block bg-white/10 border border-white/20 text-white text-[11px] font-bold rounded-full px-3 py-1 tracking-widest">
+            <span className="inline-block bg-white/15 border border-white/30 text-white text-[11px] font-bold rounded-full px-3 py-1 tracking-widest">
               PARA PENDIRI
             </span>
             <h2 className="text-3xl md:text-5xl font-black mt-4 leading-tight">
               Empat suara.<br className="md:hidden" />{" "}
-              <span className="text-[#00B512]">Satu misi.</span>
+              <span className="text-[#000066]">Satu misi.</span>
             </h2>
-            <p className="text-sm md:text-base text-white/70 mt-4 max-w-2xl mx-auto">
+            <p className="text-sm md:text-base text-white/85 mt-4 max-w-2xl mx-auto">
               Mereka bukan super hero. Mereka empat orang biasa yang percaya
               pada satu hal yang sama: rumah harus jadi hak, bukan privilege.
             </p>
@@ -509,26 +509,24 @@ export default function TentangKamiPage() {
             {founders.map((f) => (
               <div
                 key={f.name}
-                className="bg-white/5 backdrop-blur border border-white/10 rounded-3xl p-6 md:p-7 hover:bg-white/10 transition"
+                className="bg-white/10 backdrop-blur border border-white/20 rounded-3xl p-6 md:p-7 hover:bg-white/15 transition"
               >
                 <Quote
-                  className="w-8 h-8 mb-3"
-                  style={{ color: f.color }}
+                  className="w-8 h-8 mb-3 text-white"
                   strokeWidth={2.5}
                 />
-                <p className="text-sm md:text-base text-white/85 leading-relaxed italic">
+                <p className="text-sm md:text-base text-white leading-relaxed italic">
                   "{f.quote}"
                 </p>
-                <div className="mt-5 flex items-center gap-3 pt-4 border-t border-white/10">
+                <div className="mt-5 flex items-center gap-3 pt-4 border-t border-white/20">
                   <div
-                    className="w-11 h-11 rounded-full flex items-center justify-center text-white font-black text-base shadow-md"
-                    style={{ backgroundColor: f.color }}
+                    className="w-11 h-11 rounded-full flex items-center justify-center text-[#00B512] bg-white font-black text-base shadow-md"
                   >
                     {f.initial}
                   </div>
                   <div>
-                    <div className="text-sm font-bold">{f.name}</div>
-                    <div className="text-xs text-white/60">{f.role}</div>
+                    <div className="text-sm font-bold text-white">{f.name}</div>
+                    <div className="text-xs text-white/80">{f.role}</div>
                   </div>
                 </div>
               </div>
