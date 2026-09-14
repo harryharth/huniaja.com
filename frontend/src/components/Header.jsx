@@ -17,7 +17,6 @@ export default function Header() {
   const [tab, setTab] = useState("Beli");
   const [query, setQuery] = useState("");
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [mobileSearchOpen, setMobileSearchOpen] = useState(false);
   const navigate = useNavigate();
   const { user, logout } = useAuth();
   const t = useT();
@@ -35,84 +34,22 @@ export default function Header() {
 
   return (
     <header className="bg-[#001DF3] text-white sticky top-0 z-50 border-b border-white/25">
-      {/* Mobile top row: logo + search icon + hamburger */}
+      {/* Mobile top row: logo + hamburger */}
       <div className="lg:hidden max-w-7xl mx-auto px-4 pt-4 pb-3 flex items-center justify-between">
         <Link to="/" className="flex items-center shrink-0">
           <img src={LOGO_WHITE} alt="Huniaja" className="h-7 w-auto" />
         </Link>
         <div className="flex items-center gap-2">
           <button
-            className={`w-10 h-10 rounded-full flex items-center justify-center transition ${
-              mobileSearchOpen ? "bg-white text-[#001DF3]" : "bg-white/10 hover:bg-white/20"
-            }`}
-            onClick={() => {
-              setMobileSearchOpen((v) => !v);
-              if (mobileOpen) setMobileOpen(false);
-            }}
-            aria-label="Cari"
-            data-testid="header-mobile-search-toggle"
-          >
-            {mobileSearchOpen ? <X className="w-5 h-5" /> : <Search className="w-5 h-5" />}
-          </button>
-          <button
             className="w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center"
-            onClick={() => {
-              setMobileOpen((v) => !v);
-              if (mobileSearchOpen) setMobileSearchOpen(false);
-            }}
+            onClick={() => setMobileOpen((v) => !v)}
             aria-label="menu"
+            data-testid="header-mobile-menu-toggle"
           >
             {mobileOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
           </button>
         </div>
       </div>
-
-      {/* Mobile search row — hidden by default, expands when search icon clicked */}
-      {mobileSearchOpen && (
-        <div className="lg:hidden max-w-7xl mx-auto px-4 pb-4">
-          <form
-            onSubmit={(e) => {
-              submitSearch(e);
-              setMobileSearchOpen(false);
-            }}
-            className="flex items-center bg-white rounded-full pl-1 pr-1 py-1 shadow-sm"
-            data-testid="header-search-form-mobile"
-          >
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <button type="button" className="flex items-center gap-1 text-[#001DF3] text-sm font-bold px-3 py-1.5 rounded-full hover:bg-blue-50 transition">
-                  {tab}
-                  <ChevronDown className="w-3.5 h-3.5" />
-                </button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent align="start">
-                {searchTabs.map((t) => (
-                  <DropdownMenuItem key={t} onClick={() => setTab(t)}>
-                    {t}
-                  </DropdownMenuItem>
-                ))}
-              </DropdownMenuContent>
-            </DropdownMenu>
-            <div className="w-px h-6 bg-slate-200 mx-1" />
-            <input
-              autoFocus
-              value={query}
-              onChange={(e) => setQuery(e.target.value)}
-              placeholder={t("Cari properti...")}
-              data-testid="header-search-input-mobile"
-              className="flex-1 min-w-0 bg-transparent outline-none px-2 py-1.5 text-sm text-slate-800 placeholder:text-slate-400"
-            />
-            <button
-              type="submit"
-              aria-label="Search"
-              data-testid="header-search-submit-mobile"
-              className="text-[#001DF3] hover:bg-blue-50 transition p-1.5 rounded-full"
-            >
-              <Search className="w-4 h-4" strokeWidth={2.5} />
-            </button>
-          </form>
-        </div>
-      )}
 
       {/* Desktop row (>= lg) */}
       <div className="hidden lg:flex max-w-7xl mx-auto px-8 py-5 md:py-6 items-center gap-8">
@@ -235,6 +172,48 @@ export default function Header() {
       {mobileOpen && (
         <div className="lg:hidden border-t border-white/15 bg-[#001DF3]">
           <nav className="px-4 py-3 flex flex-col">
+            {/* Mobile search — placed above nav links */}
+            <form
+              onSubmit={submitSearch}
+              className="flex items-center bg-white rounded-full pl-1 pr-1 py-1 shadow-sm mb-3"
+              data-testid="header-search-form-mobile"
+            >
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <button
+                    type="button"
+                    className="flex items-center gap-1 text-[#001DF3] text-sm font-bold px-3 py-1.5 rounded-full hover:bg-blue-50 transition"
+                  >
+                    {tab}
+                    <ChevronDown className="w-3.5 h-3.5" />
+                  </button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="start">
+                  {searchTabs.map((tItem) => (
+                    <DropdownMenuItem key={tItem} onClick={() => setTab(tItem)}>
+                      {tItem}
+                    </DropdownMenuItem>
+                  ))}
+                </DropdownMenuContent>
+              </DropdownMenu>
+              <div className="w-px h-6 bg-slate-200 mx-1" />
+              <input
+                value={query}
+                onChange={(e) => setQuery(e.target.value)}
+                placeholder={t("Cari properti...")}
+                data-testid="header-search-input-mobile"
+                className="flex-1 min-w-0 bg-transparent outline-none px-2 py-1.5 text-sm text-slate-800 placeholder:text-slate-400"
+              />
+              <button
+                type="submit"
+                aria-label="Search"
+                data-testid="header-search-submit-mobile"
+                className="text-[#001DF3] hover:bg-blue-50 transition p-1.5 rounded-full"
+              >
+                <Search className="w-4 h-4" strokeWidth={2.5} />
+              </button>
+            </form>
+
             {navLinks.map((l) => (
               <Link
                 key={l.label}
