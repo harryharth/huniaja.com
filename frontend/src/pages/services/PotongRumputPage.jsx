@@ -229,29 +229,29 @@ export default function DigitalMarketingPage() {
       {/* ============ 3. BIG IDEA / INSIGHT ============ */}
       <section
         className="py-16 md:py-24 relative overflow-hidden"
-        style={{ backgroundColor: NAVY }}
+        style={{ backgroundColor: GREEN }}
         data-testid="dm-insight-section"
       >
         <div className="absolute inset-0 opacity-10 pointer-events-none">
           <div
             className="absolute -top-24 -right-24 w-96 h-96 rounded-full blur-3xl"
-            style={{ backgroundColor: ACCENT }}
+            style={{ backgroundColor: "#FFFFFF" }}
           />
           <div
             className="absolute -bottom-24 -left-24 w-96 h-96 rounded-full blur-3xl"
-            style={{ backgroundColor: GREEN }}
+            style={{ backgroundColor: NAVY }}
           />
         </div>
         <div className="max-w-5xl mx-auto px-4 md:px-6 relative">
           <div className="text-center">
-            <span className="text-xs font-bold uppercase tracking-widest text-white/60">
+            <span className="text-xs font-bold uppercase tracking-widest text-white/70">
               03 · Big Idea
             </span>
             <h2 className="mt-3 text-3xl md:text-5xl font-black text-white leading-[1.1]">
-              Membeli rumah itu <span style={{ color: "#7DD3FC" }}>perjalanan 180 hari</span>
+              Membeli rumah itu <span style={{ color: "#FEF3C7" }}>perjalanan 180 hari</span>
               <br className="hidden md:block" /> — bukan keputusan 5 menit.
             </h2>
-            <p className="mt-5 text-base md:text-lg text-white/80 max-w-3xl mx-auto leading-relaxed">
+            <p className="mt-5 text-base md:text-lg text-white/90 max-w-3xl mx-auto leading-relaxed">
               Kebanyakan iklan properti bicara ke semua fase buyer dengan pesan
               yang sama. Padahal setiap fase butuh konten, format, bahkan channel
               yang berbeda. Insight ini bukan teori — ini pola beli properti
@@ -286,22 +286,21 @@ export default function DigitalMarketingPage() {
             ].map((p, i) => (
               <div
                 key={i}
-                className="bg-white/8 backdrop-blur rounded-2xl p-6 border border-white/15 hover:bg-white/12 transition"
+                className="bg-white/12 backdrop-blur rounded-2xl p-6 border border-white/25 hover:bg-white/18 transition"
                 data-testid={`dm-phase-${i + 1}`}
               >
                 <div
-                  className="w-11 h-11 rounded-xl flex items-center justify-center"
-                  style={{ backgroundColor: "#7DD3FC" }}
+                  className="w-11 h-11 rounded-xl flex items-center justify-center bg-white"
                 >
-                  <p.Icon className="w-5 h-5 text-slate-900" strokeWidth={2.4} />
+                  <p.Icon className="w-5 h-5" style={{ color: GREEN }} strokeWidth={2.4} />
                 </div>
-                <div className="mt-4 text-[11px] uppercase tracking-widest text-white/60 font-bold">
+                <div className="mt-4 text-[11px] uppercase tracking-widest text-white/70 font-bold">
                   {p.subtitle}
                 </div>
                 <div className="text-xl font-black text-white mt-1">
                   {p.phase}
                 </div>
-                <p className="mt-3 text-sm text-white/80 leading-relaxed">
+                <p className="mt-3 text-sm text-white/90 leading-relaxed">
                   {p.text}
                 </p>
               </div>
@@ -309,8 +308,8 @@ export default function DigitalMarketingPage() {
           </div>
 
           <div className="mt-12 max-w-3xl mx-auto text-center">
-            <div className="inline-flex items-start gap-3 bg-white/10 backdrop-blur rounded-2xl px-5 py-4 border border-white/20">
-              <Quote className="w-6 h-6 text-white/70 shrink-0 mt-1" />
+            <div className="inline-flex items-start gap-3 bg-white/15 backdrop-blur rounded-2xl px-5 py-4 border border-white/25">
+              <Quote className="w-6 h-6 text-white/80 shrink-0 mt-1" />
               <p className="text-base md:text-lg text-white font-semibold leading-snug text-left">
                 "Iklan yang menang di properti bukan yang paling gencar — tapi
                 yang paling paham kapan buyer siap dihubungi."
