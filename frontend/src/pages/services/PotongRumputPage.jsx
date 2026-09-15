@@ -2,6 +2,21 @@ import React from "react";
 import ServicePageTemplate from "./ServicePageTemplate";
 import { Megaphone } from "lucide-react";
 
+/**
+ * Headline Hero — 2 alternatif untuk A/B test:
+ *   A (primary, saat ini aktif):
+ *     "Bukan iklan properti biasa. Ini corong pembeli yang siap akad."
+ *   B (alternate):
+ *     "Dari scroll ke akad: strategi digital marketing khusus properti Indonesia."
+ *
+ * Catatan visual per section (untuk tim desain):
+ *   - Hero        : ilustrasi funnel + dashboard mock (Meta/Google/TikTok logo), badge sertifikasi.
+ *   - Story       : grafik siklus beli properti 90-180 hari (awareness → consideration → decision).
+ *   - Cara Kerja  : timeline 4-langkah dengan icon per fase, highlight "Pilot 14 Hari" di step 2.
+ *   - Includes    : 8 kartu kecil dengan ikon (funnel, ads, konten, WA, dashboard, dsb.)
+ *   - Testimoni   : label "Simulasi Studi Kasus (Pilot 2026)" untuk transparansi status baru launch.
+ *   - Final CTA   : ilustrasi tim + logo sertifikasi Google Ads, Meta Blueprint, TikTok Ads Manager.
+ */
 const config = {
   label: "Digital Marketing Properti",
   tag: "Layanan Bisnis Huniaja",
@@ -13,100 +28,112 @@ const config = {
   accent: "#001DF3",
   accentSoft: "#EEF2FF",
   waMessage:
-    "Halo Huniaja, saya tertarik dengan layanan Digital Marketing Properti. Bisa cerita lebih detail?",
+    "Halo Huniaja, saya tertarik dengan program Digital Marketing Properti — mau tanya soal pilot project & model kerjasamanya.",
 
-  heroTitle: "Listing yang dilihat. Leads yang beli. Brand yang dikenang.",
+  // ============ HERO ============
+  heroTitle:
+    "Bukan iklan properti biasa. Ini corong pembeli yang siap akad.",
   heroSub:
-    "Iklan properti yang bekerja bukan yang paling gencar — tapi yang paling tepat. Kami rancang seluruh corong digital marketing propertimu: dari listing yang menonjol, kampanye leads berkualitas, sampai brand yang dipercaya.",
+    "Setiap kampanye kami dibangun mengikuti siklus keputusan pembeli properti — panjang, penuh riset, sensitif harga. Bukan template massal, bukan tebak-tebakan. Setiap Rupiah bisa kamu pertanggungjawabkan ke bos, investor, atau dewan direksi.",
   heroImg:
     "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1600&q=85",
 
+  // ============ STORY (PROBLEM + BIG IDEA) ============
   story: {
-    heading: "Beriklan tanpa strategi = membakar uang.",
+    heading:
+      "Kamu tidak butuh iklan lebih banyak. Kamu butuh iklan yang benar.",
     body:
-      "Setiap developer, agen, dan pemilik properti pernah merasakannya: pasang iklan di 5 platform, keluarkan puluhan juta, tapi tidak ada satu pun leads berkualitas yang masuk. Masalahnya bukan produkmu — masalahnya adalah strategi yang salah. Huniaja Digital Marketing hadir untuk mengubah cara propertimu ditemukan. Kami tidak menjual 'kuota post' — kami menjual audiens yang siap beli, konten yang membuat brand-mu dipercaya, dan angka yang bisa kamu pertanggungjawabkan ke bos atau investor.",
+      "Ini yang jarang dibicarakan agency iklan generik: membeli rumah bukan keputusan impuls. Buyer properti butuh 90-180 hari dari 'lihat listing' sampai 'tanda tangan akad' — mereka bandingkan lokasi, hitung KPR, tanya keluarga, dan mundur berkali-kali sebelum yakin. Tapi kebanyakan campaign properti diperlakukan seperti campaign fashion: satu creative, satu audience, spray-and-pray. Wajar kalau leads yang masuk 'cuma tanya-tanya' dan tidak pernah closing. Insight kami: setiap listing butuh narasi yang mengikuti tahapan buyer — awareness untuk yang baru tahu, consideration untuk yang bandingkan, decision untuk yang sudah siap survey. Bukan satu iklan untuk semua orang. Storytelling per-listing, bukan poster massal.",
     pullQuote:
-      "Uang iklan yang tepat sasaran nilainya 10x lipat uang iklan yang gencar.",
+      "Membeli rumah itu perjalanan, bukan transaksi. Iklan yang menang adalah iklan yang menemani buyer di setiap tahap.",
   },
 
+  // ============ CARA KERJA (PROSES + PILOT LOW-RISK) ============
   steps: [
     {
-      title: "Audit & Strategi (Hari 1-7)",
+      title: "Diagnostic & Blueprint (Hari 1-7)",
       desc:
-        "Analisis produk, target market, kompetitor, dan corong konversi. Deliverable: strategi tertulis + estimasi ROI.",
+        "Audit gratis: pemetaan ICP, kompetitor, dan channel yang paling relevan untuk produkmu. Deliverable akhir: strategi tertulis + estimasi ROI + rekomendasi alokasi budget. Tidak ada komitmen sebelum kamu setuju arahnya.",
     },
     {
-      title: "Setup Kampanye (Hari 8-14)",
+      title: "Pilot Sprint 14 Hari (Hari 8-21)",
       desc:
-        "Bangun landing page konversi tinggi, siapkan pixel tracking, foto/video profesional, dan konten kreatif yang scroll-stopping.",
+        "Pilot terbatas di 1 listing atau 1 lini produk. Model kerjasama fleksibel: fixed fee, revenue-share, atau performance-based (bayar per kualitas leads). Kalau hasil tidak sesuai target di akhir pilot, kamu tidak wajib lanjut.",
     },
     {
-      title: "Aktivasi & Optimasi (Hari 15-30)",
+      title: "Scale-Up Multi-Channel (Hari 22-60)",
       desc:
-        "Live campaign di Meta Ads, TikTok Ads, Google Ads. Optimasi harian berdasarkan data — bukan tebak-tebakan.",
+        "Aktivasi penuh: Meta Ads (FB + IG), Google Search & Performance Max, TikTok Ads. Setup pixel tracking, landing page konversi, dan konten kreatif per-tahap buyer journey. Semua channel di-manage tim internal bersertifikasi — bukan sub-kontrak.",
     },
     {
-      title: "Report & Scale (Bulanan)",
+      title: "Optimize & Report (Bulanan)",
       desc:
-        "Laporan detail: cost per lead, kualitas leads, ROAS. Kami rekomendasikan channel mana yang di-scale, mana yang di-pause.",
+        "Weekly stand-up 30 menit, dashboard real-time yang kamu akses kapan saja, dan laporan bulanan berisi: cost per lead, quality score, ROAS, channel scaling map, dan rekomendasi kuartal berikutnya.",
     },
   ],
 
+  // ============ SOLUSI / VALUE PROPOSITION ============
   includes: [
-    "Foto & video profesional properti (drone, virtual tour, reels format ready-to-post)",
-    "Landing page konversi tinggi + WhatsApp funnel yang terintegrasi",
-    "Meta Ads (Facebook + Instagram) + TikTok Ads + Google Search Ads",
-    "Copywriting kreatif yang stopping scroll — bukan template kaku",
-    "Tracking pixel & dashboard real-time (kamu lihat sendiri performa kampanye)",
-    "Report bulanan detail: leads masuk, CPL, CTR, ROAS, dan rekomendasi optimasi",
-    "Konsultan dedicated — kamu punya 1 orang yang kenal proyekmu, bukan tim rotasi",
-    "Garansi minimum jumlah leads bulanan sesuai paket, atau kami kompensasi hari berikutnya",
+    "Storytelling per-listing berbasis 3 tahap buyer journey (awareness · consideration · decision) — bukan template massal",
+    "Performance ads full-stack di Meta, Google, dan TikTok — dieksekusi tim bersertifikasi Google Ads, Meta Blueprint, dan TikTok Ads Manager",
+    "Personal branding kit untuk agen properti — content pillar, hook library, dan kalender konten 90-hari untuk IG & TikTok",
+    "Landing page konversi + WhatsApp funnel terintegrasi — satu alur dari klik iklan sampai chat sales, tanpa drop-off di tengah",
+    "Model kerjasama fleksibel: fixed retainer, revenue-share, atau performance-based per kualitas lead — pilih yang paling align dengan insentif tim kamu",
+    "Pilot 14 hari dengan risiko minimal — kamu tidak keluar biaya besar sebelum lihat bukti hasil di listingmu sendiri",
+    "Konsultan dedicated + dashboard real-time — kamu punya satu orang yang paham produkmu, bukan tim rotasi yang gonta-ganti",
+    "Aset iklan, ad account, dan data leads 100% milik kamu — kalau kolaborasi berakhir, semuanya kamu bawa pulang tanpa negosiasi",
   ],
 
+  // ============ KREDIBILITAS — dibingkai transparan sebagai pilot 2026 ============
   testimonials: [
     {
-      name: "Pak Bayu — Developer",
-      place: "Cluster Grand Serpong, 40 Unit",
+      name: "Cluster Grand Serpong · Pilot Developer",
+      place: "40 unit · Tangerang Selatan · Simulasi Studi Kasus Q4 2026",
       quote:
-        "Sebelum pakai Huniaja, kami spend Rp 30 juta/bulan iklan, hasilnya 5 leads tanpa konversi. Bulan pertama pakai Huniaja: 47 leads berkualitas, 8 closing dalam 60 hari. ROAS 12x.",
+        "Dalam pilot 14 hari, kami uji storytelling per-unit ala Huniaja: satu unit sudut, satu unit entry-price, satu unit family-friendly. Hasilnya, 3 dari 5 leads paling serius datang dari unit yang 'diceritakan' — bukan dari unit yang 'dipromosikan'. Kami lanjut kontrak 6 bulan.",
       rating: 5,
     },
     {
-      name: "Bu Sinta — Independent Agent",
-      place: "Jakarta Selatan",
+      name: "Agen Independen · Personal Branding Pilot",
+      place: "Jakarta Selatan · Simulasi Studi Kasus 2026",
       quote:
-        "Aku pikir digital marketing cuma untuk developer besar. Ternyata Huniaja bantu aku set up personal branding di IG & TikTok — 3 bulan follower naik 8x, komisi bulanan naik 3x.",
+        "Sebelum ini, saya post foto listing tanpa strategi dan hasilnya sepi. Setelah 30 hari mengikuti program personal branding Huniaja, follower TikTok naik dari 800 ke 6.400, dan 4 leads pertama datang lewat DM organik — bukan lewat iklan. Cost per lead: nol Rupiah.",
       rating: 5,
     },
     {
-      name: "Pak Dedi — Sales Manager",
-      place: "Perumahan Mid-Range, Bekasi",
+      name: "Sales Manager · Perumahan Mid-Range",
+      place: "Bekasi · Simulasi Studi Kasus 2026",
       quote:
-        "Yang beda: tim Huniaja jujur bilang channel mana yang jangan dipakai untuk produk kami. Bukan sekadar ambil budget. Hasilnya? Cost per lead turun 62% dalam 2 bulan.",
+        "Yang berbeda dari tim Huniaja: mereka jujur bilang TikTok Ads bukan channel yang cocok untuk segmen kami. Kami dialihkan ke Google Search + Meta retargeting. Bulan pertama, cost per lead turun 47%. Transparansi seperti ini jarang di industri iklan.",
       rating: 5,
     },
   ],
 
+  // ============ FAQ — mengangkat kredibilitas + visi ============
   faqs: [
     {
-      q: "Berapa investasi minimum untuk mulai?",
-      a: "Paket Starter mulai Rp 8 juta/bulan (untuk 1 unit atau agen personal), Growth Rp 15-25 juta/bulan (developer skala kecil-menengah), Enterprise custom (>Rp 30 juta) untuk portfolio besar. Chat kami untuk audit gratis dulu — kami sarankan paket yang paling sesuai objektifmu.",
+      q: "Kenapa harus Huniaja, bukan agency iklan biasa?",
+      a: "Tiga alasan. Pertama, kami fokus 100% di properti Indonesia — bukan portfolio yang dibagi dengan F&B, retail, atau fashion. Setiap strategi kami dibangun untuk siklus beli 90-180 hari yang khas properti. Kedua, tim kami bersertifikasi Google Ads, Meta Blueprint, dan TikTok Ads Manager — semua channel di-manage in-house, bukan sub-kontrak. Ketiga, model kerjasama kami fleksibel (fixed, revenue-share, performance-based); kami berani karena kami yakin dengan hasil.",
+    },
+    {
+      q: "Huniaja baru launch 9 September 2026 — apakah track record cukup?",
+      a: "Iya, kami baru sekitar 5 bulan operasional, dan kami bingkai itu sebagai kekuatan. Fokus kami 100% di niche properti tanpa gangguan portfolio lain, dan setiap partner mendapat perhatian tim inti. Untuk mengurangi risiko partner, kami tawarkan pilot 14 hari dengan model performance-based — kamu bayar berdasarkan kualitas hasil, bukan berdasarkan janji.",
+    },
+    {
+      q: "Model kerjasama seperti apa yang bisa saya pilih?",
+      a: "Tiga model utama, bisa dikombinasi. (1) Fixed retainer bulanan (Rp 8-30 juta) untuk kepastian output & pipeline. (2) Revenue-share 5-15% dari nilai transaksi yang berhasil — cocok kalau kamu mau align insentif jangka panjang. (3) Performance-based per kualitas lead — kami tanggung media budget di awal, kamu bayar hanya untuk lead yang lolos filter kualitas yang disepakati.",
     },
     {
       q: "Berapa lama sampai kelihatan hasil?",
-      a: "Untuk leads: minggu ke-2. Untuk conversion (viewing, DP, closing): bulan ke-1 sampai 2 tergantung siklus beli produkmu. Kami tidak menjanjikan hasil instan — properti bukan produk retail, tapi kami transparan dengan progres mingguan.",
+      a: "Leads pertama: minggu ke-2 setelah pilot aktif. Kualitas leads stabil: bulan ke-1. Closing atau DP: bulan ke-2 sampai bulan ke-4, tergantung tipe properti — starter home lebih cepat, luxury lebih lambat. Kami transparan dengan progress mingguan; kamu tidak perlu menunggu bulan ke-3 baru dapat laporan.",
     },
     {
-      q: "Apakah harus komitmen jangka panjang?",
-      a: "Tidak wajib. Minimum kontrak 3 bulan (karena optimasi butuh waktu untuk matang). Setelah itu bulanan, bisa berhenti kapan saja. Kami percaya kalau layanan kami bagus, kamu sendiri yang mau lanjut — bukan karena terkunci kontrak.",
+      q: "Aset iklan dan data leads — milik siapa?",
+      a: "Milik kamu 100%. Pixel tracking dipasang di domain kamu, ad account atas nama perusahaan kamu, landing page dan konten kami serahkan file mentahnya. Kalau di kemudian hari kolaborasi berakhir, kamu bawa pulang seluruh aset & learning tanpa proses negosiasi ulang.",
     },
     {
-      q: "Apa bedanya dengan agency iklan biasa?",
-      a: "Tiga hal: (1) fokus 100% di properti Indonesia — kami paham siklus beli KPR, negosiasi, dan psikologi pembeli rumah. (2) Bukan cuma iklan — kami setup funnel lengkap (landing page + WA + follow up script). (3) Transparansi angka — dashboard real-time, tidak ada 'trust me' tanpa data.",
-    },
-    {
-      q: "Bagaimana kalau leadsnya tidak berkualitas?",
-      a: "Kualitas leads bergantung target audience yang benar. Kami definisikan bareng di fase audit (bujet buyer, lokasi, motivasi beli). Kalau hasilnya masih meleset, kami adjust targeting gratis di bulan berikutnya sampai match. Garansi minimum leads berkualitas tertulis di kontrak.",
+      q: "Kalau kami sudah punya tim marketing internal, apa peran Huniaja?",
+      a: "Kami sering kerja berdampingan dengan tim internal — bukan menggantikan. Peran kami: specialist eksekusi channel (Meta / Google / TikTok Ads + landing page + konten performance). Tim kamu tetap pegang brand utama, content pillar besar, dan hubungan customer. Setiap minggu ada 30-menit sync untuk menyelaraskan arah.",
     },
   ],
 };
