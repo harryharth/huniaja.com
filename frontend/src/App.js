@@ -68,10 +68,10 @@ function App() {
           <AuthProvider>
             <ScrollToTop />
             <AppRoutes />
+            <ConditionalChat />
           </AuthProvider>
         </LangProvider>
       </BrowserRouter>
-      <ConditionalChat />
       <Toaster />
     </div>
   );
@@ -116,9 +116,10 @@ function AppRoutes() {
 }
 
 function ConditionalChat() {
-  const path = window.location.pathname;
-  if (path.startsWith("/admin")) return null;
-  if (path === "/login" || path.startsWith("/auth/")) return null;
+  const { pathname } = useLocation();
+  // Hide AI chat on admin, login, and auth callback pages
+  if (pathname.startsWith("/admin")) return null;
+  if (pathname === "/login" || pathname.startsWith("/auth/")) return null;
   return <ChatWidget />;
 }
 
