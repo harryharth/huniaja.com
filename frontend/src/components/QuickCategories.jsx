@@ -1,10 +1,16 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { ICON_BELI_PROPERTI, ICON_KERJASAMA, ICON_POTONG_RUMPUT, ICON_HOME_CLEANING, ICON_SERVICE_AC } from "../mock";
-import { Megaphone, TrendingUp } from "lucide-react";
+import { Megaphone, TrendingUp, Bot } from "lucide-react";
 
 const items = [
   { label: "Beli Properti", bg: "bg-blue-50", img: ICON_BELI_PROPERTI, href: "/cari-properti" },
+  {
+    label: "AI Assistant",
+    bg: "bg-green-50",
+    icon: <Bot className="w-6 h-6 text-[#00B512]" strokeWidth={2.2} />,
+    href: "/ai-assistant",
+  },
   { label: "Kerjasama", bg: "bg-green-50", img: ICON_KERJASAMA, href: "/kerjasama" },
   { label: "Home Service", bg: "bg-transparent", img: ICON_HOME_CLEANING, href: "/layanan/home-service" },
   {
@@ -25,7 +31,7 @@ export default function QuickCategories() {
   return (
     <section className="bg-white pt-6 md:pt-8">
       <div className="max-w-6xl mx-auto px-4 md:px-6">
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 md:gap-4">
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 md:gap-4">
           {items.map((c) => (
             <Link
               key={c.label}

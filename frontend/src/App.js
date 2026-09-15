@@ -46,6 +46,7 @@ import HomeCleaningPage from "./pages/services/HomeCleaningPage";
 import ServiceAcPage from "./pages/services/ServiceAcPage";
 import JagaRumahPage from "./pages/services/JagaRumahPage";
 import CsrPage from "./pages/CsrPage";
+import AiAssistantPage from "./pages/AiAssistantPage";
 
 const Home = () => (
   <div className="min-h-screen bg-white">
@@ -114,6 +115,7 @@ function AppRoutes() {
       <Route path="/layanan/property-investment" element={<ServiceAcPage />} />
       <Route path="/layanan/jaga-rumah" element={<JagaRumahPage />} />
       <Route path="/csr" element={<CsrPage />} />
+      <Route path="/ai-assistant" element={<AiAssistantPage />} />
     </Routes>
   );
 }

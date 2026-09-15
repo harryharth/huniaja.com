@@ -22,6 +22,7 @@ import {
   CheckCircle2,
   ChevronDown,
 } from "lucide-react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import ListingCard from "../components/ListingCard";
@@ -156,12 +157,41 @@ export default function PropertyDetailPage() {
           <div className="lg:col-span-2 space-y-6">
             {/* Gallery */}
             <div className="bg-white rounded-3xl overflow-hidden border border-slate-100 shadow-sm">
-              <div className="relative">
+              <div className="relative group">
                 <img
                   src={gallery[activeImg]}
                   alt={item.title}
                   className="w-full aspect-[16/10] object-cover"
                 />
+
+                {/* Slide controls */}
+                {gallery.length > 1 && (
+                  <>
+                    <button
+                      type="button"
+                      onClick={() =>
+                        setActiveImg((activeImg - 1 + gallery.length) % gallery.length)
+                      }
+                      aria-label="Sebelumnya"
+                      data-testid="prop-gallery-prev"
+                      className="absolute left-3 top-1/2 -translate-y-1/2 w-10 h-10 md:w-11 md:h-11 rounded-full bg-white/95 backdrop-blur shadow-md flex items-center justify-center hover:bg-white transition"
+                    >
+                      <ChevronLeft className="w-5 h-5 text-slate-800" strokeWidth={2.4} />
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => setActiveImg((activeImg + 1) % gallery.length)}
+                      aria-label="Berikutnya"
+                      data-testid="prop-gallery-next"
+                      className="absolute right-3 top-1/2 -translate-y-1/2 w-10 h-10 md:w-11 md:h-11 rounded-full bg-white/95 backdrop-blur shadow-md flex items-center justify-center hover:bg-white transition"
+                    >
+                      <ChevronRight className="w-5 h-5 text-slate-800" strokeWidth={2.4} />
+                    </button>
+                    <div className="absolute bottom-3 left-1/2 -translate-x-1/2 bg-black/50 backdrop-blur text-white text-[11px] font-bold px-2.5 py-1 rounded-full">
+                      {activeImg + 1} / {gallery.length}
+                    </div>
+                  </>
+                )}
                 <div className="absolute top-4 left-4 inline-flex items-center gap-1 bg-white/95 backdrop-blur text-[#001DF3] text-xs font-bold px-3 py-1.5 rounded-full shadow-sm">
                   <BadgeCheck className="w-3.5 h-3.5" />
                   Terverifikasi
@@ -230,6 +260,11 @@ export default function PropertyDetailPage() {
               </div>
             </div>
 
+            {/* Property title + price — below gallery */}
+            <div className="bg-white rounded-3xl p-5 md:p-6 border border-slate-100 shadow-sm">
+              <PropertyHeader item={item} />
+            </div>
+
             {/* Description */}
             <div className="bg-white rounded-3xl p-6 md:p-8 border border-slate-100 shadow-sm">
               <h2 className="text-lg md:text-xl font-black text-slate-900">
@@ -292,63 +327,14 @@ export default function PropertyDetailPage() {
                   </div>
                 </div>
               </div>
-              <div className="mt-5 rounded-2xl overflow-hidden aspect-[16/8] bg-slate-100 flex items-center justify-center">
-                <div className="text-center px-4">
-                  <MapPin className="w-10 h-10 text-slate-300 mx-auto" />
-                  <p className="text-sm text-slate-400 mt-2">
-                    Peta interaktif akan tersedia setelah kamu menghubungi
-                    agen kami.
-                  </p>
-                </div>
-              </div>
             </div>
           </div>
 
-          {/* Right: Sticky sidebar */}
+          {/* Right: Sticky sidebar (agent + trust) */}
           <div className="space-y-4">
             <div className="bg-white rounded-3xl p-5 md:p-6 border border-slate-100 shadow-sm lg:sticky lg:top-24">
-              <PropertyHeader item={item} />
-
-              <div className="mt-5 space-y-2">
-                <Button
-                  asChild
-                  className="w-full h-12 bg-white border border-slate-200 text-slate-800 hover:bg-[#001DF3] hover:border-[#001DF3] hover:text-white active:bg-[#00B512] active:border-[#00B512] active:text-white rounded-full font-bold text-sm transition"
-                >
-                  <a
-                    href={WA_URL(
-                      `Halo, saya tertarik dengan ${item.title} (${item.location}) seharga ${item.price}. Bisa dijadwalkan survey?`
-                    )}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    data-testid="prop-wa-btn"
-                  >
-                    <MessageCircle className="w-4 h-4 mr-2" /> Chat via WhatsApp
-                  </a>
-                </Button>
-                <Button
-                  onClick={() => setKprOpen(true)}
-                  data-testid="prop-kpr-btn"
-                  className="w-full h-12 bg-white border border-slate-200 text-slate-800 hover:bg-[#001DF3] hover:border-[#001DF3] hover:text-white active:bg-[#00B512] active:border-[#00B512] active:text-white rounded-full font-bold text-sm transition"
-                >
-                  <Calculator className="w-4 h-4 mr-2" /> Simulasi KPR
-                </Button>
-                <Button
-                  onClick={() => setBrosurOpen(true)}
-                  data-testid="prop-brosur-btn"
-                  className="w-full h-12 bg-white border border-slate-200 text-slate-800 hover:bg-[#001DF3] hover:border-[#001DF3] hover:text-white active:bg-[#00B512] active:border-[#00B512] active:text-white rounded-full font-bold text-sm transition"
-                >
-                  <Download className="w-4 h-4 mr-2" /> Download Brosur
-                </Button>
-              </div>
-
-              <BrosurLeadDialog
-                open={brosurOpen}
-                onClose={() => setBrosurOpen(false)}
-                property={item}
-              />
-
               {/* Agent card */}
-              <div className="mt-6 pt-6 border-t border-slate-100">
+              <div>
                 <div className="flex items-center gap-3">
                   <div className="w-12 h-12 rounded-full bg-[#001DF3] text-white font-black flex items-center justify-center text-lg">
                     D
@@ -390,7 +376,56 @@ export default function PropertyDetailPage() {
                   KPR Ready
                 </div>
               </div>
+
+              <BrosurLeadDialog
+                open={brosurOpen}
+                onClose={() => setBrosurOpen(false)}
+                property={item}
+              />
             </div>
+          </div>
+        </div>
+
+        {/* Bottom full-width CTA bar */}
+        <div className="mt-8 md:mt-10 bg-white rounded-3xl p-5 md:p-6 border border-slate-100 shadow-sm">
+          <div className="text-center mb-4">
+            <h3 className="text-base md:text-lg font-black text-slate-900">
+              Tertarik dengan properti ini?
+            </h3>
+            <p className="text-xs md:text-sm text-slate-500 mt-1">
+              Pilih cara termudah untuk kamu lanjut ke langkah berikutnya
+            </p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+            <Button
+              asChild
+              className="h-12 bg-[#00B512] hover:bg-[#009e0f] text-white rounded-full font-bold text-sm shadow-sm transition"
+            >
+              <a
+                href={WA_URL(
+                  `Halo, saya tertarik dengan ${item.title} (${item.location}) seharga ${item.price}. Bisa dijadwalkan survey?`
+                )}
+                target="_blank"
+                rel="noopener noreferrer"
+                data-testid="prop-wa-btn"
+              >
+                <MessageCircle className="w-4 h-4 mr-2" /> Chat via WhatsApp
+              </a>
+            </Button>
+            <Button
+              onClick={() => setKprOpen(true)}
+              data-testid="prop-kpr-btn"
+              className="h-12 bg-[#001DF3] hover:bg-[#0017c2] text-white rounded-full font-bold text-sm shadow-sm transition"
+            >
+              <Calculator className="w-4 h-4 mr-2" /> Simulasi KPR
+            </Button>
+            <Button
+              onClick={() => setBrosurOpen(true)}
+              data-testid="prop-brosur-btn"
+              className="h-12 bg-white border border-slate-200 text-slate-800 hover:bg-slate-50 rounded-full font-bold text-sm transition"
+            >
+              <Download className="w-4 h-4 mr-2" /> Download Brosur
+            </Button>
           </div>
         </div>
       </section>

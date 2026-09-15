@@ -336,12 +336,12 @@ export default function KerjasamaPage() {
               Kami sesuaikan panggungnya.
             </h2>
             <p className="text-sm md:text-base text-slate-500 mt-3 max-w-2xl mx-auto">
-              Setiap partner punya cerita berbeda. Empat bentuk kolaborasi ini
-              adalah titik awal - detailnya kita rancang bersama.
+              Tiga peran, tiga alur, satu prinsip yang sama: kami di sisi yang
+              sama denganmu. Detailnya kita rancang bersama.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 md:gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6 max-w-5xl mx-auto">
             {partnerships.map((p) => (
               <div
                 key={p.title}
