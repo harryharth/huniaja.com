@@ -260,8 +260,8 @@ export default function PropertyDetailPage() {
               </div>
             </div>
 
-            {/* Property title + price — below gallery */}
-            <div className="bg-white rounded-3xl p-5 md:p-6 border border-slate-100 shadow-sm">
+            {/* Property title + price — below gallery (mobile only) */}
+            <div className="lg:hidden bg-white rounded-3xl p-5 md:p-6 border border-slate-100 shadow-sm">
               <PropertyHeader item={item} />
             </div>
 
@@ -332,6 +332,11 @@ export default function PropertyDetailPage() {
 
           {/* Right: Sticky sidebar (agent + trust) */}
           <div className="space-y-4">
+            {/* Property title + price (desktop only — original position) */}
+            <div className="hidden lg:block bg-white rounded-3xl p-5 md:p-6 border border-slate-100 shadow-sm">
+              <PropertyHeader item={item} />
+            </div>
+
             <div className="bg-white rounded-3xl p-5 md:p-6 border border-slate-100 shadow-sm lg:sticky lg:top-24">
               {/* Agent card */}
               <div>
@@ -377,6 +382,39 @@ export default function PropertyDetailPage() {
                 </div>
               </div>
 
+              {/* CTA buttons (desktop only — original position) */}
+              <div className="mt-5 pt-5 border-t border-slate-100 space-y-2.5">
+                <Button
+                  asChild
+                  className="w-full h-11 bg-[#00B512] hover:bg-[#009e0f] text-white rounded-full font-bold text-sm shadow-sm transition"
+                >
+                  <a
+                    href={WA_URL(
+                      `Halo, saya tertarik dengan ${item.title} (${item.location}) seharga ${item.price}. Bisa dijadwalkan survey?`
+                    )}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    data-testid="prop-wa-btn-desktop"
+                  >
+                    <MessageCircle className="w-4 h-4 mr-2" /> Chat via WhatsApp
+                  </a>
+                </Button>
+                <Button
+                  onClick={() => setKprOpen(true)}
+                  data-testid="prop-kpr-btn-desktop"
+                  className="w-full h-11 bg-[#001DF3] hover:bg-[#0017c2] text-white rounded-full font-bold text-sm shadow-sm transition"
+                >
+                  <Calculator className="w-4 h-4 mr-2" /> Simulasi KPR
+                </Button>
+                <Button
+                  onClick={() => setBrosurOpen(true)}
+                  data-testid="prop-brosur-btn-desktop"
+                  className="w-full h-11 bg-white border border-slate-200 text-slate-800 hover:bg-slate-50 rounded-full font-bold text-sm transition"
+                >
+                  <Download className="w-4 h-4 mr-2" /> Download Brosur
+                </Button>
+              </div>
+
               <BrosurLeadDialog
                 open={brosurOpen}
                 onClose={() => setBrosurOpen(false)}
@@ -386,8 +424,8 @@ export default function PropertyDetailPage() {
           </div>
         </div>
 
-        {/* Bottom full-width CTA bar */}
-        <div className="mt-8 md:mt-10 bg-white rounded-3xl p-5 md:p-6 border border-slate-100 shadow-sm">
+        {/* Bottom full-width CTA bar (mobile only) */}
+        <div className="lg:hidden mt-8 md:mt-10 bg-white rounded-3xl p-5 md:p-6 border border-slate-100 shadow-sm">
           <div className="text-center mb-4">
             <h3 className="text-base md:text-lg font-black text-slate-900">
               Tertarik dengan properti ini?
