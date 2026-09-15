@@ -428,49 +428,6 @@ export default function PropertyDetailPage() {
             </div>
           </div>
         </div>
-
-        {/* Bottom full-width CTA bar (mobile only) */}
-        <div className="lg:hidden mt-8 md:mt-10 bg-white rounded-3xl p-5 md:p-6 border border-slate-100 shadow-sm">
-          <div className="text-center mb-4">
-            <h3 className="text-base md:text-lg font-black text-slate-900">
-              Tertarik dengan properti ini?
-            </h3>
-            <p className="text-xs md:text-sm text-slate-500 mt-1">
-              Pilih cara termudah untuk kamu lanjut ke langkah berikutnya
-            </p>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
-            <Button
-              asChild
-              className="h-12 bg-[#00B512] hover:bg-[#009e0f] text-white rounded-full font-bold text-sm shadow-sm transition"
-            >
-              <a
-                href={WA_URL(
-                  `Halo, saya tertarik dengan ${item.title} (${item.location}) seharga ${item.price}. Bisa dijadwalkan survey?`
-                )}
-                target="_blank"
-                rel="noopener noreferrer"
-                data-testid="prop-wa-btn"
-              >
-                <MessageCircle className="w-4 h-4 mr-2" /> Chat via WhatsApp
-              </a>
-            </Button>
-            <Button
-              onClick={() => setKprOpen(true)}
-              data-testid="prop-kpr-btn"
-              className="h-12 bg-[#001DF3] hover:bg-[#0017c2] text-white rounded-full font-bold text-sm shadow-sm transition"
-            >
-              <Calculator className="w-4 h-4 mr-2" /> Simulasi KPR
-            </Button>
-            <Button
-              onClick={() => setBrosurOpen(true)}
-              data-testid="prop-brosur-btn"
-              className="h-12 bg-white border border-slate-200 text-slate-800 hover:bg-slate-50 rounded-full font-bold text-sm transition"
-            >
-              <Download className="w-4 h-4 mr-2" /> Download Brosur
-            </Button>
-          </div>
-        </div>
       </section>
 
       {/* Related */}
