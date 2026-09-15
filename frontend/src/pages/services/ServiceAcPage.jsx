@@ -1,110 +1,116 @@
 import React from "react";
 import ServicePageTemplate from "./ServicePageTemplate";
-import { ICON_SERVICE_AC } from "../../mock";
+import { TrendingUp } from "lucide-react";
 
 const config = {
-  label: "Service AC",
-  tag: "Layanan Rumah Huniaja",
-  icon: ICON_SERVICE_AC,
-  accent: "#001DF3",
-  accentSoft: "#E6F3FF",
+  label: "Property Investment",
+  tag: "Layanan Bisnis Huniaja",
+  icon: (
+    <div className="w-14 h-14 rounded-2xl bg-[#00B512] text-white flex items-center justify-center">
+      <TrendingUp className="w-7 h-7" />
+    </div>
+  ),
+  accent: "#00B512",
+  accentSoft: "#E7FBEA",
   waMessage:
-    "Halo Huniaja, saya mau pesan layanan Service AC. Boleh info paket & jadwal tekniknya?",
+    "Halo Huniaja, saya tertarik dengan layanan Property Investment. Bisa cerita detail cara kerjanya?",
 
-  heroTitle: "AC dingin lagi, tidur nyenyak lagi.",
+  heroTitle: "Investasi properti yang berbasis data, bukan intuisi.",
   heroSub:
-    "Cuci, isi freon, atau perbaiki AC-mu dengan teknisi bersertifikat. Datang tepat waktu, kerja aman, dan garansi hasil — tanpa drama.",
+    "Kami analisis lokasi, hitung yield, kalkulasi ROI, dan pantau risiko — supaya keputusan investasimu jelas hitam-putih. Karena beli properti Rp 500 juta - 5 miliar bukan momen untuk 'ikut teman'.",
   heroImg:
-    "https://images.unsplash.com/photo-1615529162924-f8605388461d?w=1400&q=80",
+    "https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=1600&q=85",
 
   story: {
-    heading: "AC yang dingin bukan kemewahan — itu tidur yang berkualitas.",
+    heading: "80% investor properti pemula rugi karena satu alasan yang sama.",
     body:
-      "Malam panas, AC cuma keluar angin hangat, kamar makin sumuk. Anak-anak susah tidur, kamu bolak-balik cek suhu. Panggil teknisi random bikin was-was: harga tidak jelas, kadang dikerjakan sembarangan, malah nambah masalah. Huniaja hadir untuk itu. Kami hanya bekerja sama dengan teknisi bersertifikat dan berpengalaman minimal 3 tahun, dengan alat lengkap dan SOP jelas.",
+      "Mereka membeli properti berdasarkan 'katanya area ini bakal berkembang' — tanpa data. Setelah 5 tahun, harga tidak naik, penyewa tidak dapat, cicilan malah jadi beban. Kami di Huniaja Property Investment memutus siklus itu. Setiap properti yang kami rekomendasikan lewat 3 lapis analisis: makro (pertumbuhan area & rencana infrastruktur), mikro (perbandingan dengan properti sekitar), dan proyeksi (yield 3, 5, 10 tahun). Tidak ada tebak-tebakan. Kalau angkanya tidak masuk, kami jujur bilang tidak masuk.",
     pullQuote:
-      "AC-mu bukan mainan — makanya kami tidak asal panggil orang.",
+      "Investasi properti terbaik adalah yang bisa kamu jelaskan angkanya dalam 3 menit ke pasangan.",
   },
 
   steps: [
     {
-      title: "Chat & Cerita Masalahnya",
+      title: "Konsultasi Tujuan Investasi",
       desc:
-        "Kirim foto/video AC, sebutkan gejalanya (kurang dingin, bocor, bunyi). Tim kami diagnosa awal dan estimasi kunjungan.",
+        "Cashflow bulanan, apresiasi jangka panjang, atau tabungan pensiun? Setiap tujuan butuh strategi properti yang berbeda.",
     },
     {
-      title: "Atur Jadwal",
+      title: "Analisis & Rekomendasi (7-14 hari)",
       desc:
-        "Pilih hari & jam yang cocok. Kami kirim teknisi bersertifikat lengkap dengan foto profil sebelum datang.",
+        "Kami cari 5-10 properti kandidat, analisis satu per satu (yield, cap rate, ROI, IRR), kirim laporan tertulis lengkap.",
     },
     {
-      title: "Diagnosa & Kerja",
+      title: "Due Diligence Bareng",
       desc:
-        "Teknisi cek unit indoor & outdoor, tunjukkan penyebabnya, lalu kerjakan setelah kamu setuju — bukan main pasang-lepas.",
+        "Kami dampingi survey fisik, cek legalitas via BPN, verifikasi status developer, dan simulasi KPR bareng mitra bank.",
     },
     {
-      title: "Tes Dingin & Garansi",
+      title: "Akuisisi & Manajemen",
       desc:
-        "AC dinyalakan, tunggu suhu turun, dan kamu cek sendiri. Semua pekerjaan bergaransi 14 hari — tanpa biaya tambahan.",
+        "Dari nego harga, akad KPR, sampai serah terima. Setelah itu (opsional): kami bantu carikan penyewa & manage properti bulanan.",
     },
   ],
 
   includes: [
-    "Teknisi bersertifikat & berpengalaman minimal 3 tahun, terverifikasi Huniaja",
-    "Layanan lengkap: cuci AC (indoor/outdoor), isi freon R32/R410, service umum, pasang & bongkar",
-    "Cek tekanan & kebocoran memakai alat manifold — bukan tebak-tebakan",
-    "Bahan kimia cuci AC aman, tidak merusak evaporator atau cat unit",
-    "Garansi hasil kerja 14 hari — kalau kurang dingin lagi, tim kembali gratis",
-    "Harga transparan sebelum kerja dimulai — tidak ada biaya kejutan",
+    "Analisis lokasi mendalam: pertumbuhan harga historis, rencana infrastruktur (tol, MRT, kawasan industri), demografi penyewa",
+    "Perhitungan yield realistis (Gross Yield, Net Yield, Cap Rate, Cash-on-Cash Return, IRR)",
+    "Laporan tertulis min. 20 halaman untuk setiap properti kandidat — bukan sekadar chat",
+    "Cek legalitas & due diligence dokumen (SHM/HGB, PBG, PBB, riwayat sengketa)",
+    "Simulasi KPR di 3-5 bank dan rekomendasi yang paling optimal (bunga & tenor)",
+    "Pendampingan negosiasi harga — pengalaman kami rata-rata turunkan 8-15% dari asking price",
+    "Property Management bulanan (opsional): pencarian penyewa, kontrak, kolektif sewa, maintenance",
+    "Review portfolio 6 bulanan — kapan hold, kapan sell, kapan refinance",
   ],
 
   testimonials: [
     {
-      name: "Pak Bagas",
-      place: "Kelapa Gading, Jakut",
+      name: "Pak Andrew — Dokter",
+      place: "Portfolio 3 properti sewa",
       quote:
-        "Sudah panggil 3 teknisi sebelumnya, cuma dibilang 'freon habis'. Tim Huniaja tunjukin bagian mana yang bocor, benerin, dan sampai sekarang normal.",
+        "Sebelum Huniaja, saya beli properti hanya karena 'kata teman lokasi ini bakal booming'. 5 tahun stagnan. Dengan Huniaja, properti ke-3 saya di Bogor: yield 9.8%/tahun, apresiasi 14% di 18 bulan. Angka bicara.",
       rating: 5,
     },
     {
-      name: "Bu Dini",
-      place: "Cinere, Depok",
+      name: "Bu Melinda — Business Owner",
+      place: "Investor Pertama Kali",
       quote:
-        "Cuci AC 2 unit selesai dalam 90 menit, rapi, kamar tidak jadi kotor. Yang penting: teknisinya sopan dan pakai sepatu dalam bag.",
+        "Kami baru mau mulai investasi properti umur 35. Bingung banget. Tim Huniaja audit tujuan (pensiun dini), rekomendasikan 2 properti kost dekat kampus. Sekarang cashflow Rp 12 juta/bulan pasif.",
       rating: 5,
     },
     {
-      name: "Mas Erwin",
-      place: "Serpong",
+      name: "Pak Hendra — Corporate Executive",
+      place: "Diversifikasi Portfolio",
       quote:
-        "Harga di depan, kerjaan di depan, garansi juga jelas. Tidak ada 'nanti dulu bos'. Recommended banget buat yang trauma tukang AC nakal.",
+        "Yang bikin beda: mereka SANGGUP bilang 'jangan beli ini' walau berarti kehilangan komisi. Itu langka. Sekarang 4 properti aktif, semua yield di atas 8%, tidak ada yang loss.",
       rating: 5,
     },
   ],
 
   faqs: [
     {
-      q: "Layanan AC apa saja yang tersedia?",
-      a: "Cuci AC (indoor & outdoor), isi freon (R32 / R22 / R410), service umum, perbaikan kebocoran, ganti sparepart, pasang unit baru, dan bongkar-pasang saat pindah rumah.",
+      q: "Berapa modal minimum untuk mulai investasi properti dengan Huniaja?",
+      a: "Rp 100-200 juta untuk properti pertama (rumah subsidi FLPP atau rumah tapak entry-level di daerah berkembang). Rp 500 juta - 1 miliar untuk properti tapak menengah. Kami rekomendasikan strategi bertahap: mulai dari yang terjangkau, cashflow ditambahkan ke DP properti berikutnya.",
     },
     {
-      q: "Berapa lama pengerjaannya?",
-      a: "Cuci AC standar sekitar 45–60 menit per unit. Perbaikan kebocoran atau ganti sparepart bisa 1–3 jam tergantung kompleksitas. Kami selalu informasikan durasi estimasi sebelum kerja.",
+      q: "Apa target yield yang realistis di 2026?",
+      a: "Properti sewa keluarga: Gross Yield 5-8% per tahun. Kost mahasiswa/pekerja: 12-20%. Ruko/kios: 8-12%. Apartemen studio CBD: 5-7%. Semua ini SEBELUM apresiasi properti yang biasanya 6-10%/tahun di area yang tepat.",
     },
     {
-      q: "Ada garansi setelah service?",
-      a: "Ya, seluruh pekerjaan bergaransi 14 hari. Jika masalah yang sama muncul dalam periode garansi, tim akan kembali gratis untuk memeriksa dan memperbaiki.",
+      q: "Berapa biaya jasa Property Investment ini?",
+      a: "Konsultasi awal + analisis 1 kandidat: gratis. Paket Standard (analisis 5 kandidat + pendampingan akuisisi): Rp 10-15 juta ATAU 1.5% dari nilai transaksi (mana yang lebih rendah). Property Management bulanan (opsional): 8-10% dari sewa bulanan.",
     },
     {
-      q: "Apakah harga sudah termasuk freon?",
-      a: "Harga jasa cuci/service terpisah dari biaya freon. Kalau AC butuh isi ulang freon, teknisi akan cek tekanan dulu dan konfirmasi harga sebelum menambahkan. Semua transparan di depan.",
+      q: "Apa bedanya sama beli langsung dari agen developer?",
+      a: "Agen developer punya bias — mereka jual properti perusahaan mereka. Kami independen — kami cari SEMUA opsi (baru, second, lelang, take-over KPR) yang paling optimal untuk tujuanmu. Kami dibayar oleh kamu, jadi loyalty kami ke kamu.",
     },
     {
-      q: "Kalau AC tidak bisa diperbaiki di tempat, gimana?",
-      a: "Jika perlu bawa ke workshop (misal PCB rusak berat), kami informasikan estimasi biaya & lama perbaikan dulu. Kamu bebas lanjut atau tidak, tanpa tekanan.",
+      q: "Bagaimana kalau properti yang direkomendasikan ternyata rugi?",
+      a: "Kami hanya rekomendasikan properti yang proyeksi ROI 3-5 tahun-nya positif. Kalau setelah 3 tahun angkanya meleset >30% dari proyeksi (di luar force majeure), kami kembalikan 50% biaya jasa. Ini komitmen tertulis di kontrak.",
     },
   ],
 };
 
-export default function ServiceAcPage() {
+export default function PropertyInvestmentPage() {
   return <ServicePageTemplate config={config} />;
 }

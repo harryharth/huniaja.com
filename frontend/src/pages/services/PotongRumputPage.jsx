@@ -1,110 +1,116 @@
 import React from "react";
 import ServicePageTemplate from "./ServicePageTemplate";
-import { ICON_POTONG_RUMPUT } from "../../mock";
+import { Megaphone } from "lucide-react";
 
 const config = {
-  label: "Potong Rumput",
-  tag: "Layanan Rumah Huniaja",
-  icon: ICON_POTONG_RUMPUT,
-  accent: "#00B512",
-  accentSoft: "#E9F8EC",
+  label: "Digital Marketing Properti",
+  tag: "Layanan Bisnis Huniaja",
+  icon: (
+    <div className="w-14 h-14 rounded-2xl bg-[#001DF3] text-white flex items-center justify-center">
+      <Megaphone className="w-7 h-7" />
+    </div>
+  ),
+  accent: "#001DF3",
+  accentSoft: "#EEF2FF",
   waMessage:
-    "Halo Huniaja, saya mau pesan layanan Potong Rumput. Boleh minta info & jadwal terdekatnya?",
+    "Halo Huniaja, saya tertarik dengan layanan Digital Marketing Properti. Bisa cerita lebih detail?",
 
-  heroTitle: "Halaman rapi, akhir pekan santai.",
+  heroTitle: "Listing yang dilihat. Leads yang beli. Brand yang dikenang.",
   heroSub:
-    "Serahkan urusan rumput ke tim Huniaja. Datang tepat waktu, kerja rapi, dan halaman bersih total sebelum kami pamit — tanpa sisa potongan berserakan.",
+    "Iklan properti yang bekerja bukan yang paling gencar — tapi yang paling tepat. Kami rancang seluruh corong digital marketing propertimu: dari listing yang menonjol, kampanye leads berkualitas, sampai brand yang dipercaya.",
   heroImg:
-    "https://images.unsplash.com/photo-1558904541-efa843a96f01?w=1400&q=80",
+    "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1600&q=85",
 
   story: {
-    heading: "Rumput yang rapi bikin rumah terasa lebih lapang.",
+    heading: "Beriklan tanpa strategi = membakar uang.",
     body:
-      "Kami tahu rasanya. Weekend datang, tapi halaman sudah kayak semak. Tenaga sudah habis kerja seminggu, mau nyewa tukang bingung siapa yang bisa dipercaya, harga tak jelas, dan setelah selesai halaman malah kotor. Huniaja lahir untuk menghapus semua rasa itu. Tim kami adalah mitra terlatih yang datang tepat waktu, bekerja rapi, dan meninggalkan halaman lebih bersih dari sebelum mereka datang.",
+      "Setiap developer, agen, dan pemilik properti pernah merasakannya: pasang iklan di 5 platform, keluarkan puluhan juta, tapi tidak ada satu pun leads berkualitas yang masuk. Masalahnya bukan produkmu — masalahnya adalah strategi yang salah. Huniaja Digital Marketing hadir untuk mengubah cara propertimu ditemukan. Kami tidak menjual 'kuota post' — kami menjual audiens yang siap beli, konten yang membuat brand-mu dipercaya, dan angka yang bisa kamu pertanggungjawabkan ke bos atau investor.",
     pullQuote:
-      "Kami tidak sekadar memotong rumput — kami mengembalikan hari liburmu.",
+      "Uang iklan yang tepat sasaran nilainya 10x lipat uang iklan yang gencar.",
   },
 
   steps: [
     {
-      title: "Chat & Kirim Foto",
+      title: "Audit & Strategi (Hari 1-7)",
       desc:
-        "Buka WhatsApp, kirim foto halaman & lokasi. Tim kami akan estimasi lama pengerjaan dan siapkan penawaran khusus untukmu.",
+        "Analisis produk, target market, kompetitor, dan corong konversi. Deliverable: strategi tertulis + estimasi ROI.",
     },
     {
-      title: "Pilih Jadwal Kamu",
+      title: "Setup Kampanye (Hari 8-14)",
       desc:
-        "Weekend, hari kerja, pagi, atau sore — kami menyesuaikan. Konfirmasi tim ready max 15 menit setelah chat.",
+        "Bangun landing page konversi tinggi, siapkan pixel tracking, foto/video profesional, dan konten kreatif yang scroll-stopping.",
     },
     {
-      title: "Datang & Kerja Rapi",
+      title: "Aktivasi & Optimasi (Hari 15-30)",
       desc:
-        "Mitra terverifikasi datang lengkap dengan alat sendiri. Rumput dipotong presisi, rapi di setiap sudut & pinggiran.",
+        "Live campaign di Meta Ads, TikTok Ads, Google Ads. Optimasi harian berdasarkan data — bukan tebak-tebakan.",
     },
     {
-      title: "Bersih Total & Selesai",
+      title: "Report & Scale (Bulanan)",
       desc:
-        "Semua sisa potongan disapu, dikumpulkan, dan dibuang. Kami tinggalkan halaman siap kamu nikmati kembali.",
+        "Laporan detail: cost per lead, kualitas leads, ROAS. Kami rekomendasikan channel mana yang di-scale, mana yang di-pause.",
     },
   ],
 
   includes: [
-    "Mesin potong rumput profesional (mower + trimmer) dibawa sendiri oleh tim",
-    "Rapikan pinggiran teras, pagar, dan sekitar tanaman — bukan cuma tengah halaman",
-    "Jaminan bersih total: seluruh sisa rumput disapu & dibuang, halaman siap dipakai",
-    "Mitra terverifikasi identitasnya, ramah, dan berpakaian rapi",
-    "Garansi kepuasan: kalau ada bagian yang kurang, tim balik gratis di hari yang sama",
-    "Aman untuk hewan peliharaan & tanaman hias — kami tanya dulu sebelum memangkas",
+    "Foto & video profesional properti (drone, virtual tour, reels format ready-to-post)",
+    "Landing page konversi tinggi + WhatsApp funnel yang terintegrasi",
+    "Meta Ads (Facebook + Instagram) + TikTok Ads + Google Search Ads",
+    "Copywriting kreatif yang stopping scroll — bukan template kaku",
+    "Tracking pixel & dashboard real-time (kamu lihat sendiri performa kampanye)",
+    "Report bulanan detail: leads masuk, CPL, CTR, ROAS, dan rekomendasi optimasi",
+    "Konsultan dedicated — kamu punya 1 orang yang kenal proyekmu, bukan tim rotasi",
+    "Garansi minimum jumlah leads bulanan sesuai paket, atau kami kompensasi hari berikutnya",
   ],
 
   testimonials: [
     {
-      name: "Bu Irma",
-      place: "Cibubur, Bogor",
+      name: "Pak Bayu — Developer",
+      place: "Cluster Grand Serpong, 40 Unit",
       quote:
-        "Awalnya ragu, ternyata masnya sopan banget dan hasilnya rapi. Yang paling bikin saya kaget, halaman malah lebih bersih dari sebelum mereka datang.",
+        "Sebelum pakai Huniaja, kami spend Rp 30 juta/bulan iklan, hasilnya 5 leads tanpa konversi. Bulan pertama pakai Huniaja: 47 leads berkualitas, 8 closing dalam 60 hari. ROAS 12x.",
       rating: 5,
     },
     {
-      name: "Pak Dhany",
-      place: "BSD, Tangerang Selatan",
+      name: "Bu Sinta — Independent Agent",
+      place: "Jakarta Selatan",
       quote:
-        "Chat jam 8 pagi, jam 11 sudah dikerjakan. Cepat, harga transparan, dan tidak nawar-nawar lagi setelah selesai. Recommended.",
+        "Aku pikir digital marketing cuma untuk developer besar. Ternyata Huniaja bantu aku set up personal branding di IG & TikTok — 3 bulan follower naik 8x, komisi bulanan naik 3x.",
       rating: 5,
     },
     {
-      name: "Keluarga Ardi",
-      place: "Sentul City, Bogor",
+      name: "Pak Dedi — Sales Manager",
+      place: "Perumahan Mid-Range, Bekasi",
       quote:
-        "Sudah 3 bulan langganan tiap 2 minggu sekali. Anak-anak jadi lebih sering main di halaman karena benar-benar bersih.",
+        "Yang beda: tim Huniaja jujur bilang channel mana yang jangan dipakai untuk produk kami. Bukan sekadar ambil budget. Hasilnya? Cost per lead turun 62% dalam 2 bulan.",
       rating: 5,
     },
   ],
 
   faqs: [
     {
-      q: "Apakah harganya sudah termasuk alat & pembuangan sampah rumput?",
-      a: "Iya. Tim membawa alat sendiri dan seluruh sisa rumput disapu, dikumpulkan, lalu dibuang ke titik pembuangan sesuai standar. Kamu tidak perlu menyiapkan apa pun selain akses ke halaman.",
+      q: "Berapa investasi minimum untuk mulai?",
+      a: "Paket Starter mulai Rp 8 juta/bulan (untuk 1 unit atau agen personal), Growth Rp 15-25 juta/bulan (developer skala kecil-menengah), Enterprise custom (>Rp 30 juta) untuk portfolio besar. Chat kami untuk audit gratis dulu — kami sarankan paket yang paling sesuai objektifmu.",
     },
     {
-      q: "Berapa lama satu kali kunjungan?",
-      a: "Rata-rata 45–90 menit tergantung luas halaman. Untuk halaman lebih besar, kami kirim tim 2 orang agar tetap cepat dan rapi.",
+      q: "Berapa lama sampai kelihatan hasil?",
+      a: "Untuk leads: minggu ke-2. Untuk conversion (viewing, DP, closing): bulan ke-1 sampai 2 tergantung siklus beli produkmu. Kami tidak menjanjikan hasil instan — properti bukan produk retail, tapi kami transparan dengan progres mingguan.",
     },
     {
-      q: "Apakah aman untuk anak-anak dan hewan peliharaan?",
-      a: "Aman. Kami memakai alat berstandar keselamatan dan meminta akses jelas sebelum mulai. Kalau kamu punya hewan peliharaan, cukup beritahu kami dulu — kami koordinasikan.",
+      q: "Apakah harus komitmen jangka panjang?",
+      a: "Tidak wajib. Minimum kontrak 3 bulan (karena optimasi butuh waktu untuk matang). Setelah itu bulanan, bisa berhenti kapan saja. Kami percaya kalau layanan kami bagus, kamu sendiri yang mau lanjut — bukan karena terkunci kontrak.",
     },
     {
-      q: "Bagaimana kalau hasilnya kurang memuaskan?",
-      a: "Kami kasih garansi kepuasan. Kalau ada bagian yang terlewat atau kurang rapi, cukup chat WhatsApp kami di hari yang sama — tim akan kembali gratis untuk merapikan.",
+      q: "Apa bedanya dengan agency iklan biasa?",
+      a: "Tiga hal: (1) fokus 100% di properti Indonesia — kami paham siklus beli KPR, negosiasi, dan psikologi pembeli rumah. (2) Bukan cuma iklan — kami setup funnel lengkap (landing page + WA + follow up script). (3) Transparansi angka — dashboard real-time, tidak ada 'trust me' tanpa data.",
     },
     {
-      q: "Apakah bisa langganan rutin?",
-      a: "Bisa. Banyak pelanggan mengambil paket rutin 2 minggu sekali atau 1 bulan sekali. Chat tim kami untuk penawaran khusus langganan.",
+      q: "Bagaimana kalau leadsnya tidak berkualitas?",
+      a: "Kualitas leads bergantung target audience yang benar. Kami definisikan bareng di fase audit (bujet buyer, lokasi, motivasi beli). Kalau hasilnya masih meleset, kami adjust targeting gratis di bulan berikutnya sampai match. Garansi minimum leads berkualitas tertulis di kontrak.",
     },
   ],
 };
 
-export default function PotongRumputPage() {
+export default function DigitalMarketingPage() {
   return <ServicePageTemplate config={config} />;
 }

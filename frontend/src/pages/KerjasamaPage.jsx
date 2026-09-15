@@ -29,32 +29,40 @@ const HERO_IMG =
 
 const partnerships = [
   {
-    Icon: Megaphone,
-    title: "Paid Partnership",
-    desc: "Kerja sama iklan bersponsor, listing prioritas, dan campaign co-marketing untuk brand Anda.",
-    perks: ["Konten bersponsor", "Iklan prioritas", "Laporan performa"],
+    Icon: Building2,
+    title: "Developer",
+    desc: "Kami bantu unit propertimu terjual dengan cara yang jujur — bukan hard-selling. Listing prioritas, targeted campaign, dan laporan angka yang bisa dipertanggungjawabkan ke boardmu.",
+    perks: [
+      "Landing page proyek dedicated",
+      "Digital marketing full funnel",
+      "Leads berkualitas terverifikasi",
+      "Report bulanan dengan ROAS jelas",
+    ],
     color: "#001DF3",
   },
   {
-    Icon: Handshake,
-    title: "Co-Branding",
-    desc: "Bangun kampanye bersama Huniaja lewat konten kolaboratif, event, dan program eksklusif.",
-    perks: ["Event bersama", "Konten kolaboratif", "Distribusi ke jaringan kami"],
-    color: "#000066",
-  },
-  {
-    Icon: Building2,
-    title: "Developer Partnership",
-    desc: "Pasarkan proyek properti Anda langsung ke jutaan pencari properti aktif.",
-    perks: ["Halaman proyek dedicated", "Leads berkualitas", "Priority listing"],
-    color: "#00B512",
-  },
-  {
     Icon: Users,
-    title: "Affiliate & Agent",
-    desc: "Bergabung menjadi agen atau afiliasi resmi Huniaja dan dapatkan komisi kompetitif.",
-    perks: ["Komisi hingga 80%", "Dashboard tracking", "Support pelatihan"],
+    title: "Agen",
+    desc: "Kamu tidak butuh boss yang menekan target. Kamu butuh platform yang mendukung. Komisi kompetitif, leads dibagi adil, pelatihan gratis, dan komunitas agen yang saling angkat.",
+    perks: [
+      "Komisi hingga 80% dari fee closing",
+      "Leads didistribusikan otomatis via AI",
+      "Pelatihan bulanan gratis (KPR, legal, closing)",
+      "Dashboard tracking realtime performa",
+    ],
     color: "#00B512",
+  },
+  {
+    Icon: TrendingUp,
+    title: "Investor",
+    desc: "Kamu punya modal, kami punya data. Kami analisis lokasi, yield, dan potensi ROI setiap kandidat properti — supaya keputusan investasimu didukung angka, bukan intuisi.",
+    perks: [
+      "Analisis yield & cap rate mendalam",
+      "Due diligence legalitas lengkap",
+      "Access properti off-market",
+      "Property management pasca-akuisisi",
+    ],
+    color: "#000066",
   },
 ];
 
@@ -195,7 +203,7 @@ export default function KerjasamaPage() {
         <div className="relative max-w-6xl mx-auto px-4 md:px-6 pt-16 md:pt-24 pb-20 md:pb-28">
           <div className="max-w-3xl">
             <span className="inline-flex items-center gap-2 bg-white/10 backdrop-blur border border-white/20 rounded-full px-3 py-1 text-[11px] font-bold tracking-widest">
-              <Handshake className="w-3.5 h-3.5" /> AJAK KAMI TUMBUH BERSAMA
+              <Handshake className="w-3.5 h-3.5" /> DEVELOPER · AGEN · INVESTOR
             </span>
             <h1 className="text-4xl md:text-6xl lg:text-7xl font-black tracking-tight mt-6 leading-[1.05]">
               Kami tidak mencari klien.<br />
@@ -204,10 +212,11 @@ export default function KerjasamaPage() {
               </span>
             </h1>
             <p className="mt-6 text-base md:text-xl text-white/85 leading-relaxed max-w-2xl">
-              Setiap partnership yang kami bangun adalah komitmen jangka
-              panjang - bukan transaksi cepat. Kalau kamu percaya bahwa
-              kolaborasi terbaik lahir dari saling percaya, kita sudah punya
-              satu kesamaan.
+              Kalau kamu <strong className="text-white">Developer</strong> yang mau unit terjual dengan cara jujur,{" "}
+              <strong className="text-white">Agen</strong> yang mau tumbuh tanpa politik kantor,
+              atau <strong className="text-white">Investor</strong> yang butuh partner analisis data —
+              kami di sisi yang sama denganmu. Setiap partnership yang kami bangun adalah komitmen
+              jangka panjang, bukan transaksi cepat.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
               <a

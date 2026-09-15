@@ -107,8 +107,11 @@ function AppRoutes() {
       <Route path="/akun" element={<AkunPage />} />
       <Route path="/auth/callback" element={<AuthCallback />} />
       <Route path="/layanan/potong-rumput" element={<PotongRumputPage />} />
+      <Route path="/layanan/digital-marketing" element={<PotongRumputPage />} />
       <Route path="/layanan/home-cleaning" element={<HomeCleaningPage />} />
+      <Route path="/layanan/home-service" element={<HomeCleaningPage />} />
       <Route path="/layanan/service-ac" element={<ServiceAcPage />} />
+      <Route path="/layanan/property-investment" element={<ServiceAcPage />} />
       <Route path="/layanan/jaga-rumah" element={<JagaRumahPage />} />
       <Route path="/csr" element={<CsrPage />} />
     </Routes>
