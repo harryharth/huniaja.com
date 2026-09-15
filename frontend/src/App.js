@@ -118,6 +118,7 @@ function AppRoutes() {
 function ConditionalChat() {
   const path = window.location.pathname;
   if (path.startsWith("/admin")) return null;
+  if (path === "/login" || path.startsWith("/auth/")) return null;
   return <ChatWidget />;
 }
 

@@ -230,11 +230,6 @@ export default function PropertyDetailPage() {
               </div>
             </div>
 
-            {/* Title + price - mobile only */}
-            <div className="bg-white rounded-3xl p-6 md:p-8 border border-slate-100 shadow-sm lg:hidden">
-              <PropertyHeader item={item} />
-            </div>
-
             {/* Description */}
             <div className="bg-white rounded-3xl p-6 md:p-8 border border-slate-100 shadow-sm">
               <h2 className="text-lg md:text-xl font-black text-slate-900">
@@ -311,7 +306,7 @@ export default function PropertyDetailPage() {
 
           {/* Right: Sticky sidebar */}
           <div className="space-y-4">
-            <div className="hidden lg:block bg-white rounded-3xl p-6 border border-slate-100 shadow-sm sticky top-24">
+            <div className="bg-white rounded-3xl p-5 md:p-6 border border-slate-100 shadow-sm lg:sticky lg:top-24">
               <PropertyHeader item={item} />
 
               <div className="mt-5 space-y-2">
@@ -395,32 +390,6 @@ export default function PropertyDetailPage() {
                   KPR Ready
                 </div>
               </div>
-            </div>
-
-            {/* Mobile CTAs */}
-            <div className="lg:hidden bg-white rounded-3xl p-4 border border-slate-100 shadow-sm space-y-2">
-              <Button
-                asChild
-                className="w-full h-12 bg-[#00B512] hover:bg-[#009e0f] text-white rounded-full font-bold text-sm"
-              >
-                <a
-                  href={WA_URL(
-                    `Halo, saya tertarik dengan ${item.title} seharga ${item.price}.`
-                  )}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  data-testid="prop-mobile-wa-btn"
-                >
-                  <MessageCircle className="w-4 h-4 mr-2" /> Chat WhatsApp
-                </a>
-              </Button>
-              <Button
-                onClick={() => setKprOpen(true)}
-                data-testid="prop-mobile-kpr-btn"
-                className="w-full h-12 bg-[#001DF3] hover:bg-[#0017c2] text-white rounded-full font-bold text-sm"
-              >
-                <Calculator className="w-4 h-4 mr-2" /> Simulasi KPR
-              </Button>
             </div>
           </div>
         </div>
