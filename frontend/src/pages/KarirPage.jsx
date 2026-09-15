@@ -165,7 +165,7 @@ const stories = [
   },
   {
     name: "Kirana Ayu",
-    role: "Content Creator - 1.5 tahun di Huniaja",
+    role: "Content Creator - tim awal Huniaja",
     initial: "K",
     color: "#000066",
     quote:

@@ -44,45 +44,45 @@ const OWNER_IMG =
   "https://customer-assets-gfyr7b9c.emergentagent.net/job_branding-suite-6/artifacts/u7wrh4m8_image.png";
 
 const stats = [
-  { value: "2,4Jt+", label: "Pengguna Aktif Bulanan" },
-  { value: "50K+", label: "Properti Terjual" },
-  { value: "120+", label: "Partner Developer" },
-  { value: "50+", label: "Kota Terjangkau" },
+  { value: "500+", label: "Listing Aktif Sejak Launch" },
+  { value: "15", label: "Developer Partner" },
+  { value: "5", label: "Bank Penyalur KPR" },
+  { value: "12", label: "Kota Terjangkau" },
 ];
 
 const timeline = [
   {
-    year: "2019",
+    year: "2024",
     title: "Sebuah Percakapan di Warung Kopi",
     desc: "Empat sahabat gelisah melihat sepupu mereka gagal beli rumah karena tertipu agen. Malam itu, ide Huniaja lahir - sebuah janji bahwa siapapun berhak punya rumah dengan aman.",
     Icon: Lightbulb,
     color: "#00B512",
   },
   {
-    year: "2020",
-    title: "MVP dan 100 Listing Pertama",
-    desc: "Di tengah pandemi, kami merilis versi pertama Huniaja. Modal patungan Rp 50 juta, tim 4 orang, dan mimpi sebesar samudera. Bulan ketiga, 100 listing terpasang - dan pengguna pertama menemukan rumahnya.",
-    Icon: Rocket,
+    year: "Awal 2025",
+    title: "Riset & Validasi",
+    desc: "Tim inti mulai turun ke lapangan — 3.000 keluhan pembeli rumah didokumentasikan, 15 developer & 5 bank diajak duduk bersama. Pola masalahnya jelas: transparansi hilang di setiap tahap transaksi.",
+    Icon: Compass,
     color: "#001DF3",
   },
   {
-    year: "2022",
-    title: "Menjangkau 25 Kota",
-    desc: "Kami ekspansi ke luar Jabodetabek. Bandung, Surabaya, Medan, Makassar - satu per satu, komunitas Huniaja tumbuh. Tim berkembang jadi 45 orang dengan satu misi: buat rumah jadi hak, bukan mimpi.",
-    Icon: Compass,
+    year: "Q2-Q3 2026",
+    title: "Membangun Platform",
+    desc: "Development platform intensif — AI matching engine, simulator KPR, verifikasi legalitas, dan chat 24/7. Modal patungan Rp 500 juta, tim inti 12 orang, dan target: launch di bulan kemerdekaan properti Indonesia.",
+    Icon: Rocket,
     color: "#00B512",
   },
   {
-    year: "2024",
-    title: "AI-Powered Property Matching",
-    desc: "Kami meluncurkan Dea - asisten AI yang membantu pencarian properti terasa seperti ngobrol dengan sahabat. 500 ribu percakapan di 6 bulan pertama. Teknologi akhirnya melayani manusia.",
+    year: "9 September 2026",
+    title: "Huniaja.com Resmi Online",
+    desc: "Hari pertama publik bisa mengakses Huniaja. 500+ listing di 12 kota, 15 developer partner, 5 bank penyalur KPR. Hari itu, satu janji berubah jadi jalan yang bisa ditapaki bersama.",
     Icon: Sparkles,
-    color: "#000066",
+    color: "#001DF3",
   },
   {
-    year: "2026",
-    title: "Rumah untuk Semua",
-    desc: "Hari ini, 2,4 juta orang setiap bulan mempercayakan pencarian rumah mereka ke Huniaja. Tapi kami baru mulai. Target 2028: 10 juta keluarga Indonesia punya rumah pertama lewat platform kami.",
+    year: "Sekarang",
+    title: "Baru Saja Dimulai",
+    desc: "Di beberapa minggu pertama pasca-launch, ratusan keluarga sudah mulai konsultasi. Tapi kami sadar — ini baru babak pembuka. Target 5 tahun: 100.000 keluarga Indonesia menemukan rumah pertama mereka lewat Huniaja.",
     Icon: Award,
     color: "#000066",
   },
@@ -190,10 +190,11 @@ export default function TentangKamiPage() {
               </span>
             </h1>
             <p className="mt-6 text-base md:text-xl text-white/85 leading-relaxed max-w-2xl">
-              Sejak 2019, Huniaja telah membantu lebih dari 50.000 keluarga
-              Indonesia menemukan tempat pulang mereka. Ini bukan sekadar
-              platform properti - ini adalah jembatan antara mimpi dan
-              kunci pintu.
+              Resmi hadir sejak <strong className="text-white">9 September 2026</strong>,
+              Huniaja adalah jembatan baru antara mimpi punya rumah dan kunci
+              pintu yang beneran ada di tanganmu. Ini bukan sekadar platform
+              properti — ini adalah cara kami menemani ribuan keluarga
+              Indonesia pulang, dengan aman.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
               <Link
@@ -284,26 +285,28 @@ export default function TentangKamiPage() {
             </span>
             <h2 className="text-3xl md:text-4xl font-black text-slate-900 mt-4 leading-tight">
               Dari empat sahabat<br />
-              yang gelisah, jadi rumah<br />
-              bagi 2 juta pencari.
+              yang gelisah, jadi tempat<br />
+              pulang yang aman.
             </h2>
             <div className="mt-6 space-y-4 text-[15px] md:text-base text-slate-700 leading-[1.85]">
               <p>
-                Tahun 2019, sepupu Reza tertipu Rp 200 juta oleh agen
-                properti palsu. Cerita itu bukan pengecualian - itu potret
+                Tahun 2024, sepupu Reza tertipu Rp 200 juta oleh agen
+                properti palsu. Cerita itu bukan pengecualian — itu potret
                 harian di Indonesia. Malam itu, di sebuah warung kopi kecil
                 di Bogor, empat sahabat bersumpah: mereka akan membangun
                 sesuatu yang lebih baik.
               </p>
               <p>
-                Kami mulai dengan Rp 50 juta patungan, satu laptop bekas,
-                dan satu keyakinan sederhana: <span className="font-bold text-slate-900">setiap keluarga Indonesia berhak
-                punya rumah dengan cara yang aman, transparan, dan manusiawi.</span>
+                Butuh hampir dua tahun riset, patungan modal Rp 500 juta, dan
+                puluhan kali gagal prototype. Kami tidak mau launching cepat —
+                kami mau launching benar. Karena rumah bukan barang yang bisa
+                dites lalu dikembalikan.
               </p>
               <p>
-                Tujuh tahun kemudian, kami masih berpegang pada janji itu.
-                Kami tidak sempurna - tapi kami tidak pernah berhenti berusaha
-                jadi lebih baik untukmu.
+                <span className="font-bold text-slate-900">Tanggal 9 September 2026, Huniaja resmi online untuk publik.</span>{" "}
+                Satu janji yang lahir di warung kopi akhirnya jadi platform
+                yang bisa ditapaki bersama. Kami baru mulai — dan itulah yang
+                bikin kami semangat setiap pagi.
               </p>
             </div>
           </div>
@@ -408,7 +411,7 @@ export default function TentangKamiPage() {
                   </div>
                   <div>
                     <div className="text-[9px] uppercase tracking-widest text-slate-400 font-bold">
-                      Sejak 2019
+                      Sejak 9 Sep 2026
                     </div>
                     <div className="text-[11px] font-black text-slate-900">
                       Rumah untuk semua

@@ -17,10 +17,10 @@ import { WA_URL } from "./ChatWidget";
 /* --------------------- TRUST STRIP --------------------- */
 export function HomeTrustStrip() {
   const stats = [
-    { value: "2,4Jt+", label: "Pencari aktif tiap bulan" },
-    { value: "50.000+", label: "Rumah terjual" },
-    { value: "120+", label: "Developer partner" },
-    { value: "4.9", label: "Google Play rating" },
+    { value: "9 Sep 2026", label: "Resmi launching" },
+    { value: "500+", label: "Listing aktif" },
+    { value: "15", label: "Developer partner" },
+    { value: "12", label: "Kota terjangkau" },
   ];
   return (
     <section className="bg-white pt-8 md:pt-12">
@@ -235,7 +235,7 @@ export function HomeManifesto() {
         <div className="mt-6 inline-flex items-center gap-3">
           <div className="w-10 h-px bg-slate-300" />
           <span className="text-xs font-bold text-slate-500 tracking-widest">
-            KEYAKINAN KAMI SEJAK 2019
+            KEYAKINAN KAMI SEJAK HARI PERTAMA
           </span>
           <div className="w-10 h-px bg-slate-300" />
         </div>

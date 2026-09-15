@@ -81,11 +81,11 @@ const partnerStories = [
   },
   {
     name: "Bu Rina - Affiliate Star",
-    role: "Top Agent 2025",
+    role: "Top Agent Launching",
     initial: "R",
     color: "#00B512",
     stat: "Rp 380Jt",
-    statLabel: "Komisi total 2025",
+    statLabel: "Komisi bulan pertama",
     quote:
       "Saya ibu rumah tangga biasa. Dari share link Huniaja di grup WhatsApp, sekarang saya bisa bantu ekonomi keluarga tanpa meninggalkan anak. Huniaja tidak cuma platform - mereka mengubah hidup saya.",
   },
@@ -95,7 +95,7 @@ const whyPartner = [
   {
     Icon: Target,
     title: "Audiens yang Fokus",
-    desc: "2,4 juta pencari properti aktif setiap bulan. Bukan traffic sampah - ini orang-orang yang sedang siap beli, jual, atau sewa properti.",
+    desc: "Ribuan pencari properti aktif sejak hari pertama launching. Bukan traffic sampah - ini orang-orang yang sedang siap beli, jual, atau sewa properti.",
   },
   {
     Icon: Heart,
@@ -146,10 +146,10 @@ const timeline = [
 ];
 
 const stats = [
-  { value: "120+", label: "Partner Aktif" },
-  { value: "50+", label: "Kota Terjangkau" },
-  { value: "2,4Jt+", label: "Pengguna Bulanan" },
-  { value: "25K+", label: "Listing Aktif" },
+  { value: "15", label: "Developer Partner" },
+  { value: "12", label: "Kota Terjangkau" },
+  { value: "5", label: "Bank Penyalur KPR" },
+  { value: "500+", label: "Listing Aktif" },
 ];
 
 export default function KerjasamaPage() {

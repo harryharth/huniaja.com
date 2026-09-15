@@ -27,10 +27,10 @@ const TREE_IMG =
   "https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?w=1400&q=85";
 
 const impact = [
-  { value: "127", label: "Rumah Layak Huni dibangun", color: "#001DF3" },
-  { value: "1.240", label: "Anak menerima beasiswa", color: "#00B512" },
-  { value: "23", label: "Desa binaan aktif", color: "#000066" },
-  { value: "8.400+", label: "Pohon ditanam bersama warga", color: "#00B512" },
+  { value: "12", label: "Rumah Layak Huni direnovasi bulan pertama", color: "#001DF3" },
+  { value: "48", label: "Anak menerima beasiswa perdana", color: "#00B512" },
+  { value: "3", label: "Desa binaan awal", color: "#000066" },
+  { value: "600+", label: "Pohon ditanam bersama warga", color: "#00B512" },
 ];
 
 const programs = [
@@ -40,7 +40,7 @@ const programs = [
     title: "Rumah Layak Huni",
     desc:
       "Kami merenovasi rumah keluarga kurang mampu di desa binaan — dari atap bocor sampai sanitasi. Karena tidak ada anak yang layak tidur di rumah yang bahaya.",
-    tag: "Sejak 2020",
+    tag: "Sejak Launching",
   },
   {
     Icon: GraduationCap,
@@ -63,7 +63,7 @@ const programs = [
     color: "#00B512",
     title: "Reforestasi & Kota Hijau",
     desc:
-      "Setiap 1 rumah terjual di Huniaja, kami menanam 3 pohon. Dari 8.400 pohon yang tertanam, 82% masih hidup dan tumbuh di lahan bekas tambang & lereng gundul.",
+      "Setiap 1 rumah terjual di Huniaja, kami menanam 3 pohon. Dari 600+ pohon yang sudah tertanam, 82% masih hidup dan tumbuh di lahan bekas tambang & lereng gundul.",
     tag: "3 pohon / transaksi",
   },
   {
@@ -106,11 +106,11 @@ const stories = [
 ];
 
 const timeline = [
-  { year: "2019", event: "Huniaja Peduli lahir sebagai divisi CSR — modal awal 9% net revenue." },
-  { year: "2021", event: "Program Rumah Layak Huni pertama di Kampung Muara, Bogor." },
-  { year: "2022", event: "Beasiswa anak konstruksi meluas ke 4 provinsi." },
-  { year: "2024", event: "Program Makan Gratis Jumat Berkah pertama, 200 paket ke warga sekitar kantor pusat." },
-  { year: "2026", event: "Target: 500 rumah, 5.000 anak, dan 30.000 pohon tertanam." },
+  { year: "2024", event: "Ide Huniaja lahir dari keresahan empat sahabat di sebuah warung kopi di Bogor." },
+  { year: "Awal 2025", event: "Tim inti mulai riset — mendokumentasikan 3.000 keluhan pembeli rumah di Indonesia." },
+  { year: "Q2-Q3 2026", event: "Development platform + rekrutmen partner: 15 developer & 5 bank penyalur KPR." },
+  { year: "9 Sep 2026", event: "Huniaja.com resmi online untuk publik. Divisi Huniaja Peduli lahir di hari yang sama — 9% net revenue dialokasikan." },
+  { year: "Sekarang", event: "Program Makan Gratis Jumat Berkah pertama dibuka — dan ini baru babak pembuka perjalanan sosial kami." },
 ];
 
 export default function CsrPage() {
@@ -138,10 +138,11 @@ export default function CsrPage() {
             Kami hanya bantu memulangkan yang tercecer.
           </h1>
           <p className="mt-6 text-base md:text-lg text-white/85 max-w-2xl leading-relaxed">
-            Sejak 2019, 9% dari pendapatan bersih Huniaja disisihkan untuk
-            program sosial — bukan sebagai kewajiban, tapi sebagai janji. Karena
-            di balik setiap rumah yang kami bantu jual, ada rumah lain yang belum
-            punya kesempatan.
+            Resmi hadir sejak 9 September 2026, kami langsung menyisihkan 9%
+            dari pendapatan bersih Huniaja untuk program sosial — bukan
+            sebagai kewajiban, tapi sebagai janji sejak hari pertama. Karena
+            di balik setiap rumah yang kami bantu jual, ada rumah lain yang
+            belum punya kesempatan.
           </p>
           <div className="mt-9 flex flex-wrap gap-3">
             <a
@@ -233,9 +234,10 @@ export default function CsrPage() {
               </h2>
               <div className="mt-6 space-y-4 text-slate-600 text-[15px] md:text-base leading-relaxed">
                 <p>
-                  Awal 2020, tim kami berkunjung ke Desa Cikahuripan untuk pendataan
-                  potensi properti. Tapi yang kami temukan bukan investasi — melainkan
-                  keluarga Ibu Yati dengan atap terpal dan lantai tanah.
+                  Beberapa minggu setelah launching, tim kami berkunjung ke Desa
+                  Cikahuripan untuk pendataan potensi properti. Tapi yang kami
+                  temukan bukan investasi — melainkan keluarga Ibu Yati dengan
+                  atap terpal dan lantai tanah.
                 </p>
                 <p>
                   Kami pulang, patungan, dan tiga bulan kemudian atap terpal itu berganti
@@ -347,8 +349,8 @@ export default function CsrPage() {
               PERJALANAN
             </span>
             <h2 className="text-3xl md:text-4xl font-black text-slate-900 mt-4 leading-tight tracking-tight">
-              7 tahun. Dan{" "}
-              <span className="text-[#001DF3]">masih baru dimulai</span>.
+              Baru beberapa bulan.{" "}
+              <span className="text-[#001DF3]">Dan baru saja dimulai</span>.
             </h2>
           </div>
 

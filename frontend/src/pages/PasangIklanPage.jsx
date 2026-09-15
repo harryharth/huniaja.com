@@ -66,10 +66,10 @@ const sellerStories = [
 const differentiators = [
   {
     Icon: Eye,
-    title: "Terlihat oleh 2,4Jt Pencari Aktif",
+    title: "Terlihat oleh Ribuan Pencari Aktif",
     desc: "Iklanmu bukan sekadar upload lalu tenggelam. Kami tampilkan ke pencari yang aktif mencari properti seperti punyamu.",
-    stat: "2,4Jt",
-    statLabel: "pengunjung/bulan",
+    stat: "Ribuan",
+    statLabel: "kunjungan aktif",
   },
   {
     Icon: Zap,
